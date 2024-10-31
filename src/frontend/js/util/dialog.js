@@ -9,6 +9,7 @@ import { EditFlashcardModal } from "../components/modals/editFlashcardModal.js";
 import { StickyNoteModal } from "../components/modals/stickyNoteModal.js";
 import { NewCollectionModal } from "../components/modals/newCollectionModal.js";
 import { TaskModal } from "../components/modals/taskModal.js";
+import { MilestoneModal } from "../components/modals/milestoneModal.js";
 
 
 export class Dialog {
@@ -29,7 +30,8 @@ export class Dialog {
                 '.edit-flashcard-modal',
                 '.sticky-note-modal',
                 '.new-collection-modal',
-                '.task-modal'
+                '.task-modal',
+                '.milestone-modal'
             ];
 
             // Check if the clicked target belongs to any excluded container
@@ -106,6 +108,15 @@ export class Dialog {
         this.dialog.querySelector('.task-modal input').focus()
     }
 
+    renderMilestoneModal(controller, taskboardId = null, milestone = null) {
+        this.addChild(new MilestoneModal(
+            controller, 
+            taskboardId, 
+            milestone
+        ));
+        this.dialog.querySelector('.milestone-modal input').focus()
+    }
+
     renderStickyNoteModal(controller, parentId, stickyNote = null) {
         this.addChild(new StickyNoteModal(
             controller, 
@@ -127,8 +138,8 @@ export class Dialog {
 
     renderSearchModal(toolbar) {
         const modal = new SearchModal()
-        modal.querySelector('.search-function-modal input').focus();
         toolbar.appendChild(modal);
+        modal.querySelector('.search-function-modal input').focus();
         modal.style.opacity = '1';
         modal.style.transform = 'translateY(0px)';
     }

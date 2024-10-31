@@ -1,3 +1,5 @@
+import { createFolderPath } from "../../util/ui/components.js";
+
 class DescriptionPageBlock extends HTMLElement {
     constructor() {
         super();
@@ -20,4 +22,33 @@ class DescriptionPageBlock extends HTMLElement {
     }
 }
 
-customElements.define('description-page-block', DescriptionPageBlock)
+
+
+
+class DocumentLocationPageBlock extends HTMLElement {
+    connectedCallback() {
+        this.folders = JSON.parse(this.getAttribute('folders'));
+        this.render();
+    }
+
+    render() {
+        const folderPaths = []
+        this.folders.forEach(folder => {
+            const folderPath = createFolderPath(folder);
+            const icon = document.createElement('i');
+            icon.classList.add('bi');
+            icon.classList.add('bi-chevron-right');
+
+            folderPaths.push(folderPath);
+            folderPaths.push(icon);           
+        });
+        folderPaths.pop();
+        folderPaths.forEach(item => {
+            this.appendChild(item);
+        });
+    }
+}
+    
+
+customElements.define('description-page-block', DescriptionPageBlock);
+customElements.define('document-location-page-block', DocumentLocationPageBlock);

@@ -83,6 +83,7 @@ i {
 .view-title {
     font-size: 56px;
     width: fit-content;
+    font-weight: 500;
     font-family: sans-serif;
     color: var(--important);
 }

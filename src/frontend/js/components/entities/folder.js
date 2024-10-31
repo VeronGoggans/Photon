@@ -35,6 +35,28 @@ class RecentFolder extends HTMLElement {
 
 
 
+class FolderPath extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        this.folder = JSON.parse(this.getAttribute('folder'));
+        this.textContent = this.folder.name;
+        this.id = this.folder.id;
+
+        this.addEventListener('click', this.handleClick.bind(this));
+    }
+
+    disconnectedCallback() {
+        this.removeEventListener('click', this.handleClick.bind(this));
+    }
+
+    handleClick() {        
+        this.dispatchEvent(new CustomEvent('FolderPathClick', { detail: { folderId: this.id }, bubbles: true }));
+    }
+}
+
 
 
 class Folder extends HTMLElement {
@@ -47,7 +69,6 @@ class Folder extends HTMLElement {
     }
 
     connectedCallback() {
-        // Parse the stickyWall JSON attribute
         this.folder = JSON.parse(this.getAttribute('folder'));
         this.id = this.folder.id;
         this.draggable = true;
@@ -171,3 +192,4 @@ class Folder extends HTMLElement {
 // Register the custom elements
 customElements.define('folder-card', Folder);
 customElements.define('recent-folder-card', RecentFolder);
+customElements.define('folder-path', FolderPath);

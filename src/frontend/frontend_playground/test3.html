@@ -11,57 +11,62 @@
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
-    .progress {
+    
+    .milestone-modal {
         display: flex;
-        margin-top: 50px;
-        background-color: #e6eaff;
-        height: 5px;
+        row-gap: 30px;
+        flex-direction: column;
+        background-color: var(--modal);
+        width: 660px;
+        height: fit-content;
         border-radius: 10px;
+        padding: 70px;
+    }
+    
+    .milestone-modal input[type="text"] {
+        border: none;
+        background-color: transparent;
+        color: var(--important);
+        font-family: sans-serif;
+        font-size: 32px;
+        margin: 20px 0;
     }
 
-    .progress__fill {
-        position: relative;
+    .milestone-modal input[type="date"] {
+        border: none;
+        background-color: transparent;
+        color: var(--important);
+        font-size: 16px;
+        font-family: sans-serif;
+    }
+
+    .milestone-modal textarea {
+        padding: 10px;
+        font-family: sans-serif;
+        font-size: 15px;
+        color: var(--text);
+        height: 180px;
+        max-height: 180px;
+        background-color: transparent;
+        border-top: 1px solid var(--border-sidebar-right);
+    }
+
+    .milestone-modal button {
+        right: 30px;
+        background-color: transparent;
+        color: var(--text);
         background-color: #5c7fdd;
-        width: 50%;
         border-radius: 10px;
+        padding: 10px 50px;
+        margin: 0 0 0 auto;
     }
-
-    .progress__fill span {
-        position: absolute;
-        font-size: 13px;
-        top: -20px;
-        right: -20px;
-        background-color: var(--background);
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        border: 1px solid var(--border-card);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: Roboto;
-        font-weight: 600;
-    }
-
-
 </style>
 <body>
-    <div class="flashcard-deck fadeInFromBottom" id="7">
-        <p class="deck-name" textcontent="User storys">User storys</p>
-        <div>
-            <p class="last-study-date" textcontent="Not studied yet.">Not studied yet.</p>
-            <p class="card-count"><span>3</span><i class="bi bi-files"></i></p>
-            <div class="progress">
-                <div class="progress__fill">
-                    <span class="percentage">50%</span>
-                </div>
-            </div>
-        </div>
-        <div class="flashcard-options">
-            <i id="edit-btn" class="fa-solid fa-pen"></i>
-            <i id="delete-btn" class="fa-solid fa-trash"></i>
-        </div>
+    <div class="milestone-modal">
+        <input class="milestone-name-input" type="text" placeholder="Milestone name" spellcheck="false">
+        <textarea placeholder="Description goes here..." spellcheck="false"></textarea>
+        <input type="date">
+        <button>Add</button>
     </div>
-    
 </body>
 </html>

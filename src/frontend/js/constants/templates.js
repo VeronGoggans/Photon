@@ -235,6 +235,15 @@ const taskBoardTemplate = `
 
             </div>
         </div>
+        <h1>Milestones</h1>
+        <div class="util-bar-type-2">
+            <button class="add-milestone-btn"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <div class="timeline">
+            <milestone-card></milestone-card>
+            <milestone-card></milestone-card>
+        </div>
+        
     </div>
 `
 
@@ -296,7 +305,6 @@ const editorTemplate = `
       </div>
 
       <div class="editor-util-btns-container">
-        <i id="editor-search-btn" class="bi bi-search"></i>
 
         <div class="templates-dropdown">
             <i id="editor-template-btn" class="fa-solid fa-file-lines"></i>

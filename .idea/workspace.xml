@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/frontend/js/components/modals/milestoneModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Note Taking App.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/application/services/focus_session_service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/application/services/taskboard_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/application/services/taskboard_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/data/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/data/helpers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/data/managers/focus_session_manager.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/data/managers/folder_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/data/managers/folder_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/data/managers/taskboard_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/data/managers/taskboard_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/data/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/data/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/presentation/routers/focus_session_router.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/presentation/routers/taskboard_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/presentation/routers/taskboard_router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/util/paths.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/util/paths.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/general/sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/sidebar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/views/taskboard/taskboardView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/views/taskboard/taskboardView.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/frontend_playground/test3.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/frontend_playground/test3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/frontend_playground/test6.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/frontend_playground/test6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/components/entities/folder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/components/entities/folder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/components/pageBlocks/pageBlocks.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/components/pageBlocks/pageBlocks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/constants/templates.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/constants/templates.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/controller/folderController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/controller/folderController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/model/folderModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/model/folderModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/util/dialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/util/dialog.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/util/formatters.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/util/formatters.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/util/ui/components.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/util/ui/components.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/view/homeView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/view/homeView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/view/taskView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/view/taskView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/view/textEditorView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/view/textEditorView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/json/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/json/settings.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;VeronGoggans&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/VeronGoggans/Note-taking-app.git&quot;,
+    &quot;accountId&quot;: &quot;546b963a-074e-4674-828f-b949c91e5257&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2o9W8kyMseOaSB2ft3Kix7dJ1na" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;sqlite-persistence&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-d7ad00fb9fc3-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23726.102" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="" />
+      <created>1730282120122</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1730282120122</updated>
+    </task>
+    <servers />
+  </component>
+</project>

@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from src.backend.data.models import Folder, Note, Taskboard, Flashcard, FlashcardSet, Task, NoteBook, NotebookItem
+from src.backend.data.models import Folder, Note, Taskboard, Flashcard, FlashcardSet, Task, NoteBook, NotebookItem, Milestone
 from src.backend.data.exceptions.exceptions import NotFoundException
 
 
@@ -25,6 +25,14 @@ def find_task(id: int, db: Session) -> ( Task | NotFoundException ):
     if task is None:
         raise NotFoundException(f"Task with id {id} not found.")
     return task
+
+
+def find_milestone(id: int, db: Session) -> ( Milestone | NotFoundException ):
+    milestone = db.query(Milestone).filter(Milestone.id == id).first()
+
+    if milestone is None:
+        raise NotFoundException(f"Milestone with id {id} not found.")
+    return milestone
 
 
 def find_taskboard(id: int, db: Session) -> ( Taskboard | NotFoundException ):
@@ -67,37 +75,33 @@ def find_flashcard(id: int, db: Session) -> ( Flashcard | NotFoundException ):
     return flashcard
 
 
-def get_folder_hierarchy(id: int, db: Session) -> list[dict]:
+def get_hierarchy(item_id: int, db: Session, is_note: bool) -> list[dict]:
     """
     Retrieve the folder hierarchy for a given folder or note ID.
     The hierarchy is a list of dictionaries with {id, name} for each folder in the path.
     """
 
-    folder = None
-
-    # Step 1: Check if the ID belongs to a Note
-    note = db.query(Note).filter(Note.id == id).first()
+    path = []
     
-    if note:
-        # If it's a note, find the folder where the note is located
-        folder_id = note.folder_id
-        folder = db.query(Folder).filter(Folder.id == folder_id).first()
+    # Start from the folder or the folder linked to the note
+    if is_note:
+        note = db.query(Note).filter_by(id=item_id).one_or_none()
+        if note is None or note.folder_id is None:
+            return []  # Note or folder not found
+        current_folder_id = note.folder_id
     else:
-        # Step 2: Check if the ID belongs to a Folder
-        folder = db.query(Folder).filter(Folder.id == id).first()
-
-    if not folder:
-        raise NotFoundException(f"No folder or note found with id {id}.")
-
-    # Step 3: Traverse up the folder hierarchy and collect the path
-    hierarchy = []
-    current_folder = folder
-
-    while current_folder:
-        hierarchy.append({"id": current_folder.id, "name": current_folder.name})
-        current_folder = db.query(Folder).filter(Folder.id == current_folder.parent_id).first()
-
-    # Reverse the hierarchy so that the root folder comes first
-    hierarchy.reverse()
-
-    return hierarchy
+        folder = db.query(Folder).filter_by(id=item_id).one_or_none()
+        if folder is None:
+            return []  # Folder not found
+        current_folder_id = folder.id
+    
+    # Traverse the hierarchy of folders
+    while current_folder_id:
+        folder = db.query(Folder).filter_by(id=current_folder_id).one_or_none()
+        if not folder:
+            break
+        path.append(folder.name)
+        current_folder_id = folder.parent_id  # Move up to the parent folder
+    
+    # Reverse the path to show the hierarchy from top to bottom
+    return path[::-1]

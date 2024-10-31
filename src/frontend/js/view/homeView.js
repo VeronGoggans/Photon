@@ -97,9 +97,9 @@ export class HomeView extends BaseView {
     #eventListeners() {
         this._recentFolderList.addEventListener('RecentFolderCardClick', async (event) => {
             const { folderId } = event.detail;            
-            const { Object, location } = await this.applicationController.getFolderById(folderId);
+            const { folder, location } = await this.applicationController.getFolderById(folderId);            
             this.applicationController.initView('notes', {
-                folder: Object,
+                folder: folder,
                 location: location
             })
         })  

@@ -30,12 +30,12 @@ export class FolderModel extends HttpModel {
     }
 
 
-    getAllFolderNames() {
-        let folderNames = []
+    getAllFolders() {
+        let folders = []
         this.folderObjects.forEach(folderObject => {
-            folderNames.push(folderObject.name)
+            folders.push(folderObject)
         })
-        return folderNames
+        return folders
     }
 
 

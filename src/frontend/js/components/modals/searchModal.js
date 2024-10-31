@@ -30,9 +30,9 @@ export class SearchModal {
         this.NEXT_BUTTON = CNode.create('button', {});
         this.CLOSE_BUTTON = CNode.create('button', {});
         // ICONS
-        this.PREVIOUS_ICON = CNode.create('i', {'class': 'fa-solid fa-chevron-up'});
-        this.NEXT_ICON = CNode.create('i', {'class': 'fa-solid fa-chevron-down'});
-        this.CLOSE_ICON = CNode.create('i', {'class': 'fa-solid fa-xmark'});
+        this.PREVIOUS_ICON = CNode.create('i', {'class': 'bi bi-chevron-up'});
+        this.NEXT_ICON = CNode.create('i', {'class': 'bi bi-chevron-down'});
+        this.CLOSE_ICON = CNode.create('i', {'class': 'bi bi-x-lg'});
     }
 
     #render() {

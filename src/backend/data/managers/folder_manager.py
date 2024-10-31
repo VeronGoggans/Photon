@@ -1,8 +1,9 @@
 from sqlalchemy.orm import Session
 from src.backend.data.models import Folder
-from src.backend.data.helpers import find_folder, get_folder_hierarchy
+from src.backend.data.helpers import find_folder, get_hierarchy
 from src.backend.data.exceptions.exceptions import NotFoundException, InsertException
 from datetime import datetime
+
 
 class FolderManager:
 
@@ -36,7 +37,7 @@ class FolderManager:
 
     def get_by_id(self, folder_id: int, db: Session) -> (Folder | NotFoundException):
         folder = find_folder(folder_id, db)
-        hierarchy = get_folder_hierarchy(folder_id, db)
+        hierarchy = get_hierarchy(folder_id, db, is_note=False)
         return folder, hierarchy
     
 

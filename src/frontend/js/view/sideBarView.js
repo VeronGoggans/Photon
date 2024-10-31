@@ -85,7 +85,7 @@ export class SidebarView {
         }
 
         document.querySelector('.logo-container').style.justifyContent = 'normal'
-        document.querySelector('.logo-text').textContent = 'eutron';
+        document.querySelector('.logo-text').textContent = 'hoton';
     }
 
     #toggleSidebar() {

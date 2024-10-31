@@ -13,18 +13,6 @@
     color: var(--editor-text);
 } 
 
-.document-location {
-    display: flex;
-    align-items: center;
-    margin-left: 30px;
-    color: var(--file-path);
-    font-family: sans-serif;
-    font-size: 16px;
-}
-
-.document-location i {
-    cursor: default;
-}
 
 .save-note-btn {
     cursor: pointer;

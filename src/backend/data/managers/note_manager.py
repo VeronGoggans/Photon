@@ -1,5 +1,5 @@
 from src.backend.data.models import Note
-from src.backend.data.helpers import find_folder, find_note, get_folder_hierarchy
+from src.backend.data.helpers import find_folder, find_note, get_hierarchy
 from src.backend.presentation.request_bodies.note_requests import *
 from src.backend.data.exceptions.exceptions import *
 from sqlalchemy.orm import Session
@@ -29,7 +29,7 @@ class NoteManager:
 
     def get_by_id(self, id: int, db: Session) -> (Note | NotFoundException):
         note = find_note(id, db)
-        hierarchy = get_folder_hierarchy(id, db)
+        hierarchy = get_hierarchy(id, db, is_note=True)
         return note, hierarchy
     
 

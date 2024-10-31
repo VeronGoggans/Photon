@@ -129,6 +129,7 @@ export class TaskView extends BaseView {
 
     #eventListeners() {
         this.addTaskButton.addEventListener('click', () => {this.dialog.renderTaskModal(this.controller, this.taskbaordId)});
+        this.addMilestoneButton.addEventListener('click', () => {this.dialog.renderMilestoneModal(this.controller, this.taskboardId)});
         this.viewElement.addEventListener('PreviousViewButtonClick', () => {this.controller.loadPreviousView()});
         this.board.addEventListener('TaskCardClick', (event) => {
             const { task } = event.detail;
@@ -177,6 +178,7 @@ export class TaskView extends BaseView {
         this.inprogressCount = document.querySelector('.inprogress .board-section-name span')
         this.doneCount = document.querySelector('.done .board-section-name span')
         this.addTaskButton = document.querySelector('.add-task-btn');
+        this.addMilestoneButton = document.querySelector('.add-milestone-btn');
         this.board = document.querySelector('.board');
         this.description = document.querySelector('.description-block-content');
         this.name = document.querySelector('h1');

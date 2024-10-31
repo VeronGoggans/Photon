@@ -25,6 +25,12 @@ class TaskboardRouter:
         self.route.add_api_route('/task/{id}', self.get_task_by_id, methods=['GET'])
         self.route.add_api_route('/task', self.update_task, methods=['PUT'])
         self.route.add_api_route('/task/{id}', self.delete_task, methods=['DELETE'])
+
+        self.route.add_api_route('/milestone', self.add_task, methods=['POST'])
+        self.route.add_api_route('/milestones/{taskboard_id}', self.get_tasks, methods=['GET'])
+        self.route.add_api_route('/milestone/{id}', self.get_task_by_id, methods=['GET'])
+        self.route.add_api_route('/milestone', self.update_task, methods=['PUT'])
+        self.route.add_api_route('/milestone/{id}', self.delete_task, methods=['DELETE'])
         
 
     @handle_exceptions
@@ -93,3 +99,46 @@ class TaskboardRouter:
     @handle_exceptions
     def delete_task(self, id: int, db: Session = Depends(Database.get_db)):
         return {'status': HttpStatus.OK, 'task': self.service.delete_task(id, db)}
+    
+
+
+    @handle_exceptions
+    def add_milestone(self, request: PostTaskRequest, db: Session = Depends(Database.get_db)):
+        return {
+            'status': HttpStatus.OK, 
+            'task': self.service.add_milestone(
+                request.parent_id,
+                request.name, 
+                request.description, 
+                request.due_date,
+                request.tag,
+                db)}
+       
+
+    @handle_exceptions
+    def get_milestones(self, taskboard_id: int, db: Session = Depends(Database.get_db)):
+        return {'status': HttpStatus.OK, 'tasks': self.service.get_milestones(taskboard_id, db)}
+       
+
+    @handle_exceptions
+    def get_milestone_by_id(self, id: int, db: Session = Depends(Database.get_db)):
+        return {'status': HttpStatus.OK, 'task': self.service.get_milestone_by_id(id, db)}
+
+
+    @handle_exceptions
+    def update_milestone(self, request: PutTaskRequest, db: Session = Depends(Database.get_db)):
+        return {
+            'status': HttpStatus.OK, 
+            'task': self.service.update_milestone(
+            request.id, 
+            request.name, 
+            request.description,
+            request.due_date,
+            request.section,
+            request.tag,
+            db)}
+    
+
+    @handle_exceptions
+    def delete_milestone(self, id: int, db: Session = Depends(Database.get_db)):
+        return {'status': HttpStatus.OK, 'task': self.service.delete_milestone(id, db)}

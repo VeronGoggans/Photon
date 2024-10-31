@@ -1,3 +1,4 @@
+/*__________DESCRIPTION PAGE BLOCK___________*/
 description-page-block {
     display: flex;
     flex-direction: column;
@@ -22,3 +23,16 @@ description-page-block .description-block-placeholder {
     font-style: italic;
 }
 
+
+/*__________DOCUMENT LOCATION___________*/
+
+document-location-page-block {
+    display: flex;
+    align-items: center;
+    font-family: Roboto;
+    font-weight: 600;
+}
+
+document-location-page-block i {
+    font-size: 14px;
+}

@@ -75,31 +75,6 @@ class Template(Base):
 
 
 
-class Taskboard(Base):
-    __tablename__ = 'taskboards'
-    
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String, nullable=True)
-    description = Column(String, nullable=True)
-    board_sections = Column(JSON, default=['To do', 'In progress', 'Done'])
-
-    tasks = relationship("Task", backref="parent_taskboard", cascade="all, delete-orphan")
-
-
-
-class Task(Base):
-    __tablename__ = 'tasks'
-    
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String, nullable=True)
-    description = Column(String, nullable=True)
-    due_date = Column(String, nullable=True)
-    section = Column(String, nullable=False, default='To do')
-    tag = Column(String, nullable=False, default='Task')
-
-    # Foreign keys for folder or subfolder
-    taskboard_id = Column(Integer, ForeignKey('taskboards.id', ondelete='CASCADE'), nullable=True)
-
 
 
 
@@ -140,6 +115,7 @@ class NoteBook(Base):
 
 
 
+
 class NotebookItem(Base):
     __tablename__ = 'notebook_item'
 
@@ -152,11 +128,44 @@ class NotebookItem(Base):
 
 
 
-class FocusSession(Base):
-    __tablename__ = 'focus_sessions'
+
+class Taskboard(Base):
+    __tablename__ = 'taskboards'
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String, nullable=True)
+    description = Column(String, nullable=True)
+    board_sections = Column(JSON, default=['To do', 'In progress', 'Done'])
+
+    tasks = relationship("Task", backref="parent_taskboard", cascade="all, delete-orphan")
+    milestones = relationship("Milestone", backref="parent_taskboard", cascade="all, delete-orphan")
+
+
+
+
+class Task(Base):
+    __tablename__ = 'tasks'
+    
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String, nullable=True)
+    description = Column(String, nullable=True)
+    due_date = Column(String, nullable=True)
+    section = Column(String, nullable=False, default='To do')
+    tag = Column(String, nullable=False, default='Task')
+
+    # Foreign keys for folder or subfolder
+    taskboard_id = Column(Integer, ForeignKey('taskboards.id', ondelete='CASCADE'), nullable=True)
+    milestones_id = Column(Integer, ForeignKey('milestones.id', ondelete='CASCADE'), nullable=True)
+
+
+
+
+class Milestone(Base):
+    __tablename__ = 'milestones'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String, nullable=False, default='Timer')
-    work_time = Column(Integer, nullable=False, default=60)
-    rest_time = Column(Integer, nullable=False, default=10)
-    iterations = Column(Integer, nullable=False, default=1)
+    name = Column(String, nullable=True)
+    description = Column(String, nullable=True)
+    due_date = Column(String, nullable=True)
+    tasks = relationship("Task", backref="milestone", passive_deletes=True)
+    taskboard_id = Column(Integer, ForeignKey('taskboards.id', ondelete='CASCADE'), nullable=True)

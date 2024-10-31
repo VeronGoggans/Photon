@@ -100,6 +100,22 @@ recent-folder-card i {
     font-size: 18px;
 }
 
+
+folder-path {
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: var(--file-path);
+    cursor: pointer;
+    transition: .2s;
+}
+
+folder-path:hover {
+    background-color: var(--hover);
+    color: #5c7fdd;
+}
+
+
 .color-blue-1 {background-color: rgb(121, 144, 255)}
 .color-blue-2 {background-color: rgb(169, 215, 255)}
 .color-blue-3 {background-color: rgb(217, 237, 255)}

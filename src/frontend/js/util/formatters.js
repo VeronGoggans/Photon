@@ -1,3 +1,6 @@
+import { createFolderPath } from "./ui/components.js";
+
+
 export function formatName(name) {
     if (name.length <= 25) return name;
     else return name.slice(0, 22) + '...';
@@ -16,13 +19,13 @@ export function filterNotePreview(content) {
 }
 
 
-export function formatDocumentLocation(folderNames, documentLocationTag) {
-    let formattedDocumentLocation = ' ';
+export function formatDocumentLocation(folders, documentLocationTag) {
+    let folderPaths = [];
     const chevronIcon = '<i class="bi bi-chevron-right"></i>';
-    folderNames.forEach(name => {
-        formattedDocumentLocation += `${name}${chevronIcon}`;
+    
+    folders.forEach(folder => {
+        folderPaths.push(createFolderPath(folder)); 
     });
-    // Remove the last '/ ' from the location string
     documentLocationTag.innerHTML = formattedDocumentLocation.slice(0, -chevronIcon.length);
 }
 

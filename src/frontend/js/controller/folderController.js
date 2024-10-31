@@ -76,7 +76,7 @@ export class FolderController {
 
 
     getAllFolderNames() {
-        return this.model.getAllFolderNames()
+        return this.model.getAllFolders()
     }
 
     getCurrentFolderObject() {

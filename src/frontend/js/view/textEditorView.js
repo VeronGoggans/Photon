@@ -2,11 +2,11 @@ import { KeyEventListener } from "../eventListeners/keyEventListener.js";
 import { TextEditorEventListener } from "../eventListeners/textEditorEventListener.js";
 import { DropdownHelper } from "../helpers/dropdownHelper.js";
 import { TextFormatter } from "../textFormat/textFormatter.js"; 
-import { formatDocumentLocation } from "../util/formatters.js";
 import { TextBlockHandler } from "../textFormat/textBlockHandler.js";
 import { SlashCommand } from "../textFormat/slashCommand.js";
 import { AnimationHandler } from "../handlers/animation/animationHandler.js";
 import { BaseView } from "../view/baseView.js"
+import { createDocumentLocation } from "../util/ui/components.js";
 
 export class TextEditorView extends BaseView {
   constructor(controller, applicationController) {
@@ -33,13 +33,11 @@ export class TextEditorView extends BaseView {
    * 
    * @param {Object} object - could be a Note or Template object
    */
-  open(object, allFolderNames, allTemplateNames) {
+  open(object, folders, allTemplateNames) {
     this.editorContent = object.content;
     this.page.innerHTML = object.content;
     this.documentNameInput.value = object.name;
-
-    formatDocumentLocation(allFolderNames, this.documentLocation)
-    this.show(allFolderNames, allTemplateNames);
+    this.show(folders, allTemplateNames);
     this.textBlockHandler.parse();
   }
 
@@ -74,8 +72,8 @@ export class TextEditorView extends BaseView {
   } 
 
 
-  show(allFolderNames, allTemplateNames) {
-    formatDocumentLocation(allFolderNames, this.documentLocation);
+  show(folders, allTemplateNames) {
+    this.documentLocation.appendChild(createDocumentLocation(folders));
     this.dropdownHelper.renderTemplatesDropdown(allTemplateNames);
     this.editor.scrollTop = 0;
     this.page.focus();
@@ -123,6 +121,10 @@ export class TextEditorView extends BaseView {
     this.controller.saveDeckName(deckName)
   }
 
+  renderSearchModal() {
+    this.dialog.renderSearchModal(this.toolbar);
+  }
+
   #getStoredEditorObject() {
     const storedEditorData = this.controller.getStoredObject();
     return storedEditorData.editorObject;
@@ -144,7 +146,6 @@ export class TextEditorView extends BaseView {
     this.documentNameInput = document.querySelector('.note-name-input');
     this.exitButton = document.querySelector('#exit-editor-btn');
     this.saveButton = document.querySelector('.save-note-btn');
-    this.findButton = document.querySelector('#editor-search-btn');
     this.deckButton = document.querySelector('#editor-flashcard-set-btn');
     this.colorButton = document.querySelector('.color-dropdown button');
 
@@ -182,7 +183,6 @@ export class TextEditorView extends BaseView {
     this.saveButton.addEventListener('click', async () => { await this.save(true, false)});
     this.page.addEventListener('click', () => {this.dropdownHelper.closeDropdowns()});
 
-    this.findButton.addEventListener('click', () => {this.dialog.renderSearchModal(this.toolbar)});  
     this.colorButton.addEventListener('click', () => {this.dropdownHelper.toggleDropdown(this.colorDropdown)})
     this.deckButton.addEventListener('click', () => {
       // Get currently stored cards
