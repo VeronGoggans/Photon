@@ -1,8 +1,7 @@
-import { Template } from "../components/entities/template.js"; 
 import { AnimationHandler } from "../handlers/animation/animationHandler.js";
-import { TemplateObjectArray } from "../util/array.js";
 import { decrementString } from "../util/ui.js";
 import { BaseView } from "./baseView.js";
+import { createCustomElement } from "../util/ui/components.js";
 
 
 export class TemplateView extends BaseView {
@@ -10,7 +9,6 @@ export class TemplateView extends BaseView {
         super(controller);
         this.controller = controller;
         this.applicationController = applicationController;
-        this.templateObjects = new TemplateObjectArray();
         this.#initElements();
         this.#eventListeners();
 
@@ -19,20 +17,19 @@ export class TemplateView extends BaseView {
 
 
     renderAll(recent, other, totalUses, mostUsed) {
-        this.templateObjects.clear()
         this.#renderTemplateStats(recent, other, totalUses, mostUsed);
         if (recent.length > 0) {
             const recentContentFragment = document.createDocumentFragment();
             const otherContentFragment = document.createDocumentFragment();
 
             for(let i = 0; i < recent.length; i++) {
-                const templateCard = this.#template(recent[i]);
+                const templateCard = createCustomElement(recent[i], 'template-card');
                 recentContentFragment.appendChild(templateCard);
                 AnimationHandler.fadeInFromBottom(templateCard);
             }
 
             for(let i = 0; i < other.length; i++) {
-                const templateCard = this.#template(other[i]);
+                const templateCard = createCustomElement(other[i], 'template-card');
                 otherContentFragment.appendChild(templateCard);
                 AnimationHandler.fadeInFromBottom(templateCard);
             }
@@ -48,14 +45,13 @@ export class TemplateView extends BaseView {
         for (let i = 0; i < templates.length; i++) {
             if (templates[i].id == template.id) {
                 AnimationHandler.fadeOutCard(templates[i]);
-                this.templateObjects.remove(template);
                 this._templateCountSpan.textContent = decrementString(this._templateCountSpan.textContent); 
             }
         }
     }
 
-    handleTemplateCardClick(templateId) {
-        const template = this.templateObjects.get(templateId);
+    handleTemplateCardClick(event) {
+        const { template } = event.detail;
         this.applicationController.initView('editor', 
             {
                 editorObjectType: 'template', 
@@ -67,22 +63,10 @@ export class TemplateView extends BaseView {
         );
     }
 
-    getTemplateObject(templateId) {
-        return this.templateObjects.get(templateId);
-    }
-
-
     #renderTemplateStats(recent, other, totalUses, mostUsed) {
-        this._templateCountSpan.textContent = 
-        recent.length + other.length
-
+        this._templateCountSpan.textContent = recent.length + other.length
         this._templateUsesCountSpan.textContent = totalUses;
         this._mostUsedTemplateSpan.textContent = mostUsed;
-    }
-
-    #template(template) {
-        this.templateObjects.add(template);
-        return new Template(template, this)
     }
 
     #initElements() {
@@ -96,6 +80,20 @@ export class TemplateView extends BaseView {
     }
 
     #eventListeners() {
+        this._recentTemplates.addEventListener('DeleteTemplate', (event) => {
+            const { template } = event.detail;
+            this.dialog.renderDeleteModal(this.controller, template.id, template.name)
+        })
+
+        this._otherTemplates.addEventListener('DeleteTemplate', (event) => {
+            const { template } = event.detail;
+            this.dialog.renderDeleteModal(this.controller, template.id, template.name)
+        })
+
+        this._recentTemplates.addEventListener('DeleteTemplate', (event) => {this.handleTemplateCardClick(event)})
+        this._otherTemplates.addEventListener('DeleteTemplate', (event) => {this.handleTemplateCardClick(event)})
+
+
         this._addTemplateButton.addEventListener('click', () => {
             this.applicationController.initView('editor', {
                 editorObjectType: 'template', 

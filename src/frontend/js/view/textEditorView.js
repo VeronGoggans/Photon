@@ -140,6 +140,8 @@ export class TextEditorView extends BaseView {
     this.controller.clearStoredObject();
   }
 
+
+
   #initElements() {
     // toolbar top
     this.documentLocation = document.querySelector('.document-location');
@@ -174,6 +176,17 @@ export class TextEditorView extends BaseView {
 
 
   #eventListeners() {
+    this.documentLocation.addEventListener('FolderPathClick', async (event) => {
+      this.controller.clearStoredObject();
+      const { folderId } = event.detail;
+      const { folder, location } = await this.applicationController.getFolderById(folderId);
+      const viewId = 'notes'
+      this.applicationController.initView(viewId, {
+        folder: folder,
+        location: location
+      })
+    })
+
     this.noteDetailsSpan.addEventListener('click', () => {this.dialog.renderNoteDetailsModal(this.#getStoredEditorObject())});
     this.deleteNoteSpan.addEventListener('click', () => {this.renderDeleteModal(this.#getStoredEditorObject().id, this.documentNameInput.value, this)});
     this.saveNoteSpan.addEventListener('click', async () => {await this.save(false, false, true, false)});

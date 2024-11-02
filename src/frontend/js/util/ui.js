@@ -45,6 +45,30 @@ export function addDraggImage(event, imageType) {
 }
 
 
+export function showContextMenu(event, parentElement, menuTemplate) {
+    event.preventDefault()
+
+    const existingMenu = document.querySelector(".options-menu");
+    if (existingMenu) existingMenu.remove();
+
+    const menu = document.createElement("div");
+    menu.classList.add("options-menu");
+    menu.innerHTML = menuTemplate
+
+    parentElement.appendChild(menu);
+
+    // Add an event listener to close the menu when clicking outside of it
+    document.addEventListener("click", function hideMenu(e) {
+    if (!menu.contains(e.target)) {
+        menu.remove();
+        document.removeEventListener("click", hideMenu);
+    }});
+}
+
+
+
+// TODO Make this a function
+
 class DragImage {
     constructor(type) {
         /**

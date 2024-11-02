@@ -1,20 +1,17 @@
 folder-card {
-    user-select: none;
     cursor: pointer;
-    min-height: 280px;
-    max-height: 280px;
-    border-radius: 15px;
+    height: 50px;
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    padding: 10px;
     background-color: var(--card);
+    border-radius: 10px;
     color: var(--icon);
-    display: grid;
-    grid-template-rows: 40px 1fr 50px;
-    margin: 20px;
-    overflow: visible;
-    /* border: 1px solid var(--border-card); */
+    box-shadow: var(--card-shadow);
     opacity: 0;
     transform: translateY(30%);
     transition: opacity .7s ease, transform .25s ease, scale .2s ease;
-    box-shadow: var(--card-shadow);
 }
 
 folder-card:hover {
@@ -22,50 +19,12 @@ folder-card:hover {
 }
 
 
-folder-card #folder-icon {
-    color: var(--icon);
-    font-size: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-folder-card div {
-    position: relative;
-    display: flex;
-    justify-content: right;
-    align-items: center;
-    padding-right: 10px;
-    gap: 10px;
-    opacity: 0;
-    transition: 200ms;
-    cursor: auto;
-}
-
 folder-card div:hover {
     opacity: 1;
 }
 
-folder-card div #edit-btn,
-folder-card div #delete-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-    border-radius: 10px;
-    color: var(--icon);
-}
-
-folder-card div #edit-btn:hover,
-folder-card div #delete-btn:hover {
-    background-color: var(--hover);
-    color: var(--icon-hover);
-}
 
 folder-card p {
-    width: 100%;
     padding: 5px;
     margin: 0 10px;
     font-family: sans-serif;
@@ -95,7 +54,8 @@ recent-folder-card:hover {
 
 }
 
-recent-folder-card i {
+recent-folder-card i,
+folder-card i {
     margin-right: 10px;
     font-size: 18px;
 }

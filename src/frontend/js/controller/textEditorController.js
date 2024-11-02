@@ -109,9 +109,9 @@ export class TextEditorController {
         await this.applicationController.addDeck(deckName, flashcards);
     }
 
-    // This method will notify the user that they deleted something.
     async handleDeleteButtonClick(editorObjectId) {
-        const editorObjectType = this.model.getStoredObject()['editorObjectType']
+        const { editorObjectType } = this.model.getStoredObject()
+        
         if (editorObjectType === 'note') {
             await this.applicationController.deleteNote(editorObjectId, true);
         }

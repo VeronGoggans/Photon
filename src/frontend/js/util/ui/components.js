@@ -6,20 +6,10 @@ export function createListItemType1(item, itemType) {
 }
 
 
-export function createFolder() {
-
-}
-
-
-export function createFolderPath(folder) {
-    const folderPath = document.createElement('folder-path');
-    folderPath.setAttribute('folder', JSON.stringify(folder));
-    return folderPath;
-}
-
-
-export function createRecentFolder() {
-
+export function createCustomElement(elementData, elementName) {
+    const customComponent = document.createElement(elementName)
+    customComponent.setData(elementData);
+    return customComponent
 }
 
 

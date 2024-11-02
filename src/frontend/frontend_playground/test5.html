@@ -5,71 +5,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Auto-Scrolling Text Editor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        /* Styling the contenteditable div */
-        .editor {
-            width: 600px;
-            height: 300px;
-            border: 1px solid #ccc;
+        .options-menu {
+            background-color: rgb(255, 255, 255);
+            width: fit-content;
             padding: 10px;
-            overflow-y: auto; /* Scrollable */
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            line-height: 1.5;
-            white-space: pre-wrap; /* Keep whitespace formatting */
-            scroll-behavior: smooth; /* Makes native scroll smooth */
+            border-radius: 10px;
+            box-shadow: 5px 5px 10px #cacad4;
         }
+
+        .options-menu div {
+            cursor: pointer;
+            padding: 10px;
+            margin: 5px;
+            border-radius: 5px;
+            transition: 200ms;
+        }
+
+        .options-menu div:hover {
+            background-color: #cacad4;
+        }
+
+        .options-menu i {
+            font-size: 14px;
+        }
+
+        .options-menu span {
+            font-size: 16px;
+            font-family: sans-serif;
+            margin-left: 10px;
+        }
+        
     </style>
 </head>
 <body>
 
-<div class="editor" contenteditable="true"></div>
+    <div class="options-menu">
+        <div>
+            <i id="edit-btn" class="fa-solid fa-pen"></i>
+            <span>Edit folder</span>
+        </div>
+        <div>
+            <i id="delete-btn" class="fa-solid fa-trash"></i>
+            <span>Delete folder</span>
+        </div>
+        
+    </div>
 
-<script>
-    const editor = document.querySelector('.editor');
 
-    editor.addEventListener('input', () => {
-        ensureCursorVisibility();
-    });
-
-    editor.addEventListener('keyup', (event) => {
-        ensureCursorVisibility();
-    });
-
-    function ensureCursorVisibility() {
-        const cursorPosition = getCaretCoordinates();
-        if (cursorPosition) {
-            const { top, bottom } = cursorPosition;
-            const editorRect = editor.getBoundingClientRect();
-
-            // Check if the cursor is near or below the visible bottom of the editor
-            if (bottom > editorRect.bottom) {
-                editor.scrollTo({
-                    top: editor.scrollTop + (bottom - editorRect.bottom) + 100, // Calculate the amount to scroll
-                    behavior: 'smooth' // Enable smooth scrolling
-                });
-            }
-        }
-    }
-
-    // Function to get the coordinates of the text cursor
-    function getCaretCoordinates() {
-        const selection = window.getSelection();
-        if (selection.rangeCount === 0) return null;
-        const range = selection.getRangeAt(0).cloneRange();
-
-        const tempSpan = document.createElement('span');
-        range.collapse(false); // Collapse to the end of the range
-        range.insertNode(tempSpan);
-
-        const rect = tempSpan.getBoundingClientRect();
-        const coordinates = { top: rect.top, bottom: rect.bottom };
-
-        tempSpan.parentNode.removeChild(tempSpan); // Clean up the temporary span
-
-        return coordinates;
-    }
-</script>
 
 </body>
 </html>

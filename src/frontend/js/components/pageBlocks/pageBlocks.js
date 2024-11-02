@@ -1,4 +1,4 @@
-import { createFolderPath } from "../../util/ui/components.js";
+import { createCustomElement } from "../../util/ui/components.js";
 
 class DescriptionPageBlock extends HTMLElement {
     constructor() {
@@ -34,7 +34,7 @@ class DocumentLocationPageBlock extends HTMLElement {
     render() {
         const folderPaths = []
         this.folders.forEach(folder => {
-            const folderPath = createFolderPath(folder);
+            const folderPath = createCustomElement(folder, 'folder-path');
             const icon = document.createElement('i');
             icon.classList.add('bi');
             icon.classList.add('bi-chevron-right');

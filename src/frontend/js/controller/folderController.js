@@ -43,6 +43,7 @@ export class FolderController {
 
         const { folders } = await this.model.get(`/folders/${parentFolderId}`);
         this.view.renderAll(folders);
+        return true
     }
 
 
@@ -93,8 +94,8 @@ export class FolderController {
     }
 
     /**
-     * @param {*} init - Indicating if this method is called by the init method 
-     * or by the folder view.  
+     * @param {*} init - Indicating if this method is called by the init method
+     * or by the folder view.
      */
     async navigateIntoFolder(folderId, name, init = false) {
         // If the home button inside the notes view is clicked 
@@ -104,13 +105,9 @@ export class FolderController {
         this.model.patch(`/viewedFolderTime/${folderId}`);
         this.model.addFolderIdToList(folderId, name);
 
-        await this.get();
-        if (!init) {
-            // This timeout is used to combat the Race condition
-            // Where the folders would take
-            setTimeout(async () => {
-                await this.applicationController.getNotes(folderId);    
-            }, 20);
+        const foldersFetched = await this.get();
+        if (!init && foldersFetched) {
+            await this.applicationController.getNotes(folderId);    
         }
     }
 

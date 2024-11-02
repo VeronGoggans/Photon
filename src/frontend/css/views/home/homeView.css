@@ -27,16 +27,6 @@
     color: var(--important);
 }
 
-
-.home .middle .block-title {
-    font-family: sans-serif;
-    color: var(--subtitle);
-    margin-top: 20px;
-    font-size: 20px;
-    padding: 20px 0;
-}
-
-
 .home .recent-folders {
     max-width: 100%;
     display: grid;
@@ -48,29 +38,9 @@
 .home .recent-notes {
     max-width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    grid-template-rows: repeat(auto-fill, 280px);
-    gap: 40px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-rows: repeat(auto-fill, 320px);
     margin-bottom: 50px;
-}
-
-.home .recent-notes .recent-note {
-    user-select: none;
-    cursor: pointer;
-    min-height: 280px;
-    max-height: 280px;
-    border-radius: 15px;
-    background-color: var(--card);
-    box-shadow: var(--card-shadow);
-    display: grid;
-    grid-template-rows: 40px 1fr;
-    opacity: 0;
-    transform: translateY(30%);
-    transition: opacity .7s ease, transform .25s ease, scale .2s ease;
-}
-
-.home .recent-notes .recent-note:hover {
-    scale: 1.05;
 }
 
 .flashcard-decks {

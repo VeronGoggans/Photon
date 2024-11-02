@@ -22,9 +22,8 @@ const homeTemplate = `
 `;
 
 const notesTemplate = `
-    <div class="notes">
+    <div class="notes-view">
     <div class="notes-top">
-        <button class="exit-folder-btn"><i class="bi bi-arrow-left"></i></button>
 
         <div class="searchbar">
             <i id="search-icon" class="bi bi-search"></i>
@@ -34,19 +33,23 @@ const notesTemplate = `
 
     </div>
     <div class="notes-bottom">
-        <div class="content-folder-view">
         <div class="current-folder-name-container">
             <h1 class="current-folder-name view-title">Home</h1>
             <div>
-            <button title="Create folder" class="create-folder-btn"><i class="bi bi-folder-fill"></i></button>
-            <button title="Create note" class="create-note-btn"><i class="bi bi-file-earmark-fill"></i></button>
-            <button title="Return home" class="home-folder-btn"><i class="bi bi-house-fill"></i></button>
-            <button title="Show bookmarks" class="bookmarks-btn"><i class="bi bi-bookmark-fill"></i></button>
+                <button title="Back" class="exit-folder-btn"><i class="bi bi-backspace-fill"></i></button>
+                <button title="Create folder" class="create-folder-btn"><i class="bi bi-folder-fill"></i></button>
+                <button title="Create note" class="create-note-btn"><i class="bi bi-file-earmark-fill"></i></button>
+                <button title="Return home" class="home-folder-btn"><i class="bi bi-house-fill"></i></button>
+                <button title="Show bookmarks" class="bookmarks-btn"><i class="bi bi-bookmark-fill"></i></button>
             </div>
         </div>
-        <div class="content-view">
+        <div class="note-view-content">
+            <p class="block-title" id="folders-block-title">Folders</p>
+            <div class="folders"></div>
+            <p class="block-title" id="notes-block-title">Notes</p>
+            <div class="notes"></div>
         </div>
-        </div>
+        
     </div>
     </div>
 `;

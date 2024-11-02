@@ -88,6 +88,6 @@
 }
 
 .soft {
-    border: none;
+    border: 1px solid var(--border-sidebar-soft);
     background-color: var(--sidebar-soft);
 }

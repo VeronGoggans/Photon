@@ -2,7 +2,8 @@ export class AnimationHandler {
 
     static fadeInFromBottom(card) {
         setTimeout(() => {
-            card.classList.add('fadeInFromBottom');
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)'
         }, 30);
     }
 

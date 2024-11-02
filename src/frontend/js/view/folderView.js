@@ -13,6 +13,16 @@ export class FolderView extends BaseView {
     }
 
     renderAll(folders) {
+        if (folders.length === 0) {
+            document.querySelector('#folders-block-title').style.display = 'none';
+            this._content.style.display = 'none'
+        }
+
+        if (folders.length > 0) {
+            document.querySelector('#folders-block-title').style.display = '';
+            this._content.style.display = ''
+        }
+
         for (let i = 0; i < folders.length; i++) {
             const folderCard = this.#folder(folders[i]);
             this._content.appendChild(folderCard);
@@ -21,6 +31,10 @@ export class FolderView extends BaseView {
     }
 
     renderOne(folder) {
+        if (this._content.children.length === 0) {
+            document.querySelector('#folders-block-title').style.display = '';
+            this._content.style.display = ''
+        }
         const folderCard = this.#folder(folder);
         this._content.insertBefore(folderCard, this._content.firstChild);
         AnimationHandler.fadeInFromBottom(folderCard);
@@ -44,7 +58,6 @@ export class FolderView extends BaseView {
                 AnimationHandler.fadeOutCard(folders[i]);
             }
         }
-        addEmptyMessage(this._content);
     }
 
 
@@ -57,12 +70,13 @@ export class FolderView extends BaseView {
 
     displayFolderName(name) {
         removeContent(this._content);
+        removeContent(document.querySelector('.notes'));
         this.currentFolderName.textContent = name;
     }
 
 
     #initElements() {
-        this._content = document.querySelector('.content-view');
+        this._content = document.querySelector('.folders');
         this.currentFolderName = document.querySelector('.current-folder-name');
         this.backButton = document.querySelector('.exit-folder-btn');
         this.createFolderButton = document.querySelector('.create-folder-btn');

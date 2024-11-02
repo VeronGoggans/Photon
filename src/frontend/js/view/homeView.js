@@ -1,8 +1,7 @@
-import { RecentNote } from "../components/entities/note.js";
-import { NoteObjectArray } from "../util/array.js";
 import { AnimationHandler } from "../handlers/animation/animationHandler.js";
 import { greetBasedOnTime } from "../util/date.js";
 import { BaseView } from "./baseView.js";
+import { createCustomElement } from "../util/ui/components.js";
 
 export class HomeView extends BaseView {
     constructor(controller, applicationController) {
@@ -10,7 +9,6 @@ export class HomeView extends BaseView {
         this.controller = controller;
         this.applicationController = applicationController;
 
-        this.noteObjects = new NoteObjectArray();
         this.#initElements();
         this.#eventListeners();
 
@@ -31,16 +29,15 @@ export class HomeView extends BaseView {
 
 
     renderRecentNotes(notes) {
-        this.noteObjects.clear()
         const contentFragment = document.createDocumentFragment();
 
         for (let i = 0; i < notes.length; i++) {
-            const noteCard = this.#recentNote(notes[i]);
+            const noteCard = createCustomElement(notes[i], 'recent-note-card');
 
             contentFragment.appendChild(noteCard);
             AnimationHandler.fadeInFromBottom(noteCard);
         }
-        this.recentNoteContainer.appendChild(contentFragment); 
+        this._recentNoteList.appendChild(contentFragment); 
     }
 
     renderRandomDecks(decks) {
@@ -48,7 +45,6 @@ export class HomeView extends BaseView {
 
         for (let i = 0; i < decks.length; i++) {
             const { deck, stats } = decks[i];
-            console.log(stats);
             
             const deckCard = this.#flashcardDeck(deck, stats);
 
@@ -59,30 +55,11 @@ export class HomeView extends BaseView {
 
     }
 
-    async handleNoteCardClick(noteId) {
-        const { note, location } = await this.applicationController.getNoteById(noteId)
-        this.applicationController.initView('editor', 
-            {
-                editorObjectType: 'note', 
-                editorObject: note,
-                newEditorObject: false, 
-                previousView: 'home',
-                editorObjectLocation: location 
-            }
-        );
-    }
-
 
     #recentFolder(folder) {
         const recentFolderCard = document.createElement('recent-folder-card');
         recentFolderCard.setAttribute('folder', JSON.stringify(folder));
         return recentFolderCard
-    }
-
-
-    #recentNote(note) {
-        this.noteObjects.add(note)
-        return new RecentNote(note, this);
     }
 
 
@@ -95,6 +72,19 @@ export class HomeView extends BaseView {
 
 
     #eventListeners() {
+        this._recentNoteList.addEventListener('RecentNoteCardClick', async (event) => {
+            const { noteId } = event.detail;
+            const { note, location } = await this.applicationController.getNoteById(noteId)
+            this.applicationController.initView('editor', 
+                {
+                    editorObjectType: 'note', 
+                    editorObject: note,
+                    newEditorObject: false, 
+                    previousView: 'home',
+                    editorObjectLocation: location 
+                }
+            );
+        })
         this._recentFolderList.addEventListener('RecentFolderCardClick', async (event) => {
             const { folderId } = event.detail;            
             const { folder, location } = await this.applicationController.getFolderById(folderId);            
@@ -118,7 +108,7 @@ export class HomeView extends BaseView {
     #initElements() {
         document.querySelector('.view-title').textContent = greetBasedOnTime();
         this._recentFolderList = document.querySelector('.recent-folders');
-        this.recentNoteContainer = document.querySelector('.recent-notes');
+        this._recentNoteList = document.querySelector('.recent-notes');
         this._flashcardDeckList = document.querySelector('.flashcard-decks');
         this._viewElement = document.querySelector('.home');
     }

@@ -1,7 +1,18 @@
 import { folderColors } from "../../constants/constants.js";
 import { formatName } from "../../util/formatters.js";
-import { addDraggImage } from "../../util/ui.js";
+import { addDraggImage, showContextMenu } from "../../util/ui.js";
 
+
+const optionsMenuTemplate = `
+    <div id="edit-btn" >
+        <i class="fa-solid fa-pen"></i>
+        <span>Edit folder</span>
+    </div>
+    <div id="delete-btn">
+        <i class="fa-solid fa-trash"></i>
+        <span>Delete folder</span>
+    </div>
+` 
 
 class RecentFolder extends HTMLElement {
     constructor() {
@@ -40,11 +51,17 @@ class FolderPath extends HTMLElement {
         super();
     }
 
-    connectedCallback() {
-        this.folder = JSON.parse(this.getAttribute('folder'));
+    setData(value) {
+        this.folder = value;
+        this.render();
+    }
+
+    render() {
         this.textContent = this.folder.name;
         this.id = this.folder.id;
+    }
 
+    connectedCallback() {
         this.addEventListener('click', this.handleClick.bind(this));
     }
 
@@ -78,49 +95,41 @@ class Folder extends HTMLElement {
     }
 
 
-    disconnectedCallback() {
-        this.removeEventListeners();
-    }
-
-
     attributeChangedCallback(name, oldValue, newValue) {
         if (name === 'folder') {
             this.folder = JSON.parse(newValue);
             this.render();
-            this.addEventListeners()            
         }
     }
     
 
     render() {
         this.innerHTML = `
-            <p class="folder-name">${formatName(this.folder.name)}</p>
-            <i id="folder-icon" class="bi bi-folder"></i>
-            <div class="folder-options">
-                <i id="edit-btn" class="fa-solid fa-pen"></i>
-                <i id="delete-btn" class="fa-solid fa-trash"></i>
-            </div>
+            <i id="folder-icon" class="bi bi-folder-fill"></i>
+            <p>${formatName(this.folder.name)}</p>
         `;
         this.addColor();
     }
 
 
     addEventListeners() {
-        this.querySelector('#folder-icon').addEventListener('click', this.handleCardClick.bind(this));
-        this.querySelector('#edit-btn').addEventListener('click', this.handleEditClick.bind(this));
-        this.querySelector('#delete-btn').addEventListener('click', this.handleDeleteClick.bind(this));
+        this.addEventListener('click', (event) => {
+            if (event.target.closest('#edit-btn')) {
+                this.handleEditClick();
+            } 
+            else if (event.target.closest('#delete-btn')) {
+                this.handleDeleteClick();
+            }
+            else {
+                this.handleCardClick()
+            }
+        });
+        this.addEventListener('contextmenu', (event) => {showContextMenu(event, this, optionsMenuTemplate)});
         this.addEventListener('dragstart', (event) => {this.dragStart(event)}); 
         this.addEventListener('dragend', () => {this.dragEnd()});
         this.addEventListener('dragover', (event) => {this.onHover(event)});
         this.addEventListener('dragleave', (event) => {this.onLeave(event)});
         this.addEventListener('drop', (event) => {this.drop(event)});
-    }
-
-
-    removeEventListeners() {
-        this.querySelector('.folder-name').removeEventListener('click', this.handleCardClick.bind(this));
-        this.querySelector('#edit-btn').removeEventListener('click', this.handleEditClick.bind(this));
-        this.querySelector('#delete-btn').removeEventListener('click', this.handleDeleteClick.bind(this));
     }
 
     addColor() {
@@ -180,7 +189,7 @@ class Folder extends HTMLElement {
         this.dispatchEvent(new CustomEvent('DeleteFolder', { detail: { folder: this.folder }, bubbles: true }));
     }
 
-    handleEditClick() {
+    handleEditClick() {        
         this.dispatchEvent(new CustomEvent('UpdateFolder', { detail: { folder: this.folder }, bubbles: true }));
     }
 

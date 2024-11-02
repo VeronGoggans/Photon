@@ -1,5 +1,3 @@
-import { createFolderPath } from "./ui/components.js";
-
 
 export function formatName(name) {
     if (name.length <= 25) return name;
@@ -16,17 +14,6 @@ export function filterNotePreview(content) {
     } else {
         return segments.join("<div>");
     }
-}
-
-
-export function formatDocumentLocation(folders, documentLocationTag) {
-    let folderPaths = [];
-    const chevronIcon = '<i class="bi bi-chevron-right"></i>';
-    
-    folders.forEach(folder => {
-        folderPaths.push(createFolderPath(folder)); 
-    });
-    documentLocationTag.innerHTML = formattedDocumentLocation.slice(0, -chevronIcon.length);
 }
 
 

@@ -1,111 +1,126 @@
-import { CNode } from "../../util/CNode.js";
-import { dateFormat } from "../../util/date.js";
 import { formatName, filterNotePreview } from "../../util/formatters.js";
-import { addDraggImage } from "../../util/ui.js";
+import { addDraggImage, showContextMenu } from "../../util/ui.js";
 
-export class Note {
-    constructor(note, view) {
-        this.id = note.id;
-        this.name = note.name;
-        this.bookmark = note.bookmark;
-        this.content = filterNotePreview(note.content);
-        this.color = note.color;
-        this.created = dateFormat(note.creation);
-        this.lastEdit = dateFormat(note.last_edit);
-        this.view = view;
 
-        this.#initElements();
-        this.#eventListeners();
-        
-        if (this.bookmark) this.HOST.classList.add('bookmark');
-        return this.#render();
+const optionMenuTemplate = `
+    <div id="bookmark-btn" >
+        <i class="fa-solid fa-bookmark"></i>
+        <span>Bookmark note</span>
+    </div>
+    <div id="delete-btn">
+        <i class="fa-solid fa-trash"></i>
+        <span>Delete note</span>
+    </div>
+`
+
+
+class Note extends HTMLElement {
+    constructor() {
+        super();
     }
 
-    #initElements() {
-        this.HOST = CNode.create('div', { 'class': 'note', 'id': this.id, 'draggable': true});
-        this.HOST.dataset.info = `${this.created}--${this.lastEdit}`;
-        this.NAME_BOX = CNode.create('div', { 'class': 'note-name-box' });
-        this.H4 = CNode.create('h4', {'textContent': formatName(this.name)});
-        this.CONTENT_BOX = CNode.create('div', { 'class': 'note-content-box' });
-        this.CONTENT = CNode.create('p', { 'innerHTML': this.content});
-        this.UTIL_BAR = CNode.create('div', { 'class': 'note-util-bar' });
-        this.BOOKMARK_ICON = CNode.create('i', { 'class': 'fa-solid fa-bookmark', 'id': 'bookmark-note-btn' });
-        this.DELETE_ICON = CNode.create('i', { 'class': 'fa-solid fa-trash' });
+    setData(value) {
+        this.note = value;
+        this.render();
     }
 
-    #render() {
-        this.NAME_BOX.append(this.H4);
-        this.CONTENT_BOX.appendChild(this.CONTENT);
-        this.UTIL_BAR.append(this.BOOKMARK_ICON, this.DELETE_ICON);
-        this.HOST.append(this.NAME_BOX, this.CONTENT_BOX, this.UTIL_BAR);
-        return this.HOST
+    connectedCallback() {
+        this.id = this.note.id;
+        this.draggable = true;
+        this.addEventListeners();
+    }
+    
+
+    render() {       
+        this.innerHTML = `
+            <h4>${formatName(this.note.name)}</h4>
+            <div class="note-content-box">${filterNotePreview(this.note.content)}</div>
+        `;
     }
 
-    #eventListeners() {
-        this.DELETE_ICON.addEventListener('click', () => {this.view.renderDeleteModal(this.id, this.name)});
-        this.CONTENT_BOX.addEventListener('click', () => {this.view.handleNoteCardClick(this.id)});
-        this.BOOKMARK_ICON.addEventListener('click', () => {this.updateNoteBookmark()});
 
-        // Drag and drop event listeners below.
-        this.HOST.addEventListener('dragstart', (event) => {
-            addDraggImage(event, this.HOST, 'file')
-            event.dataTransfer.setData('text/plain', `{"draggedItem": "note", "draggedCardId": "${this.id}"}`)
+    addEventListeners() {
+        this.addEventListener('click', (event) => {
+            if (event.target.closest('#bookmark-btn')) {
+                this.handleBookmarkClick();
+            } 
+            else if (event.target.closest('#delete-btn')) {
+                this.handleDeleteClick();
+            }
+            else {
+                this.handleCardClick()
+            }
         });
-        this.HOST.addEventListener('dragend', () => {this.HOST.classList.remove('dragging')});
+        this.addEventListener('contextmenu', (event) => {showContextMenu(event, this, optionMenuTemplate)});
+        this.addEventListener('dragstart', (event) => {this.dragStart(event)}); 
+        this.addEventListener('dragend', () => {this.classList.remove('dragging')});
     }
 
-    #toggleBookmarkStyle() {
-        this.HOST.classList.contains('bookmark') ? 
-        this.HOST.classList.remove('bookmark') :
-        this.HOST.classList.add('bookmark');
+    toggleBookmarkStyle() {
+        this.classList.contains('bookmark') ? 
+        this.classList.remove('bookmark') :
+        this.classList.add('bookmark');
     }
 
+    
+    handleCardClick() {
+        this.dispatchEvent(new CustomEvent('NoteCardClick', { detail: { note: this.note }, bubbles: true }));
+    }
 
-    async updateNoteBookmark() {
-        // Reverting the bookmark value
-        this.bookmark = !this.bookmark;
-        this.#toggleBookmarkStyle();
-        const content = this.view.getNoteObject(this.id)['content'];
-        await this.view.updateObject({
-            'id': this.id, 
-            'name': this.name, 
-            'content': content, 
-            'bookmark': this.bookmark, 
-            'favorite': this.favorite
-        });
+    dragStart(event) {
+        this.classList.add('dragging')
+        addDraggImage(event, this, 'file')
+        event.dataTransfer.setData('text/plain', `{"draggedItem": "note", "draggedCardId": "${this.id}"}`)
+    }
+
+    handleDeleteClick() {
+        this.dispatchEvent(new CustomEvent('DeleteNote', { detail: { note: this.note }, bubbles: true }));
+    }
+
+    handleBookmarkClick() {
+        this.toggleBookmarkStyle()
+        this.dispatchEvent(new CustomEvent('BookmarkNote', { detail: { note: this.note }, bubbles: true }));
     }
 }
 
 
-export class RecentNote {
-    constructor(note, view) {
-        this.id = note.id;
-        this.name = note.name;
-        this.bookmark = note.bookmark;
-        this.content = note.content;
-        this.view = view;
 
-        this.#initElements();
-        this.#eventListeners();
-        return this.#render();
+
+
+class RecentNote extends HTMLElement {
+    constructor() {
+        super();
     }
 
-    #initElements() {
-        this.HOST = CNode.create('div', { 'class': 'recent-note', 'id': this.id});
-        this.NAME_BOX = CNode.create('div', { 'class': 'note-name-box' });
-        this.H4 = CNode.create('h4', { 'textContent': formatName(this.name)});
-        this.CONTENT_BOX = CNode.create('div', { 'class': 'note-content-box' });
-        this.CONTENT = CNode.create('p', { 'innerHTML': filterNotePreview(this.content) });
+    setData(value) {
+        this.note = value;
+        this.render();
     }
 
-    #render() {
-        this.NAME_BOX.appendChild(this.H4);
-        this.CONTENT_BOX.appendChild(this.CONTENT);
-        this.HOST.append(this.NAME_BOX, this.CONTENT_BOX);
-        return this.HOST
+    connectedCallback() {
+        this.id = this.note.id;        
+        this.addEventListeners();
+    }
+    
+
+    render() {        
+        this.innerHTML = `
+            <h4>${formatName(this.note.name)}</h4>
+            <div class="note-content-box">${filterNotePreview(this.note.content)}</div>
+        `;
     }
 
-    #eventListeners() {
-        this.CONTENT_BOX.addEventListener('click', () => {this.view.handleNoteCardClick(this.id)});
+
+    addEventListeners() {
+        this.querySelector('.note-content-box').addEventListener('click', this.handleCardClick.bind(this));
+    }
+
+
+    handleCardClick() {
+        this.dispatchEvent(new CustomEvent('RecentNoteCardClick', { detail: { noteId: this.id }, bubbles: true }));
     }
 }
+
+
+customElements.define('note-card', Note);
+customElements.define('recent-note-card', RecentNote);
