@@ -1,7 +1,6 @@
 folder-card {
     cursor: pointer;
     height: 50px;
-    font-family: sans-serif;
     display: flex;
     align-items: center;
     padding: 10px;
@@ -27,7 +26,6 @@ folder-card div:hover {
 folder-card p {
     padding: 5px;
     margin: 0 10px;
-    font-family: sans-serif;
     color: var(--important);
     font-size: 15px;
 }
@@ -36,7 +34,6 @@ folder-card p {
 recent-folder-card {
     cursor: pointer;
     height: 50px;
-    font-family: sans-serif;
     display: flex;
     align-items: center;
     padding: 10px;

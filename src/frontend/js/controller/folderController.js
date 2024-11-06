@@ -9,18 +9,13 @@ export class FolderController {
         this.model = new FolderModel();
     }
 
-    /**
-     * 
-     * @param {String} folderId 
-     * @param {String} folderName 
-     * @param {Array} location - Hierarcical array of folder objects. 
-     */
+    
     init(folderId = null, folderName = null, location = null) {
         this.view = new FolderView(this, this.applicationController)
         
         // If a folder on the home view has been clicked.
         if (folderId === null) {
-            this.model.clearFolderIdlist();
+            this.model.emptyFolders();
         }
         if (location !== null) {
             this.model.addHierarcyPath(location)
@@ -31,19 +26,16 @@ export class FolderController {
 
     async add(object) {
         const { name, color } = object
-        const parentFolderId = this.model.getCurrentFolderID();
-
-        const { folder } = await this.model.add('/folder', {'parent_id': parentFolderId, 'color': color, 'name': name});
+        const { id } = this.model.getCurrentFolder();
+        const { folder } = await this.model.add('/folder', {'parent_id': id, 'color': color, 'name': name});
         this.view.renderOne(folder);
     }
 
 
     async get() {
-        const parentFolderId = this.model.getCurrentFolderID();
-
-        const { folders } = await this.model.get(`/folders/${parentFolderId}`);
+        const { id } = this.model.getCurrentFolder();
+        const { folders } = await this.model.get(`/folders/${id}`);
         this.view.renderAll(folders);
-        return true
     }
 
 
@@ -80,17 +72,17 @@ export class FolderController {
         return this.model.getAllFolders()
     }
 
-    getCurrentFolderObject() {
-        return this.model.getCurrentFolderObject();
+    getCurrentFolder() {
+        return this.model.getCurrentFolder();
     }
     
-    getPreviousFolderObject() {
-        return this.model.getPreviousFolderObject();
+    getParentFolder() {
+        return this.model.getParentFolder();
     }
     
     async navigateOutofFolder() {
-        const parentFolder = this.model.removeFolderIdFromList();
-        await this.navigateIntoFolder(parentFolder.id, parentFolder.name);
+        const { id, name } = this.model.getParentFolder();
+        await this.navigateIntoFolder(id, name);
     }
 
     /**
@@ -99,20 +91,20 @@ export class FolderController {
      */
     async navigateIntoFolder(folderId, name, init = false) {
         // If the home button inside the notes view is clicked 
-        if (folderId === this.homeFolderId) this.model.clearFolderIdlist();
+        if (folderId === this.homeFolderId) this.model.emptyFolders();
 
         this.view.displayFolderName(name);
         this.model.patch(`/viewedFolderTime/${folderId}`);
-        this.model.addFolderIdToList(folderId, name);
+        this.model.addFolder(folderId, name);
 
-        const foldersFetched = await this.get();
-        if (!init && foldersFetched) {
+        await this.get();
+        if (!init) {
             await this.applicationController.getNotes(folderId);    
         }
     }
 
     clearFolderHistory() {
-        this.model.clearFolderIdlist();
+        this.model.emptyFolders();
     }
 
     setNoteLocation(location) {

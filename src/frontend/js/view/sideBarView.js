@@ -13,7 +13,7 @@ export class SidebarView {
         this._collapsed = false;
         this._size = 'standard';
         this._wrapper = document.querySelector('.wrapper');
-        this._buttonCount = 8;
+        this._buttonCount = 6;
 
         this.#eventListeners();
 
@@ -44,10 +44,10 @@ export class SidebarView {
 
     setActiveTab(view) {
         // Remove the previous active tab
-        this.sidebarButtons.forEach(button => button.classList.remove('active-view'));
+        this.sidebarButtons.forEach(button => button.classList.remove('active-tab'));
 
         // Set new active tab
-        this._sidebar.querySelector(`#${view}-btn`).classList.add('active-view')
+        this._sidebar.querySelector(`#${view}-btn`).classList.add('active-tab')
     }
 
     /**
@@ -140,7 +140,7 @@ export class SidebarView {
             const droppedCardId = droppedCardInfo.draggedCardId;
             const draggedItemType = droppedCardInfo.draggedItem;
 
-            const newParentDFolderId = this.applicationController.getPreviousFolderObject().id;
+            const newParentDFolderId = this.applicationController.getParentFolder().id;
 
             if (droppedCardId !== this.id) {
                 if (draggedItemType === 'folder') {

@@ -28,7 +28,7 @@
    cursor: text;
    overflow-x: hidden;
    font-size: 11pt;
-   font-family: sans-serif;
+   
    color: var(--editor-text);
    padding: 0 10px 40px 10px;
 }
@@ -135,6 +135,10 @@
  
  .editor h4 {
    font-size: 20px;
+ }
+
+ .editor li {
+   margin: 10px 0;
  }
 
  .no-pointer {

@@ -27,7 +27,7 @@
 
 .templates .stats-section p span {
     font-size: 25px;
-    font-family: sans-serif;
+    
     color: var(--stats-span-color);
 }
 
@@ -70,7 +70,7 @@
 }
 
 .templates .bottom h2 {
-    font-family: sans-serif;
+    
     color: var(--important);
 }
 

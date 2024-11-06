@@ -24,12 +24,6 @@ export class SlashCommand {
         case 'horizontal-line-option':
           this.formatter.addHorizontalLine(range, extension);
           break;
-        case 'quote-block':
-          this.formatter.addQuoteBlock(range);
-          break;
-        case 'important-block':
-          this.formatter.addImportantBlock(range);
-          break;
         case 'unordered-list':
           this.formatter.addList(range, 'ul');
           break;
@@ -47,9 +41,6 @@ export class SlashCommand {
           break;
         case 'heading-4':
           this.formatter.addHeading(range, 4, extension);
-          break;
-        case 'date':
-          this.formatter.addDateBlock(range);
           break;
         case 'insert-html':
           this.formatter.addHtml(range);
@@ -139,8 +130,6 @@ export class SlashCommand {
         }
       }
     }
-
-
 
     #eventListeners() {
       this.#listenForCommmandClicks();

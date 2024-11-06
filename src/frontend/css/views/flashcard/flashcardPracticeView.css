@@ -48,7 +48,7 @@
 }
 
 .flashcard-practice .deck-section h2 {
-    font-family: sans-serif;
+    
     color: var(--important);
 }
 
@@ -87,7 +87,7 @@
     padding: 0 25px;
     font-size: 20px;
     line-height: 1.4;
-    font-family: sans-serif;
+    
     max-width: 500px;
  }
 

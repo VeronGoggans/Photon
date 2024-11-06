@@ -31,7 +31,7 @@ list-item-card-1 .list-item-card-1-buttons-container:hover {
 
 list-item-card-1 span {
     color: var(--important);
-    font-family: sans-serif;
+    
     width: 100%;
     margin: 0;
     padding: 10px;

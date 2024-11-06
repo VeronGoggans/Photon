@@ -39,14 +39,6 @@
     --hover: #617fff69; 
     --folder-name-input: #5c7dff;
     
-    /*taskboard*/
-    --board-section: #141322;
-    --task: #0b0a14;
-    --due-date: #1a0154;
-
-    /*notebook*/
-    --list-item-hover: #1a192f;
-    --item-border: #282a3d;
 
     /*Other*/
     --title-bar-button-background: #252735;
@@ -135,15 +127,6 @@
     --editor-text: #383838;
     --hover-slash-command: #f3f4f8;
     --file-path: #a0a6c1;
-
-    /*taskboard*/
-    --board-section: #fff;
-    --task: #f6f7ff;
-    --due-date: #d9deff;
-
-    /*notebook*/
-    --list-item-hover: #f7f7ff;
-    --item-border: #dee1ef;
 
     /*Other*/
     --title-bar-button-background: #dfe7ff;

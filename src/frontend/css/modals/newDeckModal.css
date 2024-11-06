@@ -19,7 +19,7 @@
 
 .create-deck-modal h2,
 .edit-flashcard-modal h2 {
-    font-family: sans-serif;
+    
     color: var(--important);
 }
 
@@ -32,7 +32,7 @@
     padding: 5px 15px;
     font-size: 17px;
     color: var(--text);
-    font-family: sans-serif;
+    
     transition: 150ms;
 }
 
@@ -54,7 +54,7 @@
     font-size: 16px;
     border-radius: 10px;
     color: var(--text);
-    font-family: sans-serif;
+    
     overflow-y: scroll;
     border: 1px solid var(--border-card);
 }
@@ -120,7 +120,7 @@
     position: absolute;
     top: 27px;
     right: 250px;
-    font-family: sans-serif;
+    
     font-size: 20px;
     color: var(--important);
 }

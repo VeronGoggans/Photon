@@ -1,7 +1,7 @@
 .flashcard-edit-view {
     outline: none;
     padding: 20px 5%;
-    font-family: sans-serif;
+    
     color: var(--important);
     overflow-y: scroll;
     max-height: calc(100dvh - 37px);

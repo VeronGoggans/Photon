@@ -60,12 +60,12 @@ Such as the **FolderModel**, that model will  extend the **HttpModel** to inheri
         }
 
         // Method that handle client side data storage
-        clearFolderIdlist() {
+        emptyFolders() {
             this.folderObjects = [];
         }
 
         // Method that handle client side data retrieval
-        getCurrentFolderObject() {
+        getCurrentFolder() {
             const lastFolder = this.folderObjects[this.folderObjects.length - 1];
             return lastFolder ? lastFolder : {id: 'f-1', name: 'Home'};
         }

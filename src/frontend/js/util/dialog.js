@@ -8,8 +8,6 @@ import { AnimationHandler } from "../handlers/animation/animationHandler.js";
 import { EditFlashcardModal } from "../components/modals/editFlashcardModal.js";
 import { StickyNoteModal } from "../components/modals/stickyNoteModal.js";
 import { NewCollectionModal } from "../components/modals/newCollectionModal.js";
-import { TaskModal } from "../components/modals/taskModal.js";
-import { MilestoneModal } from "../components/modals/milestoneModal.js";
 
 
 export class Dialog {
@@ -97,24 +95,6 @@ export class Dialog {
             entityData
         ));
         this.dialog.querySelector('.new-collection-modal input').focus()
-    }
-
-    renderTaskModal(controller, taskboardId = null, task = null) {
-        this.addChild(new TaskModal(
-            controller, 
-            taskboardId, 
-            task
-        ));
-        this.dialog.querySelector('.task-modal input').focus()
-    }
-
-    renderMilestoneModal(controller, taskboardId = null, milestone = null) {
-        this.addChild(new MilestoneModal(
-            controller, 
-            taskboardId, 
-            milestone
-        ));
-        this.dialog.querySelector('.milestone-modal input').focus()
     }
 
     renderStickyNoteModal(controller, parentId, stickyNote = null) {

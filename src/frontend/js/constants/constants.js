@@ -27,18 +27,6 @@ export const folderColors = {
     'rgb(255, 255, 255)': 'color-original'
 }
 
-export const tagColors = {
-    'User story': 'user-story-tag',
-    'Learning story': 'learning-story-tag',
-    'Research story': 'research-story-tag',
-    'Enabler story': 'enabler-story-tag',
-    'Task': 'task-tag',
-    'Feature': 'feature-tag',
-    'Testing': 'testing-tag',
-    'Bug': 'bug-tag',
-    'Documentation': 'documentation-tag',
-}
-
 
 export const headingsMap = {
     'H1': 'Heading 1',
@@ -57,27 +45,17 @@ export const arrowKeys = new Set([
 
 
 export const notificationTypes = {
-    'saved': 'Saved',
-    'updated': 'Updated',
+    'saved': 'Added note successful',
+    'updated': 'Changes saved successful',
     'deleted': 'Deleted',
     'new': 'New',
-    'empty': 'Nothing here',
+    'empty': "Looks like nothing's here",
     'error': 'An error occurred'
 }
 
 
-export const notificationIcons = {
-    'saved': 'fa-solid fa-file',
-    'updated': 'fa-solid fa-pen',
-    'deleted': 'fa-regular fa-trash-can',
-    'new': 'fa-solid fa-plus',
-    'empty': 'fa-solid fa-folder-open',
-    'error': 'fa-solid fa-bug'
-}
-
-
 export const notificationMessages = {
-    'saved': 'Your note has been saved successfully.',
+    'saved': 'has been saved to the folder.',
     'updated': 'Your changes have been saved.',
     'deleted': 'has been deleted.',
     'new': 'Changes saved.\nCreating a new note.',
@@ -89,15 +67,12 @@ export const commands = {
     'link': 'link-option',
     'video': 'embed-video-option',
     'line': 'horizontal-line-option',
-    'quote': 'quote-block',
-    'important': 'important-block',
     'ul': 'unordered-list',
     'ol': 'ordered-list',
     'h1': 'heading-1',
     'h2': 'heading-2',
     'h3': 'heading-3',
     'h4': 'heading-4',
-    'date': 'date',
     'html': 'insert-html'
 }
 
@@ -110,47 +85,24 @@ export const stickyNoteColors = [
     '#d4e7ff',
 ]
 
-export const taskBoardSections = {
-    'todo': 'To do',
-    'inprogress': 'In progress',
-    'done': 'Done'
-} 
-
-export const sidebarButtonText = ['Home', 'Notes', 'Templates', 'Notebooks', 'Taskboards', 'Stickies', 'Flashcards', 'Settings']
+export const sidebarButtonText = ['Home', 'Notes', 'Templates', 'Stickies', 'Flashcards', 'Settings']
 
 
 export const modalPlaceholderText = {
-    taskboard: 'Taskboard name...',
     stickyWall: 'Sticky wall name...',
-    notebook: 'Notebook name...'
 }
 
 export const modalNewTitleText = {
-    taskboard: 'New taskboard',
     stickyWall: 'New sticky wall',
-    notebook: 'New notebook',
     folder: 'New folder'
 }
 
 export const modalUpdateTitleText = {
-    taskboard: 'Edit taskboard',
     stickyWall: 'Edit sticky wall',
-    notebook: 'Edit notebook',
     folder: 'Edit folder'
 }
 
 export const modalButtonText = {
-    taskboard: 'Add taskboard',
     stickyWall: 'Add sticky wall',
-    notebook: 'Add notebook',
     folder: 'Add folder'
-}
-
-export const notebookItemIcons = {
-    folder: 'bi bi-folder',
-    note: 'bi bi-file-earmark',
-    template: 'bi bi-file-earmark-text',
-    flashcard: 'bi bi-card-text',
-    taskboard: 'bi bi-pin',
-    stickyWall: 'bi bi-sticky'
 }

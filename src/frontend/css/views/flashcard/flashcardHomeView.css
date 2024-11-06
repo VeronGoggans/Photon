@@ -39,7 +39,7 @@
 
 .flashcards-view .deck-section .continue-studying,
 .flashcards-view .deck-progression-section p {
-    font-family: sans-serif;
+    
     color: #a4a8bb;
 }
 
@@ -79,6 +79,6 @@
 
 .flashcards-view .stats-section p span {
     font-size: 25px;
-    font-family: sans-serif;
+    
     color: var(--stats-span-color);
 }

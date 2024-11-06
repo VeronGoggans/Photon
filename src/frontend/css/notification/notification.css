@@ -1,41 +1,47 @@
 .notification-card {
     position: absolute;
-    bottom: -200px;
+    /* bottom: -200px; */
     right: 50px;
-    font-family: sans-serif;
-    background-color: var(--sidebar);
-    height: 150px;
+    
+    background-color: #f3f3fd;
+    height: fit-content;
     width: 300px;
     border-radius: 10px;
     padding: 20px;
     cursor: pointer;
     transition: 150ms;
-    border: 1px solid var(--border-card);
 }
 
 .notification-card:hover {
     scale: 1.05;
 }
 
-.notification-card i {
-    position: absolute;
-    top: -20px;
-    right: -20px;
-    background-color: #5c7fdd;
-    padding: 15px;
-    color: #fff;
-    border-radius: 50%;
+.notification-card div {
+    display: flex;
+    align-items: center;
 }
 
-.notification-card h3 {
-    color: var(--important);
-    font-size: 25px;
-    margin-top: 5px;
-    margin-bottom: 0;
+.notification-card i {
+    margin-right: 20px;
+    color: #46567e;
+}
+
+.notification-card .notification-title{
+    color: #5c7fdd;
+    font-size: 18px;
+}
+
+.notification-card .dot {
+    width: 7px;
+    height: 7px;
+    box-shadow: 0 0 10px #5c7fdd;
+    background-color: #5c7fdd;
+    border-radius: 50%;
+    margin-right: 10px;
 }
 
 .notification-card p {
-    color: var(--text);
+    color: #737a8b;
 }
 
 .show-notification {

@@ -58,17 +58,3 @@ export class FlashcardObjectArray extends ObjectArray {
         }
     }
 }
-
-
-export class TaskObjectArray extends ObjectArray {
-    update(task) {
-        for (let i = 0; i < this.objects.length; i++) {
-            if (this.objects[i].id === task.id) {
-                this.objects[i].name = task.name;
-                this.objects[i].description = task.description;
-                this.objects[i].due_date = task.due_date;
-                this.objects[i].tag = task.tag
-            }
-        }
-    }
-}

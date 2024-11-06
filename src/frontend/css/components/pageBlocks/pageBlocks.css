@@ -2,7 +2,7 @@
 description-page-block {
     display: flex;
     flex-direction: column;
-    font-family: sans-serif;
+    
     color: var(--text);
     max-width: 600px;
     margin: 0;

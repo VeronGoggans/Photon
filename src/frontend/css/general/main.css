@@ -8,6 +8,7 @@ body {
 
 * {
     box-sizing: border-box;
+    font-family: Poppins;
 }
 
 button {
@@ -81,15 +82,13 @@ i {
 }
 
 .view-title {
-    font-size: 56px;
+    font-size: 40px;
     width: fit-content;
     font-weight: 500;
-    font-family: sans-serif;
     color: var(--important);
 }
 
 .block-title {
-    font-family: sans-serif;
     color: var(--subtitle);
     margin-top: 20px;
     font-size: 20px;
@@ -100,7 +99,6 @@ i {
     font-weight: 500;
     color: var(--important);
     margin: 30px 0;
-    font-family: sans-serif;
 }
 
 

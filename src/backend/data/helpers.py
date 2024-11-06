@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from src.backend.data.models import Folder, Note, Taskboard, Flashcard, FlashcardSet, Task, NoteBook, NotebookItem, Milestone
+from src.backend.data.models import Folder, Note, Flashcard, FlashcardSet
 from src.backend.data.exceptions.exceptions import NotFoundException
 
 
@@ -19,52 +19,12 @@ def find_note(note_id: int, db: Session) -> ( Note | NotFoundException ):
     return note
 
 
-def find_task(id: int, db: Session) -> ( Task | NotFoundException ):
-    task = db.query(Task).filter(Task.id == id).first()
-
-    if task is None:
-        raise NotFoundException(f"Task with id {id} not found.")
-    return task
-
-
-def find_milestone(id: int, db: Session) -> ( Milestone | NotFoundException ):
-    milestone = db.query(Milestone).filter(Milestone.id == id).first()
-
-    if milestone is None:
-        raise NotFoundException(f"Milestone with id {id} not found.")
-    return milestone
-
-
-def find_taskboard(id: int, db: Session) -> ( Taskboard | NotFoundException ):
-    taskboard = db.query(Taskboard).filter(Taskboard.id == id).first()
-
-    if taskboard is None:
-        raise NotFoundException(f"Taskboard with id {id} not found.")
-    return taskboard
-
-
 def find_deck(id: int, db: Session) -> ( FlashcardSet | NotFoundException ):
     deck = db.query(FlashcardSet).filter(FlashcardSet.id == id).first()
     
     if deck is None:
         raise NotFoundException(f"Deck with id {id} not found.")
     return deck
-
-
-def find_notebook(id: int, db: Session) -> ( NoteBook | NotFoundException ):
-    notebook = db.query(NoteBook).filter(NoteBook.id == id).first()
-    
-    if notebook is None:
-        raise NotFoundException(f"Notebook with id {id} not found.")
-    return notebook
-
-
-def find_notebook_item(id: int, db: Session) -> ( NotebookItem | NotFoundException ):
-    notebook_item = db.query(NotebookItem).filter(NotebookItem.id == id).first()
-    
-    if notebook_item is None:
-        raise NotFoundException(f"Notebook item with id {id} not found.")
-    return notebook_item
 
 
 def find_flashcard(id: int, db: Session) -> ( Flashcard | NotFoundException ):

@@ -1,60 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auto-Scrolling Text Editor</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        .options-menu {
-            background-color: rgb(255, 255, 255);
-            width: fit-content;
-            padding: 10px;
-            border-radius: 10px;
-            box-shadow: 5px 5px 10px #cacad4;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trie Autocomplete Example</title>
+  <style>
+    .search-container {
+      position: relative;
+      display: inline-block;
+    }
+    #searchBar {
+      position: absolute;
+      background: none;
+      color: black;
+      z-index: 1;
+    }
+    #autocomplete {
+      position: absolute;
+      padding: 2px;  /* Adjust for alignment */
+      color: lightgray;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-        .options-menu div {
-            cursor: pointer;
-            padding: 10px;
-            margin: 5px;
-            border-radius: 5px;
-            transition: 200ms;
-        }
+    .suggestion-item {
+    padding: 5px;
+    cursor: pointer;
+    }
 
-        .options-menu div:hover {
-            background-color: #cacad4;
-        }
+    .suggestion-item.highlighted {
+    background-color: #d3d3d3; /* Highlight color */
+    }
 
-        .options-menu i {
-            font-size: 14px;
-        }
-
-        .options-menu span {
-            font-size: 16px;
-            font-family: sans-serif;
-            margin-left: 10px;
-        }
-        
-    </style>
+  </style>
 </head>
 <body>
+  <div class="search-container">
+    <input type="text" id="searchBar" placeholder="Search folders and notes" autocomplete="off" />
+    <span id="autocomplete"></span>
+  </div>
+  <div id="suggestions"></div>
 
-    <div class="options-menu">
-        <div>
-            <i id="edit-btn" class="fa-solid fa-pen"></i>
-            <span>Edit folder</span>
-        </div>
-        <div>
-            <i id="delete-btn" class="fa-solid fa-trash"></i>
-            <span>Delete folder</span>
-        </div>
-        
-    </div>
+  <script>
+    // Define the TrieNode and Trie classes for storing folder and note names
+class TrieNode {
+  constructor() {
+    this.children = {};
+    this.isEndOfWord = false;
+  }
+}
 
+class Trie {
+  constructor() {
+    this.root = new TrieNode();
+  }
 
+  insert(word) {
+    let node = this.root;
+    for (let char of word.toLowerCase()) {
+      if (!node.children[char]) {
+        node.children[char] = new TrieNode();
+      }
+      node = node.children[char];
+    }
+    node.isEndOfWord = true;
+  }
 
+  searchPrefix(prefix) {
+    let node = this.root;
+    for (let char of prefix) {
+      if (!node.children[char]) {
+        return [];
+      }
+      node = node.children[char];
+    }
+    return this.collectAllWords(node, prefix);
+  }
+
+  collectAllWords(node, prefix) {
+    let words = [];
+    if (node.isEndOfWord) {
+      words.push(prefix);
+    }
+    for (let char in node.children) {
+      words = words.concat(this.collectAllWords(node.children[char], prefix + char));
+    }
+    return words;
+  }
+}
+
+// Initialize Trie and add some folder/note names
+const trie = new Trie();
+const folderNames = ["Projects", "Personal", "Work", "Tasks"];
+const noteNames = ["MeetingNotes", "ShoppingList", "ProjectPlan"];
+folderNames.forEach(name => trie.insert(name));
+noteNames.forEach(name => trie.insert(name));
+
+// Function to get suggestions based on prefix
+function getSuggestions(prefix) {
+  return trie.searchPrefix(prefix);
+}
+
+let selectedIndex = -1; // Keeps track of the currently highlighted suggestion
+let currentSuggestions = []; // Stores the current list of suggestions
+
+// Event listener for search bar input
+document.getElementById("searchBar").addEventListener("input", (event) => {
+  const prefix = event.target.value;
+  currentSuggestions = getSuggestions(prefix); // Update current suggestions
+  displaySuggestions(currentSuggestions);
+  showAutoComplete(prefix, currentSuggestions);
+  selectedIndex = -1; // Reset index whenever input changes
+});
+
+// Event listener for keydown events (Enter, Arrow keys)
+document.getElementById("searchBar").addEventListener("keydown", (event) => {
+  const searchBar = document.getElementById("searchBar");
+
+  if (event.key === "Enter") {
+    event.preventDefault();
+    if (selectedIndex >= 0 && currentSuggestions[selectedIndex]) {
+      searchBar.value = currentSuggestions[selectedIndex];
+      clearSuggestions();
+    } else if (currentSuggestions.length > 0) {
+      searchBar.value = currentSuggestions[0];
+      clearSuggestions();
+    }
+  }
+
+  if (event.key === "ArrowDown") {
+    event.preventDefault();
+    if (selectedIndex < currentSuggestions.length - 1) {
+      selectedIndex++;
+      updateHighlightedSuggestion();
+    }
+  }
+
+  if (event.key === "ArrowUp") {
+    event.preventDefault();
+    if (selectedIndex > 0) {
+      selectedIndex--;
+      updateHighlightedSuggestion();
+    } else {
+      selectedIndex = -1;
+      updateHighlightedSuggestion();
+    }
+  }
+});
+
+function showAutoComplete(prefix, suggestions) {
+  const autocompleteSpan = document.getElementById("autocomplete");
+
+  if (suggestions.length > 0) {
+    const firstSuggestion = suggestions[0];
+    const leftover = firstSuggestion.slice(prefix.length);
+    autocompleteSpan.textContent = prefix + leftover;
+  } else {
+    autocompleteSpan.textContent = "";
+  }
+}
+
+function displaySuggestions(suggestions) {
+  const suggestionsDiv = document.getElementById("suggestions");
+  suggestionsDiv.innerHTML = ""; // Clear previous suggestions
+  suggestions.forEach((suggestion, index) => {
+    const div = document.createElement("div");
+    div.textContent = suggestion;
+    div.className = "suggestion-item";
+    if (index === selectedIndex) {
+      div.classList.add("highlighted");
+    }
+    div.addEventListener("mousedown", () => {
+      document.getElementById("searchBar").value = suggestion;
+      clearSuggestions();
+    });
+    suggestionsDiv.appendChild(div);
+  });
+}
+
+function updateHighlightedSuggestion() {
+  const suggestionItems = document.querySelectorAll(".suggestion-item");
+  suggestionItems.forEach((item, index) => {
+    if (index === selectedIndex) {
+      item.classList.add("highlighted");
+    } else {
+      item.classList.remove("highlighted");
+    }
+  });
+}
+
+function clearSuggestions() {
+  document.getElementById("suggestions").innerHTML = "";
+  document.getElementById("autocomplete").textContent = "";
+  currentSuggestions = [];
+  selectedIndex = -1;
+}
+
+  </script>
 </body>
 </html>

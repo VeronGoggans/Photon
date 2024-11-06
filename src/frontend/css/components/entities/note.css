@@ -32,15 +32,14 @@ template-card h4 {
     padding: 5px;
     margin: auto 10px;
     color: var(--important);
-    font-family: sans-serif;
     font-size: 15px;
+    font-weight: 500;
 }
 
 note-card .note-content-box,
 recent-note-card .note-content-box,
 template-card .note-content-box {
     padding: 10px;
-    font-weight: 600;
     overflow: hidden;
     color: var(--text);
     cursor: pointer;

@@ -8,14 +8,10 @@ import { TextEditorController } from "./textEditorController.js"
 import { SettingController } from "./settingController.js";
 import { FlashcardPracticeController } from "./flashcardPracticeController.js";
 import { FlashcardEditController } from "./flashcardEditController.js";
-import { NotebookController } from "./notebookController.js";
 import { templates } from "../constants/templates.js";
 
 import { FlashcardHomeController } from "./flashcardHomeController.js";
-import { NotebookHomeController } from "./notebookHomeController.js";
 import { StickyWallHomeController } from "./stickyWallHomeController.js";
-import { TaskboardHomeController } from "./taskboardHomeController.js";
-import { TaskboardController } from "./taskboardController.js";
 import { StickWallController } from "./stickyWallController.js";
 
 
@@ -34,10 +30,6 @@ export class ApplicationController {
         this.flashcardEditController = new FlashcardEditController(this);
         this.textEditorController = new TextEditorController(this);
         this.stickyWallController = new StickWallController(this);
-        this.notebookController = new NotebookController(this);
-        this.taskboardController = new TaskboardHomeController(this);
-        this.notebookHomeController = new NotebookHomeController(this);
-        this.taskController = new TaskboardController(this);
         this.settingController = new SettingController(this);
         this.stickyWallHomeController = new StickyWallHomeController(this);
         this.viewContainer = document.querySelector('.content .view');
@@ -51,10 +43,6 @@ export class ApplicationController {
             stickyWall: this.stickyWallController,
             settings: this.settingController,
             editor: this.textEditorController,
-            taskboardHome: this.taskboardController,
-            task: this.taskController,
-            notebookHome: this.notebookHomeController,
-            notebook: this.notebookController,
             stickyWallHome: this.stickyWallHomeController
         }
         this.initView('home')
@@ -155,39 +143,12 @@ export class ApplicationController {
                     return;
                 }
 
-                if (viewId === 'taskboardHome') {
-                    this.sidebarView.setActiveTab('taskboard-home')
-                }
-
-                if (viewId === 'task') {
-                    const {
-                        taskboard, 
-                        previousView
-                    } = viewParameters
-
-                    this.model.setPreviousView(previousView);
-                    controller.init(taskboard);
-                    return;
-                }
-
                 if (viewId === 'settings') {
                     this.sidebarView.setActiveTab('settings')
                 }
 
                 if (viewId === 'stickyWallHome') {
                     this.sidebarView.setActiveTab('sticky-wall-home')
-                }
-
-                if (viewId === 'notebookHome') {
-                    this.sidebarView.setActiveTab('notebook-home')
-                }
-
-                if (viewId === 'notebook') {
-                    const { notebook, previousView } = viewParameters;
-                    controller.init(notebook);
-                    this.model.setPreviousView(previousView);
-                    this.sidebarView.setActiveTab('notebook-home')
-                    return;
                 }
 
                 controller.init();
@@ -229,7 +190,7 @@ export class ApplicationController {
     // Note methods
 
     async addNote(name, content, notify) {
-        const { id } = this.folderController.getCurrentFolderObject();
+        const { id } = this.folderController.getCurrentFolder();
         const note = await this.noteController.add(id, name, content, notify);
         this.textEditorController.storeEditorObject(note, 'note')
     }
@@ -294,12 +255,12 @@ export class ApplicationController {
         return await this.folderController.getSearchItems();
     }
 
-    getCurrentFolderObject() {
-        return this.folderController.getCurrentFolderObject();
+    getCurrentFolder() {
+        return this.folderController.getCurrentFolder();
     }
 
-    getPreviousFolderObject() {
-        return this.folderController.getPreviousFolderObject();
+    getParentFolder() {
+        return this.folderController.getParentFolder();
     }
 
     async moveFolder(newParentFolderId, droppedFolderId) {

@@ -21,43 +21,6 @@ export class TextFormatter {
   }
 
 
-  addImportantBlock(range) {
-    const { br, p } = this.#createBlockHelperNodes();
-    const impContainer = CNode.create('div', {'class': 'important-block'});
-    const icon = CNode.create('i', {'class': 'fa-solid fa-exclamation'});
-
-    impContainer.append(icon, p);
-    range.insertNode(br);
-    range.insertNode(impContainer);
-    this.#removeSelectedEffect(range, impContainer);
-    this.#moveCursorToTextBlock(p);
-  }
-
-
-  addQuoteBlock(range) {
-    const { br, p } = this.#createBlockHelperNodes();
-    const quoteBlock = CNode.create('div', {'class': 'quote-block'});
-
-    quoteBlock.appendChild(p);
-    range.insertNode(br);
-    range.insertNode(quoteBlock);
-    this.#removeSelectedEffect(range, quoteBlock);
-    this.#moveCursorToTextBlock(p);
-  }
-
-
-  addDateBlock(range) {
-    const br = document.createElement('br');
-    const dateTimeContainer = CNode.create('div', {'class': 'date-time-block'});
-
-    dateTimeContainer.innerHTML = getCurrentDateAndTime();
-    range.insertNode(br);
-    range.insertNode(dateTimeContainer);
-    this.#removeSelectedEffect(range, dateTimeContainer);
-    this.#moveCursorToTextBlock(br);
-  }
-
-
   addHeading(range, headingType, extension = null) {
     const heading = document.createElement(`h${headingType}`);
 
@@ -210,10 +173,4 @@ export class TextFormatter {
 
     node.focus();
   }
-
-  #createBlockHelperNodes() {
-    const br = document.createElement('br');
-    const p = document.createElement('p');
-    return { br, p }
-  }  
 }

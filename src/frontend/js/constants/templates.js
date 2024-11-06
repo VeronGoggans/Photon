@@ -138,55 +138,6 @@ const stickyWallTemplate = `
     </div>
 `
 
-const taskBoardHomeTemplate = `
-    <div class="task-board-home-view">
-        <h1 class="view-title">Task boards​</h1>
-        <p class="context-text">Create task boards to organize and manage your tasks more efficiently, streamlining your workflow and tracking progress with ease.</p>
-        <div class="task-boards">
-            <div class="util-bar-type-2">
-                <button class="add-task-board-btn"><i class="fa-solid fa-plus"></i></button>
-            </div>
-            <div class="task-board-cards"></div>
-        </div>
-    </div>
-`
-
-
-const notebookHomeTemplate = `
-    <div class="notebook-home-view">
-        <h1 class="view-title">Notebooks</h1>
-        <p class="context-text">Create notebooks to manage collections of relevant work effectively.</p>
-        <div class="notebooks">
-            <div class="util-bar-type-2">
-                <button class="add-notebook-btn"><i class="fa-solid fa-plus"></i></button>
-            </div>
-            <div class="notebook-cards"></div>
-        </div>
-    </div>
-`
-
-const notebookTemplate = `
-    <div class="notebook-view">
-    <previous-view-button></previous-view-button>
-        <div class="notebook-top">
-
-            <div class="searchbar">
-                <i id="search-icon" class="bi bi-search"></i>
-                <input type="text" placeholder="Search..." spellcheck="false">
-                <ul class="dropdown-items"></ul>
-            </div>
-        </div>
-        <div class="notebook-bottom">
-            <h1></h1>
-            <description-page-block></description-page-block>
-            <div class="notebook-content">
-                <div class="notebook-items"></div>
-            </div>  
-        </div>
-                
-    </div>
-`
-
 
 const stickyNoteHomeTemplate = `
     <div class="sticky-home-view">
@@ -201,54 +152,6 @@ const stickyNoteHomeTemplate = `
     </div>
 `
 
-const taskBoardTemplate = `
-    <div class="task-board-view">
-        <previous-view-button></previous-view-button>
-        <h1>Untitled</h1>
-        <description-page-block></description-page-block>
-        <div class="task-board">
-            <div class="util-bar-type-2">
-                <button class="add-task-btn"><i class="fa-solid fa-plus"></i></button>
-            </div>
-            <div class="board">
-
-                <section class="todo">
-                    <div class="board-section-name">
-                        <p>To Do</p> 
-                        <span class="task-count">0</span>
-                    </div>
-                    <div class="tasks" dropzone="true"></div>
-                </section>
-
-                <section class="inprogress">
-                    <div class="board-section-name">
-                        <p>In progress</p> 
-                        <span class="task-count">0</span>
-                    </div>
-                    <div class="tasks" dropzone="true"></div>
-                </section>
-
-                <section class="done">
-                    <div class="board-section-name">
-                        <p>Done</p> 
-                        <span class="task-count">0</span>
-                    </div>
-                    <div class="tasks" dropzone="true"></div>
-                </section>
-
-            </div>
-        </div>
-        <h1>Milestones</h1>
-        <div class="util-bar-type-2">
-            <button class="add-milestone-btn"><i class="fa-solid fa-plus"></i></button>
-        </div>
-        <div class="timeline">
-            <milestone-card></milestone-card>
-            <milestone-card></milestone-card>
-        </div>
-        
-    </div>
-`
 
 const settingsTemplate = `
     <div class="settings">
@@ -413,9 +316,5 @@ export const templates = {
     stickyWall: stickyWallTemplate,
     stickyWallHome: stickyNoteHomeTemplate,
     settings: settingsTemplate,
-    editor: editorTemplate,
-    taskboardHome: taskBoardHomeTemplate,
-    task: taskBoardTemplate,
-    notebookHome: notebookHomeTemplate,
-    notebook: notebookTemplate
+    editor: editorTemplate
 }

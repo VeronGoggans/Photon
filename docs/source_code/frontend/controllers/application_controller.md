@@ -9,7 +9,7 @@ Like this I maintain **seperation of concerns.**
    // These methods don't contain any logic besides communicating with different controllers
    // to accomplish a task. 
    async addNote(name, content, notify) {
-        const { id } = this.folderController.getCurrentFolderObject();
+        const { id } = this.folderController.getCurrentFolder();
         const note = await this.noteController.add(id, name, content, notify);
         this.textEditorController.storeEditorObject(note, 'note')
     }

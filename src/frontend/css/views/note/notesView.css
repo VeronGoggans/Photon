@@ -2,7 +2,6 @@
     outline: none;
     height: 100dvh;
     max-height: 100dvh;
-    font-family: Roboto;
     display: grid;
     grid-template-rows: 60px 1fr;
     padding: 0 5%;

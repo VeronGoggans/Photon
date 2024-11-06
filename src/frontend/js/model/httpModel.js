@@ -1,5 +1,5 @@
 import { fetchData } from "../util/http_request/request.js";
-import { RequestOptionsBuilder } from "../util/builders/requestOptionsBuilder.js";
+import { RequestOptionsBuilder } from "../util/http_request/requestOptionsBuilder.js";
 
 export class HttpModel {
 

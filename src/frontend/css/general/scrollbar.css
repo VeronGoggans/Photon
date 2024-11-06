@@ -16,12 +16,7 @@
 .editor-wrapper .templates-container::-webkit-scrollbar,
 .flashcard-edit-view::-webkit-scrollbar,
 .sticky-wall-view::-webkit-scrollbar,
-.task-board-cards::-webkit-scrollbar,
-.sticky-wall-cards::-webkit-scrollbar,
-.task-board-view::-webkit-scrollbar,
-.task-tags-dropdown ul::-webkit-scrollbar,
-.board section .tasks::-webkit-scrollbar,
-.notebook-bottom::-webkit-scrollbar {
+.sticky-wall-cards::-webkit-scrollbar {
     background-color: transparent;
     width: 5px;
 }
@@ -45,11 +40,7 @@
 .flashcard-edit-view::-webkit-scrollbar-thumb,
 .sticky-wall-view::-webkit-scrollbar-thumb,
 .task-board-cards::-webkit-scrollbar-thumb,
-.sticky-wall-cards::-webkit-scrollbar-thumb,
-.task-board-view::-webkit-scrollbar-thumb,
-.task-tags-dropdown ul::-webkit-scrollbar-thumb,
-.board section .tasks::-webkit-scrollbar-thumb,
-.notebook-bottom::-webkit-scrollbar-thumb {
+.sticky-wall-cards::-webkit-scrollbar-thumb {
     background-color: var(--scrollbar-content-view);
     border-radius: 10px;
 }

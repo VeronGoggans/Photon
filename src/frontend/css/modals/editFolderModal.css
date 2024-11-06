@@ -14,7 +14,7 @@
 
 .edit-folder-modal h2 {
     color: var(--important);
-    font-family: sans-serif;
+    
     font-size: 32px;
 }
 
@@ -24,7 +24,7 @@
 }
 
 .folder-settings #title {
-    font-family: sans-serif;
+    
     font-size: 17px;
     color: var(--important);
     font-weight: 600;
@@ -33,7 +33,7 @@
 }
 
 .folder-settings p {
-    font-family: sans-serif;
+    
     margin: 0;
     color: #9b9bb5;
     margin-bottom: 5px;

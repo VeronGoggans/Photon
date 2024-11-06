@@ -1,25 +1,24 @@
 import { CNode } from "../../util/CNode.js";
-import { notificationTypes, notificationIcons, notificationMessages } from "../../constants/constants.js";
+import { notificationTypes, notificationMessages } from "../../constants/constants.js";
 
 export class NotificationHandler {
     
     
     static push(type, noteName = null, errorMsg = null) {
         const types = notificationTypes;
-        const icons = notificationIcons;
         const messages = notificationMessages;
         const notifications = {
-            'saved': { icon: icons.saved, message: messages.saved, type: types.saved},
-            'updated': { icon: icons.updated, message: messages.updated, type: types.updated},
-            'deleted': { icon: icons.deleted, message: `<b>${noteName}</b> ${messages.deleted}`, type: types.deleted},
-            'new': { icon: icons.new, message: messages.new, type: types.new},
-            'empty': { icon: icons.empty, message: messages.empty, type: types.empty},
-            'error': { icon: icons.error, message: errorMsg, type: types.error}
+            'saved': { message: messages.saved, type: types.saved},
+            'updated': { message: messages.updated, type: types.updated},
+            'deleted': { message: `<b>${noteName}</b> ${messages.deleted}`, type: types.deleted},
+            'new': { message: messages.new, type: types.new},
+            'empty': { message: messages.empty, type: types.empty},
+            'error': { message: errorMsg, type: types.error}
         };
     
-        const data = notifications[type.toLowerCase()]; // Convert to lowercase for case-insensitivity
+        const data = notifications[type.toLowerCase()];
         
-        document.querySelector('.wrapper').appendChild(new Notification(data.icon, data.message, data.type));
+        document.querySelector('.wrapper').appendChild(new Notification(data.message, data.type));
     }
 
     static empty(parentElement) {
