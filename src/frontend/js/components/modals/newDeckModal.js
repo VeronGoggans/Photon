@@ -1,5 +1,5 @@
 import { CNode } from "../../util/CNode.js";
-import { AnimationHandler } from "../../handlers/animation/animationHandler.js";
+import { AnimationHandler } from "../../handlers/animationHandler.js";
 import { dialogEvent } from "../../util/dialog.js";
 
 

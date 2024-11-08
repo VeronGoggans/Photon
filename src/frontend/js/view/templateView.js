@@ -1,4 +1,4 @@
-import { AnimationHandler } from "../handlers/animation/animationHandler.js";
+import { AnimationHandler } from "../handlers/animationHandler.js";
 import { decrementString } from "../util/ui.js";
 import { BaseView } from "./baseView.js";
 import { createCustomElement } from "../util/ui/components.js";

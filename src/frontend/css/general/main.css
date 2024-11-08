@@ -136,6 +136,7 @@ textarea::placeholder {
     left: -1px;
     z-index: 1;
     width: 100%;
+    min-width: 300px;
     max-height: 350px;
     overflow-y: auto;
     border: 1px solid var(--border-sidebar-right);
@@ -149,6 +150,11 @@ textarea::placeholder {
     transition: 150ms;
 }
 
+.soft-dropdown {
+    border: 1px solid var(--border-note-view-dropdown) !important;
+    box-shadow: var(--shadow-dropdown) !important;
+}
+
 .dropdown-items li {
     cursor: pointer;
     font-size: 16px;
@@ -156,8 +162,11 @@ textarea::placeholder {
     padding: 10px;
     color: var(--editor-text);
     border-radius: 5px;
-    font-weight: 600;
     transition: background-color 150ms ease
+}
+
+.dropdown-items i {
+    margin-right: 10px;
 }
 
 .dropdown-items li:hover {

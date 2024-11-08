@@ -10,7 +10,7 @@
     background-color: var(--dropdown);
     padding: 10px 15px;
     border-radius: 10px;
-    border: 1px solid var(--border-sidebar-right);
+    box-shadow: var(--shadow-dropdown);
     opacity: 0;
     transition: 150ms;
 }
@@ -83,7 +83,7 @@
     display: grid;
     grid-template-rows: 30px 1fr;
     border-radius: 10px;
-    border: 1px solid var(--border-sidebar-right);
+    box-shadow: var(--shadow-dropdown);
     width: 300px;
     padding: 20px;
     row-gap: 10px;

@@ -156,27 +156,19 @@ export class ApplicationController {
         }
     }
 
-    async showTextEditor() {
-        const allFolderNames = this.applicationModel.getAllFolderNames();
-        const allTemplateNames = await this.templateController.getTemplateNames();
-        this.textEditorController.showTextEditor(allFolderNames, allTemplateNames);
-    }
-
     getPreviousView() {
         return this.model.getPreviousView();
     }
     
     async openInTextEditor(editorObject, editorObjectType) {
         const allFolderNames = this.folderController.getAllFolderNames();
-        const allTemplateNames = await this.templateController.getTemplateNames();
-        this.textEditorController.openInTextEditor(editorObject, editorObjectType, allFolderNames, allTemplateNames);
+        this.textEditorController.openInTextEditor(editorObject, editorObjectType, allFolderNames);
     }
 
     async openTextEditor(editorObjectType) {
         this.clearEditorObject();
         const allFolderNames = this.folderController.getAllFolderNames();
-        const allTemplateNames = await this.templateController.getTemplateNames();
-        this.textEditorController.showTextEditor(editorObjectType, allFolderNames, allTemplateNames);
+        this.textEditorController.showTextEditor(editorObjectType, allFolderNames);
     }
 
     /**

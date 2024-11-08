@@ -45,12 +45,10 @@ export const arrowKeys = new Set([
 
 
 export const notificationTypes = {
-    'saved': 'Added note successful',
-    'updated': 'Changes saved successful',
+    'saved': 'Added note successfully',
+    'updated': 'Changes saved successfully',
     'deleted': 'Deleted',
     'new': 'New',
-    'empty': "Looks like nothing's here",
-    'error': 'An error occurred'
 }
 
 
@@ -59,7 +57,6 @@ export const notificationMessages = {
     'updated': 'Your changes have been saved.',
     'deleted': 'has been deleted.',
     'new': 'Changes saved.\nCreating a new note.',
-    'empty': 'There is no content in this folder.'
 }
 
 

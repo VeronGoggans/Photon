@@ -1,5 +1,5 @@
-import { AnimationHandler } from "../handlers/animation/animationHandler.js";
-import { removeContent, addEmptyMessage, removeEmptyMessage } from "../util/ui.js";
+import { AnimationHandler } from "../handlers/animationHandler.js";
+import { removeContent } from "../util/ui.js";
 import { BaseView } from "./baseView.js";
 
 export class FolderView extends BaseView {
@@ -79,8 +79,7 @@ export class FolderView extends BaseView {
         this._content = document.querySelector('.folders');
         this.currentFolderName = document.querySelector('.current-folder-name');
         this.backButton = document.querySelector('.exit-folder-btn');
-        this.createFolderButton = document.querySelector('.create-folder-btn');
-        this.homeButton = document.querySelector('.home-folder-btn');
+        this.createFolderButton = document.querySelector('.add-folder-btn');
     }
 
     
@@ -112,6 +111,5 @@ export class FolderView extends BaseView {
 
         this.backButton.addEventListener('click', async () => {await this.controller.navigateOutofFolder()})
         this.createFolderButton.addEventListener('click', () => {this.dialog.renderEditFolderModal(this.controller)});
-        this.homeButton.addEventListener('click', async () => {await this.controller.navigateIntoFolder(1, 'Home')})
     }
 }

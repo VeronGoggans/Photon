@@ -13,7 +13,7 @@ template-card {
     opacity: 0;
     transform: translateY(30%);
     transition: opacity .7s ease, transform .25s ease, scale .2s ease;
-    box-shadow: var(--card-shadow);
+    box-shadow: var(--shadow-card);
 }
 
 note-card:hover,

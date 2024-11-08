@@ -1,37 +1,32 @@
-.notification-card {
+push-notification {
     position: absolute;
-    /* bottom: -200px; */
+    bottom: -200px;
     right: 50px;
-    
-    background-color: #f3f3fd;
+    background-color: var(--notification);
+    border: 1px solid var(--border-notification); 
     height: fit-content;
-    width: 300px;
+    width: fit-content;
     border-radius: 10px;
     padding: 20px;
     cursor: pointer;
     transition: 150ms;
 }
 
-.notification-card:hover {
+push-notification:hover {
     scale: 1.05;
 }
 
-.notification-card div {
+push-notification div {
     display: flex;
     align-items: center;
 }
 
-.notification-card i {
-    margin-right: 20px;
-    color: #46567e;
-}
-
-.notification-card .notification-title{
+push-notification .notification-title{
     color: #5c7fdd;
-    font-size: 18px;
+    font-size: 16px;
 }
 
-.notification-card .dot {
+push-notification .dot {
     width: 7px;
     height: 7px;
     box-shadow: 0 0 10px #5c7fdd;
@@ -40,18 +35,12 @@
     margin-right: 10px;
 }
 
-.notification-card p {
-    color: #737a8b;
+push-notification .notitication-message {
+    color: var(--text);
+    font-size: 14px;
+    margin: 5px 0;
 }
 
-.show-notification {
-    bottom: 50px;
-}
-
-.notify-empty-text {
-    font-size: 45px;
-    color: var(--placeholder);
-    position: absolute;
-    top: 35%;
-    left: calc(50% - 200.5px);
+.show-push-notification {
+    bottom: 50px !important;
 }

@@ -62,7 +62,7 @@
     font-size: 16px;
     transition: 150ms;
     z-index: 2;
-    box-shadow: var(--card-shadow);
+    box-shadow: var(--shadow-card);
 }
 
 .editor-options-dropdown .options button {
@@ -103,7 +103,7 @@
     transition: 100ms;
     visibility: hidden;
     opacity: 0;
-    box-shadow: var(--card-shadow);
+    box-shadow: var(--shadow-card);
 }
 
 .templates-dropdown .options span {

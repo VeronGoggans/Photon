@@ -5,7 +5,7 @@ const homeTemplate = `
         <div class="searchbar">
             <i id="search-icon" class="bi bi-search"></i>
             <input type="text" placeholder="Search..." spellcheck="false">
-            <ul class="dropdown-items"></ul>
+            <ul class="dropdown-items soft-dropdown"></ul>
         </div>
         
         </div>
@@ -28,20 +28,23 @@ const notesTemplate = `
         <div class="searchbar">
             <i id="search-icon" class="bi bi-search"></i>
             <input type="text" placeholder="Search..." spellcheck="false">
-            <ul class="dropdown-items"></ul>
+            <ul class="dropdown-items soft-dropdown"></ul>
         </div>
 
     </div>
     <div class="notes-bottom">
         <div class="current-folder-name-container">
-            <h1 class="current-folder-name view-title">Home</h1>
-            <div>
-                <button title="Back" class="exit-folder-btn"><i class="bi bi-backspace-fill"></i></button>
-                <button title="Create folder" class="create-folder-btn"><i class="bi bi-folder-fill"></i></button>
-                <button title="Create note" class="create-note-btn"><i class="bi bi-file-earmark-fill"></i></button>
-                <button title="Return home" class="home-folder-btn"><i class="bi bi-house-fill"></i></button>
-                <button title="Show bookmarks" class="bookmarks-btn"><i class="bi bi-bookmark-fill"></i></button>
+            <button class="exit-folder-btn"><i class="bi bi-chevron-left"></i></button>
+            <div class="note-view-options-dropdown">
+                <button><i class="bi bi-three-dots-vertical"></i></button>
+                <ul class="dropdown-items soft-dropdown">
+                    <li class="add-note-btn"><i class="bi bi-file-earmark"></i> Add a note</li>
+                    <li class="add-folder-btn"><i class="bi bi-folder-plus"></i> Add a Folder</li>
+                    <li class="view-bookmarks-btn"><i class="bi bi-bookmark"></i> View bookmarks</li>
+                </ul>
             </div>
+            
+            <h1 class="current-folder-name view-title">Home</h1>
         </div>
         <div class="note-view-content">
             <p class="block-title" id="folders-block-title">Folders</p>
@@ -211,16 +214,6 @@ const editorTemplate = `
       </div>
 
       <div class="editor-util-btns-container">
-
-        <div class="templates-dropdown">
-            <i id="editor-template-btn" class="fa-solid fa-file-lines"></i>
-            <div class="options">
-            <span>Templates</span>
-            <ul class="templates-container">
-            </ul>
-            </div>
-        </div>
-
         <i id="editor-flashcard-set-btn" class="bi bi-card-text"></i>
       </div>
 
@@ -290,15 +283,12 @@ const editorTemplate = `
             <div class="link-option"><i class="fa-solid fa-link"></i>Add a url</div>
             <div class="embed-video-option"><i class="fa-solid fa-play"></i>Add a video</div>
             <div class="horizontal-line-option"><i class="fa-solid fa-ruler-horizontal"></i>Add a horizontal line</div>
-            <div class="quote-block"><i class="fa-solid fa-quote-right"></i>Quote block</div>   
-            <div class="important-block"><i class="fa-solid fa-exclamation"></i>Important block</div>   
             <div class="unordered-list"><i class="fa-solid fa-list-ul"></i>Bullet list</div>
             <div class="ordered-list"><i class="fa-solid fa-list-ol"></i>Numbered list</div> 
             <div class="heading-1"><i class="fa-solid fa-h"></i>Add heading 1</div>
             <div class="heading-2"><i class="fa-solid fa-h"></i>Add heading 2</div>
             <div class="heading-3"><i class="fa-solid fa-h"></i>Add heading 3</div>
             <div class="heading-4"><i class="fa-solid fa-h"></i>Add heading 4</div>
-            <div class="date"><i class="fa-regular fa-calendar"></i>Current date</div>
             <div class="insert-html"><i class="fa-brands fa-html5"></i>Insert HTML</div>
         </div>
     </div>

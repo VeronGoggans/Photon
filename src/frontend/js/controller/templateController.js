@@ -1,6 +1,6 @@
 import { HttpModel } from "../model/httpModel.js";
 import { TemplateView } from "../view/templateView.js";
-import { NotificationHandler } from "../handlers/userFeedback/notificationHandler.js";
+import { pushNotification, renderEmptyNotification } from "../handlers/notificationHandler.js";
 
 
 export class TemplateController {
@@ -19,7 +19,7 @@ export class TemplateController {
     async add(name, content, notify) {
         await this.model.add('/template', {'name': name,'content': content})
         if (notify) {
-            NotificationHandler.push('saved')
+            pushNotification('saved')
         }
     }
 
@@ -44,6 +44,7 @@ export class TemplateController {
 
     async update(template) {
         await this.model.update('/template', {'id': template.id,'name': template.name, 'content': template.content})
+        pushNotification('updated')
     }
 
 
@@ -52,7 +53,7 @@ export class TemplateController {
         this.view.renderDelete(template);
 
         if (notify) {
-            NotificationHandler.push('deleted', template.name)
+            pushNotification('deleted', template.name)
         }
     }
 }

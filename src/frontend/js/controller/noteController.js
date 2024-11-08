@@ -2,7 +2,7 @@ import { HttpModel } from "../model/httpModel.js";
 import { NoteView } from "../view/noteView.js";
 import { Searchbar } from "../view/searchbar.js";
 import { viewToLoad } from "../helpers/random.js";
-import { NotificationHandler } from "../handlers/userFeedback/notificationHandler.js"
+import { pushNotification, renderEmptyNotification } from "../handlers/notificationHandler.js"
 
 export class NoteController {
     constructor(applicationController) {
@@ -23,7 +23,7 @@ export class NoteController {
     async add(folderId, name, content, notify) {
         const { note } = await this.model.add('/note', {'folder_id': folderId,'name': name,'content': content});
         if (notify) {
-            NotificationHandler.push('saved');
+            pushNotification('saved');
         }
         return note
     }
@@ -48,7 +48,7 @@ export class NoteController {
 
     async update(note) {
         await this.model.update('/note', {'note_id': note.id,'name': note.name,'content': note.content,'bookmark': note.bookmark,'favorite': note.favorite});
-        NotificationHandler.push('updated');
+        pushNotification('updated');
     }
 
 
@@ -64,7 +64,7 @@ export class NoteController {
         this.view.renderDelete(note);
         
         if (notify) {
-            NotificationHandler.push('deleted', note.name)
+            pushNotification('deleted', note.name)
         }
     }
 

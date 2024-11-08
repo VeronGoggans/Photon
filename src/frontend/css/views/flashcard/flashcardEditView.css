@@ -43,7 +43,7 @@
     grid-template-rows: 1fr 30px 40px;
     border-radius: 10px;
     height: 200px;
-    box-shadow: var(--card-shadow);
+    box-shadow: var(--shadow-card);
     background-color: var(--card);
     transition: opacity .7s ease, transform .25s ease, scale .2s ease;
 }

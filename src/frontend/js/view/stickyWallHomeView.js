@@ -1,4 +1,4 @@
-import { AnimationHandler } from "../handlers/animation/animationHandler.js";
+import { AnimationHandler } from "../handlers/animationHandler.js";
 import { createListItemType1 } from "../util/ui/components.js";
 import { BaseView } from "./baseView.js";
 

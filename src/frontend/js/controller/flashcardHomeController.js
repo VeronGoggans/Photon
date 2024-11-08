@@ -1,7 +1,6 @@
 import { HttpModel } from "../model/httpModel.js";
 import { FlashcardDeckView } from "../view/flashcardDeckView.js";
 import { FlashcardModel } from "../model/flashcardModel.js";
-import { NotificationHandler } from "../handlers/userFeedback/notificationHandler.js";
 
 export class FlashcardHomeController {
     constructor(applicationController) {

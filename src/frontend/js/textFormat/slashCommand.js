@@ -1,5 +1,5 @@
 import { commands } from "../constants/constants.js";
-import { AnimationHandler } from "../handlers/animation/animationHandler.js";
+import { AnimationHandler } from "../handlers/animationHandler.js";
  
 export class SlashCommand {
     constructor(view, formatter) {

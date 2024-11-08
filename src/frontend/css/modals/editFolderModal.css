@@ -14,8 +14,8 @@
 
 .edit-folder-modal h2 {
     color: var(--important);
-    
     font-size: 32px;
+    font-weight: 500;
 }
 
 .folder-settings {
@@ -42,7 +42,7 @@
 .edit-folder-modal input {
     border: none;
     background-color: transparent;
-    border-bottom: 2px solid var(--folder-name-input);
+    border-bottom: 2px solid var(--folder-name-border);
     padding: 5px 10px;
     height: 45px;
     margin-bottom: 10px;
@@ -72,7 +72,7 @@
     background-color: transparent;
     color: #5c7dff;
     font-size: 16px;
-    width: 120px;
+    width: 135px;
     overflow: hidden;
 }
 

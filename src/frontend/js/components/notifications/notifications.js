@@ -1,13 +1,27 @@
+import { notificationTypes, notificationMessages } from "../../constants/constants.js";
 
 class PushNotification extends HTMLElement {
     constructor() {
         super()
+        this.notifications = {
+            'saved': { message: `<b>${this.noteName}</b> ${notificationMessages.saved}`, type: notificationTypes.saved },
+            'updated': { message: notificationMessages.updated, type: notificationTypes.updated },
+            'deleted': { message: `<b>${this.noteName}</b> ${notificationMessages.deleted}`, type: notificationTypes.deleted },
+            'new': { message: notificationMessages.new, type: notificationTypes.new },
+        };
+    }
+
+    setData(value) {
+        const data = JSON.parse(value);
+        this.noteName = data.noteName;
+        this.notification = this.notifications[data.type];
     }
 
     
     connectedCallback() {
         this.render();
-        this.addEventListener('click', this.showNotification.bind(this));
+        this.addEventListener('click', this.closeNotification.bind(this));
+        this.showNotification()
     }
 
 
@@ -15,21 +29,21 @@ class PushNotification extends HTMLElement {
         this.innerHTML = `
             <div>
                 <div class="dot"></div>
-                <p class="notification-title">Added note successful</p>
+                <p class="notification-title">${this.notification.type}</p>
             </div>        
-            <p class="notitication-message">Docker syntax has been added.</p>
-        `
+            <p class="notitication-message">${this.notification.message}</p>
+        `   
     }
 
     showNotification() {
-        this.classList.add('show');
+        this.classList.add('show-push-notification');
         setTimeout(() => {
             this.closeNotification();
-        }, 4500);
+        }, 400500);
     }
 
     closeNotification() {
-        this.classList.remove('show');
+        this.classList.remove('show-push-notification');
         setTimeout(() => {
             this.remove(); 
         }, 250);

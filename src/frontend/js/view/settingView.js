@@ -1,4 +1,4 @@
-import { AnimationHandler } from "../handlers/animation/animationHandler.js";
+import { AnimationHandler } from "../handlers/animationHandler.js";
 import { DropdownHelper } from "../helpers/dropdownHelper.js";
 import { capitalizeFirstLetter } from "../util/formatters.js";
 
@@ -8,7 +8,12 @@ export class SettingView {
         this.applicationController = applicationController;
         this.#initElements();
         this.#eventListeners();
-        this.dropdownHelper = new DropdownHelper(this, this.dropdowns, this.dropdownOptions);
+        this.dropdownHelper = new DropdownHelper(
+            this.dropdowns, 
+            this.dropdownOptions, 
+            this.settingsView, 
+            ['.theme-dropdown','.sidebar-color-dropdown']
+        );
         AnimationHandler.fadeInFromSide(this.settingsView);
     }
 
@@ -74,13 +79,5 @@ export class SettingView {
         this.darkTheme.addEventListener('click', () => {this.#darkmode()});
         this.originalSidebar.addEventListener('click', () => {this.#originalColor()});
         this.softSidebar.addEventListener('click', () => {this.#softColor()});
-        this.settingsView.addEventListener('click', (event) => {
-            const excludedContainers = ['.theme-dropdown','.sidebar-color-dropdown'];
-
-            // Check if the click was on a dropdown.
-            if (excludedContainers.some(selector => event.target.closest(selector))) {
-                return;
-            } this.dropdownHelper.closeDropdowns();
-        });
     }
 }

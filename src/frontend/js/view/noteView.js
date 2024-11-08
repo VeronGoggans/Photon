@@ -1,8 +1,8 @@
-import { AnimationHandler } from "../handlers/animation/animationHandler.js";
-import { removeContent, addEmptyMessage } from "../util/ui.js";
+import { AnimationHandler } from "../handlers/animationHandler.js";
+import { removeContent } from "../util/ui.js";
 import { BaseView } from "./baseView.js";
-import { NotificationHandler } from "../handlers/userFeedback/notificationHandler.js";
 import { createCustomElement } from "../util/ui/components.js";
+import { DropdownHelper } from "../helpers/dropdownHelper.js";
 
 
 export class NoteView extends BaseView {
@@ -10,23 +10,27 @@ export class NoteView extends BaseView {
         super(controller);
         this.controller = controller;
         this.applicationController = applicationController;
-        
         this.#initElements();
         this.#eventListeners();
-
-        AnimationHandler.fadeInFromBottom(this._viewElement)
+        this.dropdownHelper = new DropdownHelper(
+            this.dropdowns, 
+            this.dropdownOptions,
+            this.viewElement,
+            ['.note-view-options-dropdown']
+        );
+        AnimationHandler.fadeInFromBottom(this.viewElement)
     }
 
     
     renderAll(notes) { 
         if (notes.length === 0) {
             document.querySelector('#notes-block-title').style.display = 'none';
-            this._content.style.display = 'none'
+            this.notesContainer.style.display = 'none'
         }
 
         if (notes.length > 0) {
             document.querySelector('#notes-block-title').style.display = '';
-            this._content.style.display = ''
+            this.notesContainer.style.display = ''
         }
         const contentFragment = document.createDocumentFragment();
 
@@ -36,12 +40,12 @@ export class NoteView extends BaseView {
             contentFragment.appendChild(noteCard);
             AnimationHandler.fadeInFromBottom(noteCard);
         }
-        this._content.appendChild(contentFragment);
+        this.notesContainer.appendChild(contentFragment);
     }
 
     
     renderDelete(note) {
-        const cards = this._content.children;
+        const cards = this.notesContainer.children;
 
         for (let i = 0; i < cards.length; i++) {
             if (cards[i].id == note.id) {
@@ -52,19 +56,24 @@ export class NoteView extends BaseView {
 
 
     #initElements() {
-        this.createNoteButton = document.querySelector('.create-note-btn')
-        this.bookmarkedButton = document.querySelector('.bookmarks-btn')
-        this._content = document.querySelector('.notes');
-        this._viewElement = document.querySelector('.notes-view');
+        this.createNoteButton = document.querySelector('.add-note-btn');
+        this.bookmarkedButton = document.querySelector('.view-bookmarks-btn');
+        this.noteViewOptionsButton = document.querySelector('.note-view-options-dropdown'); 
+        this.noteViewOptions = document.querySelector('.note-view-options-dropdown ul');
+        this.notesContainer = document.querySelector('.notes');
+        this.viewElement = document.querySelector('.notes-view');
+
+        this.dropdowns = [this.noteViewOptionsButton];
+        this.dropdownOptions = [this.noteViewOptions];
     }
 
     #eventListeners() {
-        this._content.addEventListener('DeleteNote', (event) => {
+        this.notesContainer.addEventListener('DeleteNote', (event) => {
             const { note } = event.detail;
             this.dialog.renderDeleteModal(this.controller, note.id, note.name)
         })
         
-        this._content.addEventListener('NoteCardClick', (event) => {
+        this.notesContainer.addEventListener('NoteCardClick', (event) => {
             const { note } = event.detail;
             this.applicationController.initView('editor', 
                 {
@@ -77,8 +86,12 @@ export class NoteView extends BaseView {
             );
         })
 
+        this.noteViewOptionsButton.addEventListener('click', () => {
+
+        });
+
         this.bookmarkedButton.addEventListener('click', () => {
-            removeContent(this._content);
+            removeContent(this.notesContainer);
             const allBookmarks = -1
             this.controller.get(allBookmarks)
         });

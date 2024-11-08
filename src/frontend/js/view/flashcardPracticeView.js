@@ -1,4 +1,4 @@
-import { AnimationHandler } from "../handlers/animation/animationHandler.js";
+import { AnimationHandler } from "../handlers/animationHandler.js";
 import { FlashcardObjectArray } from "../util/array.js";
 import { getMinutesDifference } from "../util/date.js";
 

@@ -4,7 +4,7 @@ import { DropdownHelper } from "../helpers/dropdownHelper.js";
 import { TextFormatter } from "../textFormat/textFormatter.js"; 
 import { TextBlockHandler } from "../textFormat/textBlockHandler.js";
 import { SlashCommand } from "../textFormat/slashCommand.js";
-import { AnimationHandler } from "../handlers/animation/animationHandler.js";
+import { AnimationHandler } from "../handlers/animationHandler.js";
 import { BaseView } from "../view/baseView.js"
 import { createDocumentLocation } from "../util/ui/components.js";
 
@@ -21,10 +21,10 @@ export class TextEditorView extends BaseView {
     this.textFormatter = new TextFormatter();
     this.textBlockHandler = new TextBlockHandler(this.page);
     this.slashCommand = new SlashCommand(this, this.textFormatter);
-    this.dropdownHelper = new DropdownHelper(this, this.dropdowns, this.dropdownOptions, this.templateList);
+    this.dropdownHelper = new DropdownHelper(this.dropdowns, this.dropdownOptions, this.viewElement, []);
     this.keyEventListener = new KeyEventListener(this);
     this.textEditorEventListener = new TextEditorEventListener(this.page, this.editor, this.slashCommand);
-    AnimationHandler.fadeInFromSide(this.textEditor)
+    AnimationHandler.fadeInFromSide(this.viewElement)
   }
 
   /**
@@ -33,11 +33,11 @@ export class TextEditorView extends BaseView {
    * 
    * @param {Object} object - could be a Note or Template object
    */
-  open(object, folders, allTemplateNames) {
+  open(object, folders) {
     this.editorContent = object.content;
     this.page.innerHTML = object.content;
     this.documentNameInput.value = object.name;
-    this.show(folders, allTemplateNames);
+    this.show(folders);
     this.textBlockHandler.parse();
   }
 
@@ -72,9 +72,8 @@ export class TextEditorView extends BaseView {
   } 
 
 
-  show(folders, allTemplateNames) {
+  show(folders) {
     this.documentLocation.appendChild(createDocumentLocation(folders));
-    this.dropdownHelper.renderTemplatesDropdown(allTemplateNames);
     this.editor.scrollTop = 0;
     this.page.focus();
   }
@@ -157,7 +156,7 @@ export class TextEditorView extends BaseView {
     this.newNoteSpan = document.querySelector('.new-note-span');
 
     // other
-    this.textEditor = document.querySelector('.editor-wrapper');
+    this.viewElement = document.querySelector('.editor-wrapper');
     this.editor = document.querySelector('.editor');
     this.page = document.querySelector('.editor-paper');
     this.toolbar = document.querySelector('.toolbar')
@@ -165,13 +164,10 @@ export class TextEditorView extends BaseView {
     // dropdowns
     this.colorDropdown = document.querySelector('.color-dropdown ul');
     this.colorDropdownOptions = this.colorDropdown.querySelectorAll('ul li');
-    this.templateDropdown = document.querySelector('.templates-dropdown');
-    this.templateDropdownOptions = this.templateDropdown.querySelector('.options');
-    this.templateList = this.templateDropdownOptions.querySelector('.templates-container');
     this.editorDropdown = document.querySelector('.editor-options-dropdown');
     this.editorDropdownOptions = this.editorDropdown.querySelector('.options');
-    this.dropdowns = [this.editorDropdown, this.templateDropdown]
-    this.dropdownOptions = [this.editorDropdownOptions, this.templateDropdownOptions]
+    this.dropdowns = [this.editorDropdown]
+    this.dropdownOptions = [this.editorDropdownOptions]
   }
 
 

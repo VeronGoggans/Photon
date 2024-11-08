@@ -1,5 +1,5 @@
 import { Flashcard } from "../components/entities/flashcardDeck.js";
-import { AnimationHandler } from "../handlers/animation/animationHandler.js";
+import { AnimationHandler } from "../handlers/animationHandler.js";
 import { BaseView } from "./baseView.js";
 
 export class FlashcardEditView extends BaseView {

@@ -3,10 +3,7 @@
     --setting-dropdown: #18182d;
     /*Editor View*/
     --editor: #0b0a14;
-    --editor-background: #1f2129;
     --editor-border: #000000;
-    --toolbar-border: #000000;
-    --toolbar: #1b1c23;
     --toolbar-btn-text: #bbbed2;
     --editor-text: #d5d9e0;
     --editor-container: #23252e;
@@ -15,9 +12,6 @@
     --editor-dropdown: #12121d;
     --dropdown: #12121d;
 
-    --important-background-color: #ffefb3;
-    --important-text-color: #101118;
-    --important-icon-color: #ffe547;
     --hover-slash-command: #16171c;
     --file-path: #9095aa;
 
@@ -37,8 +31,21 @@
     --bookmark: #5063b1;
     --dragging: #27293b;
     --hover: #617fff69; 
-    --folder-name-input: #5c7dff;
+    --folder-name-border: #5c7dff;
+
+    /*borders*/
+    --border-notification: none;
+    --border-note-view-dropdown: none;
+    --border-card: #282a3d;
+    --border-sidebar-right: #282a3d;
+    --border-sidebar-soft: #0f0e1a;
+
+    /*Hover*/
+    --hover-button: #0f0e1a;
     
+    /*Shadows*/
+    --shadow-dropdown: 5px 5px 18px #030304;
+    --shadow-card: none;
 
     /*Other*/
     --title-bar-button-background: #252735;
@@ -46,7 +53,7 @@
     --exit-btn: #28283b;
     --secondary: #5c7dff;
     --background: #0b0a14;
-    --notification: #16171c;
+    --notification: #0f0e1a;
     --subtitle: #9196aa;
     --sidebar: #0b0a14; 
     --sidebar-soft: #0f0e1a;
@@ -59,9 +66,7 @@
     --input-bg: #18182d;
     --icon-hover: #5c7dff;
     --important: #d6d8e5;
-    --border-card: #282a3d;
-    --border-sidebar-right: #282a3d;
-    --border-sidebar-soft: #0f0e1a;
+    
     --hover-searchbar-options: #18182d;
     --hover-text: #5c7dff;
     --hover-toolbar-btns: #383d4c;
@@ -71,11 +76,8 @@
     --selection: #314682;
     --dialog: rgb(0 0 0 / 25%);
     --shadow: rgba(0, 0, 0, 0.1);
-    --card-shadow: none; 
-    --shadow-notification: #121216;
     --modal: #12121d;
     --searchbar-dropdown: #0b0a14;
-    --searchbar-border: #282a3d;
     --scrollbar-content-view: #3f4045;
     --stats-background: #141322;
     --home-tab: #28283b;
@@ -102,23 +104,17 @@
     --bookmark: #d5ddff;
     --hover: rgba(92, 125, 255, .3); 
     --hover-bookmark-icon-if-bookmarked: rgba(92, 125, 255, .3);
-    --folder-name-input: #ced1e3;
+    --folder-name-border: #ced1e3;
 
     /*Home View*/
 
     /*Editor View*/
     --editor: #fff;
-    --editor-background: #fcfcff;
     --editor-border: #ced1e3;
-    --toolbar-border: #ced1e3;
     --editor-container: #ffffff;
     --editor-container-shadow: #272933;
     --editor-container-input: #f6f7ff;
     --dropdown: #ffffff;
-
-    --important-background-color: #f4f4f4;
-    --important-text-color: #444863;
-    --important-icon-color: #dde0ec;
 
     --editor-dropdown: #ffffff;
 
@@ -127,6 +123,19 @@
     --editor-text: #383838;
     --hover-slash-command: #f3f4f8;
     --file-path: #a0a6c1;
+    /*Borders*/
+    --border-notification: #f3f5fb;
+    --border-card: #dee1ef;
+    --border-sidebar-right: #dee1ef; 
+    --border-sidebar-soft: #f3f5fb;
+    --border-note-view-dropdown: none;
+
+    /*Hover*/
+    --hover-button: #f4f4fc;
+
+    /*Shadows*/
+    --shadow-dropdown: 5px 5px 18px #eaecf7;
+    --shadow-card: 5px 5px 18px #eaecf7; 
 
     /*Other*/
     --title-bar-button-background: #dfe7ff;
@@ -134,7 +143,7 @@
     --exit-btn: #f8fafe;
     --secondary: #5c7dff;
     --background: #ffffff;
-    --notification: #ffffff;
+    --notification: #f9fafd;
     --subtitle: #63656d;
     --sidebar: #ffffff; 
     --sidebar-soft: #f9fafd;
@@ -147,9 +156,7 @@
     --input-bg: #f6f6fb;
     --icon-hover: #5c7fdd;
     --important: #444863;
-    --border-card: #dee1ef;
-    --border-sidebar-right: #dee1ef; 
-    --border-sidebar-soft: #f3f5fb;
+    
     --hover-searchbar-options: #f1f6ff;
     --hover-text: #444863;
     --hover-sidebar: #f0f0ff;
@@ -158,13 +165,10 @@
     --selection: #b1daff;
     --dialog: #0d3a8d1c;
     --shadow: rgba(92, 98, 157, .1);
-    --card-shadow: 5px 5px 18px #eaecf7; 
-    --shadow-notification: #dcdee6;
+    
     --modal: #ffffff;
     --scrollbar-content-view: #cccfe1;
     --searchbar-dropdown: #fff;
-    --searchbar-border: #ced1e3;
     --stats-background: #f6f7ff;
-    --home-tab: #f0f0ff;
     --options-menu: #f5f6ff;
 }

@@ -4,7 +4,7 @@ import { ForgotSaveContainer } from "../components/modals/forgotSaveModal.js";
 import { SearchModal } from "../components/modals/searchModal.js";
 import { EditFolderModal } from "../components/modals/editFolderModal.js";
 import { NewDeckModal } from "../components/modals/newDeckModal.js";
-import { AnimationHandler } from "../handlers/animation/animationHandler.js";
+import { AnimationHandler } from "../handlers/animationHandler.js";
 import { EditFlashcardModal } from "../components/modals/editFlashcardModal.js";
 import { StickyNoteModal } from "../components/modals/stickyNoteModal.js";
 import { NewCollectionModal } from "../components/modals/newCollectionModal.js";

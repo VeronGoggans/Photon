@@ -1,5 +1,5 @@
 import { PlacementHelper } from "../helpers/placementHelper.js";
-import { AnimationHandler } from "../handlers/animation/animationHandler.js";
+import { AnimationHandler } from "../handlers/animationHandler.js";
 
 export class TextEditorEventListener {
     constructor(editorPage, editor, slashCommand) {

@@ -1,5 +1,5 @@
 import { CNode } from "./CNode.js";
-import { NotificationHandler } from "../handlers/userFeedback/notificationHandler.js";
+
 
 export function removeContent(contentDiv) {
     while (contentDiv.firstChild) 
@@ -18,22 +18,6 @@ export function incrementString(string) {
     let num = Number(string);
     num++
     return String(num)
-}
-
-
-export function addEmptyMessage(parentElement) {
-    setTimeout(() => {
-        if (parentElement.childElementCount === 0) {
-            NotificationHandler.empty(parentElement);
-        }    
-    }, 710);
-} 
-
-
-export function removeEmptyMessage(parentElement) {
-    if (parentElement.firstChild.className = 'notify-empty-text') {
-        parentElement.removeChild(parentElement.firstChild);
-    }
 }
 
 

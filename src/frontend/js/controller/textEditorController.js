@@ -56,18 +56,18 @@ export class TextEditorController {
         } 
     }
 
-    openInTextEditor(editorObject, editorObjectType, allFolderNames, allTemplateNames) {
+    openInTextEditor(editorObject, editorObjectType, allFolderNames) {
         this.model.storeEditorObject(editorObject, editorObjectType);
-        this.textEditorView.open(editorObject, allFolderNames, allTemplateNames);
+        this.textEditorView.open(editorObject, allFolderNames);
     }
 
     storeEditorObject(editorObject, editorObjectType) {
         this.model.storeEditorObject(editorObject, editorObjectType);
     }
 
-    showTextEditor(editorObjectType, allFolderNames, allTemplateNames) {
+    showTextEditor(editorObjectType, allFolderNames) {
         this.model.storeEditorObjectType(editorObjectType);
-        this.textEditorView.show(allFolderNames, allTemplateNames);
+        this.textEditorView.show(allFolderNames);
     }
 
     clearStoredObject() {
