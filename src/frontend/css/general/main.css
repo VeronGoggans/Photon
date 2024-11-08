@@ -180,9 +180,12 @@ textarea::placeholder {
     top: -80px;
     right: 5px;
     background-color: var(--options-menu);
+    color: var(--text);
     width: fit-content;
     padding: 10px;
     border-radius: 10px;
+    opacity: 0;
+    transition: .15s;
 }
 
 .options-menu div {

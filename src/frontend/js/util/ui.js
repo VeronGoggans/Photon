@@ -1,4 +1,5 @@
 import { CNode } from "./CNode.js";
+import { AnimationHandler } from "../handlers/animationHandler.js";
 
 
 export function removeContent(contentDiv) {
@@ -33,18 +34,21 @@ export function showContextMenu(event, parentElement, menuTemplate) {
     event.preventDefault()
 
     const existingMenu = document.querySelector(".options-menu");
-    if (existingMenu) existingMenu.remove();
+    if (existingMenu) {
+        AnimationHandler.fadeOutContextMenu(existingMenu);
+    }
 
-    const menu = document.createElement("div");
-    menu.classList.add("options-menu");
-    menu.innerHTML = menuTemplate
+    const newMenu = document.createElement("div");
+    newMenu.classList.add("options-menu");
+    newMenu.innerHTML = menuTemplate
 
-    parentElement.appendChild(menu);
+    parentElement.appendChild(newMenu);
+    AnimationHandler.fadeIn(newMenu)
 
     // Add an event listener to close the menu when clicking outside of it
     document.addEventListener("click", function hideMenu(e) {
-    if (!menu.contains(e.target)) {
-        menu.remove();
+    if (!newMenu.contains(e.target)) {
+        newMenu.remove();
         document.removeEventListener("click", hideMenu);
     }});
 }

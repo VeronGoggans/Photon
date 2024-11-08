@@ -29,7 +29,10 @@ export class AnimationHandler {
 
 
     static fadeIn(node) {
-        node.classList.add('fadeIn');
+        setTimeout(() => {
+            node.classList.add('fadeIn');
+        }, 30);
+        
     }
 
 
@@ -38,5 +41,12 @@ export class AnimationHandler {
         setTimeout(() => {
             node.style.display = 'none';
         }, 150);
+    }
+
+    static fadeOutContextMenu(node) {
+        node.classList.remove('fadeIn');
+        setTimeout(() => {
+            node.remove();
+        }, 100)
     }
 }
