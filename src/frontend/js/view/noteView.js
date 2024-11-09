@@ -72,6 +72,11 @@ export class NoteView extends BaseView {
             const { note } = event.detail;
             this.dialog.renderDeleteModal(this.controller, note.id, note.name)
         })
+
+        this.notesContainer.addEventListener('BookmarkNote', async (event) => {
+            const { noteId, bookmark } = event.detail;
+            await this.controller.patchBookmark(noteId, bookmark);
+        })
         
         this.notesContainer.addEventListener('NoteCardClick', (event) => {
             const { note } = event.detail;
@@ -86,9 +91,6 @@ export class NoteView extends BaseView {
             );
         })
 
-        this.noteViewOptionsButton.addEventListener('click', () => {
-
-        });
 
         this.bookmarkedButton.addEventListener('click', () => {
             removeContent(this.notesContainer);

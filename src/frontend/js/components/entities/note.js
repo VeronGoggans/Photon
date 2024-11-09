@@ -36,6 +36,7 @@ class Note extends HTMLElement {
             <h4>${formatName(this.note.name)}</h4>
             <div class="note-content-box">${filterNotePreview(this.note.content)}</div>
         `;
+        this.applyBookmarkStyle();
     }
 
 
@@ -56,10 +57,17 @@ class Note extends HTMLElement {
         this.addEventListener('dragend', () => {this.classList.remove('dragging')});
     }
 
+    applyBookmarkStyle() {
+        if (this.note.bookmark) {
+            this.classList.add('bookmarked-note')
+        }
+    }
+
     toggleBookmarkStyle() {
-        this.classList.contains('bookmark') ? 
-        this.classList.remove('bookmark') :
-        this.classList.add('bookmark');
+        this.classList.contains('bookmarked-note') ? 
+        this.classList.remove('bookmarked-note') :
+        this.classList.add('bookmarked-note');
+        this.note.bookmark = !this.note.bookmark;
     }
 
     
@@ -78,8 +86,8 @@ class Note extends HTMLElement {
     }
 
     handleBookmarkClick() {
-        this.toggleBookmarkStyle()
-        this.dispatchEvent(new CustomEvent('BookmarkNote', { detail: { note: this.note }, bubbles: true }));
+        this.toggleBookmarkStyle();
+        this.dispatchEvent(new CustomEvent('BookmarkNote', { detail: { noteId: this.id, bookmark: this.note.bookmark }, bubbles: true }));
     }
 }
 

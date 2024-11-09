@@ -47,8 +47,15 @@ export class NoteController {
 
 
     async update(note) {
-        await this.model.update('/note', {'note_id': note.id,'name': note.name,'content': note.content,'bookmark': note.bookmark,'favorite': note.favorite});
+        await this.model.update('/note', {'note_id': note.id,'name': note.name,'content': note.content,'bookmark': note.bookmark});
         pushNotification('updated');
+    }
+    
+
+    async patchBookmark(noteId, newBookmarkValue) {
+        console.log(newBookmarkValue);
+        
+        await this.model.patch(`/note/${noteId}/bookmark`, { 'bookmark': newBookmarkValue })
     }
 
 

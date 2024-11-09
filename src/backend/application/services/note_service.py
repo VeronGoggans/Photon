@@ -1,5 +1,5 @@
 from src.backend.data.managers.note_manager import NoteManager
-from src.backend.presentation.request_bodies.note_requests import PostNoteRequest, PutNoteRequest
+from src.backend.presentation.request_bodies.note_requests import PostNoteRequest, PutNoteRequest, BookmarkRequest
 from src.backend.data.models import Note
 from sqlalchemy.orm import Session
 from src.backend.data.exceptions.exceptions import *
@@ -36,6 +36,10 @@ class NoteService:
 
     def update_note(self, request: PutNoteRequest, db: Session) -> Note:
         return self.manager.update(request.note_id, request.name, request.content, request.bookmark, db)
+    
+
+    def update_bookmark(self, note_id: int, request: BookmarkRequest, db: Session) -> None:
+        self.manager.update_bookmark(note_id, request.bookmark, db) 
 
 
     def delete_note(self, note_id: int, db: Session) -> Note:

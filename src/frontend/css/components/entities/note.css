@@ -22,10 +22,6 @@ template-card:hover {
     scale: 1.05;
 }
 
-note-card .bookmark {
-    background-color: var(--bookmark) !important;
-}
-
 note-card h4,
 recent-note-card h4,
 template-card h4 {
@@ -89,3 +85,8 @@ recent-note-card .note-content-box h1{
 
 note-card .note-content-box .linked-note-container {visibility: hidden}
 note-card .note-content-box a {color: rgb(67, 142, 255)}
+
+
+.bookmarked-note {
+    background-color: var(--bookmark) !important;
+}

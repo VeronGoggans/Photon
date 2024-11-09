@@ -52,8 +52,8 @@ class NoteManager:
         return db.query(Note).filter(Note.bookmark == True).all()
                
 
-    def update(self, id: int, name: str, content: str, bookmark: bool, db: Session) -> (Note | NotFoundException):
-        note = find_note(id, db)
+    def update(self, note_id: int, name: str, content: str, bookmark: bool, db: Session) -> (Note | NotFoundException):
+        note = find_note(note_id, db)
 
         # Updating the note 
         note.name = name
@@ -65,6 +65,12 @@ class NoteManager:
         db.commit()
         db.refresh(note)
         return note
+    
+
+    def update_bookmark(self, note_id: int, new_bookmark_value: bool, db: Session) -> None:
+        note = find_note(note_id, db)
+        note.bookmark = new_bookmark_value
+        db.commit()
 
 
     def move(self, parent_id: int, note_id: int, db: Session) -> Note:

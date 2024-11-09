@@ -24,6 +24,13 @@ class PutNoteRequest(BaseModel):
     bookmark: bool
 
 
+class BookmarkRequest(BaseModel):
+    """
+    - bookmark (bool): the new bookmark value
+    """
+    bookmark: bool
+
+
 class MoveNoteRequest(BaseModel):
     """
     FolderId is the id of the folder the note is moved into
