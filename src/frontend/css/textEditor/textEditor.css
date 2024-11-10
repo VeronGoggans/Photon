@@ -70,35 +70,35 @@
 .html-container input {
    cursor: text;
    border: none;
-   border-bottom: 2px solid var(--editor-border);
+   border: 2px solid var(--border-sidebar-soft);
    padding: 5px;
    margin: 10px 0;
+   border-radius: 10px;
    padding-left: 25px;
-   background-color: transparent;
+   background-color: var(--sidebar-soft);
    color: var(--text);
    font-size: 16px;
    transition: 200ms;
 }
 
-.embed-container input:hover,
 .embed-container input:focus,
 .html-container input:focus,
-.link-container input:hover,
-.link-container input:focus,
-.html-container input:hover {
+.link-container input:focus {
    border-color: #5c7dff;
 }
 
 .link-container,
 .embed-container,
 .html-container {
+   margin: 5%;
    display: flex;
    flex-direction: column;
    position: relative;
    background-color: var(--editor-container);
-   border-radius: 5px;
+   border-radius: 15px;
    padding: 15px;
-   border: 1px solid var(--border-card);
+   box-shadow: var(--shadow-card);
+   animation: bobbing 1.5s ease-in-out infinite;
 }
 
  .editor hr {
@@ -130,6 +130,7 @@
  }
  
  .editor h3 {
+   color: var(--heading3);
    font-size: 25px;
  }
  

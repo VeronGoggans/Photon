@@ -1,6 +1,4 @@
 .toolbar-top i,
-#editor-search-btn,
-#editor-template-btn,
 #editor-flashcard-set-btn {
     display: flex;
     width: 40px;
@@ -20,7 +18,6 @@
     right: 60px;
     top: 3px;
     color: var(--editor-text);
-    
     padding: 10px 20px;
     border-radius: 7px;
 }

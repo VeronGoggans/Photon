@@ -1,5 +1,48 @@
 import {CNode} from "../util/CNode.js";
-import { getCurrentDateAndTime } from "../util/date.js";
+
+
+export function addCodeBlock(range, codeText, language = "plaintext") {
+  const pre = document.createElement("pre");
+  const code = document.createElement("code");
+  code.className = `language-${language}`;
+  code.textContent = codeText;
+  pre.appendChild(code);
+
+  // Append to your note container
+  range.insertNode(code);
+  removeSelectedEffect(range, code);
+  moveCursorToTextBlock(code);
+
+  // Highlight the new code block
+  hljs.highlightElement(code);
+}
+
+
+function removeSelectedEffect(range, node) {
+  range.setStartAfter(node);
+  range.setEndAfter(node);
+}
+
+
+function moveCursorToTextBlock(node) {
+  // Creating a text node the cursor will move to
+  const textNode = document.createTextNode('');
+  node.appendChild(textNode);
+
+  // Move the cursor inside the node
+  const range = document.createRange();
+  const selection = window.getSelection();
+
+  // Set the range to the text node which is already inside the node
+  range.setStart(textNode, 0);
+  range.collapse(true);
+
+  selection.removeAllRanges();
+  selection.addRange(range);
+
+  node.focus();
+}
+
 
 export class TextFormatter {
 
@@ -10,14 +53,14 @@ export class TextFormatter {
     // Create the hr element with specified border type
     const line = document.createElement('hr');
     if (lineType !== null) {
-      line.style.border = `2px ${lineType} var(--editor-text)`;
+      line.style.border = `1px ${lineType} var(--editor-text)`;
     } else {
-      line.style.border = `2px solid var(--editor-text)`;
+      line.style.border = `1px solid var(--editor-text)`;
     }
 
     range.insertNode(line);
-    this.#removeSelectedEffect(range, br);
-    this.#moveCursorToTextBlock(br)
+    removeSelectedEffect(range, br);
+    moveCursorToTextBlock(br)
   }
 
 
@@ -29,8 +72,8 @@ export class TextFormatter {
       heading.textContent = extension;
     }
     range.insertNode(heading);
-    this.#removeSelectedEffect(range, heading);
-    this.#moveCursorToTextBlock(heading);
+    removeSelectedEffect(range, heading);
+    moveCursorToTextBlock(heading);
   }
 
   addList(range, listType) {
@@ -39,8 +82,8 @@ export class TextFormatter {
 
     list.appendChild(li);
     range.insertNode(list);
-    this.#removeSelectedEffect(range, list);
-    this.#moveCursorToTextBlock(li);
+    removeSelectedEffect(range, list);
+    moveCursorToTextBlock(li);
   }
 
 
@@ -53,8 +96,8 @@ export class TextFormatter {
 
   addLink(range) {
     const container = CNode.create('div', {'class': 'link-container'});
-    const originalUrl = CNode.create('input', {'class': 'original-link-input', 'type': 'text', 'placeholder': 'Paste link here...'});
-    const customUrl = CNode.create('input', {'class': 'custom-link-input', 'type': 'text', 'placeholder': 'Custom text'});
+    const originalUrl = CNode.create('input', {'class': 'original-link-input', 'type': 'text', 'placeholder': 'Paste link'});
+    const customUrl = CNode.create('input', {'class': 'custom-link-input', 'type': 'text', 'placeholder': 'Custom link name'});
     container.append(originalUrl, customUrl);
     
     originalUrl.addEventListener('keydown', (event) => {insert(event, originalUrl)});
@@ -93,7 +136,7 @@ export class TextFormatter {
 
   addEmbedVideo(range) {    
     const container = CNode.create('div', {'class': 'embed-container', 'contentEditable': 'false'});
-    const input = CNode.create('input', {'type': 'text', 'placeholder': 'Paste link here...', 'class': 'embed-link-input'});
+    const input = CNode.create('input', {'type': 'text', 'placeholder': 'Paste embed link', 'class': 'embed-link-input'});
     container.append(input);
 
     input.addEventListener('keydown', (event) => {
@@ -147,30 +190,5 @@ export class TextFormatter {
     })
     range.insertNode(container);
     input.focus();
-  }
-
-
-  #removeSelectedEffect(range, node) {
-    range.setStartAfter(node);
-    range.setEndAfter(node);
-  }
-
-  #moveCursorToTextBlock(node) {
-    // Creating a text node the cursor will move to
-    const textNode = document.createTextNode('');
-    node.appendChild(textNode);
-
-    // Move the cursor inside the node
-    const range = document.createRange();
-    const selection = window.getSelection();
-
-    // Set the range to the text node which is already inside the node
-    range.setStart(textNode, 0);
-    range.collapse(true);
-
-    selection.removeAllRanges();
-    selection.addRange(range);
-
-    node.focus();
   }
 }

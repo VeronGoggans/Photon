@@ -1,3 +1,5 @@
+import { AnimationHandler } from "./animationHandler.js";
+
 
 export function pushNotification(type, noteName = null) {
     const notification = document.createElement('push-notification');
@@ -10,9 +12,16 @@ export function pushNotification(type, noteName = null) {
 }
 
 
-export function renderEmptyNotification(parentElement) {
-    const H2 = document.createElement('h2');
-    H2.classList.add('notify-empty-text');
-    H2.textContent = "There is nothing here.";
-    parentElement.appendChild(H2);
+export function renderEmptyFolderNotification() {
+    setTimeout(() => {
+        const parentElement = document.querySelector('.note-view-content');
+        const notesAndFolders = document.querySelectorAll('folder-card, note-card');
+        
+        // Check if there are any folders or notes
+        if (notesAndFolders.length === 0) {
+            const msg = document.createElement('empty-notification');
+            parentElement.appendChild(msg);
+            AnimationHandler.fadeInFromBottom(msg);
+        }
+    }, 5)
 }

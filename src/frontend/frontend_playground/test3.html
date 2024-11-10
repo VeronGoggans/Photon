@@ -8,65 +8,37 @@
     <link rel="stylesheet" href="../css/general/animation.css">
     <link rel="stylesheet" href="../css/general/themes.css">
     <script type="module" src="../js/components/task.js"></script>
+    <!-- Include Highlight.js styles (pick a theme you like) -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/atom-one-dark.min.css">
+    <!-- Include Highlight.js script -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+
 </head>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
     
-    .milestone-modal {
-        display: flex;
-        row-gap: 30px;
-        flex-direction: column;
-        background-color: var(--modal);
-        width: 660px;
-        height: fit-content;
-        border-radius: 10px;
-        padding: 70px;
-    }
-    
-    .milestone-modal input[type="text"] {
-        border: none;
-        background-color: transparent;
-        color: var(--important);
-        
-        font-size: 32px;
-        margin: 20px 0;
-    }
-
-    .milestone-modal input[type="date"] {
-        border: none;
-        background-color: transparent;
-        color: var(--important);
-        font-size: 16px;
-        
-    }
-
-    .milestone-modal textarea {
-        padding: 10px;
-        
-        font-size: 15px;
-        color: var(--text);
-        height: 180px;
-        max-height: 180px;
-        background-color: transparent;
-        border-top: 1px solid var(--border-sidebar-right);
-    }
-
-    .milestone-modal button {
-        right: 30px;
-        background-color: transparent;
-        color: var(--text);
-        background-color: #5c7fdd;
-        border-radius: 10px;
-        padding: 10px 50px;
-        margin: 0 0 0 auto;
-    }
+   
 </style>
 <body>
-    <div class="milestone-modal">
-        <input class="milestone-name-input" type="text" placeholder="Milestone name" spellcheck="false">
-        <textarea placeholder="Description goes here..." spellcheck="false"></textarea>
-        <input type="date">
-        <button>Add</button>
-    </div>
+    <pre contenteditable="true"><code class="language-python">
+        def add_folder(self, schema: FolderRequest, db: Session) -> Folder:
+            new_folder = Folder(
+                name = schema.name, 
+                color = schema.color, 
+                parent_id = schema.parent_id
+                )
+            return self.manager.add(schema.parent_id, new_folder, db)
+
+    </code></pre>
+        
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          // Initialize Highlight.js on all code blocks
+          document.querySelectorAll("pre code").forEach((block) => {
+            hljs.highlightElement(block);
+          });
+        });
+      </script>
+      
 </body>
 </html>

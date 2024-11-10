@@ -280,16 +280,19 @@ const editorTemplate = `
       <div class="foreward-slash-command-container">
         <input type="text" placeholder="Command..." spellcheck="false">
         <div class="commands">
-            <div class="link-option"><i class="fa-solid fa-link"></i>Add a url</div>
-            <div class="embed-video-option"><i class="fa-solid fa-play"></i>Add a video</div>
-            <div class="horizontal-line-option"><i class="fa-solid fa-ruler-horizontal"></i>Add a horizontal line</div>
-            <div class="unordered-list"><i class="fa-solid fa-list-ul"></i>Bullet list</div>
-            <div class="ordered-list"><i class="fa-solid fa-list-ol"></i>Numbered list</div> 
-            <div class="heading-1"><i class="fa-solid fa-h"></i>Add heading 1</div>
-            <div class="heading-2"><i class="fa-solid fa-h"></i>Add heading 2</div>
-            <div class="heading-3"><i class="fa-solid fa-h"></i>Add heading 3</div>
-            <div class="heading-4"><i class="fa-solid fa-h"></i>Add heading 4</div>
-            <div class="insert-html"><i class="fa-brands fa-html5"></i>Insert HTML</div>
+            <div class="link-option"><i class="bi bi-link-45deg"></i>Add a url</div>
+            <div class="embed-video-option"><i class="bi bi-play-fill"></i>Add a video</div>
+            <div class="horizontal-line-option"><i class="bi bi-hr"></i>Add a horizontal line</div>
+            <div class="unordered-list"><i class="bi bi-list-ul"></i>Bullet list</div>
+            <div class="ordered-list"><i class="bi bi-list-ol"></i>Numbered list</div> 
+            <div class="heading-1"><i class="bi bi-type-h1"></i>Add heading 1</div>
+            <div class="heading-2"><i class="bi bi-type-h2"></i>Add heading 2</div>
+            <div class="heading-3"><i class="bi bi-type-h3"></i>Add heading 3</div>
+            <div class="heading-4"><i class="bi bi-type-h4"></i>Add heading 4</div>
+            <div class="snippit"><i class="bi bi-code-slash"></i>Add code snippit</div>
+            <div class="template"><i class="bi bi-file-earmark"></i>Add note reference</div>
+            <div class="template"><i class="bi bi-file-earmark-text"></i>Apply template</div>
+            <div class="insert-html"><i class="bi bi-filetype-html"></i>Insert HTML</div>
         </div>
     </div>
     

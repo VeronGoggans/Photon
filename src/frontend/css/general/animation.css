@@ -19,3 +19,24 @@
 .openDropdown {
     opacity: 1; 
 }
+
+
+@keyframes bobbing {
+    0%, 100% {
+    transform: translateY(0);   /* Start and end at original position */
+    }
+    50% {
+    transform: translateY(-10px); /* Move up by 10px in the middle */
+    }
+}
+
+@keyframes pulsing {
+    0%, 100% {
+      transform: scale(1);       /* Start and end at original size */
+      opacity: 1;                /* Full opacity */
+    }
+    50% {
+      transform: scale(1.1);     /* Scale up slightly */
+      opacity: 1;              /* Slightly fade */
+    }
+}

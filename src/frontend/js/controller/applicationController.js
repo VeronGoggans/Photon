@@ -9,10 +9,10 @@ import { SettingController } from "./settingController.js";
 import { FlashcardPracticeController } from "./flashcardPracticeController.js";
 import { FlashcardEditController } from "./flashcardEditController.js";
 import { templates } from "../constants/templates.js";
-
 import { FlashcardHomeController } from "./flashcardHomeController.js";
 import { StickyWallHomeController } from "./stickyWallHomeController.js";
 import { StickWallController } from "./stickyWallController.js";
+import { renderEmptyFolderNotification } from "../handlers/notificationHandler.js";
 
 
 

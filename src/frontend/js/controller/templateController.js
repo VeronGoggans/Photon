@@ -1,6 +1,6 @@
 import { HttpModel } from "../model/httpModel.js";
 import { TemplateView } from "../view/templateView.js";
-import { pushNotification, renderEmptyNotification } from "../handlers/notificationHandler.js";
+import { pushNotification, renderEmptyFolderNotification } from "../handlers/notificationHandler.js";
 
 
 export class TemplateController {

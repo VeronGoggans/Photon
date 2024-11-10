@@ -1,6 +1,7 @@
 import { commands } from "../constants/constants.js";
 import { AnimationHandler } from "../handlers/animationHandler.js";
- 
+import { addCodeBlock } from "./textFormatter.js";
+  
 export class SlashCommand {
     constructor(view, formatter) {
         this.view = view;
@@ -41,6 +42,9 @@ export class SlashCommand {
           break;
         case 'heading-4':
           this.formatter.addHeading(range, 4, extension);
+          break;
+        case 'snippit':
+          addCodeBlock(range, '', extension);
           break;
         case 'insert-html':
           this.formatter.addHtml(range);

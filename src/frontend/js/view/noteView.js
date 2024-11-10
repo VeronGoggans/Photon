@@ -3,6 +3,7 @@ import { removeContent } from "../util/ui.js";
 import { BaseView } from "./baseView.js";
 import { createCustomElement } from "../util/ui/components.js";
 import { DropdownHelper } from "../helpers/dropdownHelper.js";
+import { renderEmptyFolderNotification } from "../handlers/notificationHandler.js";
 
 
 export class NoteView extends BaseView {
@@ -25,7 +26,8 @@ export class NoteView extends BaseView {
     renderAll(notes) { 
         if (notes.length === 0) {
             document.querySelector('#notes-block-title').style.display = 'none';
-            this.notesContainer.style.display = 'none'
+            this.notesContainer.style.display = 'none';
+            renderEmptyFolderNotification();
         }
 
         if (notes.length > 0) {
@@ -68,6 +70,20 @@ export class NoteView extends BaseView {
     }
 
     #eventListeners() {
+        this.viewElement.addEventListener('CreateNewFolder', () => {
+            this.dialog.renderEditFolderModal(this);
+        });
+
+        this.viewElement.addEventListener('CreateNewNote', () => {
+            this.applicationController.initView('editor', {
+                editorObjectType: 'note', 
+                editorObject: null,
+                newEditorObject: true, 
+                previousView: 'notes', 
+                editorObjectLocation: null
+            })
+        })
+
         this.notesContainer.addEventListener('DeleteNote', (event) => {
             const { note } = event.detail;
             this.dialog.renderDeleteModal(this.controller, note.id, note.name)

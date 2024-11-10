@@ -39,7 +39,7 @@ class PushNotification extends HTMLElement {
         this.classList.add('show-push-notification');
         setTimeout(() => {
             this.closeNotification();
-        }, 400500);
+        }, 4500);
     }
 
     closeNotification() {
@@ -58,7 +58,42 @@ class EmptyFolderNotification extends HTMLElement {
         super()
     }
 
+    connectedCallback() {
+        this.render();
+        this.addEventListeners();
+    }
+
+    render() {
+        this.innerHTML = `
+            <div class="icons">
+                <i id="center-icon" class="bi bi-folder2-open"></i>
+                <i id="floating-icon1" class="bi bi-file-earmark"></i>
+                <i id="floating-icon2" class="bi bi-file-earmark-text"></i>
+                <i id="floating-icon3" class="bi bi-sticky"></i>
+                <i id="floating-icon4" class="bi bi-image"></i>
+            </div>
+            <div class="empty-message">
+                <p>Nothing found</p>
+                <span>This folder is currently empty, start by creating a folder or note.</span>
+            </div>
+            <div class="emtpy-message-buttons">
+                <button class="empty-create-folder-btn">Create folder</button>
+                <button class="empty-create-note-btn">Create note</button>
+            </div>
+        `   
+    }
+
+    addEventListeners() {
+        this.querySelector('.empty-create-folder-btn').addEventListener('click', () => {
+            this.dispatchEvent(new CustomEvent('CreateNewFolder', { detail: {}, bubbles: true }));
+        });
+
+        this.querySelector('.empty-create-note-btn').addEventListener('click', () => {
+            this.dispatchEvent(new CustomEvent('CreateNewNote', { detail: {}, bubbles: true }));
+        });
+    }
 }
 
 
+customElements.define('empty-notification', EmptyFolderNotification);
 customElements.define('push-notification', PushNotification);

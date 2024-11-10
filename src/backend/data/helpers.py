@@ -60,7 +60,10 @@ def get_hierarchy(item_id: int, db: Session, is_note: bool) -> list[dict]:
         folder = db.query(Folder).filter_by(id=current_folder_id).one_or_none()
         if not folder:
             break
-        path.append(folder.name)
+        path.append({
+            'id': folder.id,
+            'name': folder.name
+        })
         current_folder_id = folder.parent_id  # Move up to the parent folder
     
     # Reverse the path to show the hierarchy from top to bottom

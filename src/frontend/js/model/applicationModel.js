@@ -1,4 +1,3 @@
-
 /**
  * This class is used to store the previous view.
  * So that when a user clicks on a back button,
@@ -6,16 +5,14 @@
  */
 export class ApplicationModel {
     constructor() {
-        this.previousView = null;
+        this.previousView = [];
     }
 
     setPreviousView(viewId) {
-        this.previousView = viewId;
+        this.previousView.push(viewId);
     }
 
     getPreviousView() {
-        const previousView = this.previousView;
-        this.previousView = null;
-        return previousView
+        return this.previousView.pop();
     }
 }

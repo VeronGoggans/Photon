@@ -2,7 +2,7 @@ import { HttpModel } from "../model/httpModel.js";
 import { NoteView } from "../view/noteView.js";
 import { Searchbar } from "../view/searchbar.js";
 import { viewToLoad } from "../helpers/random.js";
-import { pushNotification, renderEmptyNotification } from "../handlers/notificationHandler.js"
+import { pushNotification } from "../handlers/notificationHandler.js"
 
 export class NoteController {
     constructor(applicationController) {
