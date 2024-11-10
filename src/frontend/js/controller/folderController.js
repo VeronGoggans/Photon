@@ -1,5 +1,6 @@
 import { FolderModel } from "../model/folderModel.js";
 import { FolderView } from "../view/folderView.js";
+import { renderEmptyFolderNotification } from "../handlers/notificationHandler.js";
 
 
 export class FolderController {
@@ -91,7 +92,9 @@ export class FolderController {
      */
     async navigateIntoFolder(folderId, name, init = false) {
         // If the home button inside the notes view is clicked 
-        if (folderId === this.homeFolderId) this.model.emptyFolders();
+        if (folderId === this.homeFolderId) {
+            this.model.emptyFolders();
+        }
 
         this.view.displayFolderName(name);
         this.model.patch(`/viewedFolderTime/${folderId}`);
@@ -99,8 +102,9 @@ export class FolderController {
 
         await this.get();
         if (!init) {
-            await this.applicationController.getNotes(folderId);    
+            await this.applicationController.getNotes(folderId); 
         }
+        renderEmptyFolderNotification();   
     }
 
     clearFolderHistory() {

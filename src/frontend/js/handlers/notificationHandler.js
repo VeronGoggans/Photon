@@ -12,10 +12,11 @@ export function pushNotification(type, noteName = null) {
 }
 
 
-export function renderEmptyFolderNotification() {
+export function renderEmptyFolderNotification(timeout = 50) {
     setTimeout(() => {
         const parentElement = document.querySelector('.note-view-content');
         const notesAndFolders = document.querySelectorAll('folder-card, note-card');
+        console.log(notesAndFolders);
         
         // Check if there are any folders or notes
         if (notesAndFolders.length === 0) {
@@ -23,5 +24,13 @@ export function renderEmptyFolderNotification() {
             parentElement.appendChild(msg);
             AnimationHandler.fadeInFromBottom(msg);
         }
-    }, 5)
+    }, timeout)
+}
+
+
+export function removeEmptyFolderNotification() {
+    const msg = document.querySelector('empty-notification');
+    if (msg !== null) {
+        msg.remove();
+    }
 }

@@ -1,9 +1,11 @@
+import { removeEmptyFolderNotification, renderEmptyFolderNotification } from "./notificationHandler.js";
+
 export class AnimationHandler {
 
     static fadeInFromBottom(card) {
         setTimeout(() => {
             card.style.opacity = '1';
-            card.style.transform = 'translateY(0)'
+            card.style.transform = 'translateY(0)';
         }, 30);
     }
 

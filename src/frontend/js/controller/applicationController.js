@@ -12,7 +12,6 @@ import { templates } from "../constants/templates.js";
 import { FlashcardHomeController } from "./flashcardHomeController.js";
 import { StickyWallHomeController } from "./stickyWallHomeController.js";
 import { StickWallController } from "./stickyWallController.js";
-import { renderEmptyFolderNotification } from "../handlers/notificationHandler.js";
 
 
 
@@ -58,7 +57,7 @@ export class ApplicationController {
 
                 if (viewId === 'home') {
                     this.folderController.clearFolderHistory();
-                    this.sidebarView.setActiveTab('home')
+                    this.sidebarView.setActiveTab('home');
                 }
 
                 if (viewId === 'notes') {

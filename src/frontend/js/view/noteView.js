@@ -25,15 +25,16 @@ export class NoteView extends BaseView {
     
     renderAll(notes) { 
         if (notes.length === 0) {
+            // hide the notes subtitle
             document.querySelector('#notes-block-title').style.display = 'none';
             this.notesContainer.style.display = 'none';
-            renderEmptyFolderNotification();
+        }
+        if (notes.length > 0) {
+            // show the notes subtitle
+            document.querySelector('#notes-block-title').style.display = '';
+            this.notesContainer.style.display = '';
         }
 
-        if (notes.length > 0) {
-            document.querySelector('#notes-block-title').style.display = '';
-            this.notesContainer.style.display = ''
-        }
         const contentFragment = document.createDocumentFragment();
 
         for (let i = 0; i < notes.length; i++) {
@@ -47,13 +48,19 @@ export class NoteView extends BaseView {
 
     
     renderDelete(note) {
-        const cards = this.notesContainer.children;
+        if (this.notesContainer.children.length === 1) {
+            // hide the notes subtitle
+            document.querySelector('#notes-block-title').style.display = 'none';
+            this.notesContainer.style.display = 'none';
+        }
 
+        const cards = this.notesContainer.children;
         for (let i = 0; i < cards.length; i++) {
             if (cards[i].id == note.id) {
                 AnimationHandler.fadeOutCard(cards[i]);
             }
         }
+        renderEmptyFolderNotification(705);
     }
 
 
@@ -70,10 +77,6 @@ export class NoteView extends BaseView {
     }
 
     #eventListeners() {
-        this.viewElement.addEventListener('CreateNewFolder', () => {
-            this.dialog.renderEditFolderModal(this);
-        });
-
         this.viewElement.addEventListener('CreateNewNote', () => {
             this.applicationController.initView('editor', {
                 editorObjectType: 'note', 

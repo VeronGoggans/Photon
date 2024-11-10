@@ -9,7 +9,7 @@ push-notification {
     border-radius: 10px;
     padding: 20px;
     cursor: pointer;
-    transition: opacity .7s ease, transform .25s ease, scale .2s ease;
+    transition: .2s
 }
 
 push-notification:hover {

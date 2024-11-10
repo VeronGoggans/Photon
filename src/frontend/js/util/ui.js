@@ -1,10 +1,13 @@
 import { CNode } from "./CNode.js";
 import { AnimationHandler } from "../handlers/animationHandler.js";
+import { removeEmptyFolderNotification } from "../handlers/notificationHandler.js";
 
 
 export function removeContent(contentDiv) {
-    while (contentDiv.firstChild) 
+    while (contentDiv.firstChild) {
         contentDiv.removeChild(contentDiv.firstChild);
+    }
+    removeEmptyFolderNotification();
 }
 
 
@@ -24,7 +27,7 @@ export function incrementString(string) {
 
 export function addDraggImage(event, imageType) {
     // Adding the drag image to the body
-    const dragImage = new DragImage(imageType);
+    const dragImage = createDragImage(imageType);
     document.body.appendChild(dragImage);
     event.dataTransfer.setDragImage(dragImage, 0, 0)
 }
@@ -55,18 +58,14 @@ export function showContextMenu(event, parentElement, menuTemplate) {
 
 
 
-// TODO Make this a function
-
-class DragImage {
-    constructor(type) {
-        /**
-         * type is either ( folder ) or ( file ) or ( thumbtack )
-         * representing the fontAwesome icon class of 
-         * ( fa-solid fa-folder ) or ( fa-solid fa-file ) or ( fa-solid fa-thumbtack )
-        */
-        this.HOST = CNode.create('div', {'class': 'drag-image'});
-        this.ICON = CNode.create('i', {'class': `fa-solid fa-${type}`})
-        this.HOST.appendChild(this.ICON);
-        return this.HOST
-    }
+function createDragImage(type) {
+     /**
+     * type is either ( folder ) or ( file ) or ( thumbtack )
+     * representing the fontAwesome icon class of 
+     * ( fa-solid fa-folder ) or ( fa-solid fa-file ) or ( fa-solid fa-thumbtack )
+    */
+    const image = CNode.create('div', {'class': 'drag-image'});
+    const icon = CNode.create('i', {'class': `fa-solid fa-${type}`})
+    image.appendChild(icon);
+    return image
 }
