@@ -4,12 +4,6 @@ export const months = {
     '09': 'September', '10': 'Oktober', '11': 'November', '12': 'December', 
 }
 
-export const fullMonths = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
-];
-
-
 
 export const folderColors = {
     'rgb(121, 144, 255)': 'color-blue-1',
@@ -66,11 +60,13 @@ export const commands = {
     'line': 'horizontal-line-option',
     'ul': 'unordered-list',
     'ol': 'ordered-list',
+    'check': 'check-list',
     'h1': 'heading-1',
     'h2': 'heading-2',
     'h3': 'heading-3',
     'h4': 'heading-4',
-    'html': 'insert-html'
+    'html': 'insert-html',
+    'snippit': 'code-snippit'
 }
 
 export const stickyNoteColors = [

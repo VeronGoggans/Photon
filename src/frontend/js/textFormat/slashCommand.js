@@ -1,11 +1,11 @@
 import { commands } from "../constants/constants.js";
 import { AnimationHandler } from "../handlers/animationHandler.js";
-import { addCodeBlock } from "./textFormatter.js";
+import { addCodeBlock, addHorizontalLine, addHeading, addList, addChecklist, addLink, addEmbedVideo, addHtml } from "./textFormatter.js";
   
+
 export class SlashCommand {
-    constructor(view, formatter) {
+    constructor(view) {
         this.view = view;
-        this.formatter = formatter;
         this.commandContainer = document.querySelector('.foreward-slash-command-container');
         this.commands = this.commandContainer.querySelector('.commands');
         this.input = this.commandContainer.querySelector('input');
@@ -17,37 +17,42 @@ export class SlashCommand {
     executeSlashCommand(range, targetClass, extension = null) {
       switch (targetClass) {
         case 'link-option':
-          this.formatter.addLink(range);
+          addLink(range);
           break;
         case 'embed-video-option':
-          this.formatter.addEmbedVideo(range);
+          addEmbedVideo(range);
           break;
         case 'horizontal-line-option':
-          this.formatter.addHorizontalLine(range, extension);
+          addHorizontalLine(range, extension);
           break;
         case 'unordered-list':
-          this.formatter.addList(range, 'ul');
+          addList(range, 'ul');
           break;
         case 'ordered-list':
-          this.formatter.addList(range, 'ol');
+          addList(range, 'ol');
+          break;
+        case 'check-list':
+          addChecklist(range);
           break;
         case 'heading-1':
-          this.formatter.addHeading(range, 1, extension);
+          addHeading(range, 1, extension);
           break;
         case 'heading-2':
-          this.formatter.addHeading(range, 2, extension);
+          addHeading(range, 2, extension);
           break;
         case 'heading-3':
-          this.formatter.addHeading(range, 3, extension);
+          addHeading(range, 3, extension);
           break;
         case 'heading-4':
-          this.formatter.addHeading(range, 4, extension);
+          addHeading(range, 4, extension);
           break;
-        case 'snippit':
+        case 'code-snippit':
           addCodeBlock(range, '', extension);
           break;
         case 'insert-html':
-          this.formatter.addHtml(range);
+          addHtml(range);
+          break;
+        case 'template':
           break;
         default:
           console.log('No matching function for:', targetClass);

@@ -49,3 +49,108 @@ list-item-card-1 button:hover {
     background-color: var(--hover);
     color: var(--icon-hover);  
 }
+
+
+
+
+/*_______________________________ CHECK LIST STYLES BELOW*/
+check-list {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    row-gap: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+check-list .checklist-name-input {
+    outline: none;
+    border: none;
+    font-size: 25px;
+}
+
+check-list .tasks-count {
+    display: flex;
+    justify-content: end;
+    column-gap: 10px;
+    padding: 10px;
+}
+
+.tasks-count i {
+    color: rgb(124, 211, 124);
+}
+
+check-list .tasks {
+    display: flex;
+    flex-direction: column;
+}
+
+check-list .task {
+    display: flex;
+    column-gap: 10px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 7px;
+    transition: .2s;
+}
+
+check-list .task input[type="checkbox"] {
+    transform: scale(1.5);
+    vertical-align: middle;
+}
+
+check-list .task input[type="text"] {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    font-size: 16px;
+}
+
+.add-task-btn {
+    position: relative;
+    padding: 10px;
+    border-radius: 7px;
+    transition: .2s;
+}
+
+.add-task-btn i {
+    position: absolute;
+    top: 13px;
+    left: 13px;
+}
+
+.add-task-btn input {
+    width: 100%;
+    font-size: 16px;
+    outline: none;
+    border: none;
+    padding-left: 25px;
+    background-color: transparent;
+}
+
+check-list .task:hover {
+    background-color: #f3f5ff;
+}
+
+check-list .progress {
+    height: 5px;
+    border-radius: 5px;
+    background-color: rgb(236, 236, 236);
+}
+
+check-list .progress__fill {
+    width: 0%;
+    height: 5px;
+    border-radius: 5px;
+    background-color: rgb(124, 211, 124);
+    transition: .2s;
+}
+
+.completed-task {
+    background-color: #f8f9ff;
+}
+
+.completed-task input[type="text"] {
+    color: #cacedf;
+    text-decoration: line-through;
+}

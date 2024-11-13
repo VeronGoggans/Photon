@@ -1,6 +1,7 @@
 import {CNode} from "../util/CNode.js";
 
 
+
 export function addCodeBlock(range, codeText, language = "plaintext") {
   const pre = document.createElement("pre");
   const code = document.createElement("code");
@@ -18,10 +19,68 @@ export function addCodeBlock(range, codeText, language = "plaintext") {
 }
 
 
+
+export function addHorizontalLine(range, lineType = null) {
+  const br = document.createElement('br');
+  range.insertNode(br);
+
+  // Create the hr element with specified border type
+  const line = document.createElement('hr');
+  if (lineType !== null) {
+    line.style.border = `1px ${lineType} var(--editor-text)`;
+  } else {
+    line.style.border = `1px solid var(--editor-text)`;
+  }
+
+  range.insertNode(line);
+  removeSelectedEffect(range, br);
+  moveCursorToTextBlock(br)
+}
+
+
+
+export function addHeading(range, headingType, extension = null) {
+  const heading = document.createElement(`h${headingType}`);
+
+  // Set the user input as the textContent of the heading. 
+  if (extension !== null) {
+    heading.textContent = extension;
+  }
+  range.insertNode(heading);
+  removeSelectedEffect(range, heading);
+  moveCursorToTextBlock(heading);
+}
+
+
+
+export function addList(range, listType) {
+  const list = document.createElement(listType);
+  const li = document.createElement('li');
+
+  list.appendChild(li);
+  range.insertNode(list);
+  removeSelectedEffect(range, list);
+  moveCursorToTextBlock(li);
+}
+
+
+
+export function addChecklist(range) {
+    console.log('check');
+    const br = document.createElement('br');
+    const checklist = document.createElement('check-list');
+    checklist.init();
+    range.insertNode(br);
+    range.insertNode(checklist);
+    
+}
+
+
 function removeSelectedEffect(range, node) {
   range.setStartAfter(node);
   range.setEndAfter(node);
 }
+
 
 
 function moveCursorToTextBlock(node) {
@@ -44,151 +103,112 @@ function moveCursorToTextBlock(node) {
 }
 
 
-export class TextFormatter {
 
-  addHorizontalLine(range, lineType = null) {
-    const br = document.createElement('br');
-    range.insertNode(br);
-
-    // Create the hr element with specified border type
-    const line = document.createElement('hr');
-    if (lineType !== null) {
-      line.style.border = `1px ${lineType} var(--editor-text)`;
-    } else {
-      line.style.border = `1px solid var(--editor-text)`;
-    }
-
-    range.insertNode(line);
-    removeSelectedEffect(range, br);
-    moveCursorToTextBlock(br)
-  }
-
-
-  addHeading(range, headingType, extension = null) {
-    const heading = document.createElement(`h${headingType}`);
-
-    // Set the user input as the textContent of the heading. 
-    if (extension !== null) {
-      heading.textContent = extension;
-    }
-    range.insertNode(heading);
-    removeSelectedEffect(range, heading);
-    moveCursorToTextBlock(heading);
-  }
-
-  addList(range, listType) {
-    const list = document.createElement(listType);
-    const li = document.createElement('li');
-
-    list.appendChild(li);
-    range.insertNode(list);
-    removeSelectedEffect(range, list);
-    moveCursorToTextBlock(li);
-  }
-
-
-  addColor(color, command) {
-      // Use document.execCommand to change text color
-      document.execCommand('styleWithCSS', false, true);
-      document.execCommand(command, false, color);
-  }
-
-
-  addLink(range) {
-    const container = CNode.create('div', {'class': 'link-container'});
-    const originalUrl = CNode.create('input', {'class': 'original-link-input', 'type': 'text', 'placeholder': 'Paste link'});
-    const customUrl = CNode.create('input', {'class': 'custom-link-input', 'type': 'text', 'placeholder': 'Custom link name'});
-    container.append(originalUrl, customUrl);
-    
-    originalUrl.addEventListener('keydown', (event) => {insert(event, originalUrl)});
-    customUrl.addEventListener('keydown', (event) => {insert(event, customUrl)});
-
-    function insert(event, input) {
-      if (event.key === 'Enter') {
-        // Delete the input
-        range.deleteContents();
-
-        // Create a link element
-        const anchorTag = document.createElement('a');
-
-        anchorTag.addEventListener('click', () => {window.open(originalUrl.value)});
-        
-        // The selected text is equal to the link.
-        anchorTag.href = originalUrl.value;
-
-        if (customUrl.value !== '') {
-          anchorTag.textContent = customUrl.value;
-        } else {
-          anchorTag.textContent = originalUrl.value;
-        }
-
-        range.insertNode(anchorTag);
-      } 
-      if (event.key === 'Backspace' && input.value === '') {
-        container.remove();
-      } 
-    }
-
-    range.insertNode(container);
-    originalUrl.focus();
- }
-
-
-  addEmbedVideo(range) {    
-    const container = CNode.create('div', {'class': 'embed-container', 'contentEditable': 'false'});
-    const input = CNode.create('input', {'type': 'text', 'placeholder': 'Paste embed link', 'class': 'embed-link-input'});
-    container.append(input);
-
-    input.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') {
-        // Delete the input
-        range.deleteContents();
-
-        // Specify no cookies
-        const noCookies = 'youtube-nocookie';
-        const iframe = document.createElement('div');
-
-        // adding nocookies text to the embed link for reduced cookies
-        let iframeArray = input.value.split('youtube');
-        iframeArray.splice(1, 0, noCookies);
-
-        const noCookiesIframe = iframeArray.join('');
-
-        iframe.innerHTML = noCookiesIframe;
-        const iframeElement = iframe.querySelector('iframe');
-        if (iframeElement) {
-          iframeElement.title = '';
-        }
-        range.insertNode(iframe);
-      }
-    })
-
-    input.addEventListener('keydown', (event) => {
-      if (event.key === 'Backspace' && input.value === '') {
-        container.remove()
-      }
-    })
-    range.insertNode(container);
-    input.focus();
-  }
-
-
-  addHtml(range) {
-    const container = CNode.create('div', {'class': 'html-container', 'contentEditable': 'false'});
-    const input = CNode.create('input', {'placeholder': '<p>Paste html here...</p>'});
-    container.append(input);
-
-    input.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') {
-        // Delete the input
-        range.deleteContents();
-
-        const editorPaper = document.querySelector('.editor-paper')
-        let currentPageContent = editorPaper.innerHTML;
-        editorPaper.innerHTML = currentPageContent += input.value;
-      }
-    })
-    range.insertNode(container);
-    input.focus();
-  }
+export function addColor(color, command) {
+  // Use document.execCommand to change text color
+  document.execCommand('styleWithCSS', false, true);
+  document.execCommand(command, false, color);
 }
+
+
+
+export function addLink(range) {
+  const container = CNode.create('div', {'class': 'link-container'});
+  const originalUrl = CNode.create('input', {'class': 'original-link-input', 'type': 'text', 'placeholder': 'Paste link'});
+  const customUrl = CNode.create('input', {'class': 'custom-link-input', 'type': 'text', 'placeholder': 'Custom link name'});
+  container.append(originalUrl, customUrl);
+  
+  originalUrl.addEventListener('keydown', (event) => {insert(event, originalUrl)});
+  customUrl.addEventListener('keydown', (event) => {insert(event, customUrl)});
+
+  function insert(event, input) {
+    if (event.key === 'Enter') {
+      // Delete the input
+      range.deleteContents();
+
+      // Create a link element
+      const anchorTag = document.createElement('a');
+
+      anchorTag.addEventListener('click', () => {window.open(originalUrl.value)});
+      
+      // The selected text is equal to the link.
+      anchorTag.href = originalUrl.value;
+
+      if (customUrl.value !== '') {
+        anchorTag.textContent = customUrl.value;
+      } else {
+        anchorTag.textContent = originalUrl.value;
+      }
+
+      range.insertNode(anchorTag);
+    } 
+    if (event.key === 'Backspace' && input.value === '') {
+      container.remove();
+    } 
+  }
+
+  range.insertNode(container);
+  originalUrl.focus();
+}
+
+
+
+export function addEmbedVideo(range) {    
+  const container = CNode.create('div', {'class': 'embed-container', 'contentEditable': 'false'});
+  const input = CNode.create('input', {'type': 'text', 'placeholder': 'Paste embed link', 'class': 'embed-link-input'});
+  container.append(input);
+
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      // Delete the input
+      range.deleteContents();
+
+      // Specify no cookies
+      const noCookies = 'youtube-nocookie';
+      const iframe = document.createElement('div');
+
+      // adding nocookies text to the embed link for reduced cookies
+      let iframeArray = input.value.split('youtube');
+      iframeArray.splice(1, 0, noCookies);
+
+      const noCookiesIframe = iframeArray.join('');
+
+      iframe.innerHTML = noCookiesIframe;
+      const iframeElement = iframe.querySelector('iframe');
+      if (iframeElement) {
+        iframeElement.title = '';
+      }
+      range.insertNode(iframe);
+    }
+  })
+
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Backspace' && input.value === '') {
+      container.remove()
+    }
+  })
+  range.insertNode(container);
+  input.focus();
+}
+
+
+
+export function addHtml(range) {
+  const container = CNode.create('div', {'class': 'html-container', 'contentEditable': 'false'});
+  const input = CNode.create('input', {'placeholder': '<p>Paste html here...</p>'});
+  container.append(input);
+
+  input.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      // Delete the input
+      range.deleteContents();
+
+      const editorPaper = document.querySelector('.editor-paper')
+      let currentPageContent = editorPaper.innerHTML;
+      editorPaper.innerHTML = currentPageContent += input.value;
+    }
+  })
+  range.insertNode(container);
+  input.focus();
+}
+

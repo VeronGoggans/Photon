@@ -18,7 +18,7 @@ export class DropdownHelper {
     }
 
 
-    toggleDropdown(dropdownOptions) {
+    toggleDropdown(dropdownOptions) {      
       this.closeDropdowns(dropdownOptions);
       dropdownOptions.style.visibility = dropdownOptions.style.visibility === 'visible' ? 'hidden' : 'visible';
       dropdownOptions.style.opacity = dropdownOptions.style.opacity === '1' ? '0' : '1';

@@ -50,6 +50,9 @@ push-notification .notitication-message {
 
 empty-notification {
     height: 400px;
+    max-width: 400px;
+    margin: auto;
+    margin-top: 5%;
     display: grid;
     opacity: 0;
     transform: translateY(30%);
@@ -152,9 +155,10 @@ empty-notification .emtpy-message-buttons {
 .emtpy-message-buttons button {
     border: none;
     background-color: #5c7fdd;
-    padding: 10px;
+    padding: 7px;
     border-radius: 10px;
     color: #fff;
+    font-size: 14px;
     transition: .2s;
 }
 

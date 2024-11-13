@@ -1,5 +1,5 @@
 import { CNode } from "../../util/CNode.js";
-import { dateFormat } from "../../util/date.js";
+import { formatDate } from "../../util/date.js";
 
 export class NoteDetailContainer {
     constructor(noteInfo) {
@@ -9,15 +9,15 @@ export class NoteDetailContainer {
             <h2>Note details</h2>
             <table>
                 <tr>
-                    <td class="property"><i class="fa-solid fa-file"></i> Words</td>
+                    <td class="property"><i class="bi bi-file-earmark"></i> Words</td>
                     <td class="property-value" id="word-count"></td>
                 </tr>
                 <tr>
-                    <td class="property"><i class="fa-solid fa-clock"></i> Date created</td>
+                    <td class="property"><i class="bi bi-clock"></i> Date created</td>
                     <td class="property-value" id="created-date"></td>
                 </tr>
                 <tr>
-                    <td class="property"><i class="fa-solid fa-pen"></i> Last change made </td>
+                    <td class="property"><i class="bi bi-pen"></i> Last change made </td>
                     <td class="property-value" id="last-change"></td>
                 </tr>
             </table>
@@ -30,7 +30,7 @@ export class NoteDetailContainer {
     }
 
     #checkDateForNull(date) {
-        return date === null ? 'Not available' : dateFormat(date);
+        return date === null ? 'Not available' : formatDate(date);
     }
 
     #getWordCount() {

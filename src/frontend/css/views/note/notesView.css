@@ -63,6 +63,8 @@
 }
 
 .note-view-content {
+    display: flex;
+    flex-direction: column;
     height: calc(100dvh - 220px);
     max-height: calc(100dvh - 220px);
     overflow-y: scroll;

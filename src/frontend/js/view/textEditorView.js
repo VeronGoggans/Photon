@@ -1,12 +1,13 @@
 import { KeyEventListener } from "../eventListeners/keyEventListener.js";
 import { TextEditorEventListener } from "../eventListeners/textEditorEventListener.js";
 import { DropdownHelper } from "../helpers/dropdownHelper.js";
-import { TextFormatter } from "../textFormat/textFormatter.js"; 
+import { addColor } from "../textFormat/textFormatter.js"; 
 import { TextBlockHandler } from "../textFormat/textBlockHandler.js";
 import { SlashCommand } from "../textFormat/slashCommand.js";
 import { AnimationHandler } from "../handlers/animationHandler.js";
 import { BaseView } from "../view/baseView.js"
 import { createDocumentLocation } from "../util/ui/components.js";
+
 
 export class TextEditorView extends BaseView {
   constructor(controller, applicationController) {
@@ -18,10 +19,9 @@ export class TextEditorView extends BaseView {
     this.#initElements();
     this.#eventListeners();
 
-    this.textFormatter = new TextFormatter();
     this.textBlockHandler = new TextBlockHandler(this.page);
-    this.slashCommand = new SlashCommand(this, this.textFormatter);
-    this.dropdownHelper = new DropdownHelper(this.dropdowns, this.dropdownOptions, this.viewElement, []);
+    this.slashCommand = new SlashCommand(this);
+    this.dropdownHelper = new DropdownHelper(this.dropdowns, this.dropdownOptions, this.viewElement, ['.editor-options-dropdown']);
     this.keyEventListener = new KeyEventListener(this);
     this.textEditorEventListener = new TextEditorEventListener(this.page, this.editor, this.slashCommand);
     AnimationHandler.fadeInFromSide(this.viewElement)
@@ -200,7 +200,7 @@ export class TextEditorView extends BaseView {
 
     this.colorDropdownOptions.forEach(colorDiv => {
       colorDiv.addEventListener('click', () => {
-        this.textFormatter.addColor(colorDiv.style.backgroundColor, 'foreColor')
+        addColor(colorDiv.style.backgroundColor, 'foreColor')
       })
       
     })

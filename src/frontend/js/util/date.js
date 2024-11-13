@@ -1,74 +1,20 @@
-import { months, fullMonths } from "../constants/constants.js";
 
-     
-    /**
-     * This method formats a date string given from the backend.
-     * 01/01/2024 turns into 1 Jan 2024
-     * 25/12/2023 turns into 25 Dec 2023
-     * 
-     * @param {String} date A date string. Could be both the creation date or last edit date.
-     * @returns A formatted date string.
-     */
-export function dateFormat(date) {
-    let dateParts = date.split('/');
-    const day = dateParts[0];
-    const month = dateParts[1];
+// Time dirrefance functions 
 
-    // checking if the day of the month is before the 10th
-    const dayParts = day.split('');
-    if (dayParts[0] === '0') dateParts[0] = dayParts[1];
 
-    // giving the month number it's month name
-    const formattedMonth = months[month] || null
-    dateParts[1] = formattedMonth;
-    return dateParts.join(' ');
+export function getMinutesDifference(startDate, endDate) {
+    // Calculate the difference in milliseconds
+    const diffInMs = endDate - startDate;
+
+    // Convert milliseconds to minutes
+    const diffInMinutes = diffInMs / (1000 * 60);
+
+    // Return the difference as an integer
+    return Math.round(diffInMinutes);
 }
 
 
-export function getCurrentDateAndTime() {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = fullMonths[currentDate.getMonth()];
-    const day = currentDate.getDate();
-    const hours = currentDate.getHours();
-    const minutes = currentDate.getMinutes();
 
-    // Add ordinal suffix to day
-    const ordinalSuffix = (day) => {
-        if (day > 3 && day < 21) return 'th';
-        switch (day % 10) {
-        case 1: return 'st';
-        case 2: return 'nd';
-        case 3: return 'rd';
-        default: return 'th';
-        }
-    };
-
-    const dayWithSuffix = `${day}${ordinalSuffix(day)}`;
-
-    // Format hours and minutes with leading zero if needed
-    const formattedHours = hours.toString().padStart(2, '0');
-    const formattedMinutes = minutes.toString().padStart(2, '0');
-
-    return `
-    <span>${month} ${dayWithSuffix}, ${year}</span><h3>${formattedHours}:${formattedMinutes}</h3>
-    `;
-}
-
-export function timeOfDay() {
-    const time = new Date().getHours();
-    if (time >= 6 && time < 12) return 'morning';
-    if (time >= 12 && time < 18) return 'afternoon';
-    if (time >= 18 && time < 22) return 'evening';
-    return 'night'
-}
-
-
-/**
- * This function will give back the time thats between 
- * the date string given and the current date & time.
- * @param {String} date 
- */
 export function getPassedTime(dateString) {
     if (dateString === 'Not studied yet.') {
         return 'Not studied yet.';
@@ -105,16 +51,49 @@ export function getPassedTime(dateString) {
 }
 
 
-export function getMinutesDifference(startDate, endDate) {
-    // Calculate the difference in milliseconds
-    const diffInMs = endDate - startDate;
 
-    // Convert milliseconds to minutes
-    const diffInMinutes = diffInMs / (1000 * 60);
+// ___________________Time based functions___________________________
 
-    // Return the difference as an integer
-    return Math.round(diffInMinutes);
+
+
+
+// ___________________Date based functions___________________________
+
+export function formatDate(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+
+    // Calculate the time difference in milliseconds
+    const timeDiff = now - date;
+
+    // Convert time differences to minutes and hours
+    const minutesAgo = Math.floor(timeDiff / (1000 * 60));
+    const hoursAgo = Math.floor(timeDiff / (1000 * 60 * 60));
+
+    if (timeDiff < 1000 * 60) {
+        // If less than a minute ago, return "Just now"
+        return "Just now";
+    } else if (timeDiff < 1000 * 60 * 60) {
+        // If less than an hour ago, return in minutes
+        return `${minutesAgo} minute${minutesAgo > 1 ? 's' : ''} ago`;
+    } else if (timeDiff < 1000 * 60 * 60 * 24) {
+        // If less than a day ago, return in hours
+        return `${hoursAgo} hour${hoursAgo > 1 ? 's' : ''} ago`;
+    } else {
+        // Otherwise, format as "9 November 2024"
+        const day = date.getDate();
+        const month = date.toLocaleString('default', { month: 'long' });
+        const year = date.getFullYear();
+        return `${day} ${month} ${year}`;
+    }
 }
+
+
+
+
+
+
+// ___________________GREETINGS based on time of day___________________
 
 
 export function greetBasedOnTime() {
