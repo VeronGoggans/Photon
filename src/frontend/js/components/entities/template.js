@@ -41,7 +41,10 @@ class Template extends HTMLElement {
 
 
     handleCardClick(event) {
-        if (!event.target.closest('.options-menu')){
+        if (event.target.closest('#delete-btn')) {
+            this.handleDeleteClick();
+        }
+        else {
             this.dispatchEvent(new CustomEvent('TemplateCardClick', { detail: { template: this.template }, bubbles: true }));
         }
     }

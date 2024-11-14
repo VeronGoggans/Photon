@@ -62,6 +62,7 @@ folder-path {
     padding: 5px;
     border-radius: 5px;
     font-size: 14px;
+    font-weight: 400;
     color: var(--file-path);
     cursor: pointer;
     transition: .2s;

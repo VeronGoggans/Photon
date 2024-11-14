@@ -10,7 +10,6 @@
     height: 100dvh;
     background-color: var(--dialog);
     z-index: 3;
-    font-family: Roboto;
 }
 
 .dialog > div:first-child {

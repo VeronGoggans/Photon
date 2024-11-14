@@ -119,12 +119,12 @@ const templatesTemplate =  `
             <p>Most used: <span class="most-used-template"></span></p>
         </div>
         <div class="recent-section">
-            <h2 class="subtitle">Recent templates</h2>
+            <p class="block-title">Recent templates</p>
             <button class="add-template-btn">Add a template</button>
             <div class="recent-templates"></div>
         </div>
         <div claa="other-section">
-            <h2 class="subtitle">Other templates</h2>
+            <p class="block-title">Other templates</p>
             <div class="other-templates"></div>
         </div>
     </div>

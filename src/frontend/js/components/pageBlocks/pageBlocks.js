@@ -1,4 +1,6 @@
 import { createCustomElement } from "../../util/ui/components.js";
+import { formatDate } from "../../util/date.js";
+
 
 class DescriptionPageBlock extends HTMLElement {
     constructor() {
@@ -32,7 +34,13 @@ class DocumentLocationPageBlock extends HTMLElement {
     }
 
     render() {
-        const folderPaths = []
+        if (this.folders.length >= 6){ 
+            this.folders[0] = {"id": "null", "name": ". . . . ."};
+
+            // Remove the second element
+            this.folders.splice(1, 1);
+        }
+        const folderPaths = [];
         this.folders.forEach(folder => {
             const folderPath = createCustomElement(folder, 'folder-path');
             const icon = document.createElement('i');
@@ -47,6 +55,41 @@ class DocumentLocationPageBlock extends HTMLElement {
             this.appendChild(item);
         });
     }
+}
+
+
+class NoteLink extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+
+    connectedCallback() {
+        this.contentEditable = false
+        this.render();
+        this.addEventListeners();
+    }
+
+
+    init(name, lastEditDate) {
+        this.innerHTML = `
+            <i class="bi bi-file-earmark"></i>
+            <div>
+                <span class="note-name">${name}</span>
+                <span class="last-edit-date">${formatDate(lastEditDate)}</span>
+            </div>
+        `
+    }
+
+
+    render() {
+
+    }
+
+    addEventListeners() {
+        this.dispatchEvent()
+    }
+
 }
     
 

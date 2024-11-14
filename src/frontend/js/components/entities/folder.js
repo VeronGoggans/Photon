@@ -69,8 +69,10 @@ class FolderPath extends HTMLElement {
         this.removeEventListener('click', this.handleClick.bind(this));
     }
 
-    handleClick() {        
-        this.dispatchEvent(new CustomEvent('FolderPathClick', { detail: { folderId: this.id }, bubbles: true }));
+    handleClick() {     
+        if (this.textContent !== '. . . . .') {
+            this.dispatchEvent(new CustomEvent('FolderPathClick', { detail: { folderId: this.id }, bubbles: true }));
+        }   
     }
 }
 

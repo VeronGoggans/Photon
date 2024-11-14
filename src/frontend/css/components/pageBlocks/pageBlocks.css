@@ -29,10 +29,10 @@ description-page-block .description-block-placeholder {
 document-location-page-block {
     display: flex;
     align-items: center;
-    font-family: Roboto;
-    font-weight: 600;
+    margin: 0 10px;
 }
 
 document-location-page-block i {
     font-size: 14px;
+    margin: 0 3px;
 }

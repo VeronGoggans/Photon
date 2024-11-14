@@ -71,16 +71,17 @@ recent-note-card .note-content-box hr {
   }
 
 note-card .note-content-box :where(h1, h2),
-recent-note-card .note-content-box :where(h1, h2) {
+recent-note-card .note-content-box :where(h1, h2),
+template-card .note-content-box :where(h1, h2) {
     color: var(--important);
-    font-weight: 600;
+    font-weight: 500;
     font-size: 12px
 }
 
 note-card .note-content-box h1,
 recent-note-card .note-content-box h1{
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 note-card .note-content-box .linked-note-container {visibility: hidden}

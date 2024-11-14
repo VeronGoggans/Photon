@@ -80,19 +80,12 @@ export class TemplateView extends BaseView {
     }
 
     #eventListeners() {
-        this._recentTemplates.addEventListener('DeleteTemplate', (event) => {
+        this._viewElement.addEventListener('DeleteTemplate', (event) => {
             const { template } = event.detail;
             this.dialog.renderDeleteModal(this.controller, template.id, template.name)
         })
 
-        this._otherTemplates.addEventListener('DeleteTemplate', (event) => {
-            const { template } = event.detail;
-            this.dialog.renderDeleteModal(this.controller, template.id, template.name)
-        })
-
-        this._recentTemplates.addEventListener('DeleteTemplate', (event) => {this.handleTemplateCardClick(event)})
-        this._otherTemplates.addEventListener('DeleteTemplate', (event) => {this.handleTemplateCardClick(event)})
-
+        this._viewElement.addEventListener('TemplateCardClick', (event) => {this.handleTemplateCardClick(event)})
 
         this._addTemplateButton.addEventListener('click', () => {
             this.applicationController.initView('editor', {

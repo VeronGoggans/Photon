@@ -1,5 +1,4 @@
-.toolbar-top i,
-#editor-flashcard-set-btn {
+#exit-editor-btn {
     display: flex;
     width: 40px;
     height: 40px;
@@ -14,18 +13,13 @@
 
 .save-note-btn {
     cursor: pointer;
-    position: absolute;
-    right: 60px;
-    top: 3px;
     color: var(--editor-text);
-    padding: 10px 20px;
+    padding: 5px 10px;
     border-radius: 7px;
+    margin-left: auto;
 }
 
 .editor-util-btns-container {
-    position: absolute;
-    top: 55px;
-    right: 20px;
     display: flex;
     flex-direction: column;
 }
@@ -38,9 +32,6 @@
 
 .editor-options-dropdown {
     overflow: visible;
-    position: absolute;
-    right: 10px;
-    top: 3px;
     cursor: pointer;
     transition: 150ms;
 }

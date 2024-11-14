@@ -19,129 +19,57 @@
         font-family: Poppins;
     }
 
-    .completed-task {
-        color: #cacedf;
-        background-color: #f8f9ff;
-        text-decoration: line-through;
-    }
-
-    .checklist {
-        display: flex;
-        flex-direction: column;
-        padding: 20px;
-        row-gap: 20px;
-        border: 1px solid #ddd;
-        border-radius: 10px;
-    }
-
-    .checklist .checklist-name {
-        outline: none;
-        border: none;
-        font-size: 25px;
-    }
-
-    .checklist .tasks-count {
-        display: flex;
-        justify-content: end;
-        column-gap: 10px;
-    }
-
-    .tasks-count i {
-        color: rgb(124, 211, 124);
-    }
-
-    .checklist .tasks {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .checklist .task input {
-        transform: scale(1.5);
-        vertical-align: middle;
-    }
-
-    .checklist .task {
+    .note-reference {
         cursor: pointer;
-        padding: 10px;
-        border-radius: 7px;
-        transition: .2s;
-    }
-
-    .add-task-btn {
-        position: relative;
-        padding: 10px;
-        border-radius: 7px;
-        transition: .2s;
-    }
-
-    .add-task-btn i {
-        position: absolute;
-        top: 13px;
-        left: 13px;
-    }
-
-    .add-task-btn input {
-        width: 100%;
-        font-size: 16px;
-        outline: none;
-        border: none;
-        padding-left: 25px;
-        background-color: transparent;
-    }
-
-    .checklist .task:hover,
-    .checklist .add-task-btn:hover {
-        background-color: #f3f5ff;
-    }
-
-    .progress {
-        height: 5px;
+        border: 1px solid #ddd;
         border-radius: 5px;
-        background-color: rgb(236, 236, 236);
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+        width: fit-content;
     }
 
-    .progress__fill {
-        width: 50%;
-        height: 5px;
-        border-radius: 5px;
-        background-color: rgb(124, 211, 124);
+    .note-reference div {
+        display: flex;
+        flex-direction: column;
     }
+
+    .note-reference i {
+        width: 40px;
+        height: 40px;
+        border-radius: 5px;
+        background-color: #f0f0ff;
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .note-reference .note-name {
+        font-weight: 600;
+    }
+
+    .note-reference .last-edit-date {
+        color: #c1c1df;
+        font-size: 14px;
+        font-weight: 400;
+    }
+
+
+
+    
 </style>
 
 <body>
-    <div class="checklist">
-        <input class="checklist-name" type="text" placeholder="Checklist name">
-        <span class="completion-percentage">50% Done</span>
-        <div class="progress">
-            <div class="progress__fill"></div>
+   <div class="note-reference">
+        <i class="bi bi-file-earmark"></i>
+        <div>
+            <span class="note-name">Fallacies of distributed systems
+            </span>
+            <span class="last-edit-date">5 minutes ago</span>
         </div>
-        <div class="tasks-section">
-            <div class="tasks-count">
-                <i class="bi bi-check-circle-fill"></i>
-                <span>3 Tasks</span>
-            </div>
-            <div class="tasks">
-                <div class="task completed-task">
-                    <input type="checkbox">
-                    <span>Backend slides</span>
-                </div>
-                <div class="task">
-                    <input type="checkbox">
-                    <span>This is a task</span>
-                </div>
-                <div class="task">
-                    <input type="checkbox">
-                    <span>This is a task</span>
-                </div>
-                <div class="add-task-btn">
-                    <i class="bi bi-plus-lg"></i>
-                    <input class="new-task-input" type="text" placeholder="Write down a task">
-                </div>
-            </div>
-        </div>
-
-
-    </div>
+   </div>
 
 </body>
 </html>

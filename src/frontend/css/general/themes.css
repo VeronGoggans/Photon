@@ -102,7 +102,7 @@
     /*Notes View*/
     --dragging: #f3f4ff;
     --bookmark: #d5ddff;
-    --hover: rgba(92, 125, 255, .3); 
+    --hover: #f0f0ff; 
     --hover-bookmark-icon-if-bookmarked: rgba(92, 125, 255, .3);
     --folder-name-border: #ced1e3;
 

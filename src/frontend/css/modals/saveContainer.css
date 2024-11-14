@@ -1,7 +1,7 @@
 .dont-forget-to-save-container {
     position: relative;
-    height: 250px;
-    width: 350px;
+    height: 350px;
+    width: 500px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -13,14 +13,14 @@
   
   .dont-forget-to-save-container h1 {
     position: relative;
+    font-weight: 500;
     color: var(--important);
-    
   }
   
   .dont-forget-to-save-container p {
     position: relative;
     bottom: 20px;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 18px;
     color: var(--text);
   }
@@ -54,6 +54,7 @@
     height: 100%;
     background-color: var(--hover);
     transition: .2s;
+    z-index: -1;
   }
 
   .exit-with-save-btn:hover::before {
