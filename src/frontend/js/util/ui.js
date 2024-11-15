@@ -1,4 +1,3 @@
-import { CNode } from "./CNode.js";
 import { AnimationHandler } from "../handlers/animationHandler.js";
 import { removeEmptyFolderNotification } from "../handlers/notificationHandler.js";
 
@@ -63,9 +62,11 @@ function createDragImage(type) {
      * type is either ( folder ) or ( file ) or ( thumbtack )
      * representing the fontAwesome icon class of 
      * ( fa-solid fa-folder ) or ( fa-solid fa-file ) or ( fa-solid fa-thumbtack )
-    */
-    const image = CNode.create('div', {'class': 'drag-image'});
-    const icon = CNode.create('i', {'class': `fa-solid fa-${type}`})
+    */    
+    const image = document.createElement('div');
+    const icon = document.createElement('i');
+    icon.setAttribute('class', `fa-solid fa-${type}`)
+    image.classList.add('drag-image');
     image.appendChild(icon);
     return image
 }

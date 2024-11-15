@@ -85,6 +85,7 @@
     height: 100%;
     transition: 150ms;
     background-color: var(--hover);
+    z-index: -1
 }
 
 .edit-folder-modal .save-btn:hover::before {
@@ -99,7 +100,7 @@
     min-width: 30px;
     height: 30px;
     margin: 0 5px;
-    border-radius: 5px;
+    border-radius: 50%;
     cursor: pointer;
     transition: 50ms;
     border: 2px solid transparent;
@@ -109,7 +110,7 @@
     width: 30px;
     height: 30px;
     margin: 0 5px;
-    border-radius: 5px;
+    border-radius: 50%;
     cursor: pointer;
     transition: 50ms;
     background-color: var(--card);

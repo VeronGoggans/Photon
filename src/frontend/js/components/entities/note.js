@@ -77,7 +77,7 @@ class Note extends HTMLElement {
 
     dragStart(event) {
         this.classList.add('dragging')
-        addDraggImage(event, this, 'file')
+        addDraggImage(event, 'file');
         event.dataTransfer.setData('text/plain', `{"draggedItem": "note", "draggedCardId": "${this.id}"}`)
     }
 

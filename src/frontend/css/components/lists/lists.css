@@ -59,13 +59,15 @@ check-list {
     flex-direction: column;
     padding: 20px;
     row-gap: 20px;
-    border: 1px solid #ddd;
+    border: var(--border-checklist);
     border-radius: 10px;
 }
 
 check-list .checklist-name-input {
     outline: none;
     border: none;
+    color: var(--text);
+    background-color: transparent;
     font-size: 25px;
 }
 
@@ -86,27 +88,31 @@ check-list .tasks {
 }
 
 check-list .task {
+    position: relative;
     display: flex;
     column-gap: 10px;
-    cursor: pointer;
     padding: 10px;
     border-radius: 7px;
-    transition: .2s;
+    transition: .2s background-color;
+    order: 0;
 }
 
 check-list .task input[type="checkbox"] {
     transform: scale(1.5);
     vertical-align: middle;
+    cursor: pointer;
 }
 
 check-list .task input[type="text"] {
     background-color: transparent;
     border: none;
+    color: var(--text);
     width: 100%;
     font-size: 16px;
 }
 
 .add-task-btn {
+    order: 1;
     position: relative;
     padding: 10px;
     border-radius: 7px;
@@ -124,18 +130,19 @@ check-list .task input[type="text"] {
     font-size: 16px;
     outline: none;
     border: none;
+    color: var(--text);
     padding-left: 25px;
     background-color: transparent;
 }
 
 check-list .task:hover {
-    background-color: #f3f5ff;
+    background-color: var(--hover-checklist-task);
 }
 
 check-list .progress {
     height: 5px;
     border-radius: 5px;
-    background-color: rgb(236, 236, 236);
+    background-color: var(--progress-checklist);
 }
 
 check-list .progress__fill {
@@ -147,7 +154,8 @@ check-list .progress__fill {
 }
 
 .completed-task {
-    background-color: #f8f9ff;
+    order: 1 !important;
+    background-color: var(--completed-checklist-task);
 }
 
 .completed-task input[type="text"] {

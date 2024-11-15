@@ -28,7 +28,6 @@
    cursor: text;
    overflow-x: hidden;
    font-size: 11pt;
-   
    color: var(--editor-text);
    padding: 0 10px 40px 10px;
 }
@@ -122,20 +121,25 @@
  }
 
  .editor h1 {
+   margin: 15px 0;
    font-size: 35px;
  }
  
  .editor h2 {
+   margin: 10px 0;
    font-size: 30px;
  }
  
  .editor h3 {
+   margin: 5px 0;
    color: var(--heading3);
    font-size: 25px;
  }
  
  .editor h4 {
+   margin: 0;
    font-size: 20px;
+   color: var(--heading4);
  }
 
  .editor li {

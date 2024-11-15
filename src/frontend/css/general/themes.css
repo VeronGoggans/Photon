@@ -12,6 +12,7 @@
     --editor-dropdown: #12121d;
     --dropdown: #12121d;
     --heading3: #9da0bd;
+    --heading4: #8e91a3;
     --hover-slash-command: #16171c;
     --file-path: #9095aa;
 
@@ -39,9 +40,14 @@
     --border-card: #282a3d;
     --border-sidebar-right: #282a3d;
     --border-sidebar-soft: #0f0e1a;
+    --border-checklist: 1px solid #27293b;
+
+    /*Progress bars*/
+    --progress-checklist: #656479;
 
     /*Hover*/
     --hover-button: #0f0e1a;
+    --hover-checklist-task: #15162d;
     
     /*Shadows*/
     --shadow-dropdown: 5px 5px 18px #030304;
@@ -82,6 +88,9 @@
     --stats-background: #141322;
     --home-tab: #28283b;
     --options-menu: #15142d;
+
+    /*Feedback variables*/
+    --completed-checklist-task: #1c1d3b;
 }
 
 .light{
@@ -116,6 +125,7 @@
     --editor-container-input: #f6f7ff;
     --dropdown: #ffffff;
     --heading3: #707391;
+    --heading4: #8e91a3;
     --editor-dropdown: #ffffff;
 
     --toolbar-btn-text: #4f578f;
@@ -129,9 +139,14 @@
     --border-sidebar-right: #dee1ef; 
     --border-sidebar-soft: #f3f5fb;
     --border-note-view-dropdown: none;
+    --border-checklist: 1px solid #dee1ef;
 
     /*Hover*/
     --hover-button: #f4f4fc;
+    --hover-checklist-task: #f3f5ff;
+
+    /*Progress bars*/
+    --progress-checklist: #ececec;
 
     /*Shadows*/
     --shadow-dropdown: 5px 5px 18px #eaecf7;
@@ -171,4 +186,7 @@
     --searchbar-dropdown: #fff;
     --stats-background: #f6f7ff;
     --options-menu: #f5f6ff;
+
+    /*Feedback variables*/
+    --completed-checklist-task: #f8f9ff;
 }

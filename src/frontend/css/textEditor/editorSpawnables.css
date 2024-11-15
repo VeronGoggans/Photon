@@ -11,6 +11,7 @@
     padding: 10px 15px;
     border-radius: 10px;
     box-shadow: var(--shadow-dropdown);
+    border: var(--border-card);
     opacity: 0;
     transition: 150ms;
 }

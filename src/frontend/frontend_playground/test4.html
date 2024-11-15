@@ -11,140 +11,26 @@
 
     <title>Document</title>
 </head>
-<style>
-    body {
-        padding: 20%;
-    }
+<body>
+    <div id="mijnDiv">Dit is een voorbeeld tekst in de div.</div>
+    
+    <script>
+        // Verkrijg de div
+var div = document.getElementById('mijnDiv');
 
-    .wrapper {
-        font-family: sans-serif;
-        width: 400px;
-        height: 400px;
-    }
+// Verkrijg de tekstinhoud van de div
+var tekst = div.textContent || div.innerText; // Gebruik textContent voor de meeste browsers
 
-    .empty-folder-message {
-        height: 100%;
-        display: grid;
-        grid-template-rows: 1fr 100px 70px;
-    }
+// Aantal tekens inclusief spaties
+var aantalTekensMetSpaties = tekst.length;
 
-    .empty-folder-message .icons {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+// Aantal tekens zonder spaties
+var aantalTekensZonderSpaties = tekst.replace(/\s/g, '').length;
 
-    .empty-folder-message #floating-icon1,
-    .empty-folder-message #floating-icon2,
-    .empty-folder-message #floating-icon3,
-    .empty-folder-message #floating-icon4 {
-        position: absolute;
-        background-color: #f1f2fc;
-        color: #7e8392;
-        border-radius: 5px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        animation: bobbing 1.5s ease-in-out infinite;
-    }
+// Toon het aantal tekens in de console
+console.log("Aantal tekens met spaties: " + aantalTekensMetSpaties);
+console.log("Aantal tekens zonder spaties: " + aantalTekensZonderSpaties);
 
-    .empty-folder-message #floating-icon1 {
-        width: 35px;
-        height: 35px;
-        font-size: 23px;
-        top: 20px;
-        left: 50px;
-        animation-delay: .5s;
-    }
-
-    .empty-folder-message #floating-icon2 {
-        font-size: 20px;
-        bottom: 25px;
-        right: 55px;
-        width: 30px;
-        height: 30px;
-        animation-delay: .75s;
-    }
-
-    .empty-folder-message #floating-icon3 {
-        bottom: 55px;
-        left: 75px;
-        font-size: 17px;
-        width: 25px;
-        height: 25px;
-        animation-delay: .25s;
-    }
-
-    .empty-folder-message #floating-icon4 {
-        top: 30px;
-        right: 75px;
-        width: 25px;
-        height: 25px;
-        font-size: 15px;
-        animation-delay: 1s;
-    }
-
-    .empty-folder-message #center-icon {
-        font-size: 56px;
-        color: #484d5f;
-    }
-
-    .empty-folder-message .empty-message {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .empty-folder-message p {
-        font-size: 25px;
-        margin: 5px 0;
-        font-weight: 600;
-    }
-
-    .empty-folder-message span {
-
-    }
-
-    .empty-folder-message .emtpy-message-buttons {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        column-gap: 10px;
-    }
-
-    .emtpy-message-buttons button {
-        border: none;
-        background-color: #698aff;
-        padding: 10px;
-        border-radius: 5px;
-        color: #fff;
-    }
-
-
-</style>
-<body style="background-color: rgb(255, 255, 255);">
-
-    <div class="wrapper">
-        <div class="empty-folder-message">
-            <div class="icons">
-                <i id="center-icon" class="bi bi-folder2-open"></i>
-                <i id="floating-icon1" class="bi bi-file-earmark"></i>
-                <i id="floating-icon2" class="bi bi-file-earmark-text"></i>
-                <i id="floating-icon3" class="bi bi-sticky"></i>
-                <i id="floating-icon4" class="bi bi-image"></i>
-            </div>
-            <div class="empty-message">
-                <p>Nothing found</p>
-                <span>This folder is currently empty <br>Start by Creating a folder or note.</span>
-            </div>
-            <div class="emtpy-message-buttons">
-                <button>Create folder</button>
-                <button>Create note</button>
-            </div>
-        </div>
-    </div>
-
+    </script>
 </body>
 </html>
