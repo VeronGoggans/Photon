@@ -20,7 +20,8 @@
    
 </style>
 <body>
-    <pre contenteditable="true"><code class="language-python">
+    <pre contenteditable="true">
+      <code class="language-python">
         def add_folder(self, schema: FolderRequest, db: Session) -> Folder:
             new_folder = Folder(
                 name = schema.name, 
@@ -29,7 +30,8 @@
                 )
             return self.manager.add(schema.parent_id, new_folder, db)
 
-    </code></pre>
+      </code>
+    </pre>
         
     <script>
         document.addEventListener("DOMContentLoaded", () => {

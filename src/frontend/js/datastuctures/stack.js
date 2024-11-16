@@ -27,3 +27,21 @@ export class Stack {
         return this.items.length;
     }
 }
+
+
+export class BoundedStack extends Stack {
+    constructor(limit) {
+        super();
+        this.limit = limit;
+    }
+
+    push(item) {
+        if (this.size() < this.limit) {
+            this.items.push(item);
+        }
+    }
+
+    isFull() {
+        return this.size() == this.limit;
+    }
+}

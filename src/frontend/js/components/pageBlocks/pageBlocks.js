@@ -91,7 +91,48 @@ class NoteLink extends HTMLElement {
     }
 
 }
+
+
+class CodeSnippit extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        const snippit = this.querySelector('code');
+        hljs.highlightElement(snippit);
+        this.addEventListeners();
+    }
+
+
+    render(language) {
+        this.innerHTML = `
+            <span>${language}</span>
+            <pre>
+                <code class="language-${language}" style="height: 50px;"></code>
+            </pre>
+        `
+    }
+
+    addEventListeners() {
+        this.addEventListener('paste', (event) => {this.highlightOnPaste(event)})
+    }
+
+    highlightOnPaste(event) {
+        event.preventDefault();
+
+        // Access the clipboard data
+        const clipboardData = event.clipboardData || window.clipboardData;
+        const pastedContent = clipboardData.getData('text');
+        
+        const snippit = this.querySelector('code');
+        snippit.textContent = pastedContent;
+
+        hljs.highlightElement(snippit);
+    }
+}
     
 
 customElements.define('description-page-block', DescriptionPageBlock);
 customElements.define('document-location-page-block', DocumentLocationPageBlock);
+customElements.define('code-snippit', CodeSnippit);

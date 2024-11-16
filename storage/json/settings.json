@@ -1,4 +1,5 @@
 {
     "theme": "light",
-    "sidebarColor": "original"
+    "sidebarColor": "soft",
+    "widgetStyle": "shadow"
 }

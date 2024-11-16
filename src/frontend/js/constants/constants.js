@@ -80,6 +80,10 @@ export const stickyNoteColors = [
 
 export const sidebarButtonText = ['Home', 'Notes', 'Templates', 'Stickies', 'Flashcards', 'Settings']
 
+export const widgetStyles = {
+    border: 'widget-style-border',
+    shadow: 'widget-style-shadow'
+}
 
 export const modalPlaceholderText = {
     stickyWall: 'Sticky wall name...',

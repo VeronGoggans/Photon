@@ -2,20 +2,13 @@ import {CNode} from "../util/CNode.js";
 
 
 
-export function addCodeBlock(range, codeText, language = "plaintext") {
-  const pre = document.createElement("pre");
-  const code = document.createElement("code");
-  code.className = `language-${language}`;
-  code.textContent = codeText;
-  pre.appendChild(code);
-
+export function addCodeBlock(range, language = "plaintext") {
+  const codeSnippit = document.createElement('code-snippit');
+  codeSnippit.render(language)
+  
   // Append to your note container
-  range.insertNode(code);
-  removeSelectedEffect(range, code);
-  moveCursorToTextBlock(code);
-
-  // Highlight the new code block
-  hljs.highlightElement(code);
+  range.insertNode(codeSnippit);
+  moveCursorToTextBlock(codeSnippit.querySelector('code'));
 }
 
 

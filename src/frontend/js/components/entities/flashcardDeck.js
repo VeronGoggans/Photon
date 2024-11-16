@@ -1,6 +1,7 @@
 import { CNode } from "../../util/CNode.js";
 import { getPassedTime } from "../../util/date.js";
 import { capitalizeFirstLetter } from "../../util/formatters.js";
+import { applyWidgetStyle } from "../../util/ui.js";
 
 
 class FlashcardDeck extends HTMLElement {
@@ -59,6 +60,7 @@ class FlashcardDeck extends HTMLElement {
                 <i id="delete-btn" class="fa-solid fa-trash"></i>
             </div>
         `;
+        applyWidgetStyle(this);
         this.querySelector('.progress__fill').style.width = `${this.progression}%`;
     }
 

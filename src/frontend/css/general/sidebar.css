@@ -4,11 +4,11 @@
     display: grid;
     grid-template-rows: 50px 1fr;
     background-color: var(--sidebar);
-    border-right: 1px solid var(--border-sidebar-right);
+    border-right: var(--border-sidebar-right);
 }
 
 .sidebar-logo {
-    padding: 5px 10px;
+    padding: 5px 15px;
 }
 
 .logo-container {
@@ -76,11 +76,11 @@
 }
 
 .active-tab {
-    background-color: var(--hover-sidebar) !important;
-    color: var(--sidebar-text-hover) !important;
+    background-color: var(--active-tab-bg) !important;
+    color: var(--active-tab-text) !important;
 }
 
 .soft {
-    border: 1px solid var(--border-sidebar-soft);
+    border-right: var(--border-sidebar-soft);
     background-color: var(--sidebar-soft);
 }

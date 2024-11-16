@@ -38,8 +38,8 @@
     --border-notification: none;
     --border-note-view-dropdown: none;
     --border-card: #282a3d;
-    --border-sidebar-right: #282a3d;
-    --border-sidebar-soft: #0f0e1a;
+    --border-sidebar-right: 1px solid#282a3d;
+    --border-sidebar-soft: none;
     --border-checklist: 1px solid #27293b;
 
     /*Progress bars*/
@@ -65,7 +65,7 @@
     --sidebar-soft: #0f0e1a;
     --searchbar: #121223;
     --sidebar-text: #d6d8e5;
-    --sidebar-text-hover: #5c7dff; 
+    --sidebar-text-hover: #ffffff; 
     --card: #141322;
     --text: #bbbed2;
     --icon: #bbbed2;
@@ -76,7 +76,7 @@
     --hover-searchbar-options: #18182d;
     --hover-text: #5c7dff;
     --hover-toolbar-btns: #383d4c;
-    --hover-sidebar: #28283b;
+    --hover-sidebar: #1d1d2f;
     --searchbar-placeholder: #d4d7e5; 
     --placeholder: #868b9e;
     --selection: #314682;
@@ -91,6 +91,9 @@
 
     /*Feedback variables*/
     --completed-checklist-task: #1c1d3b;
+
+    --active-tab-bg: #313f76;
+    --active-tab-text: #5673ff;
 }
 
 .light{
@@ -102,7 +105,7 @@
     --flashcard-bg: #ffffff;
     --flashcard-edit-bg: #e7ebffb5;
     --flashcard-border: #dee1ef;
-    --stats-span-color: #7990ff;
+    --stats-span-color: #282d47;
     /*Template View*/
 
     /*stickyWall view*/
@@ -136,8 +139,8 @@
     /*Borders*/
     --border-notification: #f3f5fb;
     --border-card: #dee1ef;
-    --border-sidebar-right: #dee1ef; 
-    --border-sidebar-soft: #f3f5fb;
+    --border-sidebar-right: 1px solid #dee1ef; 
+    --border-sidebar-soft: 1px solid #f1f1f8;
     --border-note-view-dropdown: none;
     --border-checklist: 1px solid #dee1ef;
 
@@ -161,10 +164,10 @@
     --notification: #f9fafd;
     --subtitle: #63656d;
     --sidebar: #ffffff; 
-    --sidebar-soft: #f9fafd;
+    --sidebar-soft: #fafafd;
     --searchbar: #f4f4fc;
     --sidebar-text: #444452; 
-    --sidebar-text-hover: #5c7dff; 
+    --sidebar-text-hover: #1d2134; 
     --card: #ffffff; 
     --text: #444863;
     --icon: #4c4c68; 
@@ -172,9 +175,9 @@
     --icon-hover: #5c7fdd;
     --important: #444863;
     
-    --hover-searchbar-options: #f1f6ff;
+    --hover-searchbar-options: #f7f7fa;
     --hover-text: #444863;
-    --hover-sidebar: #f0f0ff;
+    --hover-sidebar: #eeeff3;
     --searchbar-placeholder: #9297aa; 
     --placeholder: #d4d7e5;
     --selection: #b1daff;
@@ -184,9 +187,12 @@
     --modal: #ffffff;
     --scrollbar-content-view: #cccfe1;
     --searchbar-dropdown: #fff;
-    --stats-background: #f6f7ff;
+    --stats-background: #f4f5fa;
     --options-menu: #f5f6ff;
 
     /*Feedback variables*/
     --completed-checklist-task: #f8f9ff;
+
+    --active-tab-bg: #d7dfff;
+    --active-tab-text: #5673ff;
 }

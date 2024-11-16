@@ -158,30 +158,45 @@ const stickyNoteHomeTemplate = `
 
 const settingsTemplate = `
     <div class="settings">
-    <div class="center">
         <h1 class="view-title">Settings</h1>
         <div class="settings-container">
-            <h3>Theme</h3>
-            <p>Select a theme</p>
-            <div class="theme-dropdown">
-                <input type="text" spellcheck="false" placeholder="Theme" class="theme-input">
-                <ul class="dropdown-items">
-                    <li theme="light">Light</li>
-                    <li theme="dark">Dark</li>
-                </ul>
+            <div>
+                <h3>Theme</h3>
+                <p>Select a theme</p>
+                <div class="theme-dropdown">
+                    <input type="text" spellcheck="false" placeholder="Theme" class="theme-input">
+                    <ul class="dropdown-items">
+                        <li theme="light">Light</li>
+                        <li theme="dark">Dark</li>
+                    </ul>
+                </div>
             </div>
 
-            <h3>Sidebar</h3>
-            <p>Select a sidebar color</p>
-            <div class="sidebar-color-dropdown">
-                <input type="text" spellcheck="false" placeholder="Sidebar color" class="sidebar-color-input">
-                <ul class="dropdown-items">
-                    <li color="original">Original</li>
-                    <li color="soft">Soft</li>
-                </ul>
+            <div>
+                <h3>Sidebar</h3>
+                <p>Select a sidebar color</p>
+                <div class="sidebar-color-dropdown">
+                    <input type="text" spellcheck="false" placeholder="Sidebar color" class="sidebar-color-input">
+                    <ul class="dropdown-items">
+                        <li color="original">Original</li>
+                        <li color="soft">Soft</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div>
+                <h3>Widget style</h3>
+                <p>Select a widget style</p>
+                <div class="widget-style-dropdown">
+                    <input type="text" spellcheck="false" placeholder="Widget style" class="widget-style-input">
+                    <ul class="dropdown-items">
+                        <li widgetStyle="border">Border</li>
+                        <li widgetStyle="shadow">Shadow</li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
+            
     </div>
 `;
 

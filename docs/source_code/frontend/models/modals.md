@@ -51,10 +51,6 @@ is only needed by it's own controller.
             console.log(`Stored object: ${editorObject}`);
         }
 
-        storeEditorObjectType(type) {
-            this.editorObjectType = type;
-            console.log(`Stored type: ${type}`)
-        }
 
         getStoredObject() {
             return {
@@ -63,9 +59,6 @@ is only needed by it's own controller.
             }
         }
 
-        getStoredObjectId() {
-            return this.editorObject.id;
-        }
 
         clear() {
             this.editorObject = null;

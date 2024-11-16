@@ -16,10 +16,16 @@ export class SettingController {
 
     async loadSettings() {
         const settings = await this.getSettings();
+        // Add theme class
         document.body.classList.add(settings.theme);
+
+        // Add sidebar class
         if (settings.sidebarColor === 'soft') {
             document.querySelector('.sidebar').classList.add(settings.sidebarColor);
         }
+
+        // Save widget style in session storage
+        window.sessionStorage.setItem('widget-style', settings.widgetStyle);
     }
 
     async getSettings() {
@@ -35,6 +41,11 @@ export class SettingController {
     async updateSidebarColor(newColor) {
         const { color } = await this.model.update(`/settings/sidebarColor/${newColor}`);
         return color;
+    }
 
+    async updateWidgetStyle(newWidgetStyle) {  
+        const { widgetStyle } = await this.model.update(`/settings/widgetStyle/${newWidgetStyle}`);
+        window.sessionStorage.setItem('widget-style', newWidgetStyle);
+        return widgetStyle;
     }
 }

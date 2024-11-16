@@ -35,6 +35,7 @@ export class TextEditorEventListener {
     showForwardSlashCommandContainer() {
       const selection = window.getSelection();
       const range = selection.getRangeAt(0);
+      this.commandInputField.value = '';
       
       if (selection.isCollapsed) {
         this.slashCommand.rememberRange(range);
@@ -42,7 +43,7 @@ export class TextEditorEventListener {
         AnimationHandler.fadeIn(this.forwardSlashCommandContainer);
         this.commandInputField.focus();
       } else {
-        AnimationHandler.fadeOut(this.forwardSlashCommandContainer)
+        AnimationHandler.fadeOut(this.forwardSlashCommandContainer);
       }
     }
 

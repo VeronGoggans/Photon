@@ -10,6 +10,7 @@ class SettingRouter:
         self.route.add_api_route('/settings', self.get_settings, methods=['GET'])
         self.route.add_api_route('/settings/theme/{theme}', self.update_theme, methods=['PUT'])
         self.route.add_api_route('/settings/sidebarColor/{color}', self.update_sidebar_color, methods=['PUT'])
+        self.route.add_api_route('/settings/widgetStyle/{widget_style}', self.update_widget_style, methods=['PUT'])
         
 
     def get_settings(self):
@@ -22,3 +23,7 @@ class SettingRouter:
 
     def update_theme(self, theme: str):
         return {'status': HttpStatus.OK, "theme": self.service.update_theme(theme)}
+
+
+    def update_widget_style(self, widget_style: str):
+        return {'status': HttpStatus.OK, "widgetStyle": self.service.update_widget_style(widget_style)}

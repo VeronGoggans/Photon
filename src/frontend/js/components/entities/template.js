@@ -1,5 +1,6 @@
 import { formatName, filterNotePreview } from "../../util/formatters.js";
 import { showContextMenu } from "../../util/ui.js";
+import { applyWidgetStyle } from "../../util/ui.js";
 
 
 const optionsMenuTemplate = `
@@ -31,6 +32,7 @@ class Template extends HTMLElement {
             <h4>${formatName(this.template.name)}</h4>
             <div class="note-content-box">${filterNotePreview(this.template.content)}</div>
         `;
+        applyWidgetStyle(this);
     }
 
 

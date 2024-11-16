@@ -7,7 +7,6 @@ folder-card {
     background-color: var(--card);
     border-radius: 10px;
     color: var(--icon);
-    box-shadow: var(--shadow-card);
     opacity: 0;
     transform: translateY(30%);
     transition: opacity .7s ease, transform .25s ease, scale .2s ease;
@@ -40,7 +39,6 @@ recent-folder-card {
     background-color: var(--card);
     border-radius: 10px;
     color: var(--icon);
-    box-shadow: var(--shadow-card);
     opacity: 0;
     transform: translateY(30%);
     transition: opacity .7s ease, transform .25s ease, scale .2s ease;

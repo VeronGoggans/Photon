@@ -103,7 +103,6 @@ i {
 
 
 .context-text {
-    font-weight: 600;
     color: var(--text);
     margin: 0 0 50px 0px;
     max-width: 600px;
@@ -139,7 +138,7 @@ textarea::placeholder {
     min-width: 300px;
     max-height: 350px;
     overflow-y: auto;
-    border: 1px solid var(--border-sidebar-right);
+    border: var(--border-sidebar-right);
     border-radius: 10px;
     background-color: var(--searchbar-dropdown);
     list-style: none;
@@ -212,4 +211,13 @@ textarea::placeholder {
     font-family: Roboto;
     margin-left: 5px;
     font-weight: 600;
+}
+
+
+.widget-style-border {
+    border: 1px solid var(--border-card);
+}
+
+.widget-style-shadow {
+    box-shadow: var(--shadow-card);
 }

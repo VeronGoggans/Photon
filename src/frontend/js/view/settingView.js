@@ -12,7 +12,7 @@ export class SettingView {
             this.dropdowns, 
             this.dropdownOptions, 
             this.settingsView, 
-            ['.theme-dropdown','.sidebar-color-dropdown']
+            ['.theme-dropdown','.sidebar-color-dropdown', '.widget-style-dropdown']
         );
         AnimationHandler.fadeInFromSide(this.settingsView);
     }
@@ -20,6 +20,7 @@ export class SettingView {
     setDropdownStates(settings) {
         this.themeInput.value = capitalizeFirstLetter(settings.theme);
         this.sidebarColorInput.value = capitalizeFirstLetter(settings.sidebarColor);
+        this.widgetInput.value = capitalizeFirstLetter(settings.widgetStyle);
     }
 
 
@@ -55,6 +56,18 @@ export class SettingView {
         }
     }
 
+    async #widgetShadow() {
+        this.dropdownHelper.closeDropdowns();
+        this.widgetInput.value = 'Shadow';
+        this.controller.updateWidgetStyle('shadow');
+    }
+
+    async #widgetBorder() {
+        this.dropdownHelper.closeDropdowns();
+        this.widgetInput.value = 'Border';
+        this.controller.updateWidgetStyle('border');
+    }
+
 
     #initElements() {
         this.settingsView = document.querySelector('.settings');
@@ -63,6 +76,8 @@ export class SettingView {
         this.sidebarColorInput = document.querySelector('.sidebar-color-dropdown input');
         this.sidebarOptions = document.querySelector('.sidebar-color-dropdown ul');
         this.themeOptions = document.querySelector('.theme-dropdown ul');
+        this.widgetInput = document.querySelector('.widget-style-dropdown input');
+        this.widgetOptions = document.querySelector('.widget-style-dropdown ul');
 
         this.darkTheme = this.themeOptions.querySelector('li[theme="dark"]');
         this.lightTheme = this.themeOptions.querySelector('li[theme="light"]');
@@ -70,8 +85,11 @@ export class SettingView {
         this.originalSidebar = this.sidebarOptions.querySelector('li[color="original"]');
         this.softSidebar = this.sidebarOptions.querySelector('li[color="soft"]');
 
-        this.dropdowns = [this.themeInput, this.sidebarColorInput];
-        this.dropdownOptions = [this.themeOptions, this.sidebarOptions];
+        this.widgetBorder = this.widgetOptions.querySelector('li[widgetstyle="border"]');
+        this.widgetShadow = this.widgetOptions.querySelector('li[widgetstyle="shadow"]');
+
+        this.dropdowns = [this.themeInput, this.sidebarColorInput, this.widgetInput];
+        this.dropdownOptions = [this.themeOptions, this.sidebarOptions, this.widgetOptions];
     }
 
     #eventListeners() {
@@ -79,5 +97,7 @@ export class SettingView {
         this.darkTheme.addEventListener('click', () => {this.#darkmode()});
         this.originalSidebar.addEventListener('click', () => {this.#originalColor()});
         this.softSidebar.addEventListener('click', () => {this.#softColor()});
+        this.widgetBorder.addEventListener('click', () => {this.#widgetBorder()});
+        this.widgetShadow.addEventListener('click', () => {this.#widgetShadow()});
     }
 }

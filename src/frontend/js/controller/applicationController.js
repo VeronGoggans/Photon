@@ -44,8 +44,8 @@ export class ApplicationController {
             editor: this.textEditorController,
             stickyWallHome: this.stickyWallHomeController
         }
-        this.initView('home')
-        this.settingController.loadSettings()
+        this.settingController.loadSettings();
+        this.initView('home');
     }
 
     initView(viewId, viewParameters = {}) {
@@ -183,7 +183,7 @@ export class ApplicationController {
     async addNote(name, content, notify) {
         const { id } = this.folderController.getCurrentFolder();
         const note = await this.noteController.add(id, name, content, notify);
-        this.textEditorController.storeEditorObject(note, 'note')
+        this.textEditorController.storeEditorObject(note, 'note');
     }
 
     async getNotes(folderId) {

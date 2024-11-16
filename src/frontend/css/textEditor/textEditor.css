@@ -146,6 +146,15 @@
    margin: 10px 0;
  }
 
+ .editor code {
+   min-height: 50px;
+   border-radius: 5px;
+ }
+
+ .editor pre {
+   margin: 0;
+ }
+
  .no-pointer {
    pointer-events: none;
 }

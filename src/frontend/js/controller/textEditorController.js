@@ -31,29 +31,26 @@ export class TextEditorController {
 
     async save(name, content, notify, clearEditorObject) {
         const { editorObject, editorObjectType } = this.model.getStoredObject();
-        if (clearEditorObject) {
-            this.model.clear()
+        if (clearEditorObject) this.model.clear();
+
+
+        if (editorObjectType === 'note') {
+            if (editorObject !== null) {
+                this.model.updateStoredObject(editorObject, name, content);            
+                await this.applicationController.updateNote(editorObject);
+            } else {
+                await this.applicationController.addNote(name, content, notify)
+            }
         }
 
-        // Note cases
-        if (editorObject !== null && editorObjectType === 'note') {
-            editorObject.name = name;
-            editorObject.content = content;
-            
-            await this.applicationController.updateNote(editorObject)
+        if (editorObject === 'template') {
+            if (editorObject !== null) {
+                this.model.updateStoredObject(editorObject, name, content);
+                await this.applicationController.updateTemplate(editorObject)
+            } else {
+                await this.applicationController.addTemplate(name, content, notify)
+            }
         }
-        if (editorObject === null && editorObjectType === 'note') {
-            await this.applicationController.addNote(name, content, notify)
-        }
-        // Template cases
-        if (editorObject !== null && editorObjectType === 'template') {
-            editorObject.name = name;
-            editorObject.content = content;
-            await this.applicationController.updateTemplate(editorObject)
-        }
-        if (editorObject === null && editorObjectType === 'template') {
-            await this.applicationController.addTemplate(name, content, notify)
-        } 
     }
 
     openInTextEditor(editorObject, editorObjectType, allFolderNames) {
@@ -66,7 +63,7 @@ export class TextEditorController {
     }
 
     showTextEditor(editorObjectType, allFolderNames) {
-        this.model.storeEditorObjectType(editorObjectType);
+        this.model.storeEditorObject(null, editorObjectType);
         this.textEditorView.show(allFolderNames);
     }
 

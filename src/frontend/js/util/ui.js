@@ -1,5 +1,6 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
 import { removeEmptyFolderNotification } from "../handlers/notificationHandler.js";
+import { widgetStyles } from "../constants/constants.js";
 
 
 export function removeContent(contentDiv) {
@@ -21,6 +22,12 @@ export function incrementString(string) {
     let num = Number(string);
     num++
     return String(num)
+}
+
+
+export function applyWidgetStyle(componentElement) {
+    const widgetStyle = window.sessionStorage.getItem('widget-style');
+    componentElement.classList.add(widgetStyles[widgetStyle]);
 }
 
 

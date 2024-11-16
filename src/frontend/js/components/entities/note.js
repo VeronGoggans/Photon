@@ -1,5 +1,6 @@
 import { formatName, filterNotePreview } from "../../util/formatters.js";
 import { addDraggImage, showContextMenu } from "../../util/ui.js";
+import { applyWidgetStyle } from "../../util/ui.js";
 
 
 const optionMenuTemplate = `
@@ -36,6 +37,7 @@ class Note extends HTMLElement {
             <h4>${formatName(this.note.name)}</h4>
             <div class="note-content-box">${filterNotePreview(this.note.content)}</div>
         `;
+        applyWidgetStyle(this);
         this.applyBookmarkStyle();
     }
 
@@ -116,6 +118,7 @@ class RecentNote extends HTMLElement {
             <h4>${formatName(this.note.name)}</h4>
             <div class="note-content-box">${filterNotePreview(this.note.content)}</div>
         `;
+        applyWidgetStyle(this);
     }
 
 

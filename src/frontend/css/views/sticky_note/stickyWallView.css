@@ -13,7 +13,6 @@
 }
 
 .sticky-wall-view h1 {
-    
     color: var(--important);
     margin-top: 60px;
 }
@@ -48,12 +47,11 @@ sticky-card:hover {
 
 sticky-card h3 {
     margin: 0;
-    
+    font-weight: 500;
     color: rgb(31, 32, 34);
 }
 
 sticky-card p {
-    font-weight: 600;
     color: rgb(42, 42, 49);
 }
 

@@ -47,7 +47,7 @@ export class SlashCommand {
           addHeading(range, 4, extension);
           break;
         case 'code-snippit':
-          addCodeBlock(range, '', extension);
+          addCodeBlock(range, extension);
           break;
         case 'insert-html':
           addHtml(range);

@@ -128,9 +128,7 @@
 .save-note-btn:hover,
 #editor-options-btn:hover,
 #exit-editor-btn:hover,
-#editor-flashcard-set-btn:hover,
-#editor-search-btn:hover,
-#editor-template-btn:hover {
+#editor-flashcard-set-btn:hover {
     background-color: var(--hover);
     color: #5c7dff !important;
 }

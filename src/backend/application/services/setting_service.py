@@ -3,6 +3,7 @@ from json import load, dump
 
 THEME = 'theme'
 SIDEBAR_COLOR = 'sidebarColor'
+WIDGET_STYLE = 'widgetStyle'
 
 
 class SettingService():
@@ -23,6 +24,13 @@ class SettingService():
         config[SIDEBAR_COLOR] = color
         self.__update_config(config)
         return color
+    
+
+    def update_widget_style(self, widget_style: str) -> str:
+        config = self.__get_config()
+        config[WIDGET_STYLE] = widget_style
+        self.__update_config(config)
+        return widget_style
     
 
     def __get_config(self) -> str:
