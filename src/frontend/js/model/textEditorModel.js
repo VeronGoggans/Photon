@@ -1,4 +1,4 @@
-import { BoundedStack } from "../datastuctures/stack.js";
+import { EvictingStack } from "../datastuctures/stack.js";
 
 
 export class TextEditorModel {
@@ -6,19 +6,40 @@ export class TextEditorModel {
         this.editorObject = null;
         this.editorObjectType = null;
         this.stackLimit = 5;
-        this.boundedStack = new BoundedStack(this.stackLimit);
+        this.evictingStack = new EvictingStack(this.stackLimit);
     }
 
     storeEditorObject(editorObject, editorObjectType) {
         this.editorObject = editorObject;
         this.editorObjectType = editorObjectType;
-        console.log(`Stored object: ${editorObject}`);
+
+        if (editorObject !== null && editorObjectType === 'note') {
+            this.evictingStack.push(
+                {
+                    id: editorObject.id,
+                    name: editorObject.name,
+                    time: new Date()
+                }
+            )
+        }
     }
 
 
     updateStoredObject(editorObject, name, content) {
         editorObject.name = name;
         editorObject.content = content;
+    }
+
+
+    setStoredRecentlyViewedNotes(notes) {
+        notes.forEach(note => {
+            this.evictingStack.push(note);
+        });
+    }
+
+
+    getRecentlyViewedNotes() {
+        return this.evictingStack.view();
     }
 
 
@@ -33,6 +54,5 @@ export class TextEditorModel {
     clear() {
         this.editorObject = null;
         this.editorObjectType = null;
-        console.log('CLEARED Stored Object');
     }
 }

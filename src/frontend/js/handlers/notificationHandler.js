@@ -16,7 +16,6 @@ export function renderEmptyFolderNotification(timeout = 50) {
     setTimeout(() => {
         const parentElement = document.querySelector('.note-view-content');
         const notesAndFolders = document.querySelectorAll('folder-card, note-card');
-        console.log(notesAndFolders);
         
         // Check if there are any folders or notes
         if (notesAndFolders.length === 0) {

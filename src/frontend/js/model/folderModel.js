@@ -4,40 +4,40 @@ import { Stack } from "../datastuctures/stack.js";
 export class FolderModel extends HttpModel {
     constructor() {
         super();
-        this.folders = new Stack()
+        this.stack = new Stack()
         this.homeFolder = { id: 1, name: 'Home' }
     }
 
     emptyFolders() {
-        this.folders.clear();
+        this.stack.clear();
     }
 
     getCurrentFolder() {
-        const folder = this.folders.peek();
+        const folder = this.stack.peek();
         return folder ? folder : this.homeFolder;
     }
     
     getParentFolder() {
-        this.folders.pop();
-        const folder = this.folders.peek();
+        this.stack.pop();
+        const folder = this.stack.peek();
         return folder ? folder : this.homeFolder;
     }
 
     getAllFolders() {
-        return this.folders.items
+        return this.stack.stack
     }
 
     addFolder(id, name) {
         const folder = { 'id': id, 'name': name };
-        const topFolder = this.folders.peek();
+        const topFolder = this.stack.peek();
 
-        if (this.folders.isEmpty() || id !== topFolder.id) {
-            this.folders.push(folder);
+        if (this.stack.isEmpty() || id !== topFolder.id) {
+            this.stack.push(folder);
         } 
     }
 
     addHierarcyPath(folders) {
-        this.folders.clear();
+        this.stack.clear();
         for (let i = 0; i < folders.length; i++) {
             const { id, name } = folders[i]
             console.log('adding ' + name);
