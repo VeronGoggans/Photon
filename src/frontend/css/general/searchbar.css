@@ -1,8 +1,8 @@
 .searchbar {
     position: relative;
-    height: 40px;
+    height: 50px;
     width: 50%;
-    max-width: 400px;
+    max-width: 450px;
     min-width: 300px;
     background-color: var(--searchbar);
     border-radius: 50px;
@@ -25,9 +25,9 @@
 
 .searchbar #search-icon {
     position: absolute;
-    top: 11px;
+    top: 14px;
     left: 20px;
-    color: var(--icon);
+    color: var(--searchbar-placeholder);
 }
 
 

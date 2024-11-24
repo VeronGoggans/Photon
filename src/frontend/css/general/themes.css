@@ -67,6 +67,7 @@
     --sidebar-text: #d6d8e5;
     --sidebar-text-hover: #ffffff; 
     --card: #141322;
+    --folder: #1c1c2c;
     --text: #bbbed2;
     --icon: #bbbed2;
     --input-bg: #18182d;
@@ -162,18 +163,19 @@
     --secondary: #5c7dff;
     --background: #ffffff;
     --notification: #f9fafd;
-    --subtitle: #63656d;
+    --subtitle: #2f3773;
     --sidebar: #ffffff; 
     --sidebar-soft: #fafafd;
     --searchbar: #f4f4fc;
     --sidebar-text: #444452; 
     --sidebar-text-hover: #1d2134; 
     --card: #ffffff; 
+    --folder: #f4f4fc;
     --text: #444863;
     --icon: #4c4c68; 
     --input-bg: #f6f6fb;
     --icon-hover: #5c7fdd;
-    --important: #444863;
+    --important: #2f3773;
     
     --hover-searchbar-options: #f7f7fa;
     --hover-text: #444863;
@@ -193,6 +195,6 @@
     /*Feedback variables*/
     --completed-checklist-task: #f8f9ff;
 
-    --active-tab-bg: #d7dfff;
-    --active-tab-text: #5673ff;
+    --active-tab-bg: #f4f4fc;
+    --active-tab-text: #2f3773;
 }

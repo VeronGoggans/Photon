@@ -29,6 +29,7 @@ export class Stack {
 }
 
 
+
 export class BoundedStack extends Stack {
     constructor(capacity) {
         super();

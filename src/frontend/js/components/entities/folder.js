@@ -39,7 +39,6 @@ class RecentFolder extends HTMLElement {
             <i id="folder-icon" class="bi bi-folder-fill"></i>
             <p>${this.folder.name}</p>
         `;
-        applyWidgetStyle(this);
     }
 
     handleCardClick() {        
@@ -113,7 +112,6 @@ class Folder extends HTMLElement {
             <i id="folder-icon" class="bi bi-folder-fill"></i>
             <p>${formatName(this.folder.name)}</p>
         `;
-        applyWidgetStyle(this);
         this.addColor();
     }
 

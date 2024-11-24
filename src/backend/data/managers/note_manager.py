@@ -37,7 +37,7 @@ class NoteManager:
         recent_notes = (
             db.query(Note)
             .order_by(Note.last_edit.desc())
-            .limit(6)
+            .limit(7)
             .all()
         )
         return recent_notes

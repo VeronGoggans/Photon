@@ -82,9 +82,9 @@ i {
 }
 
 .view-title {
-    font-size: 40px;
+    font-size: 45px;
     width: fit-content;
-    font-weight: 500;
+    font-weight: 300;
     color: var(--important);
 }
 

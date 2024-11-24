@@ -50,7 +50,6 @@
     display: flex;
     height: fit-content;
     margin: 0px;
-    color: var(--text)
 }
 
 .folders {
