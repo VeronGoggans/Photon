@@ -1,4 +1,5 @@
-#exit-editor-btn {
+#exit-editor-btn,
+#recently-viewed-notes-btn {
     display: flex;
     width: 40px;
     height: 40px;
@@ -9,6 +10,7 @@
     font-size: 20px;
     color: var(--editor-text);
 } 
+
 
 
 .save-note-btn {
@@ -34,6 +36,16 @@
     overflow: visible;
     cursor: pointer;
     transition: 150ms;
+    height: 34px;
+}
+
+#editor-options-btn {
+    padding: 0 10px;
+    border-radius: 7px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .editor-options-dropdown .options {
@@ -128,6 +140,7 @@
 .save-note-btn:hover,
 #editor-options-btn:hover,
 #exit-editor-btn:hover,
+#recently-viewed-notes-btn:hover,
 #editor-flashcard-set-btn:hover {
     background-color: var(--hover);
     color: #5c7dff !important;

@@ -54,21 +54,6 @@ export const notificationMessages = {
 }
 
 
-export const commands = {
-    'link': 'link-option',
-    'video': 'embed-video-option',
-    'line': 'horizontal-line-option',
-    'ul': 'unordered-list',
-    'ol': 'ordered-list',
-    'check': 'check-list',
-    'h1': 'heading-1',
-    'h2': 'heading-2',
-    'h3': 'heading-3',
-    'h4': 'heading-4',
-    'html': 'insert-html',
-    'snippit': 'code-snippit'
-}
-
 export const stickyNoteColors = [
     '#ffdfef',
     '#ded7ff',

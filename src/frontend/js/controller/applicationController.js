@@ -92,6 +92,7 @@ export class ApplicationController {
 
                     if (!newEditorObject) {
                         this.openInTextEditor(editorObject, editorObjectType);
+                        this.noteController.patchLastViewTime(editorObject.id);
                     }
                     // EditorObjectType can be Template or note.
                     this.sidebarView.setActiveTab(`${editorObjectType}s`);

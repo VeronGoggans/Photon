@@ -37,7 +37,17 @@ class NoteManager:
         recent_notes = (
             db.query(Note)
             .order_by(Note.last_edit.desc())
-            .limit(7)
+            .limit(10)
+            .all()
+        )
+        return recent_notes
+    
+
+    def get_recent_viewed(self, db: Session) -> list[Note]:
+        recent_notes = (
+            db.query(Note)
+            .order_by(Note.last_visit.desc())
+            .limit(5)
             .all()
         )
         return recent_notes
@@ -70,6 +80,12 @@ class NoteManager:
     def update_bookmark(self, note_id: int, new_bookmark_value: bool, db: Session) -> None:
         note = find_note(note_id, db)
         note.bookmark = new_bookmark_value
+        db.commit()
+
+
+    def update_visit_date(self, note_id: int, db: Session) -> (None | NotFoundException):
+        note = find_note(note_id, db)
+        note.last_visit = datetime.now()
         db.commit()
 
 

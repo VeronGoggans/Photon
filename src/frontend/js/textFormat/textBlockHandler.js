@@ -4,7 +4,7 @@ export class TextBlockHandler {
     }
 
     parse() {        
-        this.headings = this.page.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        this.headings = this.page.querySelectorAll('h1, h2, h3, h4');
         this.anchorTags = this.page.querySelectorAll('a');
         this.#eventListeners();
     }

@@ -1,1 +1,0 @@
- <div><br></div><div> <h2>Things I am learning</h2><div> <ol><li>Sqlite</li><li>OAuth</li><li>Electron</li><li>SQLAlchemy</li><li>DevOps</li><li>ISO 27001</li><li>File Uploading</li></ol></div></div>

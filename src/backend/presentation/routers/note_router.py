@@ -18,10 +18,12 @@ class NoteRouter:
         self.route.add_api_route('/noteById/{note_id}', self.get_note_by_id, methods=['GET'])
         self.route.add_api_route('/noteSearchItems', self.get_search_items, methods=['GET'])
         self.route.add_api_route('/recentNotes', self.get_recent_notes, methods=['GET'])
+        self.route.add_api_route('/recentViewedNotes', self.get_recent_viewed_notes, methods=['GET'])
         self.route.add_api_route('/note', self.update_note, methods=['PUT'])
         self.route.add_api_route('/moveNote', self.move_note, methods=['PUT'])
         self.route.add_api_route('/note/{note_id}', self.delete_note, methods=['DELETE'])
         self.route.add_api_route('/note/{note_id}/bookmark', self.update_bookmark, methods=['PATCH'])
+        self.route.add_api_route('/viewedNoteTime/{note_id}', self.note_visit, methods=['PATCH'])
 
 
     @handle_exceptions
@@ -51,6 +53,11 @@ class NoteRouter:
     
 
     @handle_exceptions
+    def get_recent_viewed_notes(self, db: Session = Depends(Database.get_db)):
+        return {'status': HttpStatus.OK, 'notes': self.service.get_recent_viewed_notes(db)}
+    
+
+    @handle_exceptions
     def update_note(self, request: PutNoteRequest, db: Session = Depends(Database.get_db)):
         return {'status': HttpStatus.OK, 'note': self.service.update_note(request, db)}
     
@@ -59,6 +66,12 @@ class NoteRouter:
     def update_bookmark(self, note_id: int, request: BookmarkRequest, db: Session = Depends(Database.get_db)):
         self.service.update_bookmark(note_id, request, db)
         return { 'status': HttpStatus.OK}
+    
+
+    @handle_exceptions
+    def note_visit(self, note_id: int, db: Session = Depends(Database.get_db)):
+        self.service.update_visit(note_id, db) 
+        return {'status': HttpStatus.OK}
 
 
     @handle_exceptions

@@ -205,6 +205,7 @@ const editorTemplate = `
       <div class="toolbar">
         <div class="toolbar-top">
           <i id="exit-editor-btn" class="bi bi-arrow-left"></i>
+          <i id="recently-viewed-notes-btn" class="bi bi-clock-history"></i>
           <p class="document-location"></p>
           <div class="save-note-btn">Save</div>
           
@@ -232,85 +233,10 @@ const editorTemplate = `
         <i id="editor-flashcard-set-btn" class="bi bi-card-text"></i>
       </div>
 
-      <div class="rich-text-option-container">
-        <div class="btn-group">
-            <button id="boldBtn" onclick="formatText('bold')"><i class="bi bi-type-bold"></i></button>
-            <button id="italicBtn" onclick="formatText('italic')"><i class="bi bi-type-italic"></i></button>
-            <button id="underlineBtn" onclick="formatText('underline')"><i class="bi bi-type-underline"></i></button>
-            <button id="strikeBtn" onclick="formatText('strikethrough')"><i class="bi bi-type-strikethrough"></i></button>
-            <button onclick="formatText('createLink')"><i class="bi bi-link-45deg"></i></button>
-        </div>
-        <div class="btn-group">
-            <button onclick="formatText('justifyLeft')"><i class="bi bi-text-left"></i></button>
-            <button id="centerAlignBtn" onclick="formatText('justifyCenter')"><i class="bi bi-text-center"></i></button>
-            <button id="rightAlignBtn" onclick="formatText('justifyRight')"><i class="bi bi-text-right"></i></button>
-        </div>
-        <div class="btn-group">
-            <button onclick="formatText('insertUnorderedList')"><i class="bi bi-list-task"></i></button>
-            <button onclick="formatText('insertOrderedList')"><i class="bi bi-list-ol"></i></button>
-        </div>
-        <div class="btn-group">
-            <button onclick="formatText('removeFormat')"><i class="fa-solid fa-text-slash" style="font-size: 15px;"></i></button>
-        </div>
-        <div class="btn-group">
-            <div class="color-dropdown">
-                <button><i class="bi bi-eyedropper"></i></button>
-                <ul>
-                    <li style="background-color: #ff0000"></li>
-                    <li style="background-color: #0000ff"></li>
-                    <li style="background-color: #ffff00"></li>
-                    <li style="background-color: #008000"></li>
-                    <li style="background-color: #800080"></li>
-                    <li style="background-color: #ffa500"></li>
-                    <li style="background-color: #ffc0cb"></li>
-
-                    <li style="background-color: #ff5555"></li>
-                    <li style="background-color: #4e6eff"></li>
-                    <li style="background-color: #ffff4f"></li>
-                    <li style="background-color: #39dd39"></li>
-                    <li style="background-color: #e632e6"></li>
-                    <li style="background-color: #ffb938"></li>
-                    <li style="background-color: #ffd0d8"></li>
-
-                    <li style="background-color: #ff8383"></li>
-                    <li style="background-color: #849bff"></li>
-                    <li style="background-color: #ffff7d"></li>
-                    <li style="background-color: #81ff81"></li>
-                    <li style="background-color: #ff82ff"></li>
-                    <li style="background-color: #ffcf78"></li>
-                    <li style="background-color: #ffdce2"></li>
-
-                    <li style="background-color: #ffbaba"></li>
-                    <li style="background-color: #b3c1ff"></li>
-                    <li style="background-color: #ffffb2"></li>
-                    <li style="background-color: #b4ffb4"></li>
-                    <li style="background-color: #ffaeff"></li>
-                    <li style="background-color: #ffdea0"></li>
-                    <li style="background-color: #ffe9ed"></li>
-                </ul>
-            </div>
-        </div>
-      </div>
-
-      <div class="foreward-slash-command-container">
-        <input type="text" placeholder="Command..." spellcheck="false">
-        <div class="commands">
-            <div class="link-option"><i class="bi bi-link-45deg"></i>Add a url</div>
-            <div class="embed-video-option"><i class="bi bi-play-fill"></i>Add a video</div>
-            <div class="horizontal-line-option"><i class="bi bi-hr"></i>Add a horizontal line</div>
-            <div class="unordered-list"><i class="bi bi-list-ul"></i>Bullet list</div>
-            <div class="ordered-list"><i class="bi bi-list-ol"></i>Numbered list</div>
-            <div class="check-list"><i class="bi bi-check-square"></i>Check list</div> 
-            <div class="heading-1"><i class="bi bi-type-h1"></i>Add heading 1</div>
-            <div class="heading-2"><i class="bi bi-type-h2"></i>Add heading 2</div>
-            <div class="heading-3"><i class="bi bi-type-h3"></i>Add heading 3</div>
-            <div class="heading-4"><i class="bi bi-type-h4"></i>Add heading 4</div>
-            <div class="snippit"><i class="bi bi-code-slash"></i>Add code snippit</div>
-            <div class="note"><i class="bi bi-file-earmark"></i>Add note reference</div>
-            <div class="template"><i class="bi bi-file-earmark-text"></i>Apply template</div>
-            <div class="insert-html"><i class="bi bi-filetype-html"></i>Insert HTML</div>
-        </div>
-    </div>
+      
+      <rich-text-bar></rich-text-bar>
+      <slash-command-container></slash-command-container>
+      
     
     </div>
 `

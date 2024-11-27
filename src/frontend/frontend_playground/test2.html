@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/general/themes.css">
     <link rel="stylesheet" href="../css/general/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <style>
         body {
@@ -16,102 +17,60 @@
             background-color: rgb(255, 255, 255);
         }
 
-        .rich-text-option-container {
-            margin-top: 50px;
-            visibility: visible;
-            top: 0;
-            opacity: 1;
+        .color-picker {
+            background-color: transparent;
         }
 
-        .color-dropdown {
-            position: relative;
-        }
-
-        .color-dropdown ul {
-            position: absolute;
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-            gap: 7px;
-            list-style: none;
-            background-color: #fff;
-            box-shadow: 0 0 10px var(--shadow);
-            border-radius: 10px;
-            margin: 0;
-            padding: 15px;
-        }
-
-        .color-dropdown ul li {
-            cursor: pointer;
-            border-radius: 7px;
-            color: var(--text);
-            
-            width: 30px;
-            height: 30px;
-        }
         
     </style>
 </head>
 <body>
     <div class="rich-text-option-container">
         <div class="btn-group">
-            <button id="boldBtn" onclick="formatText('bold')"><i class="fa-solid fa-bold"></i></button>
-            <button id="italicBtn" onclick="formatText('italic')"><i class="fa-solid fa-italic"></i></button>
-            <button id="underlineBtn" onclick="formatText('underline')"><i class="fa-solid fa-underline"></i></button>
-            <button id="strikeBtn" onclick="formatText('strikethrough')"><i class="fa-solid fa-strikethrough"></i></button>
-            <button onclick="formatText('createLink')"><i class="fa-solid fa-link"></i></button>
+            <button id="boldBtn" onclick="formatText('bold')"><i class="bi bi-type-bold"></i></button>
+            <button id="italicBtn" onclick="formatText('italic')"><i class="bi bi-type-italic"></i></button>
+            <button id="underlineBtn" onclick="formatText('underline')"><i class="bi bi-type-underline"></i></button>
+            <button id="strikeBtn" onclick="formatText('strikethrough')"><i class="bi bi-type-strikethrough"></i></button>
+            <button onclick="formatText('createLink')"><i class="bi bi-link-45deg"></i></button>
         </div>
         <div class="btn-group">
-            <button onclick="formatText('justifyLeft')"><i class="fa-solid fa-align-left"></i></button>
-            <button id="centerAlignBtn" onclick="formatText('justifyCenter')"><i class="fa-solid fa-align-center"></i></button>
-            <button id="rightAlignBtn" onclick="formatText('justifyRight')"><i class="fa-solid fa-align-right"></i></button>
+            <button onclick="formatText('justifyLeft')"><i class="bi bi-text-left"></i></button>
+            <button id="centerAlignBtn" onclick="formatText('justifyCenter')"><i class="bi bi-text-center"></i></button>
+            <button id="rightAlignBtn" onclick="formatText('justifyRight')"><i class="bi bi-text-right"></i></button>
         </div>
         <div class="btn-group">
-            <button onclick="formatText('insertUnorderedList')"><i class="fa-solid fa-list-ul"></i></button>
-            <button onclick="formatText('insertOrderedList')"><i class="fa-solid fa-list-ol"></i></button>
+            <button onclick="formatText('insertUnorderedList')"><i class="bi bi-list-task"></i></button>
+            <button onclick="formatText('insertOrderedList')"><i class="bi bi-list-ol"></i></button>
         </div>
         <div class="btn-group">
-            <button onclick="formatText('removeFormat')"><i class="fa-solid fa-text-slash"></i></button>
+            <button onclick="formatText('removeFormat')"><i class="fa-solid fa-text-slash" style="font-size: 15px;"></i></button>
         </div>
         <div class="btn-group">
             <div class="color-dropdown">
-                <button><i class="fa-solid fa-paintbrush"></i></button>
+                <button><i class="bi bi-eyedropper"></i></button>
                 <ul>
-                    <li style="background-color: #ff0000"></li>
-                    <li style="background-color: #0000ff"></li>
-                    <li style="background-color: #ffff00"></li>
-                    <li style="background-color: #008000"></li>
-                    <li style="background-color: #800080"></li>
-                    <li style="background-color: #ffa500"></li>
-                    <li style="background-color: #ffc0cb"></li>
 
-                    <li style="background-color: #ff5555"></li>
-                    <li style="background-color: #4e6eff"></li>
-                    <li style="background-color: #ffff4f"></li>
-                    <li style="background-color: #39dd39"></li>
+                    <li style="background-color: #f36f6f"></li>
+                    <li style="background-color: #728cff"></li>
+                    <li style="background-color: #a16eff"></li>
                     <li style="background-color: #e632e6"></li>
-                    <li style="background-color: #ffb938"></li>
-                    <li style="background-color: #ffd0d8"></li>
+                    <li style="background-color: #80ca4f"></li>
+                    <li style="background-color: #efb35f"></li>
+                    <li style="background-color: #69c5e3"></li>
 
-                    <li style="background-color: #ff8383"></li>
-                    <li style="background-color: #849bff"></li>
-                    <li style="background-color: #ffff7d"></li>
-                    <li style="background-color: #81ff81"></li>
-                    <li style="background-color: #ff82ff"></li>
-                    <li style="background-color: #ffcf78"></li>
-                    <li style="background-color: #ffdce2"></li>
+                    <li style="background-color: #000000"></li>
+                    <li style="background-color: #2f3037"></li>
+                    <li style="background-color: #4e505c"></li>
+                    <li style="background-color: #a4a4b3"></li>
+                    <li style="background-color: #c0c0d8"></li>
+                    <li style="background-color: #d3d3db"></li>
+                    <li style="background-color: #ffffff" style="border: 1px solid #dddddd;"></li>
 
-                    <li style="background-color: #ffbaba"></li>
-                    <li style="background-color: #b3c1ff"></li>
-                    <li style="background-color: #ffffb2"></li>
-                    <li style="background-color: #b4ffb4"></li>
-                    <li style="background-color: #ffaeff"></li>
-                    <li style="background-color: #ffdea0"></li>
-                    <li style="background-color: #ffe9ed"></li>
                 </ul>
             </div>
         </div>
       </div>
-      <p style="margin-top: 500px; color: #000000;  font-size: 20px;">
+      <p style="margin-top: 500px; color: #d3d3db;  font-size: 20px;">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni soluta commodi dignissimos quaerat quia reprehenderit illo repellat, voluptatum accusamus aperiam. Ad voluptatibus totam perferendis sit at dicta maxime nulla esse?
       </p>
       <h1>Hello world</h1>

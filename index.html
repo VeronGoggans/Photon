@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="src/frontend/css/general/animation.css">
     <link rel="stylesheet" href="src/frontend/css/notification/notification.css">
     <link rel="stylesheet" href="src/frontend/css/textEditor/textEditor.css">
-    <link rel="stylesheet" href="src/frontend/css/textEditor/toolbarBottom.css">
     <link rel="stylesheet" href="src/frontend/css/textEditor/toolbarTop.css">
     <link rel="stylesheet" href="src/frontend/css/textEditor/editorSpawnables.css">
     <link rel="stylesheet" href="src/frontend/css/modals/saveContainer.css">
@@ -63,6 +62,7 @@
     <script type="module" src="src/frontend/js/components/entities/flashcardDeck.js"></script>
     <script type="module" src="src/frontend/js/components/pageBlocks/pageBlocks.js"></script>
     <script type="module" src="src/frontend/js/components/notifications/notifications.js"></script>
+    <script type="module" src="src/frontend/js/components/editor.js"></script>
 </head>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
@@ -105,35 +105,7 @@
     
 </div> 
     <div class="dialog"></div>
-      
-      <script>
-
-        function formatText(command, value = null) {
-          if (document.queryCommandSupported(command)) {
-            document.execCommand('styleWithCSS', false, true);
-            document.execCommand(command, false, value);
-            updateToolbarState();
-          }
-        }
-
-        function updateToolbarState() {
-            const italicButton = document.getElementById('italicBtn');
-            const boldButton = document.getElementById('boldBtn');
-            const underlineButton = document.getElementById('underlineBtn');
-            const strikeButton = document.getElementById('strikeBtn');
-            const centerAlignButton = document.getElementById('centerAlignBtn');
-            const rightAlignButton = document.getElementById('rightAlignBtn');
-            
-            italicButton.classList.toggle('active-toolbar-btn', document.queryCommandState('italic'));
-            boldButton.classList.toggle('active-toolbar-btn', document.queryCommandState('bold'));
-            underlineButton.classList.toggle('active-toolbar-btn', document.queryCommandState('underline'));
-            strikeButton.classList.toggle('active-toolbar-btn', document.queryCommandState('strikeThrough'));
-            centerAlignButton.classList.toggle('active-toolbar-btn', document.queryCommandState('justifyCenter'));
-            rightAlignButton.classList.toggle('active-toolbar-btn', document.queryCommandState('justifyRight'));
-        }
-      </script>
     <script type="module" src="startup.js"></script>
     <script type="module" src="titleBar.js"></script>
-    
 </body>
 </html>

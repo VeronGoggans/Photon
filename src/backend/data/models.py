@@ -33,6 +33,7 @@ class Note(Base):
     content = Column(String, nullable=True)
     bookmark = Column(Boolean, default=False)
     last_edit = Column(String, nullable=False, default=datetime.now())
+    last_visit = Column(String, nullable=False, default=datetime.now())
     creation = Column(String, nullable=False, default=datetime.now())
     
     # Foreign keys for folder or subfolder

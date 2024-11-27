@@ -34,12 +34,20 @@ class NoteService:
         return self.manager.get_recent(db)
     
 
+    def get_recent_viewed_notes(self, db: Session) -> list[Note]:
+        return self.manager.get_recent_viewed(db)
+    
+
     def update_note(self, request: PutNoteRequest, db: Session) -> Note:
         return self.manager.update(request.note_id, request.name, request.content, request.bookmark, db)
     
 
     def update_bookmark(self, note_id: int, request: BookmarkRequest, db: Session) -> None:
         self.manager.update_bookmark(note_id, request.bookmark, db) 
+
+
+    def update_visit(self, note_id: int, db: Session) -> None:
+        self.manager.update_visit_date(note_id, db)
 
 
     def delete_note(self, note_id: int, db: Session) -> Note:

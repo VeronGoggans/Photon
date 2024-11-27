@@ -8,14 +8,13 @@ export class PlacementHelper {
 
         this.sidebar = document.querySelector('.sidebar');
         this.editor = document.querySelector('.editor');
-        this.formatBar = document.querySelector('.rich-text-option-container');
-        this.forwardSlashCommandContainer = document.querySelector('.foreward-slash-command-container');
+        this.formatBar = document.querySelector('rich-text-bar');
+        this.forwardSlashCommandContainer = document.querySelector('slash-command-container');
     }
 
 
     placeFormatBar(selection) {
         const rect = selection.getRangeAt(0).getBoundingClientRect();
-
         const xPosition = this.#checkForWidthOverflow(rect, this.formatBarWidth);
         this.formatBar.style.top = `${rect.top + window.scrollY - this.formatBarHeigth - this.paddingY}px`;
         this.formatBar.style.left = `${xPosition}px`;
@@ -49,7 +48,6 @@ export class PlacementHelper {
         const screenWidth = this.editor.clientWidth;
         const spawnPoint = rect.left + window.scrollX - this.sidebar.clientWidth;
         const totalWidth = spawnPoint + width;
-        
 
         if (totalWidth > screenWidth) {            
             const pixelOverflow = totalWidth - screenWidth;
@@ -66,7 +64,9 @@ export class PlacementHelper {
     #checkForHeightOverflow(rect) {
         const spawnPoint = rect.top + window.scrollY;
         const totalHeigth = spawnPoint - this.commandBarHeigth; 
-        if (totalHeigth <= 10) return true
+        if (totalHeigth <= 10) { 
+            return true
+        }
         return false
     }
 }

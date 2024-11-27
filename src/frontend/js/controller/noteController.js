@@ -53,9 +53,11 @@ export class NoteController {
     
 
     async patchBookmark(noteId, newBookmarkValue) {
-        console.log(newBookmarkValue);
-        
         await this.model.patch(`/note/${noteId}/bookmark`, { 'bookmark': newBookmarkValue })
+    }
+
+    async patchLastViewTime(noteId) {   
+        await this.model.patch(`/viewedNoteTime/${noteId}`);
     }
 
 

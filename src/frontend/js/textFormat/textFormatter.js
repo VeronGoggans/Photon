@@ -50,22 +50,23 @@ export function addList(range, listType) {
   const list = document.createElement(listType);
   const li = document.createElement('li');
 
+  console.log('creating list');
+  console.log(list);
+
   list.appendChild(li);
   range.insertNode(list);
-  removeSelectedEffect(range, list);
+  // removeSelectedEffect(range, list);
   moveCursorToTextBlock(li);
 }
 
 
 
 export function addChecklist(range) {
-    console.log('check');
     const br = document.createElement('br');
     const checklist = document.createElement('check-list');
     checklist.init();
     range.insertNode(br);
     range.insertNode(checklist);
-    
 }
 
 

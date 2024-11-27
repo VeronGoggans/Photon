@@ -1,6 +1,6 @@
 /*Rich Text Options Container*/
 
-.rich-text-option-container {
+rich-text-bar {
     user-select: none;
     position: absolute;
     bottom: -80px;
@@ -33,15 +33,12 @@
     color: var(--editor-text);
 }
 
-.btn-group button:hover {
-    color: #5c7dff;
-    background-color: var(--hover);
+.btn-group button:hover,
+.active-text-format {
+    color: #5c7dff !important;
+    background-color: var(--hover) !important;
 }
 
-.active-text-format {
-    background-color: var(--hover);
-    color: #5c7dff;
-}
 
 .color-dropdown {
     position: relative;
@@ -51,6 +48,8 @@
     opacity: 0;
     visibility: hidden;
     position: absolute;
+    left: -240px;
+    top: 50px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     gap: 7px;
@@ -65,7 +64,7 @@
 
 .color-dropdown ul li {
     cursor: pointer;
-    border-radius: 7px;
+    border-radius: 50%;
     color: var(--text);
     width: 30px;
     height: 30px;
@@ -76,7 +75,7 @@
 
 /*Forward Slash Command Container*/
 
-.foreward-slash-command-container {
+slash-command-container {
     user-select: none;
     position: absolute;
     bottom: -300px;
@@ -93,7 +92,7 @@
     transition: 150ms;
 }
 
-.foreward-slash-command-container input {
+slash-command-container input {
     border: none;
     padding: 5px 10px;
     font-size: 16px;
@@ -101,28 +100,28 @@
     color: var(--editor-text);
 }
 
-.foreward-slash-command-container .commands {
+slash-command-container .commands {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
     row-gap: 5px;
 }
 
-.foreward-slash-command-container .commands::-webkit-scrollbar {
+slash-command-container .commands::-webkit-scrollbar {
     background-color: transparent;
     width: 5px;
 }
 
-.foreward-slash-command-container .commands::-webkit-scrollbar-thumb {
+slash-command-container .commands::-webkit-scrollbar-thumb {
     background-color: #cfd2e3;
     border-radius: 10px;
 }
 
-.foreward-slash-command-container .commands::-webkit-scrollbar-thumb:active {
+slash-command-container .commands::-webkit-scrollbar-thumb:active {
   background-color: #bbbed4;
 }
 
-.foreward-slash-command-container .commands div {
+slash-command-container .commands div {
     cursor: pointer;
     align-items: center;
     height: 50px;
@@ -135,11 +134,15 @@
     transition: 50ms;
 }
 
-.foreward-slash-command-container .commands div:hover {
+slash-command-container .commands div:hover {
     background-color: var(--hover-slash-command);
 }
 
-.foreward-slash-command-container i {
+slash-command-container .commands .active {
+    background-color: var(--hover-slash-command) !important;
+}
+
+slash-command-container i {
     display: flex;
     font-size: 19px;
     justify-content: center;
