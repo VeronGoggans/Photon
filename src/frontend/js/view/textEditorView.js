@@ -124,9 +124,7 @@ export class TextEditorView extends BaseView {
   }
 
 
-  #renderRecentlyViewedNotes(notes) {
-    console.log(notes);
-    
+  #renderRecentlyViewedNotes(notes) {    
     const fragment  = document.createDocumentFragment();
 
     notes.forEach(note => {

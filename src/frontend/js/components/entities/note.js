@@ -157,7 +157,7 @@ class RecentlyViewedNote extends HTMLElement {
             <span class="name">${this.note.name}</span>
         </div>
         <span class="view-date">${formatDate(this.note.last_visit)}</span>
-        `
+        `        
     }
 
     handleCardClick() {

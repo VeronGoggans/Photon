@@ -10,16 +10,30 @@ export class DropdownHelper {
 
     closeDropdowns(target) {
       this.dropdownOptions.forEach((dropdown) => {
-        if (dropdown !== target) {
-          dropdown.style.visibility = 'hidden';
-          dropdown.style.opacity = '0';
+          if (dropdown !== target) {
+              dropdown.style.visibility = 'hidden';
+              dropdown.style.opacity = '0';
+          }
         }
-      })
+      )
+    }
+
+
+    updateRecentlyViewedNoteTimes(target) {
+        // update all view times inside the recently-viewed-notes-dropdown         
+        if (target.id === 'recently-viewed-notes-dropdown') {
+            const components = document.querySelectorAll('recently-viewed-note-card');
+          
+            Array.from(components).forEach(component => {
+                component.render();
+            });
+        }      
     }
 
 
     toggleDropdown(dropdownOptions) {      
       this.closeDropdowns(dropdownOptions);
+      this.updateRecentlyViewedNoteTimes(dropdownOptions);
       dropdownOptions.style.visibility = dropdownOptions.style.visibility === 'visible' ? 'hidden' : 'visible';
       dropdownOptions.style.opacity = dropdownOptions.style.opacity === '1' ? '0' : '1';
     }
