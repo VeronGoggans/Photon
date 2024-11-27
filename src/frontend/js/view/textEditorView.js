@@ -1,6 +1,5 @@
 import { KeyEventListener } from "../eventListeners/keyEventListener.js";
 import { DropdownHelper } from "../helpers/dropdownHelper.js";
-import { addColor } from "../textFormat/textFormatter.js"; 
 import { TextBlockHandler } from "../textFormat/textBlockHandler.js";
 import { AnimationHandler } from "../handlers/animationHandler.js";
 import { BaseView } from "../view/baseView.js"
@@ -18,7 +17,13 @@ export class TextEditorView extends BaseView {
     this.#eventListeners();
 
     this.textBlockHandler = new TextBlockHandler(this.page);
-    this.dropdownHelper = new DropdownHelper(this.dropdowns, this.dropdownOptions, this.viewElement, ['.editor-options-dropdown']);
+
+    this.dropdownHelper = new DropdownHelper(
+      this.dropdowns, 
+      this.dropdownOptions, 
+      this.viewElement, 
+      ['.editor-options-dropdown', '.recently-viewed-notes-dropdown']
+    );
     this.keyEventListener = new KeyEventListener(this);
     AnimationHandler.fadeInFromSide(this.viewElement)
   }
@@ -29,11 +34,11 @@ export class TextEditorView extends BaseView {
    * 
    * @param {Object} object - could be a Note or Template object
    */
-  open(object, folders) {
+  open(object, folders, viewedNotes) {
     this.editorContent = object.content;
     this.page.innerHTML = object.content;
     this.documentNameInput.value = object.name;
-    this.show(folders);
+    this.show(folders, viewedNotes);
     this.textBlockHandler.parse();
   }
 
@@ -68,7 +73,8 @@ export class TextEditorView extends BaseView {
   } 
 
 
-  show(folders) {
+  show(folders, viewedNotes) {
+    this.#renderRecentlyViewedNotes(viewedNotes);
     this.documentLocation.appendChild(createDocumentLocation(folders));
     this.editor.scrollTop = 0;
     this.page.focus();
@@ -80,9 +86,6 @@ export class TextEditorView extends BaseView {
     this.page.innerHTML = this.page.innerHTML += templateContent.content;
   }
 
-  async getSearchableNotes() {
-    return await this.applicationController.getSearchObjects(); 
-  }
 
   exitNoSave() {
     this.controller.loadPreviousView();
@@ -119,6 +122,23 @@ export class TextEditorView extends BaseView {
   renderSearchModal() {
     this.dialog.renderSearchModal(this.toolbar);
   }
+
+
+  #renderRecentlyViewedNotes(notes) {
+    console.log(notes);
+    
+    const fragment  = document.createDocumentFragment();
+
+    notes.forEach(note => {
+      const noteCard = document.createElement('recently-viewed-note-card');
+
+      noteCard.setData(note);
+      fragment.appendChild(noteCard);
+    });
+
+    this.recentlyViewedNotesOptions.appendChild(fragment);
+  }
+
 
   #getStoredEditorObject() {
     const storedEditorData = this.controller.getStoredObject();
@@ -159,11 +179,12 @@ export class TextEditorView extends BaseView {
 
     // dropdowns
     this.colorDropdown = document.querySelector('.color-dropdown ul');
-    this.colorDropdownOptions = this.colorDropdown.querySelectorAll('ul li');
     this.editorDropdown = document.querySelector('.editor-options-dropdown');
     this.editorDropdownOptions = this.editorDropdown.querySelector('.options');
-    this.dropdowns = [this.editorDropdown]
-    this.dropdownOptions = [this.editorDropdownOptions]
+    this.recentlyViewedNotesDropdown = document.querySelector('.recently-viewed-notes-dropdown');
+    this.recentlyViewedNotesOptions = this.recentlyViewedNotesDropdown.querySelector('.options');
+    this.dropdowns = [this.editorDropdown, this.recentlyViewedNotesDropdown];
+    this.dropdownOptions = [this.editorDropdownOptions, this.recentlyViewedNotesOptions];
   }
 
 

@@ -32,7 +32,7 @@ export class HomeView extends BaseView {
         const contentFragment = document.createDocumentFragment();
 
         for (let i = 0; i < notes.length; i++) {
-            const noteCard = createCustomElement(notes[i], 'recent-note-card');
+            const noteCard = createCustomElement(notes[i], 'recently-changed-note-card');
 
             contentFragment.appendChild(noteCard);
             AnimationHandler.fadeInFromBottom(noteCard);

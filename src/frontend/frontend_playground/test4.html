@@ -8,29 +8,91 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/general/animation.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:wght@100&display=swap" rel="stylesheet">
 
     <title>Document</title>
+    <style>
+        .notes {
+            width: 350px;
+            font-family: Poppins;
+
+        }
+        .recently-viewed-note-card {
+            background-color: rgb(255, 255, 255);
+            cursor: pointer;
+            transition: 200ms;
+            display: grid;
+            grid-template-columns: 1fr 80px;
+            color: var(--text);
+            
+            padding: 7px;
+            margin: 5px;
+            border-radius: 7px;
+        }
+
+        .recently-viewed-note-card .name-container {
+            display: grid;
+            grid-template-columns: 30px 1fr;
+        }
+
+        .recently-viewed-note-card .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            margin: auto 3px;
+            background-color: #5c7fdd;
+        }
+
+        .recently-viewed-note-card i {
+            color: #5c7fdd;
+            margin: auto 3px;
+        }
+
+        .recently-viewed-note-card:hover {
+            background-color: aliceblue;
+        }
+    </style>
 </head>
 <body>
-    <div id="mijnDiv">Dit is een voorbeeld tekst in de div.</div>
-    
-    <script>
-        // Verkrijg de div
-var div = document.getElementById('mijnDiv');
+    <div class="notes">
+        <div class="recently-viewed-note-card">
+            <div class="name-container">
+                <div class="dot"></div>
+                <span class="name">NoSQL alternatives </span>
+            </div>
+            <span class="view-date">5m ago</span>
+        </div>
+        <div class="recently-viewed-note-card">
+            <div class="name-container">
+                <div class="dot"></div>
+                <span class="name">NoSQL alternatives f32i </span>
+            </div>
+            <span class="view-date">5m ago</span>
+        </div>
+        <div class="recently-viewed-note-card">
+            <div class="name-container">
+                <div class="dot"></div>
+                <span class="name">NoSQL alternatives </span>
+            </div>
+            <span class="view-date">5m ago</span>
+        </div>
+        <div class="recently-viewed-note-card">
+            <div class="name-container">
+                <div class="dot"></div>
+                <span class="name">NoSQL</span>
+            </div>
+            <span class="view-date">5m ago</span>
+        </div>
+        <div class="recently-viewed-note-card">
+            <div class="name-container">
+                <div class="dot"></div>
+                <span class="name">NoSQL </span>
+            </div>
+            <span class="view-date">5m ago</span>
+        </div>
+    </div>
 
-// Verkrijg de tekstinhoud van de div
-var tekst = div.textContent || div.innerText; // Gebruik textContent voor de meeste browsers
-
-// Aantal tekens inclusief spaties
-var aantalTekensMetSpaties = tekst.length;
-
-// Aantal tekens zonder spaties
-var aantalTekensZonderSpaties = tekst.replace(/\s/g, '').length;
-
-// Toon het aantal tekens in de console
-console.log("Aantal tekens met spaties: " + aantalTekensMetSpaties);
-console.log("Aantal tekens zonder spaties: " + aantalTekensZonderSpaties);
-
-    </script>
 </body>
 </html>

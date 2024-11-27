@@ -1,5 +1,5 @@
 note-card,
-recent-note-card,
+recently-changed-note-card,
 template-card {
     cursor: pointer;
     min-height: 280px;
@@ -16,13 +16,13 @@ template-card {
 }
 
 note-card:hover,
-recent-note-card:hover,
+recently-changed-note-card:hover,
 template-card:hover {
     scale: 1.05;
 }
 
 note-card h4,
-recent-note-card h4,
+recently-changed-note-card h4,
 template-card h4 {
     padding: 5px;
     margin: auto 10px;
@@ -32,7 +32,7 @@ template-card h4 {
 }
 
 note-card .note-content-box,
-recent-note-card .note-content-box,
+recently-changed-note-card .note-content-box,
 template-card .note-content-box {
     padding: 10px;
     overflow: hidden;
@@ -43,7 +43,7 @@ template-card .note-content-box {
 
 
 note-card .note-content-box img,
-recent-note-card .note-content-box img,
+recently-changed-note-card .note-content-box img,
 template-card .note-content-box img {
     max-width: 150px;
     border-radius: 5px;
@@ -60,17 +60,17 @@ note-card .note-content-box i {
 }
 
 note-card .note-content-box iframe,
-recent-note-card .note-content-box iframe {visibility: hidden}
+recently-changed-note-card .note-content-box iframe {visibility: hidden}
 
 note-card .note-content-box hr,
-recent-note-card .note-content-box hr {
+recently-changed-note-card .note-content-box hr {
     border-style: none;
     border-radius: 5px;
     border: 1px solid var(--editor-text);
   }
 
 note-card .note-content-box :where(h1, h2),
-recent-note-card .note-content-box :where(h1, h2),
+recently-changed-note-card .note-content-box :where(h1, h2),
 template-card .note-content-box :where(h1, h2) {
     color: var(--important);
     font-weight: 500;
@@ -78,7 +78,7 @@ template-card .note-content-box :where(h1, h2) {
 }
 
 note-card .note-content-box h1,
-recent-note-card .note-content-box h1{
+recently-changed-note-card .note-content-box h1{
     font-size: 14px;
     font-weight: 400;
 }
@@ -89,4 +89,40 @@ note-card .note-content-box a {color: rgb(67, 142, 255)}
 
 .bookmarked-note {
     background-color: var(--bookmark) !important;
+}
+
+recently-viewed-note-card {
+    background-color: var(--editor-dropdown);
+    cursor: pointer;
+    transition: 200ms;
+    display: grid;
+    grid-template-columns: 1fr 80px;
+    color: var(--text);
+    
+    padding: 7px;
+    margin: 5px;
+    border-radius: 7px;
+}
+
+recently-viewed-note-card .name-container {
+    display: grid;
+    grid-template-columns: 30px 1fr;
+}
+
+recently-viewed-note-card .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    margin: auto 3px;
+    background-color: #5c7fdd;
+}
+
+recently-viewed-note-card .view-date {
+    font-size: 10px;
+    display: flex;
+    align-items: end;
+}
+
+recently-viewed-note-card:hover {
+    background-color: var(--hover-searchbar-options);
 }

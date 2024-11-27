@@ -1,6 +1,7 @@
 import { formatName, filterNotePreview } from "../../util/formatters.js";
 import { addDraggImage, showContextMenu } from "../../util/ui.js";
 import { applyWidgetStyle } from "../../util/ui.js";
+import { formatDate } from "../../util/date.js";
 
 
 const optionMenuTemplate = `
@@ -97,7 +98,7 @@ class Note extends HTMLElement {
 
 
 
-class RecentNote extends HTMLElement {
+class RecentlyChangedNote extends HTMLElement {
     constructor() {
         super();
     }
@@ -133,5 +134,38 @@ class RecentNote extends HTMLElement {
 }
 
 
+
+
+class RecentlyViewedNote extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    setData(note) {
+        this.note = note;
+    }
+
+    connectedCallback() {
+        this.render();
+        this.addEventListener('click', () => { this.handleCardClick() });
+    }
+
+    render() {
+        this.innerHTML = `
+        <div class="name-container">
+            <div class="dot"></div>
+            <span class="name">${this.note.name}</span>
+        </div>
+        <span class="view-date">${formatDate(this.note.last_visit)}</span>
+        `
+    }
+
+    handleCardClick() {
+        this.dispatchEvent(new CustomEvent('RecentlyViewedNoteCardClick', { detail: { note: this.note }, bubbles: true }));
+    }
+}
+
+
 customElements.define('note-card', Note);
-customElements.define('recent-note-card', RecentNote);
+customElements.define('recently-changed-note-card', RecentlyChangedNote);
+customElements.define('recently-viewed-note-card', RecentlyViewedNote);

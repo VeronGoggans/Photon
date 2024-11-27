@@ -48,18 +48,29 @@ export class BoundedStack extends Stack {
 }
 
 
-export class EvictingStack extends Stack {
+export class UniqueEvictingStack extends Stack {
     constructor(capacity) {
         super();
         this.capacity = capacity
     }
 
+
     push(item) {
-        if (this.stack.length === this.capacity) {
-          this.stack.shift();
+        // Remove item if present to ensure no duplicates
+        const existingIndex = this.stack.findIndex(existing => existing.id === item.id);
+        if (existingIndex !== -1) {
+            this.stack.splice(existingIndex, 1);
         }
-        this.stack.push(item);
+
+        // Remove the last item if capacity has been reached
+        if (this.stack.length === this.capacity) {
+            this.stack.pop();
+        }
+
+        // Move item to the front of the list
+        this.stack.unshift(item);
     }
+
 
     view() {
         return [...this.stack];

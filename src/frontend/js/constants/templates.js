@@ -205,7 +205,10 @@ const editorTemplate = `
       <div class="toolbar">
         <div class="toolbar-top">
           <i id="exit-editor-btn" class="bi bi-arrow-left"></i>
-          <i id="recently-viewed-notes-btn" class="bi bi-clock-history"></i>
+          <div class="recently-viewed-notes-dropdown">
+            <i id="recently-viewed-notes-btn" class="bi bi-clock-history"></i>
+            <div class="options"></div>
+          </div>
           <p class="document-location"></p>
           <div class="save-note-btn">Save</div>
           

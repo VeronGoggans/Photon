@@ -53,6 +53,27 @@ export function getPassedTime(dateString) {
 
 
 // ___________________Time based functions___________________________
+export function getFormattedTimestamp() {
+    const now = new Date();
+
+    // Get date components
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+    const day = String(now.getDate()).padStart(2, '0');
+
+    // Get time components
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+    // Get milliseconds (converted to microseconds)
+    const milliseconds = String(now.getMilliseconds()).padStart(3, '0');
+    const microseconds = milliseconds + '000'; // Extend to six digits
+
+    // Combine into the desired format
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}.${microseconds}`;
+}
+
 
 
 

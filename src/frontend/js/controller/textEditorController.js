@@ -2,16 +2,21 @@ import { TextEditorView } from "../view/textEditorView.js";
 import { TextEditorModel } from "../model/textEditorModel.js";
 import { FlashcardModel } from "../model/flashcardModel.js";
 
+
+
 export class TextEditorController {
     constructor(applicationController) {
         this.applicationController = applicationController;
         this.model = new TextEditorModel();
+        this.model.addRecentlyViewedNotes();
     }
+
 
     init() {
         this.textEditorView = new TextEditorView(this, this.applicationController);
         this.flashcardModel = new FlashcardModel();
     }
+
 
     loadPreviousView() {
         const previousView = this.applicationController.getPreviousView();
@@ -28,6 +33,7 @@ export class TextEditorController {
         }
         this.model.clear();
     }
+
 
     async save(name, content, notify, clearEditorObject) {
         const { editorObject, editorObjectType } = this.model.getStoredObject();
@@ -53,27 +59,35 @@ export class TextEditorController {
         }
     }
 
+
     openInTextEditor(editorObject, editorObjectType, allFolderNames) {
         this.model.storeEditorObject(editorObject, editorObjectType);
-        this.textEditorView.open(editorObject, allFolderNames);
+        const viewedNotes = this.model.getRecentlyViewedNotes();
+        this.textEditorView.open(editorObject, allFolderNames, viewedNotes);
     }
+
 
     storeEditorObject(editorObject, editorObjectType) {
         this.model.storeEditorObject(editorObject, editorObjectType);
     }
 
+
     showTextEditor(editorObjectType, allFolderNames) {
         this.model.storeEditorObject(null, editorObjectType);
-        this.textEditorView.show(allFolderNames);
+        const viewedNotes = this.model.getRecentlyViewedNotes();
+        this.textEditorView.show(allFolderNames, viewedNotes);
     }
+
 
     clearStoredObject() {
         this.model.clear()
     }
 
+
     getStoredObject() {
         return this.model.getStoredObject();
     }
+
 
     /**
      * Temporarely saves a flashcard object
@@ -83,6 +97,7 @@ export class TextEditorController {
     saveCardToModel(flashcard) {
         this.flashcardModel.storeFlashcard(flashcard);
     }
+
 
     /**
      * Temporarely stores the deck name

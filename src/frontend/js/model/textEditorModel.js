@@ -1,4 +1,7 @@
-import { EvictingStack } from "../datastuctures/stack.js";
+import { UniqueEvictingStack } from "../datastuctures/stack.js";
+import { HttpModel } from "./httpModel.js";
+import { getFormattedTimestamp } from "../util/date.js";
+
 
 
 export class TextEditorModel {
@@ -6,21 +9,18 @@ export class TextEditorModel {
         this.editorObject = null;
         this.editorObjectType = null;
         this.stackLimit = 5;
-        this.evictingStack = new EvictingStack(this.stackLimit);
+        this.httpModel = new HttpModel();
+        this.evictingStack = new UniqueEvictingStack(this.stackLimit);
     }
+
 
     storeEditorObject(editorObject, editorObjectType) {
         this.editorObject = editorObject;
         this.editorObjectType = editorObjectType;
 
         if (editorObject !== null && editorObjectType === 'note') {
-            this.evictingStack.push(
-                {
-                    id: editorObject.id,
-                    name: editorObject.name,
-                    time: new Date()
-                }
-            )
+            editorObject.last_visit = getFormattedTimestamp();
+            this.evictingStack.push(editorObject);
         }
     }
 
@@ -29,12 +29,10 @@ export class TextEditorModel {
         editorObject.name = name;
         editorObject.content = content;
     }
+    
 
-
-    setStoredRecentlyViewedNotes(notes) {
-        notes.forEach(note => {
-            this.evictingStack.push(note);
-        });
+    addRecentlyStoredNote(note) {
+        this.evictingStack.push(note);
     }
 
 
@@ -54,5 +52,11 @@ export class TextEditorModel {
     clear() {
         this.editorObject = null;
         this.editorObjectType = null;
+    }
+
+
+    async addRecentlyViewedNotes() {
+        const { notes } = await this.httpModel.get('/recentViewedNotes');
+        this.evictingStack.stack = notes    
     }
 }
