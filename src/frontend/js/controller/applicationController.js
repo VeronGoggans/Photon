@@ -207,10 +207,6 @@ export class ApplicationController {
         await this.noteController.move(folderId, droppedNoteId);
     } 
 
-    async deleteNote(noteId, notify) {
-        await this.noteController.delete(noteId, notify);
-    }
-
     // Template methods
 
     async addTemplate(name, content, notify) {
@@ -232,10 +228,6 @@ export class ApplicationController {
     async updateTemplate(template) {
         await this.templateController.update(template);
     }
-
-    async deleteTemplate(templateId, notify) {
-        await this.templateController.delete(templateId, notify)
-    }   
 
     // Folder methods
 

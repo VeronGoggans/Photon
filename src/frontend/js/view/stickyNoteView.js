@@ -1,12 +1,13 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
-import { BaseView } from "./baseView.js";
+import { Dialog } from "../util/dialog.js";
 
 
-export class StickyNoteView extends BaseView {
+export class StickyNoteView {
     constructor(controller, stickyWall) {
-        super(controller);
         this.controller = controller;
         this.stickyWall = stickyWall;
+
+        this.dialog = new Dialog();
         this.#initElements();
         this.#eventListeners();
         AnimationHandler.fadeInFromBottom(this.viewElement);
@@ -70,8 +71,6 @@ export class StickyNoteView extends BaseView {
         this.viewElement.addEventListener('PreviousViewButtonClick', () => {this.controller.loadPreviousView()});
 
         this._stickyWall.addEventListener('StickyCardClick', (event) => {
-            console.log('click');
-            
             const { sticky } = event.detail;
             this.dialog.renderStickyNoteModal(this.controller, this.stickyWall.id, sticky)
         });

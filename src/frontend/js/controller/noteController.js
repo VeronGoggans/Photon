@@ -69,6 +69,7 @@ export class NoteController {
 
     async delete(noteId, notify) {
         const { note } = await this.model.delete(`/note/${noteId}`);
+                
         this.searchbar.deleteSearchItem(noteId);
         this.view.renderDelete(note);
         

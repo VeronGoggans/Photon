@@ -1,14 +1,15 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
 import { decrementString } from "../util/ui.js";
-import { BaseView } from "./baseView.js";
 import { createCustomElement } from "../util/ui/components.js";
+import { Dialog } from "../util/dialog.js";
 
 
-export class TemplateView extends BaseView {
+export class TemplateView {
     constructor(controller, applicationController) {
-        super(controller);
         this.controller = controller;
         this.applicationController = applicationController;
+
+        this.dialog = new Dialog();
         this.#initElements();
         this.#eventListeners();
 

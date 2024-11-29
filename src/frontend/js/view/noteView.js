@@ -1,16 +1,17 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
 import { removeContent } from "../util/ui.js";
-import { BaseView } from "./baseView.js";
 import { createCustomElement } from "../util/ui/components.js";
 import { DropdownHelper } from "../helpers/dropdownHelper.js";
 import { renderEmptyFolderNotification } from "../handlers/notificationHandler.js";
+import { Dialog } from "../util/dialog.js";
 
 
-export class NoteView extends BaseView {
+export class NoteView {
     constructor(controller, applicationController) {
-        super(controller);
         this.controller = controller;
         this.applicationController = applicationController;
+
+        this.dialog = new Dialog();
         this.#initElements();
         this.#eventListeners();
         this.dropdownHelper = new DropdownHelper(

@@ -21,6 +21,7 @@ export class DeleteModal {
 
             if (this.notify) {
                 this.controller.handleDeleteButtonClick(this.id);
+                dialogEvent(this.HOST, 'close');
                 return
             }
             this.controller.delete(this.id);

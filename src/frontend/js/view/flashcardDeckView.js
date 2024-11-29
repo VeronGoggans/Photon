@@ -1,18 +1,20 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
-import { BaseView } from "./baseView.js";
+import { Dialog } from "../util/dialog.js";
 
 
-export class FlashcardDeckView extends BaseView {
+
+export class FlashcardDeckView {
     constructor(controller, applicationController) {
-        super(controller);
         this.controller = controller;
         this.applicationController = applicationController;
+        this.dialog = new Dialog();
 
         this.#initElements();
         this.#eventListeners();
         AnimationHandler.fadeInFromBottom(this._viewElement)
     }
 
+    
     renderAll(decks) {
         if (decks.length > 0) {
             const deckFragment = document.createDocumentFragment();

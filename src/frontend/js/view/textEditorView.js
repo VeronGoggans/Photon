@@ -2,13 +2,12 @@ import { KeyEventListener } from "../eventListeners/keyEventListener.js";
 import { DropdownHelper } from "../helpers/dropdownHelper.js";
 import { TextBlockHandler } from "../textFormat/textBlockHandler.js";
 import { AnimationHandler } from "../handlers/animationHandler.js";
-import { BaseView } from "../view/baseView.js"
 import { createDocumentLocation } from "../util/ui/components.js";
+import { Dialog } from "../util/dialog.js";
 
 
-export class TextEditorView extends BaseView {
+export class TextEditorView {
   constructor(controller, applicationController) {
-    super(controller);
     this.controller = controller;
     this.applicationController = applicationController;
     
@@ -17,7 +16,7 @@ export class TextEditorView extends BaseView {
     this.#eventListeners();
 
     this.textBlockHandler = new TextBlockHandler(this.page);
-
+    this.dialog = new Dialog();
     this.dropdownHelper = new DropdownHelper(
       this.dropdowns, 
       this.dropdownOptions, 
@@ -153,6 +152,12 @@ export class TextEditorView extends BaseView {
     this.controller.clearStoredObject();
   }
 
+  clearEditorContent() {
+    this.editorContent = '';
+    this.page.innerHTML = '';
+    this.documentNameInput.value = '';
+  }
+
 
 
   #initElements() {
@@ -198,8 +203,22 @@ export class TextEditorView extends BaseView {
       })
     })
 
-    this.noteDetailsSpan.addEventListener('click', () => {this.dialog.renderNoteDetailsModal(this.#getStoredEditorObject())});
-    this.deleteNoteSpan.addEventListener('click', () => {this.renderDeleteModal(this.#getStoredEditorObject().id, this.documentNameInput.value, this)});
+    this.recentlyViewedNotesDropdown.addEventListener('RecentlyViewedNoteCardClick', (event) => {
+      const { note } = event.detail;
+
+      // Save the current note
+      this.save(false, true, true);
+
+      // Store the current note in the editor model
+      this.controller.storeEditorObject(note, 'note');
+    })
+
+    this.noteDetailsSpan.addEventListener('click', () => { this.dialog.renderNoteDetailsModal(this.#getStoredEditorObject()) });
+    this.deleteNoteSpan.addEventListener('click', () => { 
+      const { id } = this.#getStoredEditorObject();
+      const noteName = this.documentNameInput.value;
+      this.dialog.renderDeleteModal(this, id, noteName, true);
+    });
     this.saveNoteSpan.addEventListener('click', async () => {await this.save(false, false, true, false)});
     this.newNoteSpan.addEventListener('click', () => {this.new()});
   

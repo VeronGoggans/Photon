@@ -42,6 +42,8 @@ export class Dialog {
         this.dialog.addEventListener('DialogEvent', (event) => {
             const { action } = event.detail;
             if (action === 'close') {
+                console.log('closing editor');
+                
                 this.close();
             }
         });

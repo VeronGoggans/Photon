@@ -1,15 +1,15 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
 import { removeEmptyFolderNotification, renderEmptyFolderNotification } from "../handlers/notificationHandler.js";
 import { removeContent } from "../util/ui.js";
-import { BaseView } from "./baseView.js";
+import { Dialog } from "../util/dialog.js"
 
 
-export class FolderView extends BaseView {
+export class FolderView {
     constructor(controller, applicationController) {
-        super(controller);
         this.controller = controller;
         this.applicationController = applicationController;
 
+        this.dialog = new Dialog();
         this.#initElements();
         this.#eventListeners();
     }

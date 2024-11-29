@@ -1,6 +1,8 @@
 import { TextEditorView } from "../view/textEditorView.js";
 import { TextEditorModel } from "../model/textEditorModel.js";
 import { FlashcardModel } from "../model/flashcardModel.js";
+import { HttpModel } from "../model/httpModel.js";
+import { pushNotification } from "../handlers/notificationHandler.js";
 
 
 
@@ -9,6 +11,7 @@ export class TextEditorController {
         this.applicationController = applicationController;
         this.model = new TextEditorModel();
         this.model.addRecentlyViewedNotes();
+        this.httpModel = new HttpModel();
     }
 
 
@@ -37,14 +40,15 @@ export class TextEditorController {
 
     async save(name, content, notify, clearEditorObject) {
         const { editorObject, editorObjectType } = this.model.getStoredObject();
-        if (clearEditorObject) this.model.clear();
-
+        if (clearEditorObject) {
+            this.model.editorObject = null;
+        }
 
         if (editorObjectType === 'note') {
             if (editorObject !== null) {
                 this.model.updateStoredObject(editorObject, name, content);            
                 await this.applicationController.updateNote(editorObject);
-            } else {
+            } else {                
                 await this.applicationController.addNote(name, content, notify)
             }
         }
@@ -80,7 +84,7 @@ export class TextEditorController {
 
 
     clearStoredObject() {
-        this.model.clear()
+        this.model.clear();
     }
 
 
@@ -108,6 +112,7 @@ export class TextEditorController {
         this.flashcardModel.storeDeckName(deckName)
     }
 
+
     /**
      * Returns a Object that contains the deck name and 
      * a list of saved flashcard objects
@@ -121,15 +126,19 @@ export class TextEditorController {
         await this.applicationController.addDeck(deckName, flashcards);
     }
 
+
     async handleDeleteButtonClick(editorObjectId) {
         const { editorObjectType } = this.model.getStoredObject()
         
         if (editorObjectType === 'note') {
-            await this.applicationController.deleteNote(editorObjectId, true);
+            const { note } = await this.httpModel.delete(`/note/${editorObjectId}`);
+            pushNotification('deleted', note.name);
         }
         if (editorObjectType === 'template') {
-            await this.applicationController.deleteTemplate(editorObjectId, true);
+            const { template } = await this.httpModel.delete(`/template/${editorObjectId}`);
+            pushNotification('deleted', template.name);
         }
-        this.textEditorView.clear();
+        this.textEditorView.clearEditorContent();
+        this.model.editorObject = null;
     }
 }

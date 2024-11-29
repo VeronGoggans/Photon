@@ -1,13 +1,14 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
 import { createListItemType1 } from "../util/ui/components.js";
-import { BaseView } from "./baseView.js";
+import { Dialog } from "../util/dialog.js";
 
 
-export class StickyWallHomeView extends BaseView {
+export class StickyWallHomeView {
     constructor(controller, applicationController) {
-        super(controller);
         this.controller = controller;
         this.applicationController = applicationController;
+
+        this.dialog = new Dialog();
         this.#initElements();
         this.#eventListeners();
         AnimationHandler.fadeInFromBottom(this.viewElement);

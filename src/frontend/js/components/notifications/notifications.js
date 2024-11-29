@@ -3,18 +3,18 @@ import { notificationTypes, notificationMessages } from "../../constants/constan
 class PushNotification extends HTMLElement {
     constructor() {
         super()
+    }
+
+    setData(notificationInfo) {
+        this.noteName = notificationInfo.noteName;
         this.notifications = {
             'saved': { message: `<b>${this.noteName}</b> ${notificationMessages.saved}`, type: notificationTypes.saved },
             'updated': { message: notificationMessages.updated, type: notificationTypes.updated },
             'deleted': { message: `<b>${this.noteName}</b> ${notificationMessages.deleted}`, type: notificationTypes.deleted },
             'new': { message: notificationMessages.new, type: notificationTypes.new },
-        };
-    }
-
-    setData(value) {
-        const data = JSON.parse(value);
-        this.noteName = data.noteName;
-        this.notification = this.notifications[data.type];
+        };        
+        this.notification = this.notifications[notificationInfo.type];
+        
     }
 
     

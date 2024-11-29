@@ -7,7 +7,7 @@
     background-color: var(--modal);
     width: 400px;
     height: 300px;
-    border-radius: 20px;
+    border-radius: 10px;
     font-weight: 600;
     box-shadow: 0 0 10px var(--shadow);
   }
@@ -15,6 +15,7 @@
   .delete-modal .delete-warning {
     color: var(--text);
     font-size: 20px;
+    font-weight: 300;
   }
   
   .delete-modal .deleted-item-name {

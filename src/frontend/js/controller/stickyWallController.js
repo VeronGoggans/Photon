@@ -3,9 +3,8 @@ import { StickyNoteView } from "../view/stickyNoteView.js";
 
 
 export class StickWallController {
-    constructor(applicationController, dialog) {
+    constructor(applicationController) {
         this.applicationController = applicationController;
-        this.dialog = dialog;
         this.model = new HttpModel();
     }
 

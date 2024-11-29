@@ -1,11 +1,11 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
 import { greetBasedOnTime } from "../util/date.js";
-import { BaseView } from "./baseView.js";
 import { createCustomElement } from "../util/ui/components.js";
 
-export class HomeView extends BaseView {
+
+
+export class HomeView {
     constructor(controller, applicationController) {
-        super();
         this.controller = controller;
         this.applicationController = applicationController;
 

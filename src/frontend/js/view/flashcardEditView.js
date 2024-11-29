@@ -1,13 +1,14 @@
 import { Flashcard } from "../components/entities/flashcardDeck.js";
 import { AnimationHandler } from "../handlers/animationHandler.js";
-import { BaseView } from "./baseView.js";
+import { Dialog } from "../util/dialog.js";
 
-export class FlashcardEditView extends BaseView {
+
+export class FlashcardEditView {
     constructor(controller, applicationController) {
-        super();
         this.controller = controller;
         this.applicationController = applicationController;
 
+        this.dialog = new Dialog();
         this.#initElements();
         this.#eventListeners();
         AnimationHandler.fadeInFromSide(this.viewElement);

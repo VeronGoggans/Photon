@@ -8,7 +8,6 @@ export class NewCollectionModal {
         this.controller = controller;
         this.entityData = entityData;
         this.entity = entity;
-        this.dialog = document.querySelector('.dialog');
 
         this.action = 'add';
         

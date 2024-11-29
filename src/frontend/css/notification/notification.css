@@ -135,12 +135,13 @@ empty-notification .empty-message {
 empty-notification p {
     font-size: 25px;
     margin: 5px 0;
-    font-weight: 600;
+    font-weight: 400;
     color: var(--text);
 }
 
 empty-notification span {
     max-width: 400px;
+    font-weight: 300;
     text-align: center;
     color: var(--placeholder);
 }
@@ -156,7 +157,7 @@ empty-notification .emtpy-message-buttons {
     border: none;
     background-color: #5c7fdd;
     padding: 7px;
-    border-radius: 10px;
+    border-radius: 4px;
     color: #fff;
     font-size: 14px;
     transition: .2s;
@@ -164,8 +165,4 @@ empty-notification .emtpy-message-buttons {
 
 .emtpy-message-buttons button:hover {
     background-color: #466edb;
-}
-
-.emtpy-message-buttons .empty-create-folder-btn {
-    background-color: var(--text);
 }
