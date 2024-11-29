@@ -106,9 +106,16 @@
  }
 
  .editor img {
-    margin: 10px 0;
-    max-width: 600px;
-    border-radius: 10px;
+  cursor: pointer;
+   margin: 10px;
+   padding: 10px;
+   max-width: 600px;
+   border-radius: 10px;
+   border: 1px dashed transparent;
+ }
+
+ .selected-image {
+  border-color: #ddd !important;
  }
 
  .editor a {

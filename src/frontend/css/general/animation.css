@@ -40,3 +40,16 @@
       opacity: 1;              /* Slightly fade */
     }
 }
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    30% { transform: translateY(-50px); }
+    50% { transform: translateY(0); }
+    70% { transform: translateY(-25px); }
+    100% { transform: translateY(0); }
+}
+
+/* Add bounce class animation */
+.bouncing {
+    animation: bounce 0.6s ease-out;
+}

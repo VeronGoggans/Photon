@@ -85,7 +85,9 @@ recently-changed-note-card .note-content-box h1{
 
 note-card .note-content-box .linked-note-container {visibility: hidden}
 note-card .note-content-box a {color: rgb(67, 142, 255)}
-
+.note-content-box terminal-snippet {
+    visibility: hidden;
+}
 
 .bookmarked-note {
     background-color: var(--bookmark) !important;

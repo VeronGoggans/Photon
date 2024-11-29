@@ -14,85 +14,56 @@
 
     <title>Document</title>
     <style>
-        .notes {
-            width: 350px;
+        .terminal-snippet {
+            width: 500px;
+            min-height: 100px;
+            background-color: #131313;
+            border-radius: 5px;
+            display: grid; 
+            grid-template-rows: 30px 1fr;
+        }
+
+        .terminal-bar {
             font-family: Poppins;
-
+            border-radius: 5px 5px 0 0;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            color: #ccced3;
+            padding: 0 20px;
+            background-color: #1f1f26;
         }
-        .recently-viewed-note-card {
-            background-color: rgb(255, 255, 255);
+
+        .terminal-command {
+            font-family: Poppins;
+            outline: none;
+            padding: 20px;
+            background-color: transparent;
+            border-radius: 0 0 5px 5px;
+            border: none;
+            color: #ccced3;
+        }
+
+        .terminal-bar span {
+            font-size: 12px;
+            display: flex;
+            column-gap: 10px;
+        }
+
+        .terminal-bar i {
             cursor: pointer;
-            transition: 200ms;
-            display: grid;
-            grid-template-columns: 1fr 80px;
-            color: var(--text);
-            
-            padding: 7px;
-            margin: 5px;
-            border-radius: 7px;
         }
 
-        .recently-viewed-note-card .name-container {
-            display: grid;
-            grid-template-columns: 30px 1fr;
-        }
 
-        .recently-viewed-note-card .dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            margin: auto 3px;
-            background-color: #5c7fdd;
-        }
-
-        .recently-viewed-note-card i {
-            color: #5c7fdd;
-            margin: auto 3px;
-        }
-
-        .recently-viewed-note-card:hover {
-            background-color: aliceblue;
-        }
+        
     </style>
 </head>
 <body>
-    <div class="notes">
-        <div class="recently-viewed-note-card">
-            <div class="name-container">
-                <div class="dot"></div>
-                <span class="name">NoSQL alternatives </span>
-            </div>
-            <span class="view-date">5m ago</span>
+    <div class="terminal-snippet">
+        <div class="terminal-bar">
+            <span><i class="bi bi-copy"></i> Copy command</span>
         </div>
-        <div class="recently-viewed-note-card">
-            <div class="name-container">
-                <div class="dot"></div>
-                <span class="name">NoSQL alternatives f32i </span>
-            </div>
-            <span class="view-date">5m ago</span>
-        </div>
-        <div class="recently-viewed-note-card">
-            <div class="name-container">
-                <div class="dot"></div>
-                <span class="name">NoSQL alternatives </span>
-            </div>
-            <span class="view-date">5m ago</span>
-        </div>
-        <div class="recently-viewed-note-card">
-            <div class="name-container">
-                <div class="dot"></div>
-                <span class="name">NoSQL</span>
-            </div>
-            <span class="view-date">5m ago</span>
-        </div>
-        <div class="recently-viewed-note-card">
-            <div class="name-container">
-                <div class="dot"></div>
-                <span class="name">NoSQL </span>
-            </div>
-            <span class="view-date">5m ago</span>
-        </div>
+        <input type="text" class="terminal-command">
     </div>
-
 </body>
 </html>

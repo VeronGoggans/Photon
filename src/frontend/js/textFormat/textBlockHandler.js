@@ -6,6 +6,7 @@ export class TextBlockHandler {
     parse() {        
         this.headings = this.page.querySelectorAll('h1, h2, h3, h4');
         this.anchorTags = this.page.querySelectorAll('a');
+        this.images = this.page.querySelectorAll('img');
         this.#eventListeners();
     }
 
@@ -16,9 +17,7 @@ export class TextBlockHandler {
 
     #eventListeners() {
         this.headings.forEach(heading => {
-            heading.addEventListener('keydown', (event) => {
-              console.log('Keydown event');
-              
+            heading.addEventListener('keydown', (event) => {              
               // If the Backspace key is pressed and heading text is empty, remove the heading
               if (event.key === 'Backspace' && heading.textContent.trim() === '') {
                 event.preventDefault();
@@ -40,6 +39,14 @@ export class TextBlockHandler {
             link.addEventListener('mouseover', () => {
                 this.renderLinkPreview();
             });
-        })
+        });
+
+        this.images.forEach(image => {
+            image.addEventListener('click', () => {
+                image.classList.toggle('selected-image');
+            })
+        });
+
+
     }
 }

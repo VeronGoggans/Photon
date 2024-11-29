@@ -150,7 +150,7 @@
     --hover-checklist-task: #f3f5ff;
 
     /*Progress bars*/
-    --progress-checklist: #ececec;
+    --progress-checklist: #f4f4fc;
 
     /*Shadows*/
     --shadow-dropdown: 5px 5px 18px #eaecf7;
@@ -179,7 +179,7 @@
     
     --hover-searchbar-options: #f7f7fa;
     --hover-text: #444863;
-    --hover-sidebar: #eeeff3;
+    --hover-sidebar: #f4f4fc;
     --searchbar-placeholder: #9297aa; 
     --placeholder: #d4d7e5;
     --selection: #b1daff;

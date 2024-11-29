@@ -79,7 +79,7 @@ check-list .tasks-count {
 }
 
 .tasks-count i {
-    color: rgb(124, 211, 124);
+    color: #5c7fdd;
 }
 
 check-list .tasks {
@@ -149,7 +149,7 @@ check-list .progress__fill {
     width: 0%;
     height: 5px;
     border-radius: 5px;
-    background-color: rgb(124, 211, 124);
+    background-color: #5c7fdd;
     transition: .2s;
 }
 
@@ -159,6 +159,5 @@ check-list .progress__fill {
 }
 
 .completed-task input[type="text"] {
-    color: #cacedf;
-    text-decoration: line-through;
+    color: #bebedc !important;
 }

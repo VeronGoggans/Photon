@@ -27,6 +27,7 @@ class DescriptionPageBlock extends HTMLElement {
 
 
 
+
 class DocumentLocationPageBlock extends HTMLElement {
     connectedCallback() {
         this.folders = JSON.parse(this.getAttribute('folders'));
@@ -56,6 +57,9 @@ class DocumentLocationPageBlock extends HTMLElement {
         });
     }
 }
+
+
+
 
 
 class NoteLink extends HTMLElement {
@@ -91,6 +95,9 @@ class NoteLink extends HTMLElement {
     }
 
 }
+
+
+
 
 
 class CodeSnippit extends HTMLElement {
@@ -131,8 +138,73 @@ class CodeSnippit extends HTMLElement {
         hljs.highlightElement(snippit);
     }
 }
+
+
+
+
+
+class TerminalSnippet extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        this.contentEditable = false;
+        this.render();
+        this.addEventListeners();
+    }
+
+    render() {
+        this.innerHTML = `
+            <div class="terminal-bar">
+                <p><i class="bi bi-copy"></i><span>Copy command</span></p>
+            </div>
+            <input type="text" class="terminal-command">
+        `
+        this.copyButton = this.querySelector('i');
+        this.command = this.querySelector('.terminal-command');
+        this.copyText = this.querySelector('span');
+        this.renderCommand();
+    
+    }
+
+    addEventListeners() {
+        this.command.addEventListener('input', () => { this.setAttribute('data-command', this.command.value) });
+        this.command.addEventListener('paste', () => { this.setAttribute('data-command', this.command.value) });
+        this.copyButton.addEventListener('click', () => { this.handleCopyEvent() });
+    }
+
+    renderCommand() {
+        const command = this.getAttribute('data-command');
+    
+        if (command !== null) {
+            this.command.value = command;
+        } else {
+            this.setAttribute('data-command', '')
+            this.command.value = '';
+        }
+    }
+
+
+    handleCopyEvent() {
+        navigator.clipboard.writeText(this.command.value);
+
+        // apply bouncing class and remove it after animation is done.
+        this.copyButton.classList.add('bouncing');
+        this.copyText.textContent = 'Copied command !';
+        setTimeout(() => {
+            this.copyButton.classList.remove('bouncing');
+        }, 600);
+
+        setTimeout(() => {
+            this.copyText.textContent = 'Copy command';
+        }, 2000);
+
+    }
+}
     
 
 customElements.define('description-page-block', DescriptionPageBlock);
 customElements.define('document-location-page-block', DocumentLocationPageBlock);
 customElements.define('code-snippit', CodeSnippit);
+customElements.define('terminal-snippet', TerminalSnippet);

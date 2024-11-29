@@ -12,6 +12,17 @@ export function addCodeBlock(range, language = "plaintext") {
 }
 
 
+export function addTerminal(range) {
+  const terminal = document.createElement('terminal-snippet');
+  const br = document.createElement('br');
+  range.insertNode(br);
+  range.insertNode(terminal);
+
+  removeSelectedEffect(range, br);
+  moveCursorToTextBlock(terminal.querySelector('.terminal-command'));
+}
+
+
 
 export function addHorizontalLine(range, lineType = null) {
   const br = document.createElement('br');

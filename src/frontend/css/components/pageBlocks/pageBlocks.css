@@ -36,3 +36,60 @@ document-location-page-block i {
     font-size: 14px;
     margin: 0 3px;
 }
+
+
+/*__________ TERMINAL SNIPPET__________*/
+terminal-snippet {
+    min-height: 100px;
+    background-color: #131313;
+    border-radius: 5px; 
+    display: grid; 
+    grid-template-rows: 30px 1fr;
+}
+
+.terminal-bar {
+    user-select: none;
+    overflow-y: visible;
+    font-family: Poppins;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    color: #ccced3;
+    padding: 0 20px;
+    background-color: #1f1f26;
+}
+
+.terminal-command {
+    font-family: Poppins;
+    outline: none;
+    padding: 20px;
+    background-color: transparent;
+    border-radius: 0 0 5px 5px;
+    border: none;
+    color: #ccced3;
+}
+
+.terminal-command::selection {
+    background-color: #313136;
+}
+
+.terminal-bar p {
+    margin: 0;
+    font-size: 12px;
+    display: flex;
+    column-gap: 10px;
+}
+
+.terminal-bar i {
+    cursor: pointer;
+    transition: 150ms;
+}
+
+.terminal-bar i:hover {
+    scale: 1.2;
+}
+
+.terminal-bar i:active {
+    scale: 1.5;
+}

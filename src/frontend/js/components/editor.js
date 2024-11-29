@@ -1,5 +1,5 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
-import { addChecklist, addCodeBlock, addHeading, addHtml, addLink, addList, addHorizontalLine, addEmbedVideo, addColor } from "../textFormat/textFormatter.js";
+import { addChecklist, addCodeBlock, addHeading, addHtml, addLink, addList, addHorizontalLine, addEmbedVideo, addColor, addTerminal } from "../textFormat/textFormatter.js";
 import { PlacementHelper } from "../helpers/placementHelper.js";
 
 
@@ -35,6 +35,7 @@ class SlashCommandContainer extends HTMLElement {
             <div class="heading-3" data-command="h3"><i class="bi bi-type-h3"></i>Add heading 3</div>
             <div class="heading-4" data-command="h4"><i class="bi bi-type-h4"></i>Add heading 4</div>
             <div class="snippit" data-command="snippet"><i class="bi bi-code-slash"></i>Add code snippit</div>
+            <div class="terminal" data-command="terminal"><i class="bi bi-terminal"></i>Add terminal command</div>
             <div class="note" data-command="ref"><i class="bi bi-file-earmark"></i>Add note reference</div>
             <div class="template" data-command="template"><i class="bi bi-file-earmark-text"></i>Apply template</div>
             <div class="insert-html" data-command="html"><i class="bi bi-filetype-html"></i>Insert HTML</div>
@@ -89,6 +90,9 @@ class SlashCommandContainer extends HTMLElement {
             break;
           case 'snippet':
             addCodeBlock(this.range, extension);
+            break;
+          case 'terminal':
+            addTerminal(this.range);
             break;
           case 'html':
             addHtml(this.range);
