@@ -176,11 +176,10 @@ textarea::placeholder {
 
 .options-menu {
     position: absolute;
-    top: -80px;
-    right: 5px;
+    top: -120px;
     background-color: var(--options-menu);
     color: var(--text);
-    width: fit-content;
+    width: 100%;
     padding: 10px;
     border-radius: 10px;
     opacity: 0;
