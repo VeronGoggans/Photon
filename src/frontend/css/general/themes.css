@@ -1,4 +1,8 @@
 .dark {
+
+    /*sidebar*/
+    --sidebar-inactive-tab: #8686a1;
+    --sidebar-shadow: 0 0 15px #000000;
     /*Settings view*/
     --setting-dropdown: #18182d;
     /*Editor View*/
@@ -65,7 +69,7 @@
     --sidebar-soft: #0f0e1a;
     --searchbar: #121223;
     --sidebar-text: #d6d8e5;
-    --sidebar-text-hover: #ffffff; 
+    --sidebar-text-hover: #5c7fdd; 
     --card: #141322;
     --folder: #1c1c2c;
     --text: #bbbed2;
@@ -77,7 +81,7 @@
     --hover-searchbar-options: #18182d;
     --hover-text: #5c7dff;
     --hover-toolbar-btns: #383d4c;
-    --hover-sidebar: #1d1d2f;
+    --hover-sidebar: #121223;
     --searchbar-placeholder: #d4d7e5; 
     --placeholder: #868b9e;
     --selection: #314682;
@@ -93,11 +97,15 @@
     /*Feedback variables*/
     --completed-checklist-task: #1c1d3b;
 
-    --active-tab-bg: #313f76;
+    --active-tab-bg: #121223;
     --active-tab-text: #5673ff;
 }
 
 .light{
+
+    /*sidebar*/
+    --sidebar-inactive-tab: #8686a1;
+    --sidebar-shadow: 0 0 15px #eaecf7;
     /*Settings view*/
     --setting-dropdown: #f4f5f7;
     /*Flashcard View*/
@@ -141,7 +149,7 @@
     --border-notification: #f3f5fb;
     --border-card: #dee1ef;
     --border-sidebar-right: 1px solid #dee1ef; 
-    --border-sidebar-soft: 1px solid #f1f1f8;
+    --border-sidebar-soft: 1px solid #ffffff;
     --border-note-view-dropdown: none;
     --border-checklist: 1px solid #dee1ef;
 
@@ -183,7 +191,7 @@
     --searchbar-placeholder: #9297aa; 
     --placeholder: #d4d7e5;
     --selection: #b1daff;
-    --dialog: #0d3a8d1c;
+    --dialog: #7d8ead1f;
     --shadow: rgba(92, 98, 157, .1);
     
     --modal: #ffffff;

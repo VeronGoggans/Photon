@@ -81,5 +81,10 @@
 
 .soft {
     border-right: var(--border-sidebar-soft);
-    background-color: var(--sidebar-soft);
+    box-shadow: var(--sidebar-shadow);
+    z-index: 2;
+}
+
+.soft a {
+    color: var(--sidebar-inactive-tab) ;
 }
