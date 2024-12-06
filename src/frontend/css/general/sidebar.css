@@ -85,6 +85,12 @@
     z-index: 2;
 }
 
-.soft a {
+.invisible {
+    border: none;
+    box-shadow: none;
+}
+
+.soft a,
+.invisible a{
     color: var(--sidebar-inactive-tab) ;
 }

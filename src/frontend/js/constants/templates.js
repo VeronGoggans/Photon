@@ -180,6 +180,7 @@ const settingsTemplate = `
                     <ul class="dropdown-items">
                         <li color="original">Original</li>
                         <li color="soft">Soft</li>
+                        <li color="invisible">Invisible</li>
                     </ul>
                 </div>
             </div>

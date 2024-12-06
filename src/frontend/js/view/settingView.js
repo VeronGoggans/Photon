@@ -44,6 +44,7 @@ export class SettingView {
         this.dropdownHelper.closeDropdowns();
         this.sidebarColorInput.value = 'Original';
         this.sidebar.classList.remove('soft');
+        this.sidebar.classList.remove('invisible');
         await this.controller.updateSidebarColor('original');
     }
 
@@ -51,8 +52,23 @@ export class SettingView {
         this.dropdownHelper.closeDropdowns();
         this.sidebarColorInput.value = 'Soft';
         if (!this.sidebar.classList.contains('soft')) {
+            if (this.sidebar.classList.contains('invisible')) {
+                this.sidebar.classList.remove('invisible');
+            }
             this.sidebar.classList.add('soft');
             await this.controller.updateSidebarColor('soft');
+        }
+    }
+
+    async #invisibleColor() {
+        this.dropdownHelper.closeDropdowns();
+        this.sidebarColorInput.value = 'Invisible';
+        if (!this.sidebar.classList.contains('invisible')) {
+            if(this.sidebar.classList.contains('soft')) {
+                this.sidebar.classList.remove('soft');
+            }
+            this.sidebar.classList.add('invisible');
+            await this.controller.updateSidebarColor('invisible');
         }
     }
 
@@ -84,6 +100,7 @@ export class SettingView {
 
         this.originalSidebar = this.sidebarOptions.querySelector('li[color="original"]');
         this.softSidebar = this.sidebarOptions.querySelector('li[color="soft"]');
+        this.invisibleSidebar = this.sidebarOptions.querySelector('li[color="invisible"]');
 
         this.widgetBorder = this.widgetOptions.querySelector('li[widgetstyle="border"]');
         this.widgetShadow = this.widgetOptions.querySelector('li[widgetstyle="shadow"]');
@@ -97,6 +114,7 @@ export class SettingView {
         this.darkTheme.addEventListener('click', () => {this.#darkmode()});
         this.originalSidebar.addEventListener('click', () => {this.#originalColor()});
         this.softSidebar.addEventListener('click', () => {this.#softColor()});
+        this.invisibleSidebar.addEventListener('click', () => {this.#invisibleColor()});
         this.widgetBorder.addEventListener('click', () => {this.#widgetBorder()});
         this.widgetShadow.addEventListener('click', () => {this.#widgetShadow()});
     }

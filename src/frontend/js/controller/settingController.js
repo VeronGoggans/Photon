@@ -14,19 +14,21 @@ export class SettingController {
         this.view.setDropdownStates(settings);
     }
 
+
     async loadSettings() {
         const settings = await this.getSettings();
         // Add theme class
         document.body.classList.add(settings.theme);
 
         // Add sidebar class
-        if (settings.sidebarColor === 'soft') {
+        if (settings.sidebarColor !== 'original') {
             document.querySelector('.sidebar').classList.add(settings.sidebarColor);
         }
 
         // Save widget style in session storage
         window.sessionStorage.setItem('widget-style', settings.widgetStyle);
     }
+
 
     async getSettings() {
         const { settings } = await this.model.get('/settings');

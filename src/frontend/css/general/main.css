@@ -176,8 +176,9 @@ textarea::placeholder {
 
 .options-menu {
     position: absolute;
-    top: -120px;
-    background-color: var(--options-menu);
+    top: -110px;
+    left: 0;
+    background-color: var(--background);
     color: var(--text);
     width: 100%;
     padding: 10px;
@@ -197,7 +198,7 @@ textarea::placeholder {
 }
 
 .options-menu div:hover {
-    background-color: var(--hover);
+    background-color: var(--hover-sidebar);
     color: var(--hover-text);
 }
 
