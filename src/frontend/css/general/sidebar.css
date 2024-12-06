@@ -1,20 +1,21 @@
 .sidebar {
-    font-family: Roboto;
     position: relative;
     display: grid;
-    grid-template-rows: 50px 1fr;
+    grid-template-rows: 70px 1fr;
     background-color: var(--sidebar);
     border-right: var(--border-sidebar-right);
 }
 
 .sidebar-logo {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: end;
     padding: 5px 15px;
 }
 
 .logo-container {
     display: flex;
     align-items: center;
-    height: 40px;
 }
 
 .sidebar .logo {
@@ -26,14 +27,14 @@
     align-items: center;
     border-radius: 18px 12px 18px 12px;
     color: #fff;
-    font-size: 18px;    
+    font-size: 25px;
     background-color: var(--secondary);
 }
 
 .logo-text {
     color: var(--sidebar-text);
     margin-left: 2px;
-    font-size: 25px;
+    font-size: 30px;
     letter-spacing: 2px;
 }
 

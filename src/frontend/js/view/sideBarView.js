@@ -9,6 +9,7 @@ export class SidebarView {
         this.sidebarButtons = this._sidebar.querySelectorAll('.sidebar-content a');
         this.sidebarIcons = this._sidebar.querySelectorAll('.sidebar-content a i')
         this.sidebarSpans = this._sidebar.querySelectorAll('.sidebar-content a span');
+        this.logo = this._sidebar.querySelector('.sidebar-logo');
 
         this._collapsed = false;
         this._size = 'standard';
@@ -71,7 +72,7 @@ export class SidebarView {
     
     /**
      * This method is called when the screen width 
-     * becomes bigger then 700 pixels
+     * becomes bigger than 700 pixels
      */
     #openButtons() {
         for (let i = 0; i < this._buttonCount; i++) {
@@ -92,13 +93,15 @@ export class SidebarView {
         if (this._sidebar.offsetWidth === 220) {
             this._wrapper.style.transition = '150ms'
             this._wrapper.style.gridTemplateColumns = '80px 1fr';
-            this._sidebar.dataset.width = 'small'; 
+            this._sidebar.dataset.width = 'small';
+            this.logo.style.justifyContent = 'center';
             this.#removeTransition();
             this.#collapseButtons();
         } else {
             this._wrapper.style.transition = '150ms'
             this._wrapper.style.gridTemplateColumns = '220px 1fr';
             this._sidebar.dataset.width = 'large';
+            this.logo.style.justifyContent = '';
             this.#removeTransition();
             this.#openButtons();
         }
@@ -112,7 +115,7 @@ export class SidebarView {
 
     /**
      * This method checks if the app should display 
-     * it's small version or large version.
+     * Its small version or large version.
      * 
      * This method is called when the window resizes
      */
