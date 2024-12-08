@@ -43,7 +43,7 @@ export class BoundedStack extends Stack {
     }
 
     isFull() {
-        return this.size() == this.capacity;
+        return this.size() === this.capacity;
     }
 }
 
@@ -69,6 +69,15 @@ export class UniqueEvictingStack extends Stack {
 
         // Move item to the front of the list
         this.stack.unshift(item);
+    }
+
+
+    evictDeleted(itemId) {
+        for (let i = 0; i < this.stack.length; i++) {
+            if (this.stack[i].id === itemId) {
+                this.stack.splice(i, 1);
+            }
+        }
     }
 
 

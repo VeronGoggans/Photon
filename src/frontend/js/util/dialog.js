@@ -1,6 +1,5 @@
 import { NoteDetailContainer } from "../components/modals/noteDetailModal.js";
 import { DeleteModal } from "../components/modals/deleteModal.js";
-import { ForgotSaveContainer } from "../components/modals/forgotSaveModal.js";
 import { SearchModal } from "../components/modals/searchModal.js";
 import { EditFolderModal } from "../components/modals/editFolderModal.js";
 import { NewDeckModal } from "../components/modals/newDeckModal.js";
@@ -21,15 +20,12 @@ export class Dialog {
             const excludedContainers = [
                 '.delete-modal',
                 '.settings-container',
-                '.dont-forget-to-save-container',
                 '.note-details-modal',
                 '.edit-folder-modal',
                 '.create-deck-modal',
                 '.edit-flashcard-modal',
                 '.sticky-note-modal',
                 '.new-collection-modal',
-                '.task-modal',
-                '.milestone-modal'
             ];
 
             // Check if the clicked target belongs to any excluded container
@@ -42,8 +38,6 @@ export class Dialog {
         this.dialog.addEventListener('DialogEvent', (event) => {
             const { action } = event.detail;
             if (action === 'close') {
-                console.log('closing editor');
-                
                 this.close();
             }
         });
@@ -112,10 +106,6 @@ export class Dialog {
             controller, 
             flashcard
         ));
-    }
-
-    renderForgotSaveModal(view) {
-        this.addChild(new ForgotSaveContainer(view));
     }
 
     renderSearchModal(toolbar) {

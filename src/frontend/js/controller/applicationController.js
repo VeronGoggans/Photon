@@ -172,7 +172,7 @@ export class ApplicationController {
     }
 
     /**
-     * This method ensures that the text editor model does note
+     * This method ensures that the text editor model does not
      * Remember anything from a previous note or template. 
      */
     clearEditorObject() {
@@ -199,8 +199,8 @@ export class ApplicationController {
         return await this.noteController.getSearchItems();
     }
 
-    async updateNote(note) {
-        await this.noteController.update(note);
+    async updateNote(note, notify) {
+        await this.noteController.update(note, notify);
     }   
 
     async moveNote(folderId, droppedNoteId) {
@@ -225,8 +225,8 @@ export class ApplicationController {
         return await this.templateController.getById(templateId, updateUseCount)
     }
 
-    async updateTemplate(template) {
-        await this.templateController.update(template);
+    async updateTemplate(template, notify) {
+        await this.templateController.update(template, notify);
     }
 
     // Folder methods

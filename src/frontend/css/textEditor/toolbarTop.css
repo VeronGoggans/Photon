@@ -33,6 +33,7 @@
 
 
 .editor-options-dropdown {
+    margin-left: auto;
     overflow: visible;
     transition: 150ms;
     height: 34px;

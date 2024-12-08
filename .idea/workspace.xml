@@ -4,11 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="the sidebar can now be without a border in the settings tab. And the options menu for folders and notes have been changed">
+    <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="Changed the white space around the Photon text inside the sidebar and increased the text size of it">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/presentation/routers/note_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/presentation/routers/note_router.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/css/general/sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/sidebar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/view/sideBarView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/view/sideBarView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/general/themes.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/themes.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/modals/saveContainer.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/textEditor/toolbarTop.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/textEditor/toolbarTop.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/components/editor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/components/editor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/components/entities/note.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/components/entities/note.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/components/modals/forgotSaveModal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/components/pageBlocks/pageBlocks.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/components/pageBlocks/pageBlocks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/constants/templates.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/constants/templates.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/controller/applicationController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/controller/applicationController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/controller/noteController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/controller/noteController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/controller/templateController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/controller/templateController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/controller/textEditorController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/controller/textEditorController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/datastuctures/stack.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/datastuctures/stack.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/eventListeners/keyEventListener.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/eventListeners/keyEventListener.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/model/textEditorModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/model/textEditorModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/util/dialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/util/dialog.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/view/textEditorView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/view/textEditorView.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,12 +43,12 @@
     &quot;assignee&quot;: &quot;VeronGoggans&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/VeronGoggans/Note-taking-app.git",
-    "accountId": "c0352633-a578-45f2-99f7-8571e13a7327"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/VeronGoggans/Note-taking-app.git&quot;,
+    &quot;accountId&quot;: &quot;c0352633-a578-45f2-99f7-8571e13a7327&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 3
@@ -40,20 +58,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "sqlite-persistence",
-    "last_opened_file_path": "C:/Users/jsvgo/Web Dev/In progress/Note-taking-app",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;sqlite-persistence&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jsvgo/Web Dev/In progress/Note-taking-app&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2024.3.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -69,7 +88,10 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1730282120122</updated>
-      <workItem from="1733522269969" duration="4934000" />
+      <workItem from="1733522269969" duration="5366000" />
+      <workItem from="1733581201931" duration="25112000" />
+      <workItem from="1733615746944" duration="245000" />
+      <workItem from="1733616047561" duration="194000" />
     </task>
     <task id="LOCAL-00001" summary="the sidebar can now be without a border in the settings tab. And the options menu for folders and notes have been changed">
       <option name="closed" value="true" />
@@ -79,7 +101,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733525821562</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Changed the white space around the Photon text inside the sidebar and increased the text size of it">
+      <option name="closed" value="true" />
+      <created>1733527782086</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1733527782086</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -87,6 +117,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="the sidebar can now be without a border in the settings tab. And the options menu for folders and notes have been changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="the sidebar can now be without a border in the settings tab. And the options menu for folders and notes have been changed" />
+    <MESSAGE value="Changed the white space around the Photon text inside the sidebar and increased the text size of it" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed the white space around the Photon text inside the sidebar and increased the text size of it" />
   </component>
 </project>

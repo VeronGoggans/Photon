@@ -22,6 +22,8 @@ export class NoteController {
 
     async add(folderId, name, content, notify) {
         const { note } = await this.model.add('/note', {'folder_id': folderId,'name': name,'content': content});
+        console.log('name', name)
+        console.log('content', content);
         if (notify) {
             pushNotification('saved');
         }
@@ -46,9 +48,12 @@ export class NoteController {
     }
 
 
-    async update(note) {
+    async update(note, notify) {
         await this.model.update('/note', {'note_id': note.id,'name': note.name,'content': note.content,'bookmark': note.bookmark});
-        pushNotification('updated');
+
+        if (notify) {
+            pushNotification('updated');
+        }
     }
     
 

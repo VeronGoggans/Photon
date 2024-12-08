@@ -81,6 +81,7 @@
 }
 
 .soft {
+    background-color: var(--sidebar-soft);
     border-right: var(--border-sidebar-soft);
     box-shadow: var(--sidebar-shadow);
     z-index: 2;

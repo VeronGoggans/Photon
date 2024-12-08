@@ -48,7 +48,7 @@ class SlashCommandContainer extends HTMLElement {
 
 
     addEventListeners() {
-        this.listenForCommmandClicks();
+        this.listenForCommandClicks();
         this.querySelector('input').addEventListener('keydown', (event) => { this.handleKeyEvents(event) });
         this.editorPaper.addEventListener('click', () => { this.removeSlashCommands() });
         this.editorPaper.addEventListener('keyup', (event) => { this.checkForForwardSlash(event) });
@@ -106,7 +106,7 @@ class SlashCommandContainer extends HTMLElement {
     }
 
 
-    listenForCommmandClicks() {
+    listenForCommandClicks() {
         this.container.addEventListener('click', (event) => {
             const command = event.target.closest('div').getAttribute('data-command');
 
@@ -136,28 +136,28 @@ class SlashCommandContainer extends HTMLElement {
   
     deleteForwardSlash() {
         const caretNode = this.range.startContainer;
-    const caretOffset = this.range.startOffset;
+        const caretOffset = this.range.startOffset;
 
-    // Check if caretNode is a text node and there is a character before the caret
-    if (caretNode.nodeType === Node.TEXT_NODE && caretOffset > 0) {
-        const textContent = caretNode.textContent;
+        // Check if caretNode is a text node and there is a character before the caret
+        if (caretNode.nodeType === Node.TEXT_NODE && caretOffset > 0) {
+            const textContent = caretNode.textContent;
 
-        // Check if the character before the caret is a forward slash
-        if (textContent[caretOffset - 1] === '/') {
-            // Replace the forward slash with a space 
-            const updatedTextContent = textContent.slice(0, caretOffset - 1) + ' ' + textContent.slice(caretOffset);
-            caretNode.textContent = updatedTextContent;
+            // Check if the character before the caret is a forward slash
+            if (textContent[caretOffset - 1] === '/') {
+                // Replace the forward slash with a space
+                const updatedTextContent = textContent.slice(0, caretOffset - 1) + ' ' + textContent.slice(caretOffset);
+                caretNode.textContent = updatedTextContent;
 
-            // Update the range to reflect the new caret position (just after the space)
-            this.range.setStart(caretNode, caretOffset);  // Start position after the space
-            this.range.setEnd(caretNode, caretOffset);    // End position at the same point
+                // Update the range to reflect the new caret position (just after the space)
+                this.range.setStart(caretNode, caretOffset);  // Start position after the space
+                this.range.setEnd(caretNode, caretOffset);    // End position at the same point
 
-            // Apply the new range
-            const selection = window.getSelection();
-            selection.removeAllRanges(); // Remove any previous selection
-            selection.addRange(this.range); // Add the updated range to the selection
+                // Apply the new range
+                const selection = window.getSelection();
+                selection.removeAllRanges(); // Remove any previous selection
+                selection.addRange(this.range); // Add the updated range to the selection
+            }
         }
-    } 
     }
 
     deleteForwardSlash() {

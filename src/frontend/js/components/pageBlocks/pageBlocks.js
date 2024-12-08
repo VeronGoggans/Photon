@@ -100,14 +100,14 @@ class NoteLink extends HTMLElement {
 
 
 
-class CodeSnippit extends HTMLElement {
+class CodeSnippet extends HTMLElement {
     constructor() {
         super();
     }
 
     connectedCallback() {
-        const snippit = this.querySelector('code');
-        hljs.highlightElement(snippit);
+        const snippet = this.querySelector('code');
+        hljs.highlightElement(snippet);
         this.addEventListeners();
     }
 
@@ -132,10 +132,10 @@ class CodeSnippit extends HTMLElement {
         const clipboardData = event.clipboardData || window.clipboardData;
         const pastedContent = clipboardData.getData('text');
         
-        const snippit = this.querySelector('code');
-        snippit.textContent = pastedContent;
+        const snippet = this.querySelector('code');
+        snippet.textContent = pastedContent;
 
-        hljs.highlightElement(snippit);
+        hljs.highlightElement(snippet);
     }
 }
 
@@ -190,14 +190,14 @@ class TerminalSnippet extends HTMLElement {
         navigator.clipboard.writeText(this.command.value);
 
         // apply bouncing class and remove it after animation is done.
+        this.copyButton.setAttribute('class', 'bi bi-check-lg')
         this.copyButton.classList.add('bouncing');
-        this.copyText.textContent = 'Copied command !';
         setTimeout(() => {
             this.copyButton.classList.remove('bouncing');
         }, 600);
 
         setTimeout(() => {
-            this.copyText.textContent = 'Copy command';
+            this.copyButton.setAttribute('class', 'bi bi-copy')
         }, 2000);
 
     }
@@ -206,5 +206,5 @@ class TerminalSnippet extends HTMLElement {
 
 customElements.define('description-page-block', DescriptionPageBlock);
 customElements.define('document-location-page-block', DocumentLocationPageBlock);
-customElements.define('code-snippit', CodeSnippit);
+customElements.define('code-snippit', CodeSnippet);
 customElements.define('terminal-snippet', TerminalSnippet);

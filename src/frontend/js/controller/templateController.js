@@ -42,9 +42,12 @@ export class TemplateController {
     }
 
 
-    async update(template) {
+    async update(template, notify) {
         await this.model.update('/template', {'id': template.id,'name': template.name, 'content': template.content})
-        pushNotification('updated')
+
+        if (notify) {
+            pushNotification('updated');
+        }
     }
 
 

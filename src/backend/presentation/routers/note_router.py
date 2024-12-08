@@ -28,6 +28,7 @@ class NoteRouter:
 
     @handle_exceptions
     def add_note(self, request: PostNoteRequest, db: Session = Depends(Database.get_db)):
+        print(PostNoteRequest.name)
         return {'status': HttpStatus.OK, 'note': self.service.add_note(request, db)}
 
 

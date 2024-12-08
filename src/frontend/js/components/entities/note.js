@@ -142,7 +142,12 @@ class RecentlyViewedNote extends HTMLElement {
     }
 
     setData(note) {
+        this.id = note.id;
         this.note = note;
+    }
+
+    removeElement() {
+        this.remove();
     }
 
     connectedCallback() {

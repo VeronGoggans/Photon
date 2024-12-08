@@ -211,7 +211,6 @@ const editorTemplate = `
             <div class="options" id="recently-viewed-notes-dropdown"></div>
           </div>
           <p class="document-location"></p>
-          <div class="save-note-btn">Save</div>
           
           <div class="editor-options-dropdown">
             <i id="editor-options-btn" class="bi bi-three-dots-vertical"></i>

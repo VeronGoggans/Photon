@@ -1,5 +1,5 @@
 {
-    "theme": "light",
-    "sidebarColor": "invisible",
+    "theme": "dark",
+    "sidebarColor": "soft",
     "widgetStyle": "shadow"
 }
