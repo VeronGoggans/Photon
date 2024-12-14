@@ -1,6 +1,7 @@
 import { CNode } from "../../util/CNode.js";
 import { modalPlaceholderText, modalNewTitleText, modalUpdateTitleText, modalButtonText } from "../../constants/constants.js";
 import { dialogEvent } from "../../util/dialog.js";
+import { newStickyBoardModalTemplate } from "../../constants/modalTemplates.js";
 
 
 export class NewCollectionModal {
