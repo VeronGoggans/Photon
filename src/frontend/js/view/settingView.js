@@ -12,7 +12,7 @@ export class SettingView {
             this.dropdowns, 
             this.dropdownOptions, 
             this.settingsView, 
-            ['.theme-dropdown','.sidebar-color-dropdown', '.widget-style-dropdown']
+            ['.theme-dropdown','.sidebar-color-dropdown', '.widget-style-dropdown', '.folder-icon-color-dropdown']
         );
         AnimationHandler.fadeInFromSide(this.settingsView);
     }
@@ -21,6 +21,7 @@ export class SettingView {
         this.themeInput.value = capitalizeFirstLetter(settings.theme);
         this.sidebarColorInput.value = capitalizeFirstLetter(settings.sidebarColor);
         this.widgetInput.value = capitalizeFirstLetter(settings.widgetStyle);
+        this.folderIconInput.value = capitalizeFirstLetter(settings.folderIconColor)
     }
 
 
@@ -84,6 +85,18 @@ export class SettingView {
         this.controller.updateWidgetStyle('border');
     }
 
+    async #folderIconColorBlue() {
+        this.dropdownHelper.closeDropdowns();
+        this.folderIconInput.value = 'Blue';
+        this.controller.updateFolderIconColor('blue');
+    }
+
+    async #folderIconColorGray() {
+        this.dropdownHelper.closeDropdowns();
+        this.folderIconInput.value = 'Gray';
+        this.controller.updateFolderIconColor('gray');
+    }
+
 
     #initElements() {
         this.settingsView = document.querySelector('.settings');
@@ -94,6 +107,8 @@ export class SettingView {
         this.themeOptions = document.querySelector('.theme-dropdown ul');
         this.widgetInput = document.querySelector('.widget-style-dropdown input');
         this.widgetOptions = document.querySelector('.widget-style-dropdown ul');
+        this.folderIconOptions = document.querySelector('.folder-icon-color-dropdown ul');
+        this.folderIconInput = document.querySelector('.folder-icon-color-dropdown input');
 
         this.darkTheme = this.themeOptions.querySelector('li[theme="dark"]');
         this.lightTheme = this.themeOptions.querySelector('li[theme="light"]');
@@ -105,8 +120,11 @@ export class SettingView {
         this.widgetBorder = this.widgetOptions.querySelector('li[widgetstyle="border"]');
         this.widgetShadow = this.widgetOptions.querySelector('li[widgetstyle="shadow"]');
 
-        this.dropdowns = [this.themeInput, this.sidebarColorInput, this.widgetInput];
-        this.dropdownOptions = [this.themeOptions, this.sidebarOptions, this.widgetOptions];
+        this.iconBlue = this.folderIconOptions.querySelector('li[iconColor="blue"]')
+        this.iconGray = this.folderIconOptions.querySelector('li[iconColor="gray"]')
+
+        this.dropdowns = [this.themeInput, this.sidebarColorInput, this.widgetInput, this.folderIconInput];
+        this.dropdownOptions = [this.themeOptions, this.sidebarOptions, this.widgetOptions, this.folderIconOptions];
     }
 
     #eventListeners() {
@@ -117,5 +135,7 @@ export class SettingView {
         this.invisibleSidebar.addEventListener('click', () => {this.#invisibleColor()});
         this.widgetBorder.addEventListener('click', () => {this.#widgetBorder()});
         this.widgetShadow.addEventListener('click', () => {this.#widgetShadow()});
+        this.iconBlue.addEventListener('click', () => {this.#folderIconColorBlue()});
+        this.iconGray.addEventListener('click', () => {this.#folderIconColorGray()});
     }
 }

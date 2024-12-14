@@ -1,8 +1,3 @@
-export const months = {
-    '01': 'January', '02': 'Febuary', '03': 'March', '04': 'April',
-    '05': 'May', '06': 'June', '07': 'July', '08': 'August',
-    '09': 'September', '10': 'Oktober', '11': 'November', '12': 'December', 
-}
 
 
 export const folderColors = {
@@ -21,21 +16,6 @@ export const folderColors = {
     'rgb(255, 255, 255)': 'color-original'
 }
 
-
-export const headingsMap = {
-    'H1': 'Heading 1',
-    'H2': 'Heading 2',
-    'H3': 'Heading 3',
-    'H4': 'Heading 4'
-}
-
-
-export const arrowKeys = new Set([
-    'ArrowUp', 
-    'ArrowDown', 
-    'ArrowLeft', 
-    'ArrowRight'
-]);
 
 
 export const notificationTypes = {
@@ -63,7 +43,7 @@ export const stickyNoteColors = [
     '#d4e7ff',
 ]
 
-export const sidebarButtonText = ['Home', 'Notes', 'Templates', 'Stickies', 'Flashcards', 'Settings']
+export const sidebarButtonText = ['Home', 'Notes', 'Stickies', 'Flashcards', 'Settings']
 
 export const widgetStyles = {
     border: 'widget-style-border',

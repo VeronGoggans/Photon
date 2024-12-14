@@ -1,65 +1,56 @@
-import { CNode } from "../../util/CNode.js";
-import { modalPlaceholderText, modalNewTitleText, modalUpdateTitleText, modalButtonText } from "../../constants/constants.js";
 import { dialogEvent } from "../../util/dialog.js";
 import { newStickyBoardModalTemplate } from "../../constants/modalTemplates.js";
 
 
-export class NewCollectionModal {
-    constructor(controller, entity, entityData = null) {
+export class NewStickyBoardModel {
+    constructor(controller = null) {
         this.controller = controller;
-        this.entityData = entityData;
-        this.entity = entity;
 
-        this.action = 'add';
-        
-        this.HOST = CNode.create('div', {'class': 'new-collection-modal'});
-        this.DIV = document.createElement('div');
-        this.MODAL_TITLE = CNode.create('h2', {'textContent': modalNewTitleText[entity]});
-        this.NAME = CNode.create('input', {'type': 'text', 'placeholder': modalPlaceholderText[entity], 'spellCheck': false});
-        this.DESCRIPTION = CNode.create('textarea', {'placeholder': 'Type something here...', 'spellCheck': false});
-        this.SAVE_BTN = CNode.create('button', {'class': 'save-btn', 'textContent': modalButtonText[entity]});
+        this.HOST = document.createElement('div');
+        this.HOST.classList.add('new-sticky-board-modal');
+        this.HOST.innerHTML = newStickyBoardModalTemplate;
 
-        if (entityData !== null) {
-            this.#setEntity();
-        }
-
+        this.boardType = 'board';
         this.#eventListeners();
-        return this.#render();
+        return this.HOST
     }
 
-    #setEntity() {
-        this.HOST.id = this.entityData.id;
-        this.action = 'update';
-        this.MODAL_TITLE.textContent =  modalUpdateTitleText[this.entity];
-        this.SAVE_BTN.textContent = 'Save'
-        this.NAME.value = this.entityData.name;        
-        this.DESCRIPTION.value = this.entityData.description;
-    }
 
 
     #eventListeners() {
-        this.SAVE_BTN.addEventListener('click', async () => {
-            if (this.action == 'add') {
-                await this.controller.add({
-                    'name': this.NAME.value,
-                    'description': this.DESCRIPTION.value
-                })
-            }
-            else {
-                await this.controller.update({
-                    "id": this.HOST.id,
-                    "name": this.NAME.value,
-                    "description": this.DESCRIPTION.value
-                })
-            } 
+        /**
+         * Event listener for adding a new sticky board
+         */
+        this.HOST.querySelector('.save-btn').addEventListener('click', (e) => {
+            this.controller.add({
+                'name': this.HOST.querySelector('input').value,
+                'description': '',
+                'type': this.boardType
+            })
             dialogEvent(this.HOST, 'close');
         })
-    }
 
 
-    #render() {
-        this.DIV.append(this.NAME, this.DESCRIPTION)
-        this.HOST.append(this.MODAL_TITLE, this.DIV, this.SAVE_BTN);
-        return this.HOST;
+        /**
+         * Event listener for closing the new sticky board modal
+         */
+        this.HOST.querySelector('.cancel-btn').addEventListener('click', (e) => {
+            dialogEvent(this.HOST, 'close');
+        })
+
+
+        /**
+         * Event listener for toggling the sticky board type
+         */
+        this.HOST.querySelector('.board-types').addEventListener('click', (e) => {
+            if (e.target.closest('.type-one')) {
+                this.HOST.querySelector('.type-one').classList.add('selected-board-type');
+                this.HOST.querySelector('.type-two').classList.remove('selected-board-type');
+            }
+            else if (e.target.closest('.type-two')) {
+                this.HOST.querySelector('.type-two').classList.add('selected-board-type');
+                this.HOST.querySelector('.type-one').classList.remove('selected-board-type');
+            }
+        })
     }
 }

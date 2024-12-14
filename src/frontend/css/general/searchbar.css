@@ -1,6 +1,6 @@
 .searchbar {
     position: relative;
-    height: 50px;
+    height: 45px;
     width: 50%;
     max-width: 450px;
     min-width: 300px;
@@ -25,7 +25,7 @@
 
 .searchbar #search-icon {
     position: absolute;
-    top: 14px;
+    top: 10px;
     left: 20px;
     color: var(--searchbar-placeholder);
 }
@@ -37,6 +37,6 @@
     font-size: 18px;
 }
 
-.searchbar ul #folder-search-type{color: #c3c7ff}
-.searchbar ul #note-search-type {color: #b2dbff}
+.searchbar ul #folder-search-type{color: #5c7fdd}
+.searchbar ul #note-search-type {color: #a8b2ff}
 .searchbar ul #template-search-type {color: #abb8ff}

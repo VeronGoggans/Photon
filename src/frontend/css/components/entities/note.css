@@ -1,6 +1,5 @@
 note-card,
-recently-changed-note-card,
-template-card {
+recently-changed-note-card{
     cursor: pointer;
     min-height: 280px;
     max-height: 280px;
@@ -16,14 +15,12 @@ template-card {
 }
 
 note-card:hover,
-recently-changed-note-card:hover,
-template-card:hover {
+recently-changed-note-card:hover{
     scale: 1.05;
 }
 
 note-card h4,
-recently-changed-note-card h4,
-template-card h4 {
+recently-changed-note-card h4 {
     padding: 5px;
     margin: auto 10px;
     color: var(--important);
@@ -32,8 +29,7 @@ template-card h4 {
 }
 
 note-card .note-content-box,
-recently-changed-note-card .note-content-box,
-template-card .note-content-box {
+recently-changed-note-card .note-content-box {
     padding: 10px;
     overflow: hidden;
     color: var(--text);
@@ -43,8 +39,7 @@ template-card .note-content-box {
 
 
 note-card .note-content-box img,
-recently-changed-note-card .note-content-box img,
-template-card .note-content-box img {
+recently-changed-note-card .note-content-box img {
     max-width: 150px;
     border-radius: 5px;
 }
@@ -70,8 +65,7 @@ recently-changed-note-card .note-content-box hr {
   }
 
 note-card .note-content-box :where(h1, h2),
-recently-changed-note-card .note-content-box :where(h1, h2),
-template-card .note-content-box :where(h1, h2) {
+recently-changed-note-card .note-content-box :where(h1, h2) {
     color: var(--important);
     font-weight: 500;
     font-size: 12px
@@ -84,7 +78,10 @@ recently-changed-note-card .note-content-box h1{
 }
 
 note-card .note-content-box .linked-note-container {visibility: hidden}
-note-card .note-content-box a {color: rgb(67, 142, 255)}
+
+note-card .note-content-box a,
+recently-changed-note-card .note-content-box a {color: rgb(67, 142, 255)}
+
 .note-content-box terminal-snippet {
     visibility: hidden;
 }

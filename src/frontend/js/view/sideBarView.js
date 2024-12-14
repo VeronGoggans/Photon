@@ -11,10 +11,8 @@ export class SidebarView {
         this.sidebarSpans = this._sidebar.querySelectorAll('.sidebar-content a span');
         this.logo = this._sidebar.querySelector('.sidebar-logo');
 
-        this._collapsed = false;
-        this._size = 'standard';
         this._wrapper = document.querySelector('.wrapper');
-        this._buttonCount = 6;
+        this._buttonCount = 5;
 
         this.#eventListeners();
 

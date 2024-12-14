@@ -35,6 +35,7 @@ document-location-page-block {
 document-location-page-block i {
     font-size: 14px;
     margin: 0 3px;
+    color: var(--text);
 }
 
 

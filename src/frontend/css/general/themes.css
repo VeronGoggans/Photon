@@ -1,4 +1,8 @@
 .dark {
+    /* Folder colors */
+
+
+
 
     /*sidebar*/
     --sidebar-inactive-tab: #8686a1;
@@ -32,7 +36,6 @@
     --add-sticky-btn: #18172b;
 
     /*Notes View*/ 
-    --hover-bookmark-icon-if-bookmarked: #434c71;
     --bookmark: #5063b1;
     --dragging: #27293b;
     --hover: #617fff69; 
@@ -71,7 +74,7 @@
     --sidebar-text: #d6d8e5;
     --sidebar-text-hover: #5c7fdd; 
     --card: #141322;
-    --folder: #1c1c2c;
+    --folder: #141322; /*#1c1c2c*/
     --text: #bbbed2;
     --icon: #bbbed2;
     --input-bg: #18182d;
@@ -99,9 +102,32 @@
 
     --active-tab-bg: #121223;
     --active-tab-text: #5673ff;
+
+
+    /*Buttons*/
+    --button1-bg: #24263c;
+    --button1-hover: #1d1e38;
 }
 
-.light{
+.light {
+
+
+    /* Folder colors */
+    --dark-blue-folder: rgb(121, 144, 255);
+    --sky-blue-folder: rgb(169, 215, 255);
+    --light-blue-folder: rgb(217, 237, 255);
+    --torquise-green-folder: rgb(158, 213, 197);
+    --soft-green-folder: rgb(203, 255, 197);
+    --light-green-folder: rgb(173, 255, 164);
+    --dark-purple-folder: rgb(142, 122, 181);
+    --light-purple-folder: rgb(223, 193, 255);
+    --dark-red-folder: rgb(255, 163, 163);
+    --light-red-folder: rgb(255, 197, 197);
+    --dark-orange-folder: rgb(255, 182, 116);
+    --light-orange-folder: rgb(255, 224, 158);
+
+
+
 
     /*sidebar*/
     --sidebar-inactive-tab: #8686a1;
@@ -123,9 +149,8 @@
     /*Notes View*/
     --dragging: #f3f4ff;
     --bookmark: #d5ddff;
-    --hover: #f0f0ff; 
-    --hover-bookmark-icon-if-bookmarked: rgba(92, 125, 255, .3);
-    --folder-name-border: #ced1e3;
+    --hover: #f0f0ff;
+    --folder-name-border: #f4f5ff;
 
     /*Home View*/
 
@@ -174,11 +199,11 @@
     --subtitle: #2f3773;
     --sidebar: #ffffff; 
     --sidebar-soft: #ffffff;
-    --searchbar: #f4f4fc;
+    --searchbar: #f4f5ff; /*f4f4fc*/
     --sidebar-text: #444452; 
     --sidebar-text-hover: #1d2134; 
     --card: #ffffff; 
-    --folder: #f4f4fc;
+    --folder: #ffffff; /*#f4f5ff*/
     --text: #444863;
     --icon: #4c4c68; 
     --input-bg: #f6f6fb;
@@ -187,7 +212,7 @@
     
     --hover-searchbar-options: #f7f7fa;
     --hover-text: #444863;
-    --hover-sidebar: #f4f4fc;
+    --hover-sidebar: #f8f8ff;
     --searchbar-placeholder: #9297aa; 
     --placeholder: #d4d7e5;
     --selection: #b1daff;
@@ -203,6 +228,10 @@
     /*Feedback variables*/
     --completed-checklist-task: #f8f9ff;
 
-    --active-tab-bg: #f4f4fc;
+    --active-tab-bg: #f4f5ff;
     --active-tab-text: #2f3773;
+
+    /*Buttons*/
+    --button1-bg: #f4f4fc;
+    --button1-hover: #eaeaf7;
 }

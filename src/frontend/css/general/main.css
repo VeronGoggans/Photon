@@ -102,12 +102,6 @@ i {
 }
 
 
-.context-text {
-    color: var(--text);
-    margin: 0 0 50px 0px;
-    max-width: 600px;
-}
-
 .util-bar-type-2 {
     display: flex;
     justify-content: end;
@@ -176,7 +170,7 @@ textarea::placeholder {
 
 .options-menu {
     position: absolute;
-    top: -110px;
+    top: -117px;
     left: 0;
     background-color: var(--background);
     color: var(--text);

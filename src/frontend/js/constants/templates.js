@@ -40,7 +40,7 @@ const notesTemplate = `
                 <ul class="dropdown-items soft-dropdown">
                     <li class="add-note-btn"><i class="bi bi-file-earmark"></i> Add a note</li>
                     <li class="add-folder-btn"><i class="bi bi-folder-plus"></i> Add a Folder</li>
-                    <li class="view-bookmarks-btn"><i class="bi bi-bookmark"></i> View bookmarks</li>
+                    <li class="view-bookmarks-btn"><i class="bi bi-bookmarks"></i> View bookmarks</li>
                 </ul>
             </div>
             
@@ -110,26 +110,6 @@ const flashcardEditTemplate = `
     </div>
 `
 
-const templatesTemplate =  `
-    <div class="templates">
-        <h1 class="view-title">Templates</h1>
-        <div class="stats-section">
-            <p>Uses: <span class="total-uses-count">0</span></p>
-            <p>Templates: <span class="template-count">0</span></p>
-            <p>Most used: <span class="most-used-template"></span></p>
-        </div>
-        <div class="recent-section">
-            <p class="block-title">Recent templates</p>
-            <button class="add-template-btn">Add a template</button>
-            <div class="recent-templates"></div>
-        </div>
-        <div claa="other-section">
-            <p class="block-title">Other templates</p>
-            <div class="other-templates"></div>
-        </div>
-    </div>
-`;
-
 const stickyWallTemplate = `
     <div class="sticky-wall-view">
         <previous-view-button></previous-view-button>
@@ -145,13 +125,22 @@ const stickyWallTemplate = `
 const stickyNoteHomeTemplate = `
     <div class="sticky-home-view">
         <h1 class="view-title">Sticky walls</h1>
-        <p class="context-text">Create sticky walls to jot down quick thoughts, capture ideas on the fly, and keep track of your brainstorming sessions effortlessly</p>
-        <div class="sticky-walls">
-            <div class="util-bar-type-2">
-                <button class="add-sticky-wall-btn"><i class="fa-solid fa-plus"></i></button>
+        <div class="sticky-presentation">
+            <div class="sticky-image-container">
+                <div class="pin"></div>
+                <div class="sticky-one"></div>
+                <div class="sticky-two">
+                    <div class="line" style="width: 50%;"></div>
+                    <div class="line" style="width: 70%;"></div>
+                    <div class="line" style="width: 60%;"></div>
+                </div>
             </div>
-            <div class="sticky-wall-cards"></div>
+            <div class="presentation-text-container">
+                <p class="context-text">Create sticky walls to jot down quick thoughts, capture ideas on the fly, and keep track of your brainstorming sessions effortlessly</p>
+                <button class="add-sticky-board-btn">Create a board</button>
+            </div>
         </div>
+        <div class="sticky-boards"></div>
     </div>
 `
 
@@ -193,6 +182,18 @@ const settingsTemplate = `
                     <ul class="dropdown-items">
                         <li widgetStyle="border">Border</li>
                         <li widgetStyle="shadow">Shadow</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div>
+                <h3>Icon color</h3>
+                <p>Select a folder icon color</p>
+                <div class="folder-icon-color-dropdown">
+                    <input type="text" spellcheck="false" placeholder="Folder icon color" class="folder-icon-color-input">
+                    <ul class="dropdown-items">
+                        <li iconColor="blue">Blue</li>
+                        <li iconColor="gray">Gray</li>
                     </ul>
                 </div>
             </div>
@@ -250,7 +251,6 @@ export const templates = {
     flashcardsHome: flashcardsTemplate,
     flashcardsPractice: flashcardPracticeTemplate,
     flashcardEdit: flashcardEditTemplate,
-    templates: templatesTemplate,
     stickyWall: stickyWallTemplate,
     stickyWallHome: stickyNoteHomeTemplate,
     settings: settingsTemplate,

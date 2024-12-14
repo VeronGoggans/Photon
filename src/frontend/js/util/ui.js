@@ -26,8 +26,15 @@ export function incrementString(string) {
 
 
 export function applyWidgetStyle(componentElement) {
-    const widgetStyle = window.sessionStorage.getItem('widget-style');
-    componentElement.classList.add(widgetStyles[widgetStyle]);
+    componentElement.classList.add(widgetStyles[
+        window.sessionStorage.getItem('widget-style')
+        ]);
+}
+
+export function applyFolderIconColor(componentElement) {
+    const colors = { 'blue': '#5c7fdd', 'gray': '#a4a8bf' }
+    const iconColor = window.sessionStorage.getItem('folder-icon-color')
+    componentElement.querySelector('i').style.color = colors[iconColor];
 }
 
 

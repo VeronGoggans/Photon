@@ -58,7 +58,9 @@ export class StickyWallHomeView {
 
 
     #eventListeners() {
-        this._addNewstickyWallButton.addEventListener('click', () => {this.dialog.renderNewCollectionModal(this.controller, 'stickyWall');});
+        this._addNewstickyWallButton.addEventListener('click', () => {
+            this.dialog.renderNewStickyBoardModal(this.controller)
+        });
 
         this._stickyWallsList.addEventListener('ListItemCardClick', (event) => {
             const { listItem } = event.detail;        
@@ -72,18 +74,17 @@ export class StickyWallHomeView {
 
         this._stickyWallsList.addEventListener('DeleteListItem', (event) => {
             const { listItem } = event.detail
-            this.renderDeleteModal(listItem.id, listItem.name);
+            this.dialog.renderDeleteModal(listItem.id, listItem.name);
         })
 
         this._stickyWallsList.addEventListener('UpdateListItem', (event) => {
-            const { listItem, listItemType } = event.detail
-            this.dialog.renderNewCollectionModal(this.controller, listItemType, listItem)
+            this.dialog.renderNewStickyBoardModal(this.controller)
         })
     }
 
     #initElements() {
         this.viewElement = document.querySelector('.sticky-home-view');
-        this._stickyWallsList = document.querySelector('.sticky-wall-cards');
-        this._addNewstickyWallButton = document.querySelector('.add-sticky-wall-btn');  
+        this._stickyWallsList = document.querySelector('.sticky-boards');
+        this._addNewstickyWallButton = document.querySelector('.add-sticky-board-btn');
     }
 }

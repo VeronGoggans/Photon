@@ -1,17 +1,18 @@
 import { folderColors } from "../../constants/constants.js";
 import { formatName } from "../../util/formatters.js";
 import { addDraggImage, showContextMenu } from "../../util/ui.js";
-import { applyWidgetStyle } from "../../util/ui.js";
+import { applyFolderIconColor, applyWidgetStyle } from "../../util/ui.js";
+
 
 
 
 const optionsMenuTemplate = `
     <div id="edit-btn" >
-        <i class="fa-solid fa-pen"></i>
+        <i class="bi bi-pencil-square"></i>
         <span>Edit folder</span>
     </div>
     <div id="delete-btn">
-        <i class="fa-solid fa-trash"></i>
+        <i class="bi bi-folder-x"></i>
         <span>Delete folder</span>
     </div>
 ` 
@@ -36,9 +37,11 @@ class RecentFolder extends HTMLElement {
 
     render() {
         this.innerHTML = `
-            <i id="folder-icon" class="bi bi-folder-fill"></i>
+            <i id="folder-icon" class="bi bi-folder"></i>
             <p>${this.folder.name}</p>
         `;
+        applyFolderIconColor(this)
+        applyWidgetStyle(this);
     }
 
     handleCardClick() {        
@@ -109,10 +112,12 @@ class Folder extends HTMLElement {
 
     render() {
         this.innerHTML = `
-            <i id="folder-icon" class="bi bi-folder-fill"></i>
+            <i id="folder-icon" class="bi bi-folder"></i>
             <p>${formatName(this.folder.name)}</p>
         `;
         this.addColor();
+        applyFolderIconColor(this);
+        applyWidgetStyle(this);
     }
 
 

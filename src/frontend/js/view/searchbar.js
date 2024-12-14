@@ -63,13 +63,13 @@ export class Searchbar {
             let content = '';
 
             if (suggestion.type === 'note') {
-                content = `<i id="note-search-type" class="fa-solid fa-file"></i> ${suggestion.object.name}`;
+                content = `<i id="note-search-type" class="bi bi-file-earmark"></i> ${suggestion.object.name}`;
                 suggestionElement.dataset.searchType = 'note'
             } else if (suggestion.type === 'folder') {
-                content = `<i id="folder-search-type" class="bi bi-folder-fill"></i> ${suggestion.object.name}`;
+                content = `<i id="folder-search-type" class="bi bi-folder"></i> ${suggestion.object.name}`;
                 suggestionElement.dataset.searchType = 'folder'
             } else if (suggestion.type === 'template') {
-                content = `<i id="template-search-type" class="bi bi-file-earmark-text-fill"></i> ${suggestion.object.name}`;
+                content = `<i id="template-search-type" class="bi bi-file-earmark-text"></i> ${suggestion.object.name}`;
                 suggestionElement.dataset.searchType = 'template'
             } else if (suggestion.type === 'flashcard') {
                 content = `<i id="flashcard-search-type" class="bi bi-card-text"></i> ${suggestion.object.name}`;

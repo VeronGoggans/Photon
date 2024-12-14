@@ -41,6 +41,7 @@
 
 #editor-options-btn {
     padding: 0 10px;
+    color: var(--text);
     cursor: pointer;
     border-radius: 7px;
     height: 100%;

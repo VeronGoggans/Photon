@@ -30,6 +30,8 @@
     }
 }
 
+
+
 @keyframes pulsing {
     0%, 100% {
       transform: scale(1);       /* Start and end at original size */
@@ -40,6 +42,18 @@
       opacity: 1;              /* Slightly fade */
     }
 }
+
+
+
+@keyframes sway-in-the-wind {
+    0% { transform: rotate(5deg); }
+    25% { transform: rotate(10deg) translateX(-5px); }
+    50% { transform: rotate(7deg) translateX(5px); }
+    75% { transform: rotate(10deg) translateX(-5px); }
+    100% { transform: rotate(5deg); }
+}
+
+
 
 @keyframes bounce {
     0% { transform: translateY(0); }

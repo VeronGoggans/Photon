@@ -25,8 +25,9 @@ export class SettingController {
             document.querySelector('.sidebar').classList.add(settings.sidebarColor);
         }
 
-        // Save widget style in session storage
+        // Save widget style & folder icon color in session storage
         window.sessionStorage.setItem('widget-style', settings.widgetStyle);
+        window.sessionStorage.setItem('folder-icon-color', settings.folderIconColor);
     }
 
 
@@ -49,5 +50,11 @@ export class SettingController {
         const { widgetStyle } = await this.model.update(`/settings/widgetStyle/${newWidgetStyle}`);
         window.sessionStorage.setItem('widget-style', newWidgetStyle);
         return widgetStyle;
+    }
+
+    async updateFolderIconColor(newFolderIconColor) {
+        const { folderIconColor } = await this.model.update(`/settings/folderIconColor/${newFolderIconColor}`);
+        window.sessionStorage.setItem('folder-icon-color', newFolderIconColor);
+        return folderIconColor;
     }
 }

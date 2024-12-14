@@ -6,7 +6,7 @@ import { NewDeckModal } from "../components/modals/newDeckModal.js";
 import { AnimationHandler } from "../handlers/animationHandler.js";
 import { EditFlashcardModal } from "../components/modals/editFlashcardModal.js";
 import { StickyNoteModal } from "../components/modals/stickyNoteModal.js";
-import { NewCollectionModal } from "../components/modals/newCollectionModal.js";
+import { NewStickyBoardModel } from "../components/modals/newStickyBoardModal.js";
 
 
 export class Dialog {
@@ -25,7 +25,7 @@ export class Dialog {
                 '.create-deck-modal',
                 '.edit-flashcard-modal',
                 '.sticky-note-modal',
-                '.new-collection-modal',
+                '.new-sticky-board-modal',
             ];
 
             // Check if the clicked target belongs to any excluded container
@@ -84,13 +84,9 @@ export class Dialog {
         this.dialog.querySelector('.create-deck-modal input').focus();
     }
 
-    renderNewCollectionModal(controller, entity, entityData = null) {
-        this.addChild(new NewCollectionModal(
-            controller, 
-            entity, 
-            entityData
-        ));
-        this.dialog.querySelector('.new-collection-modal input').focus()
+    renderNewStickyBoardModal(controller) {
+        this.addChild(new NewStickyBoardModel(controller));
+        this.dialog.querySelector('.new-sticky-board-modal input').focus()
     }
 
     renderStickyNoteModal(controller, parentId, stickyNote = null) {

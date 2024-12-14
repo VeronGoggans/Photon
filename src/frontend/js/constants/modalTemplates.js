@@ -5,8 +5,8 @@ export const editFolderModalTemplate = `
     <p>You can change the name of this folder below</p>
     <input type="text" placeholder="Untitled" spellcheck="false">
 
-    <span id="title">Folder theme</span>
-    <p>Select a theme for this folder</p>
+    <span id="title">Folder color</span>
+    <p>Select a color for this folder</p>
     <div class="folder-color-options">
         <div style="background-color: rgb(121, 144, 255)"></div>
         <div style="background-color: rgb(169, 215, 255)"></div>
@@ -26,5 +26,30 @@ export const editFolderModalTemplate = `
         <button class="cancel-btn">Cancel</button>
         <button class="save-btn">Add folder</button>
     </div>
+</div>
+`
+
+export const newStickyBoardModalTemplate = `
+<h2>New sticky board</h2>
+<div class="board-settings">
+    <span id="title">Sticky board name</span>
+    <p>You can change the name of this sticky board below</p>
+    <input type="text" class="sticky-board-title" placeholder="Untitled">
+    <span id="title">Sticky board type</span>
+    <p>Select a type for your new sticky board</p>
+</div>
+<div class="board-types">
+    <div class="type-one selected-board-type">
+        <i class="bi bi-stickies"></i>
+        <span>Board</span>
+    </div>
+    <div class="type-two">
+        <i class="bi bi-layout-three-columns"></i>
+        <span>Column</span>
+    </div>
+</div>
+<div class="buttons-container">
+    <button class="cancel-btn">Cancel</button>
+    <button class="save-btn">Create</button>
 </div>
 `

@@ -4,6 +4,7 @@ from json import load, dump
 THEME = 'theme'
 SIDEBAR_COLOR = 'sidebarColor'
 WIDGET_STYLE = 'widgetStyle'
+FOLDER_ICON_COLOR = 'folderIconColor'
 
 
 class SettingService():
@@ -31,6 +32,13 @@ class SettingService():
         config[WIDGET_STYLE] = widget_style
         self.__update_config(config)
         return widget_style
+
+
+    def update_folder_icon_color(self, color: str) -> str:
+        config = self.__get_config()
+        config[FOLDER_ICON_COLOR] = color
+        self.__update_config(config)
+        return color
     
 
     def __get_config(self) -> str:

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:wght@100&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/textEditor/editorSpawnables.css">
+    <link rel="stylesheet" href="../css/general/themes.css">
+    <link rel="stylesheet" href="../css/general/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            height: 100dvh;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(204, 207, 214);
+        }
+
+        .new-sticky-board-modal {
+            padding: 30px 40px;
+            width: 650px;
+            height: 550px;
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        .board-choices {
+            margin: 10px 0;
+            width: fit-content;
+            border-radius: 50px;
+            background-color: #f4f5fa;
+            display: flex;
+            height: 50px;
+            column-gap: 20px;
+        }
+
+        .board-choices div {
+            cursor: pointer;
+            transition: 200ms;
+            width: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            column-gap: 5px;
+            border-radius: 50px;
+        }
+
+        .selected-board-choice {
+            background-color: #d4daff;
+        }
+
+        .board-choices div:hover {
+            scale: 1.05;
+        }
+
+        .new-sticky-board-modal h2 {
+            font-weight: 500;
+            font-size: 32px;
+        }
+
+        .new-sticky-board-modal input {
+            border: none;
+            background-color: transparent;
+            padding: 5px 10px;
+            height: 45px;
+            margin-bottom: 10px;
+            color: #444863;
+            font-size: 20px;
+            transition: 200ms;
+            border-bottom: 2px solid #f4f5ff;
+        }
+
+        
+
+        .new-sticky-board-modal button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #5c7fdd;
+            background-color: transparent;
+            padding: 10px;
+            font-size: 16px;
+            width: 120px;
+            height: 40px;
+            border-radius: 7px;
+        }
+
+        .new-sticky-board-modal button:hover {
+            background-color: #d4daff;
+        }
+
+        .board-settings {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .new-sticky-board-modal #title {
+            color: #2f3773;
+            font-size: 17px;
+            font-weight: 600;
+            margin: 0;
+            margin-top: 40px;
+        }
+
+        .new-sticky-board-modal p {
+            margin: 0;
+            color: #9b9bb5;
+            margin-bottom: 5px;
+        }
+
+        .new-sticky-board-modal textarea {
+            border: 2px solid #f4f5ff;
+            border-radius: 5px;
+            font-size: 13px;
+            padding: 10px 20px;
+        }
+
+        .new-sticky-board-modal .buttons-container {
+            display: flex;
+            justify-content: end;
+            gap: 15px;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="new-sticky-board-modal">
+        <h2>New sticky board</h2>
+        <div class="board-settings">
+            <span id="title">Sticky board name</span>
+            <p>You can change the name of this sticky board below</p>
+            <input type="text" class="sticky-board-title" placeholder="Untitled">
+            <span id="title">Sticky board type</span>
+            <p>Select a type for your new sticky board</p>
+        </div>
+        <div class="board-types">
+            <div class="choice-one">
+                <i class="bi bi-stickies"></i>
+                <span>Board</span>
+            </div>
+            <div class="choice-two selected-board-choice">
+                <i class="bi bi-layout-three-columns"></i>
+                <span>Column</span>
+            </div>
+        </div>
+        <div class="buttons-container">
+            <button class="cancel-btn">Cancel</button>
+            <button class="save-btn">Create</button>
+        </div>
+        
+    </div>
+    
+</body>
+</html>

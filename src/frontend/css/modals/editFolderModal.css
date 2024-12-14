@@ -4,9 +4,9 @@
     flex-direction: column;
     gap: 10px;
     width: 650px;
-    height: 500px;
+    height: 550px;
     padding: 30px 40px;
-    border-radius: 20px;
+    border-radius: 10px;
     justify-content: center;
     font-family: Roboto;
     box-shadow: 0 10px 20px var(--shadow);
@@ -24,12 +24,11 @@
 }
 
 .folder-settings #title {
-    
     font-size: 17px;
     color: var(--important);
     font-weight: 600;
     margin: 0;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .folder-settings p {
@@ -100,7 +99,7 @@
     min-width: 30px;
     height: 30px;
     margin: 0 5px;
-    border-radius: 50%;
+    border-radius: 10px;
     cursor: pointer;
     transition: 50ms;
     border: 2px solid transparent;
@@ -110,7 +109,7 @@
     width: 30px;
     height: 30px;
     margin: 0 5px;
-    border-radius: 50%;
+    border-radius: 10px;
     cursor: pointer;
     transition: 50ms;
     background-color: var(--card);

@@ -32,6 +32,7 @@
 }
 
 .theme-dropdown,
+.folder-icon-color-dropdown,
 .sidebar-color-dropdown,
 .widget-style-dropdown {
     position: relative;
@@ -42,7 +43,8 @@
 
 .theme-dropdown input,
 .sidebar-color-dropdown input,
-.widget-style-dropdown input {
+.widget-style-dropdown input,
+.folder-icon-color-dropdown input {
     background-color: transparent;
     border: none;
     width: 100%;

@@ -6,11 +6,11 @@ import { formatDate } from "../../util/date.js";
 
 const optionMenuTemplate = `
     <div id="bookmark-btn" >
-        <i class="fa-solid fa-bookmark"></i>
+        <i class="bi bi-bookmark"></i>
         <span>Bookmark note</span>
     </div>
     <div id="delete-btn">
-        <i class="fa-solid fa-trash"></i>
+        <i class="bi bi-file-earmark-x"></i>
         <span>Delete note</span>
     </div>
 `
