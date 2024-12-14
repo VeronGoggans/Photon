@@ -1,4 +1,4 @@
-# Neutron
+# Out dated visuals and explanatory text, need to update soon
 This is my implementation of a note taking app for desktop.
 
 I created this app with two things I thought this app should have. 
