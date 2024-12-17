@@ -44,7 +44,7 @@ class Note extends HTMLElement {
 
 
     addEventListeners() {
-        this.addEventListener('click', (event) => { this.handleCardClick() });
+        this.addEventListener('click', () => { this.handleCardClick() });
         this.addEventListener('contextmenu', (event) => {showContextMenu(event, this, optionMenuTemplate)});
         this.addEventListener('dragstart', (event) => {this.dragStart(event)}); 
         this.addEventListener('dragend', () => {this.classList.remove('dragging')});

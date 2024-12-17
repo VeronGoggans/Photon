@@ -36,7 +36,8 @@ export class ApplicationController {
             flashcardsHome: this.flashcardDeckController,
             flashcardsPractice: this.flashcardPracticeController,
             flashcardEdit: this.flashcardEditController,
-            stickyWall: this.stickyWallController,
+            standardStickyBoard: this.stickyWallController,
+            columnStickyBoard: this.stickyWallController,
             settings: this.settingController,
             editor: this.textEditorController,
             stickyWallHome: this.stickyWallHomeController
@@ -48,36 +49,29 @@ export class ApplicationController {
     initView(viewId, viewParameters = {}) {
         const controller = this.controllers[viewId];
         if (controller) {
-            // Putting the view template on the screen
+            // Rendering the correct view template on the screen
             this.viewContainer.innerHTML = templates[viewId];
+
             setTimeout(() => {
 
                 if (viewId === 'home') {
                     this.folderController.clearFolderHistory();
                     this.sidebarView.setActiveTab('home');
+                    controller.init();
                 }
 
-                if (viewId === 'notes') {
+                else if (viewId === 'notes') {
                     const { folder, location } = viewParameters; 
                     
                     this.folderController.init(folder.id, folder.name, location);
-                    // note controller 
+
                     controller.init(folder.id);
                     this.sidebarView.setActiveTab('notes');
-                    return;
                 }
 
-                if (viewId === 'editor') {
+                else if (viewId === 'editor') {
                     controller.init();
-                    const { 
-                        editorObjectType, 
-                        editorObject, 
-                        newEditorObject, 
-                        previousView, 
-                        editorObjectLocation
-                    } = viewParameters;
-
-                    this.model.setPreviousView(previousView);
+                    const { editorObjectType, editorObject, newEditorObject, previousView, editorObjectLocation } = viewParameters;
 
                     if (editorObjectLocation !== null) {
                         this.folderController.setNoteLocation(editorObjectLocation);
@@ -91,30 +85,24 @@ export class ApplicationController {
                         this.openInTextEditor(editorObject, editorObjectType);
                         this.noteController.patchLastViewTime(editorObject.id);
                     }
-                    // EditorObjectType can be Template or note.
-                    this.sidebarView.setActiveTab(`${editorObjectType}s`);
-                    return;
+
+                    this.model.setPreviousView(previousView);
+                    this.sidebarView.setActiveTab('notes');
                 }
 
-                if (viewId === 'flashcardsHome') {
+                else if (viewId === 'flashcardsHome') {
                     this.sidebarView.setActiveTab('flashcards');
                 }
 
-                if (viewId === 'flashcardsPractice') {
-                    const {
-                        deck,
-                        flashcards,
-                        previousView
-                    } = viewParameters
-
-                    this.model.setPreviousView(previousView);                    
+                else if (viewId === 'flashcardsPractice') {
+                    const { deck, flashcards, previousView } = viewParameters
 
                     controller.init(deck, flashcards);
+                    this.model.setPreviousView(previousView);
                     this.sidebarView.setActiveTab('flashcards');
-                    return;
                 }
 
-                if (viewId === 'flashcardEdit') {
+                else if (viewId === 'flashcardEdit') {
                     const {
                         deck, 
                         flashcards,
@@ -124,32 +112,34 @@ export class ApplicationController {
                     this.model.setPreviousView(previousView);
 
                     controller.init(deck, flashcards);
-                    return;
                 }
 
-                if (viewId === 'templates') {
-                    this.folderController.clearFolderHistory();
-                    this.sidebarView.setActiveTab('templates');
-                }
+                else if (viewId === 'standardStickyBoard') {
+                    const { stickyBoard, previousView } = viewParameters;
+                    controller.initStandardStickyBoard(stickyBoard, previousView);
 
-                if (viewId === 'stickyWall') {  
-                    const { stickyWall, previousView } = viewParameters 
-                    controller.init(stickyWall)
                     this.model.setPreviousView(previousView)
+
                     this.sidebarView.setActiveTab('sticky-wall-home')
-                    return;
                 }
 
-                if (viewId === 'settings') {
+                else if (viewId === 'columnStickyBoard') {
+                    const { stickyBoard, previousView } = viewParameters;
+                    controller.initColumnStickyBoard(stickyBoard, previousView);
+
+                    this.model.setPreviousView(previousView)
+
+                    this.sidebarView.setActiveTab('sticky-wall-home')
+                }
+
+                else if (viewId === 'settings') {
                     this.sidebarView.setActiveTab('settings')
                 }
 
-                if (viewId === 'stickyWallHome') {
-                    this.sidebarView.setActiveTab('sticky-wall-home')
-                }
-
-                controller.init();
-            }, 0); 
+                else if (viewId === 'stickyWallHome') {
+                    this.sidebarView.setActiveTab('sticky-wall-home');
+                    controller.init();
+                }}, 0);
         }
     }
 

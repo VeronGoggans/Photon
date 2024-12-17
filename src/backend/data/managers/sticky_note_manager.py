@@ -1,7 +1,14 @@
+from enum import Enum
 from sqlalchemy.orm import Session
 from src.backend.data.models import StickyNote, StickyBoard, StickyColumnBoard, StickyColumn
 from src.backend.data.exceptions.exceptions import InsertException, NotFoundException
 from sqlalchemy import union_all, select, text
+
+
+class BoardType(Enum):
+    STANDARD = 'standard'
+    COLUMN = 'column'
+
 
 
 
@@ -14,8 +21,14 @@ class StickyNoteManager:
         return sticky_note
 
 
-    def get_stickies(self, sticky_wall_id: int, db: Session):
-        return db.query(StickyNote).filter(StickyNote.sticky_wall_id == sticky_wall_id).all()
+
+    def get_stickies(self, sticky_board_id: int, board_type: str, db: Session) -> list[StickyNote]:
+        if board_type == BoardType.STANDARD:
+            return db.query(StickyNote).filter(StickyNote.sticky_board_id == sticky_board_id).all()
+        
+        elif board_type == BoardType.COLUMN:
+            pass
+
 
 
     def update_sticky(self, id: int, content: str, color: str, db: Session) -> (StickyNote | NotFoundException):
@@ -26,6 +39,7 @@ class StickyNoteManager:
         db.commit()
         db.refresh(sticky_note)
         return sticky_note
+
 
 
     def delete_sticky(self, id: int, db: Session) -> (None | NotFoundException):

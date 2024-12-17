@@ -114,11 +114,11 @@ export class StickyWallHomeView {
             this.dialog.renderNewStickyBoardModal(this.controller)
         });
 
-        this._stickyBoardsList.addEventListener('ListItemCardClick', (event) => {
-            const { listItem } = event.detail;        
-            this.applicationController.initView('stickyWall', 
+        this._stickyBoardsList.addEventListener('StickyBoardClick', (event) => {
+            const { stickyBoard } = event.detail;
+            this.applicationController.initView('standardStickyBoard',
                 {
-                    stickyWall: listItem,
+                    stickyBoard: stickyBoard,
                     previousView: 'stickyWallHome', 
                 }
             )

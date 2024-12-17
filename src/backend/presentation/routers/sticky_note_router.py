@@ -15,7 +15,7 @@ class StickyNoteRouter:
         self.service = StickyNoteService(StickyNoteManager())
 
         self.route.add_api_route('/stickyNote', self.add_sticky_note, methods=['POST'])
-        self.route.add_api_route('/stickyNotes/{sticky_board_id}', self.get_sticky_notes, methods=['GET'])
+        self.route.add_api_route('/stickyNotes/{sticky_board_id}/{board_type}', self.get_sticky_notes, methods=['GET'])
         self.route.add_api_route('/stickyNote', self.update_sticky_note, methods=['PUT'])
         self.route.add_api_route('/stickyNote/{id}', self.delete_sticky_note, methods=['DELETE'])
 
@@ -28,7 +28,7 @@ class StickyNoteRouter:
     @handle_exceptions
     def add_sticky_board(self, request: PostStickyBoardRequest, db: Session = Depends(Database.get_db)):
         return { 'status': HttpStatus.OK, 'StickyBoard': self.service.add_sticky_board(request, db) }
-       
+
 
     @handle_exceptions
     def get_sticky_boards(self, db: Session = Depends(Database.get_db)):
@@ -56,8 +56,8 @@ class StickyNoteRouter:
        
 
     @handle_exceptions
-    def get_sticky_notes(self, sticky_board_id: int, db: Session = Depends(Database.get_db)):
-        return {'status': HttpStatus.OK, 'Objects': self.service.get_sticky_notes(sticky_board_id, db)}
+    def get_sticky_notes(self, sticky_board_id: int, board_type: str, db: Session = Depends(Database.get_db)):
+        return {'status': HttpStatus.OK, 'Objects': self.service.get_sticky_notes(sticky_board_id, board_type, db)}
        
 
     @handle_exceptions

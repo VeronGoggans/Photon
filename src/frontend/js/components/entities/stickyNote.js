@@ -55,10 +55,14 @@ class StickyBoard extends HTMLElement {
         this.dispatchEvent(new CustomEvent('DeleteStickyBoard', { detail: { stickyBoard: this.board }, bubbles: true }));
     }
 
-
+    handleCardClick() {
+        this.dispatchEvent(new CustomEvent('StickyBoardClick', { detail: { stickyBoard: this.board }, bubbles: true }));
+        console.log('click click click')
+    }
 
     addEventListeners() {
         this.addEventListener('contextmenu', (event) => { showContextMenu(event, this, optionsMenuTemplate) });
+        this.addEventListener('click', () => { this.handleCardClick() });
     }
 }
 

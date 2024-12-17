@@ -4,25 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="Rewrote the editor logic">
+    <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="Created a component for the option menu. The logic is now reused for every entity component">
+      <change beforePath="$PROJECT_DIR$/.idea/Note-taking-app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Note-taking-app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/css/components/entities/note.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/components/entities/note.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/css/general/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/css/modals/deleteContainer.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/modals/deleteContainer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/components/entities/folder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/components/entities/folder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/application/services/sticky_note_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/application/services/sticky_note_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/data/managers/sticky_note_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/data/managers/sticky_note_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/presentation/routers/sticky_note_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/presentation/routers/sticky_note_router.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/js/components/entities/note.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/components/entities/note.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/js/components/entities/stickyNote.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/components/entities/stickyNote.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/components/pageBlocks/pageBlocks.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/components/pageBlocks/pageBlocks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/constants/templates.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/constants/templates.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/js/controller/applicationController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/controller/applicationController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/controller/homeController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/controller/homeController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/controller/stickyWallHomeController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/controller/stickyWallHomeController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/controller/templateController.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/util/ui.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/util/ui.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/util/ui/components.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/util/ui/components.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/controller/stickyWallController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/controller/stickyWallController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/view/stickyNoteView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/view/stickyNoteView.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/js/view/stickyWallHomeView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/view/stickyWallHomeView.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/view/templateView.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,12 +34,12 @@
     &quot;assignee&quot;: &quot;VeronGoggans&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/VeronGoggans/Note-taking-app.git&quot;,
-    &quot;accountId&quot;: &quot;c0352633-a578-45f2-99f7-8571e13a7327&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/VeronGoggans/Note-taking-app.git",
+    "accountId": "c0352633-a578-45f2-99f7-8571e13a7327"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 3
@@ -97,7 +93,9 @@
       <workItem from="1734184182423" duration="2032000" />
       <workItem from="1734195536222" duration="4712000" />
       <workItem from="1734447420399" duration="19000" />
-      <workItem from="1734447441420" duration="6860000" />
+      <workItem from="1734447441420" duration="7493000" />
+      <workItem from="1734472518074" duration="4147000" />
+      <workItem from="1734477171656" duration="2118000" />
     </task>
     <task id="LOCAL-00001" summary="the sidebar can now be without a border in the settings tab. And the options menu for folders and notes have been changed">
       <option name="closed" value="true" />
@@ -123,7 +121,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733626059669</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Created a component for the option menu. The logic is now reused for every entity component">
+      <option name="closed" value="true" />
+      <created>1734454938431</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1734454938431</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,6 +139,7 @@
     <MESSAGE value="the sidebar can now be without a border in the settings tab. And the options menu for folders and notes have been changed" />
     <MESSAGE value="Changed the white space around the Photon text inside the sidebar and increased the text size of it" />
     <MESSAGE value="Rewrote the editor logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rewrote the editor logic" />
+    <MESSAGE value="Created a component for the option menu. The logic is now reused for every entity component" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created a component for the option menu. The logic is now reused for every entity component" />
   </component>
 </project>

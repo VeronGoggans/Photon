@@ -22,20 +22,19 @@ class StickyNoteService:
         return self.manager.add_sticky(sticky_note, db) 
 
 
-    def get_sticky_notes(self, sticky_board_id: int, db: Session) -> list[StickyNote]:
-        return self.manager.get_stickies(sticky_board_id, db)
+
+    def get_sticky_notes(self, sticky_board_id: int, board_type: str, db: Session) -> list[StickyNote]:
+        return self.manager.get_stickies(sticky_board_id, board_type, db)
+        
 
 
     def update_sticky_note(self, request: PatchStickyNoteRequest, db: Session) -> StickyNote:
         return self.manager.update_sticky(request.id, request.content, request.color, db)
 
 
+
     def delete_sticky_note(self, id: int, db: Session) -> None:
         self.manager.delete_sticky(id, db)
-
-
-
-
 
 
 

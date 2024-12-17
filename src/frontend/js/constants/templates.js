@@ -110,15 +110,60 @@ const flashcardEditTemplate = `
     </div>
 `
 
-const stickyWallTemplate = `
-    <div class="sticky-wall-view">
-        <previous-view-button></previous-view-button>
-        <h1>Sticky Wall</h1>
-        <description-page-block></description-page-block>
-        <div class="sticky-wall">
-            <button class="add-sticky-btn"><i class="fa-solid fa-plus"></i></button>
+
+const standardStickyBoardTemplate = `
+    <div class="standard-sticky-board-view">
+        <h2>Brainstorm Pomodoro features</h2>
+        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, in quos? Ab suscipit perspiciatis obcaecati vel iure vitae corporis veniam quas! Mollitia eos tempore ipsam doloribus hic. Laborum, enim praesentium.</p>
+        <div class="standard-sticky-board-wrapper">
+            <div></div>
+            <div class="stickies-container"></div>    
         </div>
+        <button class="add-sticky-btn"><i class="bi bi-plus-lg"></i></button>
+      </div>
+`
+
+
+const columnStickyBoardTemplate = `
+    <div class="wrapper">
+    <h2>Sticky wall</h2>
+    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, in quos? Ab suscipit perspiciatis obcaecati vel iure vitae corporis veniam quas! Mollitia eos tempore ipsam doloribus hic. Laborum, enim praesentium.</p>
+    <div class="board-wrapper">
+
+      <div class="board-section">
+        <div class="board-section-top">
+          <input type="text" class="board-section-name" placeholder="Section name">
+          <i class="bi bi-three-dots-vertical"></i>
+        </div>
+        <div class="stickies-container">
+            <p class="no-stickies-message">No stickies here</p>
+        </div>
+        <button><i class="bi bi-plus-lg"></i></button> 
+      </div>
+
+      <div class="board-section">
+        <div class="board-section-top">
+          <input type="text" class="board-section-name" placeholder="Section name">
+          <i class="bi bi-three-dots-vertical"></i>
+        </div>
+        <div class="stickies-container">
+            <p class="no-stickies-message">No stickies here</p>
+        </div>
+        <button><i class="bi bi-plus-lg"></i></button> 
+      </div>
+
+      <div class="board-section">
+        <div class="board-section-top">
+          <input type="text" class="board-section-name" placeholder="Section name">
+          <i class="bi bi-three-dots-vertical"></i>
+        </div>
+        <div class="stickies-container">
+          <p class="no-stickies-message">No stickies here</p>
+        </div>
+        <button><i class="bi bi-plus-lg"></i></button> 
+      </div>
     </div>
+  </div>
 `
 
 
@@ -246,13 +291,12 @@ const editorTemplate = `
         <i id="editor-flashcard-set-btn" class="bi bi-card-text"></i>
       </div>
 
-      
       <rich-text-bar></rich-text-bar>
       <slash-command-container></slash-command-container>
-      
-    
     </div>
 `
+
+
 
 export const templates = {
     home: homeTemplate,
@@ -260,7 +304,8 @@ export const templates = {
     flashcardsHome: flashcardsTemplate,
     flashcardsPractice: flashcardPracticeTemplate,
     flashcardEdit: flashcardEditTemplate,
-    stickyWall: stickyWallTemplate,
+    standardStickyBoard: standardStickyBoardTemplate,
+    columnStickyBoard: columnStickyBoardTemplate,
     stickyWallHome: stickyNoteHomeTemplate,
     settings: settingsTemplate,
     editor: editorTemplate
