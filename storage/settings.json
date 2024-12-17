@@ -1,6 +1,6 @@
 {
     "theme": "dark",
-    "sidebarColor": "invisible",
+    "sidebarColor": "soft",
     "widgetStyle": "shadow",
-    "folderIconColor": "gray"
+    "folderIconColor": "blue"
 }

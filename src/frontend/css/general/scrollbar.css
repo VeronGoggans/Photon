@@ -16,7 +16,9 @@
 .editor-wrapper .templates-container::-webkit-scrollbar,
 .flashcard-edit-view::-webkit-scrollbar,
 .sticky-wall-view::-webkit-scrollbar,
-.sticky-wall-cards::-webkit-scrollbar {
+.sticky-home-view::-webkit-scrollbar,
+.sticky-wall-cards::-webkit-scrollbar,
+slash-command-container .commands::-webkit-scrollbar {
     background-color: transparent;
     width: 5px;
 }
@@ -40,7 +42,9 @@
 .flashcard-edit-view::-webkit-scrollbar-thumb,
 .sticky-wall-view::-webkit-scrollbar-thumb,
 .task-board-cards::-webkit-scrollbar-thumb,
-.sticky-wall-cards::-webkit-scrollbar-thumb {
+.sticky-wall-cards::-webkit-scrollbar-thumb,
+.sticky-home-view::-webkit-scrollbar-thumb,
+slash-command-container .commands::-webkit-scrollbar-thumb {
     background-color: var(--scrollbar-content-view);
     border-radius: 10px;
 }

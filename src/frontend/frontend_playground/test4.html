@@ -115,7 +115,7 @@
         padding: 10px;
         transition: 200ms;
         border-radius: 5px;
-      background-color: rgb(188, 223, 255);
+      background-color: rgb(69, 182, 154);
       grid-column: span 1; /* Occupies 1 column */
       grid-row: span 1;    /* Occupies 1 row */
     }
@@ -124,7 +124,7 @@
         padding: 10px;
         transition: 200ms;
         border-radius: 5px;
-      background-color: rgb(255, 194, 200);
+      background-color: rgb(46, 141, 146);
       grid-column: span 1; /* Occupies 1 column */
       grid-row: span 2;    /* Occupies 2 rows */
     }
@@ -142,15 +142,6 @@
     color: #ced2e6;
    }
 
-   .board-section button {
-    cursor: pointer;
-    border: none;
-    background-color: #eff0f4;
-    border-radius: 5px;
-    color: #45465f;
-    font-size: 16px;
-    margin: 0 auto;
-   }
 
    .sticky-small:hover,
    .sticky-long:hover,
@@ -169,16 +160,22 @@
 
    .add-sticky-btn {
     position:sticky;
+    margin-left: auto;
     bottom: 30px;
-    left: 30px;
+    right: 0px;
     width: 60px;
     height: 60px;
     border-radius: 50%;
     border: none;
-    color: white;
-    background-color: #45465f;
+    color: #2f3773;
+    background-color: #f4f4fc;
     font-size: 30px;
     cursor: pointer;
+    transition: 200ms;
+   }
+
+   .add-sticky-btn:hover {
+    scale: 1.05;
    }
 
    
@@ -201,7 +198,7 @@
                 <h2>Hello</h2>
                 <p>Hello world</p>
             </div>
-            <div class="sticky-small"></div>
+            <div class="sticky-small"><p>hello</p></div>
             <div class="sticky-long"></div>
             <div class="sticky-small"></div>
             <div class="sticky-wide"></div> 

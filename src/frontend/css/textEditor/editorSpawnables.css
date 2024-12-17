@@ -150,6 +150,6 @@ slash-command-container i {
     min-height: 30px;
     margin-right: 10px;
     border-radius: 5px;
-    background-color: var(--hover-toolbar-btns);
+    background-color: var(--command-square-bg);
     color: #8fa5ff;
 }

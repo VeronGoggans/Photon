@@ -43,6 +43,7 @@ export class TextEditorView {
 
     this.show(objectLocation, recentlyViewedNotes);
     this.textBlockHandler.parse();
+    this.editor.scrollTo( { top: 0, behavior: 'smooth' } )
   }
 
 
@@ -87,8 +88,11 @@ export class TextEditorView {
     // Render the new path
     this.documentLocation.appendChild(createDocumentLocation(objectLocation));
 
-    // Focus the page
-    this.page.focus();
+    setTimeout(() => {
+      // Focus on the document title
+      this.documentNameInput.focus();
+    }, 300)
+    
   }
 
 

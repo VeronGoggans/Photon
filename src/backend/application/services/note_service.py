@@ -3,6 +3,7 @@ from src.backend.presentation.request_bodies.note_requests import PostNoteReques
 from src.backend.data.models import Note
 from sqlalchemy.orm import Session
 from src.backend.data.exceptions.exceptions import *
+from src.backend.util.filters import trucate_note_preview
 
 
 class NoteService:
@@ -21,9 +22,13 @@ class NoteService:
 
 
     def get_notes(self, folder_id: int, db: Session) -> list[Note]:
+        notes = None
+        
         if folder_id == -1:
-            return self.manager.get_bookmarks(db)
-        return self.manager.get(folder_id, db)
+            notes = self.manager.get_bookmarks(db)
+
+        notes = self.manager.get(folder_id, db)
+        return notes
 
 
     def get_note_by_id(self, note_id: int, db: Session) -> Note:
@@ -60,3 +65,17 @@ class NoteService:
 
     def get_search_options(self, db: Session) -> list[dict]:
         return self.manager.get_name_id(db)
+
+
+    def __apply_note_previews(self, notes: list) -> list:
+        """
+            This method will add a key value pair (preview) to each note object
+            inside the notes list.
+
+            - notes: (str) - The list of notes that need a truncated preview
+        """
+        for note in notes:
+            note.preview = trucate_note_preview(note.content)
+        
+        return notes
+

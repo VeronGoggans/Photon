@@ -6,6 +6,7 @@
     flex-direction: column;
     padding: 0 5%;
     opacity: 0;
+    overflow-y: scroll;
     transform: translateY(30%);
     transition: opacity .7s ease, transform .2s ease;
 }
@@ -15,15 +16,17 @@
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-template-rows: repeat(auto-fill, 200px);
     gap: 20px;
+    margin-bottom: 50px;
 }
 
 sticky-board {
     cursor: pointer;
     display: grid;
     grid-template-rows: 1fr 1fr;
-    box-shadow: 5px 5px 18px #eaecf7;
     border-radius: 10px;
     transition: 200ms;
+    background-color: var(--card);
+    min-height: 200px;
 }
 
 sticky-board:hover {
@@ -44,10 +47,11 @@ sticky-board div {
 
 sticky-board p {
     margin: 0;
+    color: var(--important);
 }
 
 sticky-board span {
-    color: #c9ccdc;
+    color: var(--less-important)
 }
 
 
@@ -71,6 +75,33 @@ sticky-board span {
 
 .add-sticky-board-btn:hover {
     background-color: var(--button1-hover);
+}
+
+.sticky-board-filter-container {
+    position: absolute;
+    display: flex;
+    top: 375px;
+    right: 50px;
+    padding: 10px;
+}
+
+.sticky-board-filter-container div {
+    width: 60px;
+    padding: 5px;
+    border-radius: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: 200ms;
+    color: var(--text);
+
+}
+
+.sticky-board-filter-container div:hover {
+    scale: 1.05;
+}
+
+.selected-board-filter {
+    background-color: var(--button1-bg);
 }
 
 /* _________________________ art code ______________________________*/

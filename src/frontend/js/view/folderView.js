@@ -113,12 +113,13 @@ export class FolderView {
             this.controller.navigateIntoFolder(folder.id, folder.name);
         });
 
-        this.foldersContainer.addEventListener('UpdateFolder', (event) => {
+        document.body.addEventListener('UpdateFolder', (event) => {
             const { folder } = event.detail;
             this.dialog.renderEditFolderModal(this.controller, folder); 
         });
+    
 
-        this.foldersContainer.addEventListener('DeleteFolder', (event) => {
+        document.body.addEventListener('DeleteFolder', (event) => {
             const { folder } = event.detail;
             this.dialog.renderDeleteModal(this.controller, folder.id, folder.name);
         });

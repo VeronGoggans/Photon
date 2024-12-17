@@ -2,29 +2,6 @@ import { createCustomElement } from "../../util/ui/components.js";
 import { formatDate } from "../../util/date.js";
 
 
-class DescriptionPageBlock extends HTMLElement {
-    constructor() {
-        super();
-    }
-
-    connectedCallback() {
-        this.render();
-    }
-    
-
-    render() {
-        this.innerHTML = `
-            <span class="page-property">
-                <i class="bi bi-grip-vertical"></i>Description
-            </span>
-            <p class="description-block-content">
-                <span class="description-block-placeholder">Add your description here...</span>
-            </p>
-        `;
-    }
-}
-
-
 
 
 
@@ -56,6 +33,16 @@ class DocumentLocationPageBlock extends HTMLElement {
             this.appendChild(item);
         });
     }
+}
+
+
+
+class EntityOptionsMenu extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    
 }
 
 
@@ -204,7 +191,6 @@ class TerminalSnippet extends HTMLElement {
 }
     
 
-customElements.define('description-page-block', DescriptionPageBlock);
 customElements.define('document-location-page-block', DocumentLocationPageBlock);
 customElements.define('code-snippit', CodeSnippet);
 customElements.define('terminal-snippet', TerminalSnippet);

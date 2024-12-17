@@ -134,7 +134,7 @@ textarea::placeholder {
     overflow-y: auto;
     border: var(--border-sidebar-right);
     border-radius: 10px;
-    background-color: var(--searchbar-dropdown);
+    background-color: var(--dropdown);
     list-style: none;
     margin: 0;
     padding: 10px;
@@ -164,17 +164,14 @@ textarea::placeholder {
 
 .dropdown-items li:hover {
     background-color: var(--hover-searchbar-options);
-    color: var(--hover-text);
 }
 
 
 .options-menu {
+    user-select: none;
     position: absolute;
-    top: -117px;
-    left: 0;
-    background-color: var(--background);
-    color: var(--text);
-    width: 100%;
+    background-color: var(--options-menu);
+    color: var(--text-soft);
     padding: 10px;
     border-radius: 10px;
     opacity: 0;
@@ -192,8 +189,7 @@ textarea::placeholder {
 }
 
 .options-menu div:hover {
-    background-color: var(--hover-sidebar);
-    color: var(--hover-text);
+    background-color: var(--options-menu-hover);
 }
 
 .options-menu i {
@@ -202,9 +198,8 @@ textarea::placeholder {
 
 .options-menu span {
     font-size: 14px;
-    font-family: Roboto;
     margin-left: 5px;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 

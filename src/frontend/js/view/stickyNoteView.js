@@ -2,10 +2,10 @@ import { AnimationHandler } from "../handlers/animationHandler.js";
 import { Dialog } from "../util/dialog.js";
 
 
-export class StickyNoteView {
-    constructor(controller, stickyWall) {
+export class StickyBoardView {
+    constructor(controller, stickyBoard) {
         this.controller = controller;
-        this.stickyWall = stickyWall;
+        this.stickyBoard = stickyBoard;
 
         this.dialog = new Dialog();
         this.#initElements();
@@ -16,8 +16,8 @@ export class StickyNoteView {
     
     renderAll(stickyNotes) {
         // setting the sticky wall name & description.
-        this._stickyWallName.textContent = this.stickyWall.name;
-        this._description.textContent = this.stickyWall.description;
+        this._stickyWallName.textContent = this.stickyBoard.name;
+        this._description.textContent = this.stickyBoard.description;
         
         const contentFragment = document.createDocumentFragment();
 
@@ -67,12 +67,12 @@ export class StickyNoteView {
 
 
     #eventListeners() {
-        this.createStickyNoteButton.addEventListener('click', () => {this.dialog.renderStickyNoteModal(this.controller, this.stickyWall.id)});
+        this.createStickyNoteButton.addEventListener('click', () => {this.dialog.renderStickyNoteModal(this.controller, this.stickyBoard.id)});
         this.viewElement.addEventListener('PreviousViewButtonClick', () => {this.controller.loadPreviousView()});
 
         this._stickyWall.addEventListener('StickyCardClick', (event) => {
             const { sticky } = event.detail;
-            this.dialog.renderStickyNoteModal(this.controller, this.stickyWall.id, sticky)
+            this.dialog.renderStickyNoteModal(this.controller, this.stickyBoard.id, sticky)
         });
     }
 
@@ -82,5 +82,29 @@ export class StickyNoteView {
         this._stickyWall = document.querySelector('.sticky-wall');
         this._description = document.querySelector('.description-block-content');
         this._stickyWallName = document.querySelector('h1');
+    }
+}
+
+
+
+export class StickyColumnBoardView {
+    constructor(controller, stickyColumnBoard) {
+        this.controller = controller;
+        this.stickyColumnBoard = stickyColumnBoard;
+
+        this.dialog = new Dialog();
+        this.#initElements();
+        this.#eventListeners();
+        AnimationHandler.fadeInFromBottom(this.viewElement);
+    }
+
+
+
+    #initElements() {
+
+    }
+
+    #eventListeners() {
+
     }
 }

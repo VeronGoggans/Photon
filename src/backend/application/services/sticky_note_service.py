@@ -1,8 +1,10 @@
 from sqlalchemy.orm import Session
 from src.backend.data.managers.sticky_note_manager import StickyNoteManager
-from src.backend.presentation.request_bodies.note_requests import PostStickyNoteRequest, PostStickyWallRequest, PutStickyNoteRequest, PutStickyWallRequest
-from src.backend.data.models import StickyNote, StickyWall
+from src.backend.presentation.request_bodies.note_requests import PostStickyNoteRequest, PostStickyBoardRequest, PatchStickyNoteRequest, PatchStickyBoardRequest
+from src.backend.data.models import StickyNote, StickyBoard, StickyColumnBoard
 from src.backend.data.exceptions.exceptions import *
+from datetime import datetime
+
 
 
 class StickyNoteService:
@@ -12,41 +14,59 @@ class StickyNoteService:
 
     def add_sticky_note(self, request: PostStickyNoteRequest, db: Session) -> StickyNote:    
         sticky_note = StickyNote(
-            name = request.name, 
             content = request.content,
-            sticky_wall_id = request.parent_id
+            color = request.color,
+            sticky_board_id = request.parent_id
             )
+        
         return self.manager.add_sticky(sticky_note, db) 
 
 
-    def get_sticky_notes(self, sticky_wall_id: int, db: Session) -> list[StickyNote]:
-        return self.manager.get_stickies(sticky_wall_id, db)
+    def get_sticky_notes(self, sticky_board_id: int, db: Session) -> list[StickyNote]:
+        return self.manager.get_stickies(sticky_board_id, db)
 
 
-    def update_sticky_note(self, request: PutStickyNoteRequest, db: Session) -> StickyNote:
-        return self.manager.update_sticky(request.id, request.name, request.content, db)
+    def update_sticky_note(self, request: PatchStickyNoteRequest, db: Session) -> StickyNote:
+        return self.manager.update_sticky(request.id, request.content, request.color, db)
 
 
-    def delete_sticky_note(self, id: str, db: Session) -> None:
+    def delete_sticky_note(self, id: int, db: Session) -> None:
         self.manager.delete_sticky(id, db)
 
 
 
-    def add_sticky_wall(self, request: PostStickyWallRequest, db: Session) -> StickyWall:    
-        sticky_note = StickyWall(
-            name = request.name, 
-            description = request.description
-            )
-        return self.manager.add_sticky_wall(sticky_note, db) 
 
 
-    def get_sticky_walls(self, db: Session) -> list[StickyWall]:
-        return self.manager.get_sticky_walls(db)
 
 
-    def update_sticky_wall(self, request: PutStickyWallRequest, db: Session) -> StickyWall:
-        return self.manager.update_sticky_wall(request.id, request.name, request.description, db)
+    def add_sticky_board(self, request: PostStickyBoardRequest, db: Session) -> ( StickyBoard | StickyColumnBoard ):
+        """
+        This method will create a Sticky board based on the provided type
+        (e.g. Board or Column) 
+        """
+
+        board_type: str = request.type
+        board_name: str = request.name
+        board_object = None
+
+        if board_type == 'board':   
+            board_object = StickyBoard( name=board_name, type=board_type, creation=datetime.now() )
+        elif board_type == 'column': 
+            board_object = StickyColumnBoard( name=board_name, type=board_type, creation=datetime.now() )
+
+        db_board_object = self.manager.add_sticky_board(board_object, db).__dict__.copy()
+        db_board_object['sticky_amount'] = 0
+        return db_board_object
 
 
-    def delete_sticky_wall(self, id: str, db: Session) -> None:
-        self.manager.delete_sticky_wall(id, db)
+    def get_sticky_boards(self, db: Session) -> list[StickyBoard, StickyColumnBoard]:
+        sticky_boards = self.manager.get_sticky_boards(db)
+        return sticky_boards
+
+
+    def update_sticky_board(self, request: PatchStickyBoardRequest, db: Session) -> StickyBoard:
+        return self.manager.update_sticky_board(request.id, request.name, request.description, db)
+
+
+    def delete_sticky_board(self, id: str, db: Session) -> None:
+        self.manager.delete_sticky_board(id, db)

@@ -49,7 +49,7 @@ const notesTemplate = `
         <div class="note-view-content">
             <p class="block-title" id="folders-block-title">Folders</p>
             <div class="folders"></div>
-            <p class="block-title" id="notes-block-title">Notes</p>
+            <p class="block-title" id="notes-block-title">Documents</p>
             <div class="notes"></div>
         </div>
         
@@ -140,7 +140,16 @@ const stickyNoteHomeTemplate = `
                 <button class="add-sticky-board-btn">Create a board</button>
             </div>
         </div>
+        <p class="block-title">Boards</p>
         <div class="sticky-boards"></div>
+        <div class="sticky-board-filter-container">
+            <div id="filter-standard-boards">
+                <i class="bi bi-stickies"></i>
+            </div>
+            <div id="filter-column-boards">
+                <i class="bi bi-layout-three-columns"></i>
+            </div>
+        </div>
     </div>
 `
 

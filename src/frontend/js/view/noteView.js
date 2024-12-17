@@ -20,7 +20,7 @@ export class NoteView {
             this.viewElement,
             ['.note-view-options-dropdown']
         );
-        AnimationHandler.fadeInFromBottom(this.viewElement)
+        AnimationHandler.fadeInFromBottom(this.viewElement);
     }
 
     

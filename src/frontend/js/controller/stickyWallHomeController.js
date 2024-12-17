@@ -13,14 +13,14 @@ export class StickyWallHomeController {
         await this.get()
     }
 
-    async add(stickyWallInfo) {
-        const { Object }  = await this.model.add('/stickyWall', stickyWallInfo);
-        this.view.renderOne(Object);
+    async add(stickyBoardData) {
+        const { StickyBoard }  = await this.model.add('/stickyBoard', stickyBoardData);
+        this.view.renderOne(StickyBoard);
     }
 
     async get() {
-        const { Objects } = await this.model.get(`/stickyWalls`);
-        this.view.renderAll(Objects);
+        const { StickyBoards } = await this.model.get(`/stickyBoards`);
+        this.view.renderAll(StickyBoards);
     }
 
     async getById(stickyWallId) {

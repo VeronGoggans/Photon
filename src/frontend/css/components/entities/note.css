@@ -7,7 +7,6 @@ recently-changed-note-card{
     background-color: var(--card);
     display: grid;
     grid-template-rows: 40px 1fr;
-    margin: 20px;
     overflow: visible;
     opacity: 0;
     transform: translateY(30%);
@@ -91,13 +90,12 @@ recently-changed-note-card .note-content-box a {color: rgb(67, 142, 255)}
 }
 
 recently-viewed-note-card {
-    background-color: var(--editor-dropdown);
+    background-color: transparent;
     cursor: pointer;
     transition: 200ms;
     display: grid;
     grid-template-columns: 1fr 80px;
     color: var(--text);
-    
     padding: 7px;
     margin: 5px;
     border-radius: 7px;

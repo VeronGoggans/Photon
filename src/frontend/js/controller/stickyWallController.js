@@ -1,5 +1,5 @@
 import { HttpModel } from "../model/httpModel.js";
-import { StickyNoteView } from "../view/stickyNoteView.js";
+import { StickyBoardView } from "../view/stickyNoteView.js";
 
 
 export class StickWallController {
@@ -9,7 +9,7 @@ export class StickWallController {
     }
 
     async init(stickyWall) {
-        this.view = new StickyNoteView(this, stickyWall);
+        this.view = new StickyBoardView(this, stickyWall);
         await this.get(stickyWall.id)
     }
 

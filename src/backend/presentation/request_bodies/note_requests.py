@@ -1,4 +1,8 @@
 from pydantic import BaseModel
+from typing import Optional
+
+
+
 
 class PostNoteRequest(BaseModel):
     """
@@ -9,6 +13,8 @@ class PostNoteRequest(BaseModel):
     folder_id: int
     name: str
     content: str
+
+
 
 
 class PutNoteRequest(BaseModel):
@@ -24,11 +30,15 @@ class PutNoteRequest(BaseModel):
     bookmark: bool
 
 
+
+
 class BookmarkRequest(BaseModel):
     """
     - bookmark (bool): the new bookmark value
     """
     bookmark: bool
+
+
 
 
 class MoveNoteRequest(BaseModel):
@@ -41,43 +51,56 @@ class MoveNoteRequest(BaseModel):
 
 
 
-class PostStickyWallRequest(BaseModel):
+
+# ________________________________ Sticky notes request bodies _______________________________________ #
+
+
+
+
+
+class PostStickyBoardRequest(BaseModel):
     """
     - name (str): The name of the sticky wall
-    - description (str): The description of the sticky wall
+    - type (str): The board type (e.g. board or column)
     """
     name: str
-    description: str
+    type: str
 
 
-class PutStickyWallRequest(BaseModel):
+
+
+class PatchStickyBoardRequest(BaseModel):
     """
     - id (str): The ID of the sticky wall that will be updated.
     - name (str): The name of the sticky wall
     - content (str): The description of the sticky wall
     """
     id: int
-    name: str
-    description: str
+    name: Optional[str] = None
+    description: Optional[str] = None
+
+
 
 
 class PostStickyNoteRequest(BaseModel):
     """
-    - parent_id (int): The id of the sticky wall
-    - name (str): The name of the sticky 
+    - parent_id (int): The id of the sticky board
     - content (str): The content of the sticky
+    - color (str): the color of the sticky
     """
     parent_id: int
-    name: str
     content: str
+    color: str
 
 
-class PutStickyNoteRequest(BaseModel):
+
+
+class PatchStickyNoteRequest(BaseModel):
     """
-    - id (str): The ID of the sticky that will be updated.
-    - name (str): The name of the sticky
+    - id (str): The ID of the sticky that will be updated
     - content (str): The content of the sticky
+    - color (str): the color of the sticky
     """
     id: int
-    name: str
-    content: str
+    content: Optional[str] = None
+    color: Optional[str] = None

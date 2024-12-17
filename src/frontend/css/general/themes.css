@@ -10,18 +10,14 @@
     /*Settings view*/
     --setting-dropdown: #18182d;
     /*Editor View*/
-    --editor: #0b0a14;
-    --editor-border: #000000;
-    --toolbar-btn-text: #bbbed2;
     --editor-text: #d5d9e0;
     --editor-container: #23252e;
     --editor-container-shadow: transparent;
     --editor-container-input: #16171c;
-    --editor-dropdown: #12121d;
-    --dropdown: #12121d;
+    --dropdown: #121223;
     --heading3: #9da0bd;
     --heading4: #8e91a3;
-    --hover-slash-command: #16171c;
+    --hover-slash-command: #181b3b;
     --file-path: #9095aa;
 
     /*Flashcard View*/
@@ -34,6 +30,8 @@
 
     /*stickyWall view*/
     --add-sticky-btn: #18172b;
+    --board-types: #181b3b;
+    --active-board-type: #292d56;
 
     /*Notes View*/ 
     --bookmark: #5063b1;
@@ -69,21 +67,24 @@
     --notification: #0f0e1a;
     --subtitle: #9196aa;
     --sidebar: #0b0a14; 
-    --sidebar-soft: #0d0c18;
+    --sidebar-soft: #0b0a14;
     --searchbar: #121223;
     --sidebar-text: #d6d8e5;
     --sidebar-text-hover: #5c7fdd; 
     --card: #141322;
     --folder: #141322; /*#1c1c2c*/
-    --text: #bbbed2;
+    --text: hsl(232, 20%, 78%);
+    --text-soft: hsl(232, 20%, 60%);;
     --icon: #bbbed2;
     --input-bg: #18182d;
     --icon-hover: #5c7dff;
     --important: #d6d8e5;
+    --less-important: #2e334f;
+    
     
     --hover-searchbar-options: #18182d;
     --hover-text: #5c7dff;
-    --hover-toolbar-btns: #383d4c;
+    --command-square-bg: transparent;
     --hover-sidebar: #121223;
     --searchbar-placeholder: #d4d7e5; 
     --placeholder: #868b9e;
@@ -92,21 +93,22 @@
     --shadow: rgba(0, 0, 0, 0.1);
     --modal: #12121d;
     --searchbar-dropdown: #0b0a14;
-    --scrollbar-content-view: #3f4045;
+    --scrollbar-content-view: #20274a;
     --stats-background: #141322;
     --home-tab: #28283b;
-    --options-menu: #141322;
+    --options-menu: hsl(240, 32%, 10%);
+    --options-menu-hover: hsl(240, 32%, 13%);
 
     /*Feedback variables*/
     --completed-checklist-task: #1c1d3b;
 
-    --active-tab-bg: #121223;
+    --active-tab-bg: #181b3b;
     --active-tab-text: #5673ff;
 
 
     /*Buttons*/
-    --button1-bg: #24263c;
-    --button1-hover: #1d1e38;
+    --button1-bg: #181b3b;
+    --button1-hover: #151838;
 }
 
 .light {
@@ -145,6 +147,8 @@
 
     /*stickyWall view*/
     --add-sticky-btn: #eae9f9;
+    --board-types: #f4f5fa;
+    --active-board-type: #d4daff;
 
     /*Notes View*/
     --dragging: #f3f4ff;
@@ -155,18 +159,14 @@
     /*Home View*/
 
     /*Editor View*/
-    --editor: #fff;
-    --editor-border: #ced1e3;
     --editor-container: #ffffff;
     --editor-container-shadow: #272933;
     --editor-container-input: #f6f7ff;
     --dropdown: #ffffff;
     --heading3: #707391;
     --heading4: #8e91a3;
-    --editor-dropdown: #ffffff;
 
-    --toolbar-btn-text: #4f578f;
-    --hover-toolbar-btns: rgba(185, 198, 250, 0.5);
+    --command-square-bg: rgba(185, 198, 250, 0.5);
     --editor-text: #383838;
     --hover-slash-command: #f4f4fc;
     --file-path: #a0a6c1;
@@ -204,11 +204,13 @@
     --sidebar-text-hover: #1d2134; 
     --card: #ffffff; 
     --folder: #ffffff; /*#f4f5ff*/
-    --text: #444863;
+    --text: hsl(232, 19%, 33%);
+    --text-soft: hsl(232, 19%, 51%);
     --icon: #4c4c68; 
     --input-bg: #f6f6fb;
     --icon-hover: #5c7fdd;
-    --important: #2f3773;
+    --important: hsl(233, 42%, 32%);
+    --less-important: hsl(233 42% 80%);
     
     --hover-searchbar-options: #f7f7fa;
     --hover-text: #444863;
@@ -220,10 +222,11 @@
     --shadow: rgba(92, 98, 157, .1);
     
     --modal: #ffffff;
-    --scrollbar-content-view: #cccfe1;
+    --scrollbar-content-view: #eff0f4;
     --searchbar-dropdown: #fff;
     --stats-background: #f4f5fa;
-    --options-menu: #f5f6ff;
+    --options-menu: hsl(235, 100%, 98%);
+    --options-menu-hover: hsl(235, 100%, 95%);
 
     /*Feedback variables*/
     --completed-checklist-task: #f8f9ff;

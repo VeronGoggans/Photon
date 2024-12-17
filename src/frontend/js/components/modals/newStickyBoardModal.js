@@ -24,7 +24,6 @@ export class NewStickyBoardModel {
         this.HOST.querySelector('.save-btn').addEventListener('click', (e) => {
             this.controller.add({
                 'name': this.HOST.querySelector('input').value,
-                'description': '',
                 'type': this.boardType
             })
             dialogEvent(this.HOST, 'close');
@@ -46,10 +45,12 @@ export class NewStickyBoardModel {
             if (e.target.closest('.type-one')) {
                 this.HOST.querySelector('.type-one').classList.add('selected-board-type');
                 this.HOST.querySelector('.type-two').classList.remove('selected-board-type');
+                this.boardType = 'board'
             }
             else if (e.target.closest('.type-two')) {
                 this.HOST.querySelector('.type-two').classList.add('selected-board-type');
                 this.HOST.querySelector('.type-one').classList.remove('selected-board-type');
+                this.boardType = 'column'
             }
         })
     }

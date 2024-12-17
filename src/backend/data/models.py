@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Boolean, ForeignKey, JSON, DateTime
+from sqlalchemy import Column, String, Integer, Boolean, ForeignKey
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
@@ -41,14 +41,45 @@ class Note(Base):
 
 
 
-class StickyWall(Base):
-    __tablename__ = 'sticky_walls'
-    
+
+class StickyBoard(Base):
+    __tablename__ = 'sticky_boards'
+
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String, nullable=True)
-    description = Column(String, nullable=True, default='No description')
+    description = Column(String, nullable=True)
+    creation = Column(String, nullable=False)
+    type = Column(String, nullable=False, default='board')
 
-    stickies = relationship("StickyNote", backref="sticky_walls", cascade="all, delete-orphan")
+    stickies = relationship("StickyNote", backref="sticky_boards", cascade="all, delete-orphan")
+
+
+
+
+class StickyColumnBoard(Base):
+    __tablename__ = 'sticky_column_boards'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String, nullable=True)
+    description = Column(String, nullable=True)
+    creation = Column(String, nullable=False)
+    type = Column(String, nullable=False, default='column')
+
+    columns = relationship("StickyColumn", backref="sticky_column_boards", cascade="all, delete-orphan")
+
+
+
+
+class StickyColumn(Base):
+    __tablename__ = 'sticky_columns'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String, nullable=True)
+    defualt_sticky_color = Column(String, nullable=False, default='rgb(180, 214, 255)')
+
+    sticky_board_id = Column(Integer, ForeignKey('sticky_column_boards.id', ondelete='CASCADE'), nullable=True)
+    stickies = relationship("StickyNote", backref="sticky_columns", cascade="all, delete-orphan")
+
 
 
 
@@ -56,11 +87,11 @@ class StickyNote(Base):
     __tablename__ = 'sticky_notes'
     
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String, nullable=True)
     content = Column(String, nullable=True)
+    color = Column(String, nullable=False, default='rgb(180, 214, 255)')
 
-    sticky_wall_id = Column(Integer, ForeignKey('sticky_walls.id', ondelete='CASCADE'), nullable=True)
-
+    sticky_board_id = Column(Integer, ForeignKey('sticky_boards.id', ondelete='CASCADE'), nullable=True)
+    column_id = Column(Integer, ForeignKey('sticky_columns.id', ondelete='CASCADE'), nullable=True)
 
 
 class Template(Base):

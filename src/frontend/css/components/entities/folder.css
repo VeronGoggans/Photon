@@ -6,7 +6,7 @@ folder-card {
     padding: 10px;
     background-color: var(--folder);
     border-radius: 10px;
-    color: var(--icon);
+    color: var(--important);
     opacity: 0;
     transform: translateY(30%);
     transition: opacity .7s ease, transform .25s ease, scale .2s ease;
@@ -26,7 +26,6 @@ folder-card div:hover {
 folder-card p {
     padding: 5px;
     margin: 0 10px;
-    color: var(--important);
     font-size: 15px;
 }
 
@@ -39,7 +38,7 @@ recent-folder-card {
     padding: 10px;
     background-color: var(--folder);
     border-radius: 10px;
-    color: var(--icon);
+    color: var(--important);
     opacity: 0;
     transform: translateY(30%);
     transition: opacity .7s ease, transform .25s ease, scale .2s ease;

@@ -1,7 +1,10 @@
-import { stickyNoteColors } from "../../constants/constants.js";
-import { captureNewLines } from "../../util/formatters.js";
+import { applyWidgetStyle } from "../../util/ui.js";
 
 
+
+/**
+ * 
+ */
 class StickyBoard extends HTMLElement {
     constructor() {
         super();
@@ -22,6 +25,7 @@ class StickyBoard extends HTMLElement {
 
     connectedCallback() {
         this.id = this.board.id;
+        this.setAttribute('data-type', this.board.type)
         this.addEventListeners();
     }
 
@@ -29,12 +33,14 @@ class StickyBoard extends HTMLElement {
 
     render() {
         this.innerHTML = `
-            <i class=${this.boardIconsClasses[this.board.type]}></i>
+            <i></i>
             <div>
                 <p>${this.board.name}</p>
                 <span>${this.board.sticky_amount} stickies</span>
             </div>
         `
+        this.querySelector('i').setAttribute('class', this.boardIconsClasses[this.board.type])
+        applyWidgetStyle(this);
     }
 
 
@@ -42,14 +48,16 @@ class StickyBoard extends HTMLElement {
     addEventListeners() {
 
     }
-
-
-
-
 }
 
 
 
+
+
+/**
+ * This class represents the sticky notes that will be placed on the column sticky board type
+ * These sticky notes have a fixed size which differs them from the DynamicStickyNote class
+ */
 class StickyNote extends HTMLElement {
     static get observedAttributes() {
         return ['sticky']; 
@@ -63,7 +71,6 @@ class StickyNote extends HTMLElement {
     connectedCallback() {
         this.sticky = JSON.parse(this.getAttribute('sticky'));
         this.id = this.sticky.id;
-        this.style.backgroundColor = stickyNoteColors[Math.floor(Math.random()*stickyNoteColors.length)]
         
         this.render();
         this.addEventListener('click', this.handleCardClick.bind(this));
@@ -84,8 +91,7 @@ class StickyNote extends HTMLElement {
 
     render() {
         this.innerHTML = `
-            <h3>${this.sticky.name}</h3>
-            <p>${captureNewLines(this.sticky.content)}</p>
+            <p>${this.sticky.content}</p>
         `;
     }
 
@@ -94,5 +100,74 @@ class StickyNote extends HTMLElement {
     }
 }
 
+
+
+
+
+
+/**
+ * This class represents the sticky notes that will be placed on the standard sticky board type
+ * The word dynamic stems from the feature that these stickies will resize based on the textcontent of them.  
+ */
+class DynamicStickyNote extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    setData(value) {
+        this.sticky = value
+    }
+
+
+    connectedCallback() {
+        this.id = this.sticky.id;
+        this.render();
+    }
+
+    
+    disconnectedCallback() {
+        this.removeEventListener('click', this.handleCardClick.bind(this));
+        this.stickyContent.removeEventListener('input', this.handleStickyResize.bind(this));
+    }
+
+
+    render() {
+        this.innerHTML = `
+            <p>${this.sticky.content}</p>
+        `;
+        this.stickyContent = this.querySelector('p');
+    }
+
+
+    handleCardClick() {
+        this.dispatchEvent(new CustomEvent('StickyCardClick', { 
+            detail: { 
+                stickyId: this.sticky.id, 
+                message: 'currently editing' 
+            }, bubbles: true
+        }));
+    }
+
+
+    /**
+     * This method is responsible for the automatic resizing of the sticky note 
+     * based on its content
+     */
+    handleStickyResize() {
+        // resize logic here
+    }
+
+
+    addEventListeners() {
+        this.addEventListener('click', this.handleCardClick.bind(this));
+        this.stickyContent.addEventListener('input', this.handleStickyResize.bind(this));
+    }
+}
+
+
+
+
+
+customElements.define('dynamic-sticky-card', DynamicStickyNote);
 customElements.define('sticky-card', StickyNote);
 customElements.define('sticky-board', StickyBoard);

@@ -12,7 +12,7 @@
     margin: 10px 0;
     width: fit-content;
     border-radius: 50px;
-    background-color: #f4f5fa;
+    background-color: var(--board-types);
     display: flex;
     height: 50px;
     column-gap: 20px;
@@ -21,6 +21,7 @@
 .board-types div {
     cursor: pointer;
     transition: 200ms;
+    color: var(--text);
     width: 120px;
     display: flex;
     justify-content: center;
@@ -30,7 +31,7 @@
 }
 
 .selected-board-type {
-    background-color: #d4daff;
+    background-color: var(--active-board-type);
 }
 
 .board-types div:hover {
@@ -71,7 +72,7 @@
 }
 
 .new-sticky-board-modal button:hover {
-    background-color: #d4daff;
+    background-color: var(--active-board-type);
 }
 
 .board-settings {

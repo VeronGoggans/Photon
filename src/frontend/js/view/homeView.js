@@ -30,6 +30,8 @@ export class HomeView {
 
     renderRecentNotes(notes) {
         const contentFragment = document.createDocumentFragment();
+        console.log(notes);
+        
 
         for (let i = 0; i < notes.length; i++) {
             const noteCard = createCustomElement(notes[i], 'recently-changed-note-card');

@@ -20,14 +20,14 @@
 }
 
 .searchbar input::placeholder {
-    color: var(--searchbar-placeholder);
+    color: var(--less-important);
 }
 
 .searchbar #search-icon {
     position: absolute;
     top: 10px;
     left: 20px;
-    color: var(--searchbar-placeholder);
+    color: var(--important);
 }
 
 
