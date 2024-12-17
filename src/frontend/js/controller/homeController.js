@@ -81,15 +81,13 @@ export class HomeController {
     }
 
     async #initSearchbar() {
-        const [notes, folders, templates, flashcards] = await Promise.all([
+        const [notes, folders, flashcards] = await Promise.all([
             this.applicationController.getNoteSearchItems(),
             this.applicationController.getFolderSearchItems(),
-            this.applicationController.getTemplateSearchItems(),
             this.applicationController.getDeckSearchItems()
         ]);
         this.searchbar.fillSearchbar('note', notes);
         this.searchbar.fillSearchbar('folder', folders);
-        this.searchbar.fillSearchbar('template', templates);
         this.searchbar.fillSearchbar('flashcard', flashcards);
     }
 }

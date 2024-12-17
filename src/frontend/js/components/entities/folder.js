@@ -7,11 +7,11 @@ import { applyFolderIconColor, applyWidgetStyle } from "../../util/ui.js";
 
 
 const optionsMenuTemplate = `
-    <div id="edit-btn" >
+    <div id="edit-folder-btn" >
         <i class="bi bi-pencil-square"></i>
         <span>Edit folder</span>
     </div>
-    <div id="delete-btn">
+    <div id="delete-folder-btn">
         <i class="bi bi-folder-x"></i>
         <span>Delete folder</span>
     </div>
@@ -122,18 +122,8 @@ class Folder extends HTMLElement {
 
 
     addEventListeners() {
-        this.addEventListener('click', (event) => {
-            if (event.target.closest('#edit-btn')) {
-                this.handleEditClick();
-            } 
-            else if (event.target.closest('#delete-btn')) {
-                this.handleDeleteClick();
-            }
-            else {
-                this.handleCardClick()
-            }
-        });
-        this.addEventListener('contextmenu', (event) => {showContextMenu(event, this, optionsMenuTemplate)});
+        this.addEventListener('click', (event) => { this.handleCardClick() });
+        this.addEventListener('contextmenu', (event) => { showContextMenu(event, this, optionsMenuTemplate) });
         this.addEventListener('dragstart', (event) => {this.dragStart(event)}); 
         this.addEventListener('dragend', () => {this.dragEnd()});
         this.addEventListener('dragover', (event) => {this.onHover(event)});

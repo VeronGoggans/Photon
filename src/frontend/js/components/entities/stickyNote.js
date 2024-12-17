@@ -1,5 +1,12 @@
-import { applyWidgetStyle } from "../../util/ui.js";
+import {applyWidgetStyle, showContextMenu } from "../../util/ui.js";
 
+
+const optionsMenuTemplate = `
+    <div id="delete-sticky-board-btn">
+        <i class="bi bi-trash"></i>
+        <span>Delete folder</span>
+    </div>
+`
 
 
 /**
@@ -44,9 +51,14 @@ class StickyBoard extends HTMLElement {
     }
 
 
+    handleDeleteClick() {
+        this.dispatchEvent(new CustomEvent('DeleteStickyBoard', { detail: { stickyBoard: this.board }, bubbles: true }));
+    }
+
+
 
     addEventListeners() {
-
+        this.addEventListener('contextmenu', (event) => { showContextMenu(event, this, optionsMenuTemplate) });
     }
 }
 

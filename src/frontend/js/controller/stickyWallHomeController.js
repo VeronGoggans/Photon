@@ -23,18 +23,13 @@ export class StickyWallHomeController {
         this.view.renderAll(StickyBoards);
     }
 
-    async getById(stickyWallId) {
-        const { Object } = await this.model.get(`/stickyWall/${stickyWallId}`);
+    async getById(stickyBoardId) {
+        const { Object } = await this.model.get(`/stickyBoard/${stickyBoardId}`);
         return Object
     }
 
-    async update(updatedStickyWall) {
-        await this.model.update('/stickyWall', updatedStickyWall);
-        this.view.renderUpdate(updatedStickyWall);
-    }
-
-    async delete(stickyWallId) {
-        await this.model.delete(`/stickyWall/${stickyWallId}`);
-        this.view.renderDelete(stickyWallId);
+    async delete(stickyBoardId) {
+        await this.model.delete(`/stickyBoard/${stickyBoardId}`);
+        this.view.renderDelete(stickyBoardId);
     }
 }

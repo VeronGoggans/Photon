@@ -26,7 +26,7 @@
   }
   
   .delete-modal button {
-    background-color: var(--searchbar);
+    background-color: var(--button1-bg);
     padding: 10px 30px;
     border-radius: 10px;
     color: var(--text);

@@ -5,11 +5,11 @@ import { formatDate } from "../../util/date.js";
 
 
 const optionMenuTemplate = `
-    <div id="bookmark-btn" >
+    <div id="bookmark-note-btn" >
         <i class="bi bi-bookmark"></i>
         <span>Bookmark note</span>
     </div>
-    <div id="delete-btn">
+    <div id="delete-note-btn">
         <i class="bi bi-file-earmark-x"></i>
         <span>Delete note</span>
     </div>
@@ -44,17 +44,7 @@ class Note extends HTMLElement {
 
 
     addEventListeners() {
-        this.addEventListener('click', (event) => {
-            if (event.target.closest('#bookmark-btn')) {
-                this.handleBookmarkClick();
-            } 
-            else if (event.target.closest('#delete-btn')) {
-                this.handleDeleteClick();
-            }
-            else {
-                this.handleCardClick()
-            }
-        });
+        this.addEventListener('click', (event) => { this.handleCardClick() });
         this.addEventListener('contextmenu', (event) => {showContextMenu(event, this, optionMenuTemplate)});
         this.addEventListener('dragstart', (event) => {this.dragStart(event)}); 
         this.addEventListener('dragend', () => {this.classList.remove('dragging')});

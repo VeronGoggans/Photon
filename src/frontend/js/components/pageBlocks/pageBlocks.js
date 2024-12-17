@@ -1,15 +1,21 @@
 import { createCustomElement } from "../../util/ui/components.js";
 import { formatDate } from "../../util/date.js";
-
-
-
+import { pixelToPercentage } from "../../util/ui.js";
 
 
 class DocumentLocationPageBlock extends HTMLElement {
+
+    setData(value) {
+        this.folders = value
+    }
+
+
+
     connectedCallback() {
-        this.folders = JSON.parse(this.getAttribute('folders'));
         this.render();
     }
+
+
 
     render() {
         if (this.folders.length >= 6){ 
@@ -42,7 +48,82 @@ class EntityOptionsMenu extends HTMLElement {
         super();
     }
 
-    
+    /**
+     * This method will provide the component with the necessary data
+     * @param value {Object} - the object representing
+     *                         The menu template, bounded HTML element and the bounded entity data
+     */
+    setData(value) {
+        const { boundedElement, menuTemplate } = value;
+        this.boundedElement = boundedElement;
+        this.menuTemplate = menuTemplate;
+    }
+
+
+
+    connectedCallback() {
+        this.render();
+        this.addEventListeners();
+    }
+
+
+
+    render() {
+        this.innerHTML = this.menuTemplate;
+
+        // Place the options menu slightly above the card it's assigned to.
+        const rect = this.boundedElement.getBoundingClientRect();
+        const { x, y } = pixelToPercentage(rect.left, rect.top);
+
+        this.style.left = `${x}%`;
+        this.style.top =  `${y - 20}%`;
+    }
+
+
+
+    removeOptionsMenu(event) {
+        if (!this.contains(event.target)) {
+            this.remove();
+            document.removeEventListener("click", this.removeOptionsMenu);
+        }
+    }
+
+
+    /**
+     * This method will determine which option the user clicked on, to then call the corresponding method
+     *
+     * @param event - The click event
+     */
+    handleOption(event) {
+        // The ID's of all the options available
+        const option = event.target.closest(
+            '#bookmark-note-btn, #edit-folder-btn, #delete-note-btn, #delete-folder-btn, #delete-sticky-board-btn');
+
+        switch (option.id) {
+            case 'bookmark-note-btn':
+                this.boundedElement.handleBookmarkClick();
+                break;
+
+            case 'edit-folder-btn':
+                this.boundedElement.handleEditClick();
+                break;
+
+            case 'delete-note-btn':
+            case 'delete-folder-btn':
+            case 'delete-sticky-board-btn':
+            case 'delete-flashcard-pack-btn':
+            case 'delete-flashcard-btn':
+                this.boundedElement.handleDeleteClick();
+                break;
+        }
+    }
+
+
+
+    addEventListeners() {
+        document.addEventListener('click', (event) => { this.removeOptionsMenu(event) });
+        this.addEventListener('click', (event) => { this.handleOption(event) });
+    }
 }
 
 
@@ -191,6 +272,7 @@ class TerminalSnippet extends HTMLElement {
 }
     
 
+customElements.define('entity-options-menu', EntityOptionsMenu);
 customElements.define('document-location-page-block', DocumentLocationPageBlock);
-customElements.define('code-snippit', CodeSnippet);
+customElements.define('code-snippet', CodeSnippet);
 customElements.define('terminal-snippet', TerminalSnippet);

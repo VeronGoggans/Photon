@@ -50,42 +50,29 @@ export function addDraggImage(event, imageType) {
 export function showContextMenu(event, parentElement, menuTemplate) {
     event.preventDefault()
 
-    const existingMenu = document.querySelector(".options-menu");
+    const existingMenu = document.querySelector('entity-options-menu');
     if (existingMenu) {
         AnimationHandler.fadeOutContextMenu(existingMenu);
     }
 
-    const newMenu = document.createElement("div");
-    newMenu.classList.add("options-menu");
-    newMenu.innerHTML = menuTemplate;
-
-    // Set the X and Y position of the new options menu
-    const rect = parentElement.getBoundingClientRect();
-    const { x, y } = pixelToPercentage(rect.left, rect.top);
-    
-    newMenu.style.left = `${x}%`;
-    newMenu.style.top =  `${y - 20}%`;
-    console.log(rect.top, rect.left);
+    const newMenu = document.createElement('entity-options-menu');
+    newMenu.setData({
+        'boundedElement': parentElement,
+        'menuTemplate': menuTemplate
+    })
     
     document.body.appendChild(newMenu);
     AnimationHandler.fadeIn(newMenu);
-
-    // Add an event listener to close the menu when clicking outside of it
-    document.addEventListener("click", function hideMenu(e) {
-    if (!newMenu.contains(e.target)) {
-        newMenu.remove();
-        document.removeEventListener("click", hideMenu);
-    }});
 }
 
 
 
 /**
- * 
- * @param {Float32Array} x 
- * @param {Float32Array} y 
+ *
+ * @param {Number} x
+ * @param {number} y
  */
-function pixelToPercentage(x, y) {
+export function pixelToPercentage(x, y) {
     const winWidth = window.innerWidth;
     const winHeight = window.innerHeight;
 

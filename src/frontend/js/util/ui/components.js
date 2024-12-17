@@ -1,9 +1,3 @@
-export function createListItemType1(item, itemType) {
-    const listItemCard = document.createElement('list-item-card-1');
-    listItemCard.setAttribute('list-item', JSON.stringify(item));
-    listItemCard.setAttribute('list-item-type', itemType);
-    return listItemCard 
-}
 
 
 export function createCustomElement(elementData, elementName) {
@@ -17,6 +11,6 @@ export function createCustomElement(elementData, elementName) {
 
 export function createDocumentLocation(folders) {
     const documentLocation = document.createElement('document-location-page-block');
-    documentLocation.setAttribute('folders', JSON.stringify(folders));
+    documentLocation.setData(folders);
     return documentLocation;
 }

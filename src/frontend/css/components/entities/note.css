@@ -31,7 +31,7 @@ note-card .note-content-box,
 recently-changed-note-card .note-content-box {
     padding: 10px;
     overflow: hidden;
-    color: var(--text);
+    color: var(--text-soft);
     cursor: pointer;
     font-size: 9px;
 }

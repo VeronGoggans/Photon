@@ -124,9 +124,9 @@ export class StickyWallHomeView {
             )
         })
 
-        this._stickyBoardsList.addEventListener('DeleteListItem', (event) => {
-            const { listItem } = event.detail
-            this.dialog.renderDeleteModal(listItem.id, listItem.name);
+        this._stickyBoardsList.addEventListener('DeleteStickyBoard', (event) => {
+            const { stickyBoard } = event.detail
+            this.dialog.renderDeleteModal(this.controller, stickyBoard.id, stickyBoard.name, false);
         })
 
         this._stickyBoardsList.addEventListener('UpdateListItem', (event) => {

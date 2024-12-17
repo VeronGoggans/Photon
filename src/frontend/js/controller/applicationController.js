@@ -1,7 +1,6 @@
 import { NoteController } from "./noteController.js";
 import { HomeController } from "./homeController.js";
 import { FolderController } from "./folderController.js";
-import { TemplateController } from "./templateController.js";
 import { ApplicationModel } from "../model/applicationModel.js";
 import { SidebarView } from "../view/sideBarView.js";
 import { TextEditorController } from "./textEditorController.js"
@@ -23,7 +22,6 @@ export class ApplicationController {
         this.noteController = new NoteController(this);
         this.homeController = new HomeController(this);
         this.folderController = new FolderController(this)
-        this.templateController = new TemplateController(this);
         this.flashcardDeckController = new FlashcardHomeController(this);
         this.flashcardPracticeController = new FlashcardPracticeController(this);
         this.flashcardEditController = new FlashcardEditController(this);
@@ -38,7 +36,6 @@ export class ApplicationController {
             flashcardsHome: this.flashcardDeckController,
             flashcardsPractice: this.flashcardPracticeController,
             flashcardEdit: this.flashcardEditController,
-            templates: this.templateController,
             stickyWall: this.stickyWallController,
             settings: this.settingController,
             editor: this.textEditorController,
@@ -205,28 +202,6 @@ export class ApplicationController {
 
     async moveNote(folderId, droppedNoteId) {
         await this.noteController.move(folderId, droppedNoteId);
-    } 
-
-    // Template methods
-
-    async addTemplate(name, content, notify) {
-        await this.templateController.add(name, content, notify);
-    }
-
-    async getTemplates() {
-        await this.templateController.get();
-    }
-
-    async getTemplateSearchItems() {
-        return await this.templateController.getTemplateNames();
-    }
-
-    async getTemplateById(templateId, updateUseCount) {        
-        return await this.templateController.getById(templateId, updateUseCount)
-    }
-
-    async updateTemplate(template, notify) {
-        await this.templateController.update(template, notify);
     }
 
     // Folder methods

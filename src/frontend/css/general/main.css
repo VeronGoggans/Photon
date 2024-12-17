@@ -167,7 +167,7 @@ textarea::placeholder {
 }
 
 
-.options-menu {
+entity-options-menu {
     user-select: none;
     position: absolute;
     background-color: var(--options-menu);
@@ -178,7 +178,7 @@ textarea::placeholder {
     transition: .15s;
 }
 
-.options-menu div {
+entity-options-menu div {
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -188,15 +188,15 @@ textarea::placeholder {
     transition: 200ms;
 }
 
-.options-menu div:hover {
+entity-options-menu div:hover {
     background-color: var(--options-menu-hover);
 }
 
-.options-menu i {
+entity-options-menu i {
     font-size: 14px;
 }
 
-.options-menu span {
+entity-options-menu span {
     font-size: 14px;
     margin-left: 5px;
     font-weight: 500;
