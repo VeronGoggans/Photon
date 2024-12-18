@@ -78,8 +78,8 @@
     --icon: #bbbed2;
     --input-bg: #18182d;
     --icon-hover: #5c7dff;
-    --important: #d6d8e5;
-    --less-important: #2e334f;
+    --important: hsl(232, 22%, 87%);
+    --less-important: hsl(232 22% 68% / 1);
     
     
     --hover-searchbar-options: #18182d;
@@ -210,7 +210,7 @@
     --input-bg: #f6f6fb;
     --icon-hover: #5c7fdd;
     --important: hsl(233, 42%, 32%);
-    --less-important: hsl(233 42% 80%);
+    --less-important: hsl(233deg 23.62% 57.32%);
     
     --hover-searchbar-options: #f7f7fa;
     --hover-text: #444863;

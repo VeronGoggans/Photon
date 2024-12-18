@@ -134,6 +134,7 @@ export class ApplicationController {
 
                 else if (viewId === 'settings') {
                     this.sidebarView.setActiveTab('settings')
+                    controller.init();
                 }
 
                 else if (viewId === 'stickyWallHome') {

@@ -153,6 +153,14 @@ export class SidebarView {
             }
         })
 
+        this._sidebar.addEventListener('SetSidebarState', (event) => {
+            const { state } = event.detail;
+
+            console.log("sidebar state");
+            
+
+        })
+
         this._sidebar.addEventListener('dragover', (event) => {
             event.preventDefault();
         })

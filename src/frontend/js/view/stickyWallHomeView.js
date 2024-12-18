@@ -17,27 +17,87 @@ export class StickyWallHomeView {
     }
 
 
+
+    /**
+     * This method will render an array of stickyboard objects in their dedicated section
+     * e.g. standard or column boards
+     * 
+     * @param { Array[Object] } stickyBoards 
+     */
     renderAll(stickyBoards) {
-        const contentFragment = document.createDocumentFragment();
+
+        if (stickyBoards.length > 0) {
+            // Show the standard sticky boards title 
+            this._standardBlockTitle.style.display = '';
+            this._standardStickyBoardsList.style.display = '';
+        }
+
+        if (stickyBoards.length > 0) {
+            // show the column sticky boards title 
+            this._columnBlockTitle.style.display = '';
+            this._columnStickyBoardsList.style.display = '';
+        }
+
+        // Render the sticky boards 
+        const standardContentFragment = document.createDocumentFragment();
+        const columnContentFragment = document.createDocumentFragment();
 
         for (let i = 0; i < stickyBoards.length; i++) {
+
             const stickyBoardCard = this.#createStickyBoardCard(stickyBoards[i])
             AnimationHandler.fadeInFromBottom(stickyBoardCard);
-            contentFragment.appendChild(stickyBoardCard);
+
+            const { type } = stickyBoards[i];
+
+            if (type === 'board') {
+                standardContentFragment.appendChild(stickyBoardCard);
+            }
+
+            else if (type === 'column') {
+                columnContentFragment.appendChild(stickyBoardCard); 
+            }
         }
-        this._stickyBoardsList.append(contentFragment);
+
+        this._standardStickyBoardsList.appendChild(standardContentFragment);
+        this._columnStickyBoardsList.appendChild(columnContentFragment);
     }
 
 
+
+
+
+    /**
+     * This method will render a single sticky board
+     * on the dedicated boards section e.g. standard or column boards
+     * 
+     * @param { Object } stickyBoard - Representing the newly created sticky board
+     */
     renderOne(stickyBoard) {
+
+        const { type } = stickyBoard;
+
         const stickyBoardCard = this.#createStickyBoardCard(stickyBoard);
         AnimationHandler.fadeInFromBottom(stickyBoardCard);
-        this._stickyBoardsList.appendChild(stickyBoardCard);
+
+        if (type === 'board') {
+            this._standardStickyBoardsList.appendChild(stickyBoardCard);
+        }
+
+        else if (type === 'column') {
+            this._columnStickyBoardsList.appendChild(stickyBoardCard);
+        }
     }
 
 
-    renderDelete(stickyWallId) {
-        const stickyWalls = this._stickyBoardsList.children 
+
+
+    /**
+     * This method will delete a specified stickyboard
+     * 
+     * @param { Number } stickyBoardId - The ID of the stickyboard to delete 
+     */
+    renderDelete(stickyBoardId) {
+        const stickyBoards = this._stickyBoardsList.children 
         
         for (let i = 0; i < stickyWalls.length; i++) {
             if (stickyWalls[i].id == stickyWallId) {
@@ -47,16 +107,7 @@ export class StickyWallHomeView {
     }
 
 
-    renderUpdate(stickyWall) {
-        const stickyWalls = this._stickyBoardsList.children; 
 
-        for (let i = 0; i < stickyWalls.length; i++) {
-            if (stickyWalls[i].id == stickyWall.id) {    
-
-                stickyWalls[i].setAttribute('list-item', JSON.stringify(stickyWall));
-            }
-        }
-    }
 
 
     #createStickyBoardCard(stickyBoard) {
@@ -66,55 +117,13 @@ export class StickyWallHomeView {
     }
 
 
-    #filterBoards(type) {
-
-        const standardBoards = this._stickyBoardsList.querySelectorAll('sticky-board[data-type="board"]');
-        const columnBoards = this._stickyBoardsList.querySelectorAll('sticky-board[data-type="column"]');
-        
-        if (type === 'column') {
-            if (this.activeFilter !== 'column') {
-                this.activeFilter = 'column';
-
-                columnBoards.forEach(board => {
-                    board.style.display = '';
-                })
-
-                standardBoards.forEach(board => {
-                    board.style.display = 'none';
-                })
-            } else {
-                standardBoards.forEach(board => {
-                    board.style.display = '';
-                })
-            }   
-        }
-
-        else if (type === 'board') {
-            if (this.activeFilter !== 'board') {
-                this.activeFilter = 'board';
-
-                standardBoards.forEach(board => {
-                    board.style.display = '';
-                })
-                columnBoards.forEach(board => {
-                    board.style.display = 'none';
-                })
-            } else {
-                columnBoards.forEach(board => {
-                    board.style.display = '';
-                })
-            }   
-        }
-    }
-
-
 
     #eventListeners() {
         this._addNewstickyWallButton.addEventListener('click', () => {
             this.dialog.renderNewStickyBoardModal(this.controller)
         });
 
-        this._stickyBoardsList.addEventListener('StickyBoardClick', (event) => {
+        this.viewElement.addEventListener('StickyBoardClick', (event) => {
             const { stickyBoard } = event.detail;
             this.applicationController.initView('standardStickyBoard',
                 {
@@ -124,43 +133,32 @@ export class StickyWallHomeView {
             )
         })
 
-        this._stickyBoardsList.addEventListener('DeleteStickyBoard', (event) => {
+        this.viewElement.addEventListener('DeleteStickyBoard', (event) => {
             const { stickyBoard } = event.detail
-            this.dialog.renderDeleteModal(this.controller, stickyBoard.id, stickyBoard.name, false);
-        })
-
-        this._stickyBoardsList.addEventListener('UpdateListItem', (event) => {
-            this.dialog.renderNewStickyBoardModal(this.controller)
-        })
-
-        this._filterContainer.addEventListener('click', (e) => {
-            if (e.target.closest('#filter-standard-boards')) {
-                if (this._filterBoardButton.classList.contains('selected-board-filter')) {
-                    this._filterBoardButton.classList.remove('selected-board-filter');
-                } else {
-                    this._filterBoardButton.classList.add('selected-board-filter');
-                    this._filterColumnButton.classList.remove('selected-board-filter');
-                }
-                this.#filterBoards('board')
-            }
-            else if (e.target.closest('#filter-column-boards')) {
-                if (this._filterColumnButton.classList.contains('selected-board-filter')) {
-                    this._filterColumnButton.classList.remove('selected-board-filter');
-                } else {
-                    this._filterColumnButton.classList.add('selected-board-filter');
-                    this._filterBoardButton.classList.remove('selected-board-filter');
-                }
-                this.#filterBoards('column')
-            }
+            const additionals = { 'boardType': stickyBoard.type }
+            this.dialog.renderDeleteModal(this.controller, stickyBoard.id, stickyBoard.name, false, additionals);
         })
     }
 
+
+
+
     #initElements() {
         this.viewElement = document.querySelector('.sticky-home-view');
-        this._stickyBoardsList = document.querySelector('.sticky-boards');
+        this._standardStickyBoardsList = document.querySelector('#standard-boards');
+        this._columnStickyBoardsList = document.querySelector('#column-boards');
+
+        this._standardBlockTitle = document.querySelector('#standard-sticky-boards-block-title');
+        this._columnBlockTitle = document.querySelector('#column-sticky-boards-block-title');
+
         this._addNewstickyWallButton = document.querySelector('.add-sticky-board-btn');
         this._filterContainer = document.querySelector('.sticky-board-filter-container');
         this._filterBoardButton = document.querySelector('#filter-standard-boards');
         this._filterColumnButton = document.querySelector('#filter-column-boards');
+
+        this._standardBlockTitle.style.display = 'none';
+        this._columnBlockTitle.style.display = 'none';
+        this._standardStickyBoardsList.style.display = 'none';
+        this._columnStickyBoardsList.style.display = 'none';
     }
 }

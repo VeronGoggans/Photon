@@ -17,7 +17,7 @@
 .flashcard-edit-view::-webkit-scrollbar,
 .sticky-wall-view::-webkit-scrollbar,
 .sticky-home-view::-webkit-scrollbar,
-.sticky-wall-cards::-webkit-scrollbar,
+.standard-sticky-board-view::-webkit-scrollbar,
 slash-command-container .commands::-webkit-scrollbar {
     background-color: transparent;
     width: 5px;
@@ -42,7 +42,7 @@ slash-command-container .commands::-webkit-scrollbar {
 .flashcard-edit-view::-webkit-scrollbar-thumb,
 .sticky-wall-view::-webkit-scrollbar-thumb,
 .task-board-cards::-webkit-scrollbar-thumb,
-.sticky-wall-cards::-webkit-scrollbar-thumb,
+.standard-sticky-board-view::-webkit-scrollbar-thumb,
 .sticky-home-view::-webkit-scrollbar-thumb,
 slash-command-container .commands::-webkit-scrollbar-thumb {
     background-color: var(--scrollbar-content-view);

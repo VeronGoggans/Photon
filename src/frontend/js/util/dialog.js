@@ -66,12 +66,13 @@ export class Dialog {
         this.addChild(new NoteDetailContainer(noteInfo))
     }
     
-    renderDeleteModal(controller, id, name, insideEditor,) {
+    renderDeleteModal(controller, id, name, insideEditor, aditionals = {  }) {
         this.addChild(new DeleteModal(
             controller,
             id, 
             name, 
-            insideEditor
+            insideEditor,
+            aditionals
         ))
     }
 

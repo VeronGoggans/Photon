@@ -1,69 +1,129 @@
-.sticky-wall-view {
+.standard-sticky-board-view {
     outline: none;
     display: flex;
     flex-direction: column;
     height: calc(100dvh - 37px);
     max-height: calc(100dvh - 37px);
     overflow-y: scroll;
-    font-family: Roboto;
     padding: 0 5%;
     opacity: 0;
     transform: translateY(30%);
     transition: opacity .7s ease, transform .2s ease;
 }
 
-.sticky-wall-view h1 {
+
+.standard-sticky-board-view .description {
+    color: var(--less-important);
+    max-width: 600px;
+}
+
+.standard-sticky-board-view h2 {
     color: var(--important);
-    margin-top: 60px;
 }
 
 
-.sticky-wall-view .sticky-wall {
-    margin-top: 30px;
-    padding: 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    grid-template-rows: repeat(auto-fill, 220px);
-    gap: 15px;
-}
 
-sticky-card {
-    cursor: pointer;
+.board-wrapper {
+    position: relative;
+    display: flex;
+    margin: 50px 0;
+    max-width: 100%;
+    height: 100%;
+    overflow-x: scroll;
+    background-color: rgb(2, 2, 2);
+   }
+
+   .board-wrapper::-webkit-scrollbar {
+    height: 8px;
+    background-color: transparent;
+   }
+
+   .board-wrapper::-webkit-scrollbar-thumb {
+    background-color: #eff0f4;
+    border-radius: 4px;
+   }
+
+
+
+   .single-board-wrapper {
+    position: relative;
     padding: 10px;
     border-radius: 5px;
-    height: 220px;
-    min-height: 220px;
-    display: grid;
-    grid-template-rows: 20px 1fr 30px;
-    box-shadow: 0 0 10px var(--shadow);
-    opacity: 0;
-    transform: translateY(30%);
-    transition: opacity .7s ease, transform .25s ease, scale .3s ease;
-}
+    margin: 50px 0;
+      }
 
-sticky-card:hover {
+    
+
+    
+
+    .stickies-container {
+        display: grid;
+        grid-template-columns: repeat(5, 200px);
+        grid-auto-rows: 200px; /* Two rows, each 100px tall */
+        justify-content: center;
+        gap: 10px; /* Space between grid items */
+    
+    }
+
+    @media screen and (max-width: 1120px) {
+        .stickies-container {
+            grid-template-columns: repeat(4, 200px);
+        }
+        
+    }
+
+    @media screen and (max-width: 940px) {
+        .stickies-container {
+            grid-template-columns: repeat(3, 200px);
+        }
+    }
+
+    @media screen and (max-width: 690px) {
+        .stickies-container {
+            grid-template-columns: repeat(2, 200px);
+        }
+        
+    }
+
+
+   .board-section input::placeholder {
+    color: #ced2e6;
+   }
+
+
+   .sticky-small:hover,
+   .sticky-long:hover,
+   .sticky-wide:hover{
+    scale: 1.025;
+   }
+
+   .no-stickies-message {
+    position: absolute;
+    top: 20%;
+    left: 33%;
+    font-size: 20px;
+    color: #ced2e6;
+    font-weight: 300;
+   }
+
+   .add-sticky-btn {
+    position:sticky;
+    margin-left: auto;
+    bottom: 30px;
+    right: 0px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    color: var(--important);
+    background-color: var(--button1-bg);
+    font-size: 30px;
+    cursor: pointer;
+    transition: 200ms;
+   }
+
+   .add-sticky-btn:hover {
     scale: 1.05;
-}
+   }
 
-sticky-card h3 {
-    margin: 0;
-    font-weight: 500;
-    color: rgb(31, 32, 34);
-}
 
-sticky-card p {
-    color: rgb(42, 42, 49);
-}
-
-.sticky-wall .add-sticky-btn {
-    height: 220px;
-    font-size: 35px;
-    border-radius: 5px;
-    color: var(--text);
-    background-color: var(--add-sticky-btn);
-    transition: scale .2s ease;
-}
-
-.sticky-wall .add-sticky-btn:hover {
-    scale: 1.05;
-}

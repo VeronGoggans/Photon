@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from src.backend.data.models import Folder, Note, Flashcard, FlashcardSet
+from src.backend.data.models import Folder, Note, Flashcard, FlashcardSet, StandardStickyBoard, ColumnStickyBoard, StickyBoardColumn, StickyNote
 from src.backend.data.exceptions.exceptions import NotFoundException
 
 
@@ -33,6 +33,38 @@ def find_flashcard(id: int, db: Session) -> ( Flashcard | NotFoundException ):
     if flashcard is None:
         raise NotFoundException(f"Flashcard with id {id} not found.")
     return flashcard
+
+
+def find_standard_sticky_board(id: int, db: Session) -> ( StandardStickyBoard | NotFoundException ):
+    sticky_board = db.query(StandardStickyBoard).filter(StandardStickyBoard.id == id).first()
+
+    if sticky_board is None:
+        raise NotFoundException(f'Sticky board with id {id} not found.')
+    return sticky_board
+    
+
+def find_column_sticky_board(id: int, db: Session) -> ( ColumnStickyBoard | NotFoundException ):
+    sticky_column_board = db.query(ColumnStickyBoard).filter(ColumnStickyBoard.id == id).first()
+
+    if sticky_column_board is None:
+        raise NotFoundException(f'Sticky column board with id {id} not found.')
+    return sticky_column_board
+
+
+def find_column(id: int, db: Session) -> ( StickyBoardColumn | NotFoundException ):
+    sticky_column = db.query(StickyBoardColumn).filter(StickyBoardColumn.id == id).first()
+
+    if sticky_column is None:
+        raise NotFoundException(f'Sticky column with id {id} not found.')
+    return sticky_column
+
+
+def find_sticky_note(id: int, db: Session) -> ( StickyNote | NotFoundException ):
+    sticky_note = db.query(StickyNote).filter(StickyNote.id == id).first()
+
+    if sticky_note is None:
+        raise NotFoundException(f'Sticky note with id {id} not found.')
+    return sticky_note
 
 
 def get_hierarchy(item_id: int, db: Session, is_note: bool) -> list[dict]:

@@ -32,7 +32,7 @@ export class StandardStickyBoardView {
     renderOne(stickyNote) {
         const stickyNoteCard = this.#stickyNote(stickyNote);
         AnimationHandler.fadeInFromBottom(stickyNoteCard);
-        this._stickyBoard.insertBefore(stickyNoteCard, this._stickyWall.lastElementChild);
+        this._stickyBoard.insertBefore(stickyNoteCard, this._stickyBoard.lastElementChild);
     }
 
 

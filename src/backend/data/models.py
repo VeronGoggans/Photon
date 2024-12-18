@@ -42,7 +42,7 @@ class Note(Base):
 
 
 
-class StickyBoard(Base):
+class StandardStickyBoard(Base):
     __tablename__ = 'sticky_boards'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -56,7 +56,7 @@ class StickyBoard(Base):
 
 
 
-class StickyColumnBoard(Base):
+class ColumnStickyBoard(Base):
     __tablename__ = 'sticky_column_boards'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -65,12 +65,12 @@ class StickyColumnBoard(Base):
     creation = Column(String, nullable=False)
     type = Column(String, nullable=False, default='column')
 
-    columns = relationship("StickyColumn", backref="sticky_column_boards", cascade="all, delete-orphan")
+    columns = relationship("StickyBoardColumn", backref="sticky_column_boards", cascade="all, delete-orphan")
 
 
 
 
-class StickyColumn(Base):
+class StickyBoardColumn(Base):
     __tablename__ = 'sticky_columns'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -92,6 +92,9 @@ class StickyNote(Base):
 
     sticky_board_id = Column(Integer, ForeignKey('sticky_boards.id', ondelete='CASCADE'), nullable=True)
     column_id = Column(Integer, ForeignKey('sticky_columns.id', ondelete='CASCADE'), nullable=True)
+
+
+
 
 
 class Template(Base):

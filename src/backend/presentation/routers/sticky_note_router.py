@@ -22,7 +22,7 @@ class StickyNoteRouter:
         self.route.add_api_route('/stickyBoard', self.add_sticky_board, methods=['POST'])
         self.route.add_api_route('/stickyBoards', self.get_sticky_boards, methods=['GET'])
         self.route.add_api_route('/stickyBoard', self.patch_sticky_board, methods=['PATCH'])
-        self.route.add_api_route('/stickyBoard/{id}', self.delete_sticky_board, methods=['DELETE'])
+        self.route.add_api_route('/stickyBoard/{sticky_board_id}/{board_type}', self.delete_sticky_board, methods=['DELETE'])
         
 
     @handle_exceptions
@@ -41,8 +41,8 @@ class StickyNoteRouter:
     
 
     @handle_exceptions
-    def delete_sticky_board(self, id: str, db: Session = Depends(Database.get_db)):
-        self.service.delete_sticky_board(id, db)
+    def delete_sticky_board(self, sticky_board_id: str, board_type: str, db: Session = Depends(Database.get_db)):
+        self.service.delete_sticky_board(sticky_board_id, board_type, db);
         return { 'status': HttpStatus.OK }
     
 

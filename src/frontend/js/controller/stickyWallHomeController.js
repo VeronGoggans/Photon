@@ -28,8 +28,17 @@ export class StickyWallHomeController {
         return Object
     }
 
-    async delete(stickyBoardId) {
-        await this.model.delete(`/stickyBoard/${stickyBoardId}`);
-        this.view.renderDelete(stickyBoardId);
+
+    /**
+     * This method makes a call to the python backend to delete the specified sticky board 
+     * 
+     * This method needs the board type to prevent any ID conflict between the two board types
+     * 
+     * @param { Number } stickyBoardId    - The ID of the deleted sticky board
+     * @param { String } stickyBoardType  - The type of the deleted sticky board
+     */
+    async delete(stickyBoardId, stickyBoardType) {
+        await this.model.delete(`/stickyBoard/${stickyBoardId}/${stickyBoardType}`);
+        this.view.renderDelete(stickyBoardId, stickyBoardType);
     }
 }

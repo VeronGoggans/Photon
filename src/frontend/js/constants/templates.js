@@ -185,16 +185,11 @@ const stickyNoteHomeTemplate = `
                 <button class="add-sticky-board-btn">Create a board</button>
             </div>
         </div>
-        <p class="block-title">Boards</p>
-        <div class="sticky-boards"></div>
-        <div class="sticky-board-filter-container">
-            <div id="filter-standard-boards">
-                <i class="bi bi-stickies"></i>
-            </div>
-            <div id="filter-column-boards">
-                <i class="bi bi-layout-three-columns"></i>
-            </div>
-        </div>
+        <p id="standard-sticky-boards-block-title" class="block-title">Standard boards</p>
+        <div id="standard-boards" class="sticky-boards"></div>
+
+        <p id="column-sticky-boards-block-title" class="block-title">Column boards</p>
+        <div id="column-boards" class="sticky-boards"></div>
     </div>
 `
 

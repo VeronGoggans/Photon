@@ -3,8 +3,12 @@ import {applyWidgetStyle, showContextMenu } from "../../util/ui.js";
 
 const optionsMenuTemplate = `
     <div id="delete-sticky-board-btn">
+        <i class="bi bi-pin-angle"></i>
+        <span>Pin board</span>
+    </div>
+    <div id="delete-sticky-board-btn">
         <i class="bi bi-trash"></i>
-        <span>Delete folder</span>
+        <span>Delete board</span>
     </div>
 `
 

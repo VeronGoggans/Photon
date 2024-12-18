@@ -1,8 +1,9 @@
 from enum import Enum
 from sqlalchemy.orm import Session
-from src.backend.data.models import StickyNote, StickyBoard, StickyColumnBoard, StickyColumn
+from src.backend.data.models import StickyNote, StickyBoardColumn, StandardStickyBoard, ColumnStickyBoard
 from src.backend.data.exceptions.exceptions import InsertException, NotFoundException
 from sqlalchemy import union_all, select, text
+from src.backend.data.helpers import find_column_sticky_board, find_standard_sticky_board, find_column, find_sticky_note
 
 
 class BoardType(Enum):
@@ -32,7 +33,7 @@ class StickyNoteManager:
 
 
     def update_sticky(self, id: int, content: str, color: str, db: Session) -> (StickyNote | NotFoundException):
-        sticky_note = self.__find_sticky_note(id, db)
+        sticky_note = find_sticky_note(id, db)
         sticky_note.content = content
         sticky_note.color = color
 
@@ -43,7 +44,7 @@ class StickyNoteManager:
 
 
     def delete_sticky(self, id: int, db: Session) -> (None | NotFoundException):
-        sticky_note = self.__find_sticky_note(id, db)
+        sticky_note = find_sticky_note(id, db)
         db.delete(sticky_note)
         db.commit()
 
@@ -53,7 +54,7 @@ class StickyNoteManager:
 
 
 
-    def add_sticky_board(self, sticky_board, db: Session) -> ( StickyBoard | StickyColumnBoard ):
+    def add_sticky_board(self, sticky_board, db: Session) -> ( StandardStickyBoard | ColumnStickyBoard ):
         db.add(sticky_board)
         db.commit()
         db.refresh(sticky_board)
@@ -61,61 +62,26 @@ class StickyNoteManager:
 
 
 
-    def get_sticky_boards(self, db: Session) -> list[StickyBoard, StickyColumnBoard]:
-        sticky_boards = db.query(StickyBoard).all()
-        sticky_column_boards = db.query(StickyColumnBoard).all()
+    def get_sticky_boards(self, db: Session) -> object:
+        standard_sticky_boards = db.query(StandardStickyBoard).all()
+        column_sticky_boards = db.query(ColumnStickyBoard).all()
 
-        all_boards = sticky_boards + sticky_column_boards
-        all_boards_sorted = sorted(all_boards, key=lambda board: board.creation)
-
-        return all_boards_sorted
-    
-
-    def update_sticky_board(self, id: int, name: str, description: str, db: Session) -> StickyBoard:
-        sticky_board = self.__find_sticky_board(id, db)
-        sticky_board.name = name
-        sticky_board.description = description
-        db.commit()
-        db.refresh(sticky_board)
-        return sticky_board
+        return standard_sticky_boards + column_sticky_boards
 
 
-    def delete_sticky_board(self, id: int, db: Session) -> None:
-        sticky_wall = self.__find_sticky_board(id, db)
-        db.delete(sticky_wall)
+
+
+    def delete_sticky_board(self, sticky_board_id: int, board_type: str, db: Session) -> None:
+        sticky_board = None
+
+        if board_type == BoardType.STANDARD:
+            sticky_board = find_standard_sticky_board(sticky_board_id, db)
+
+        elif board_type == BoardType.COLUMN:
+            sticky_board = find_column_sticky_board(sticky_board_id, db)
+
+
+        db.delete(sticky_board)
         db.commit()
 
 
-
-
-
-    def __find_sticky_board(self, id: int, db: Session) -> ( StickyBoard | NotFoundException ):
-        sticky_board = db.query(StickyBoard).filter(StickyBoard.id == id).first()
-
-        if sticky_board is None:
-            raise NotFoundException(f'Sticky board with id {id} not found.')
-        return sticky_board
-    
-
-    def __find_sticky_column_board(self, id: int, db: Session) -> ( StickyColumnBoard | NotFoundException ):
-        sticky_column_board = db.query(StickyColumnBoard).filter(StickyColumnBoard.id == id).first()
-
-        if sticky_column_board is None:
-            raise NotFoundException(f'Sticky column board with id {id} not found.')
-        return sticky_column_board
-    
-
-    def __find_column(self, id: int, db: Session) -> ( StickyColumn | NotFoundException ):
-        sticky_column = db.query(StickyColumn).filter(StickyColumn.id == id).first()
-
-        if sticky_column is None:
-            raise NotFoundException(f'Sticky column with id {id} not found.')
-        return sticky_column
-
-
-    def __find_sticky_note(self, id: int, db: Session) -> ( StickyNote | NotFoundException ):
-        sticky_note = db.query(StickyNote).filter(StickyNote.id == id).first()
-
-        if sticky_note is None:
-            raise NotFoundException(f'Sticky note with id {id} not found.')
-        return sticky_note

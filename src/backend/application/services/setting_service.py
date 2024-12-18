@@ -5,6 +5,7 @@ THEME = 'theme'
 SIDEBAR_COLOR = 'sidebarColor'
 WIDGET_STYLE = 'widgetStyle'
 FOLDER_ICON_COLOR = 'folderIconColor'
+SIDEBAR_STATE = 'sidebarState'
 
 
 class SettingService():
@@ -40,6 +41,15 @@ class SettingService():
         self.__update_config(config)
         return color
     
+
+    def update_sidebar_state(self, state: str) -> str:
+        config = self.__get_config()
+        config[SIDEBAR_STATE] = state
+        self.__update_config(config)
+        return state
+
+
+
 
     def __get_config(self) -> str:
         with open(SETTINGS_PATH, 'r') as config:
