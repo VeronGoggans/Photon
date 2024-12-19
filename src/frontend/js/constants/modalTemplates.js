@@ -41,7 +41,7 @@ export const newStickyBoardModalTemplate = `
 <div class="board-types">
     <div class="type-one selected-board-type">
         <i class="bi bi-stickies"></i>
-        <span>Board</span>
+        <span>Standard</span>
     </div>
     <div class="type-two">
         <i class="bi bi-layout-three-columns"></i>

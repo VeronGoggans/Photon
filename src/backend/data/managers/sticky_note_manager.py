@@ -66,7 +66,10 @@ class StickyNoteManager:
         standard_sticky_boards = db.query(StandardStickyBoard).all()
         column_sticky_boards = db.query(ColumnStickyBoard).all()
 
-        return standard_sticky_boards + column_sticky_boards
+        return {
+            'standardStickyBoards': standard_sticky_boards,
+            'columnStickyBoards': column_sticky_boards
+        }
 
 
 
@@ -74,10 +77,10 @@ class StickyNoteManager:
     def delete_sticky_board(self, sticky_board_id: int, board_type: str, db: Session) -> None:
         sticky_board = None
 
-        if board_type == BoardType.STANDARD:
+        if board_type == BoardType.STANDARD.value:
             sticky_board = find_standard_sticky_board(sticky_board_id, db)
 
-        elif board_type == BoardType.COLUMN:
+        elif board_type == BoardType.COLUMN.value:
             sticky_board = find_column_sticky_board(sticky_board_id, db)
 
 

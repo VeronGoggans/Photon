@@ -14,6 +14,8 @@ export class FolderView {
         this.#eventListeners();
     }
 
+
+
     renderAll(folders) {
         if (folders.length === 0) {
             // hide the folders subtitle

@@ -89,7 +89,7 @@ i {
 }
 
 .block-title {
-    color: var(--subtitle);
+    color: var(--less-important);
     margin-top: 20px;
     font-size: 20px;
     padding: 20px 0;
@@ -97,7 +97,7 @@ i {
 
 .subtitle {
     font-weight: 500;
-    color: var(--important);
+    color: var(--less-important);
     margin: 30px 0;
 }
 

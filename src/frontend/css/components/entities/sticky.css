@@ -39,9 +39,11 @@ sticky-board {
     display: grid;
     grid-template-rows: 1fr 1fr;
     border-radius: 10px;
-    transition: 200ms;
     background-color: var(--card);
     min-height: 200px;
+    opacity: 0;
+    transform: translateY(30%);
+    transition: opacity .7s ease, transform .25s ease, scale .2s ease;
 }
 
 sticky-board:hover {

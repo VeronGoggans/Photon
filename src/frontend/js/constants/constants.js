@@ -68,3 +68,20 @@ export const modalButtonText = {
     stickyWall: 'Add sticky wall',
     folder: 'Add folder'
 }
+
+
+
+
+
+
+
+
+
+
+
+// ___________________________ Enums ________________________________ //
+
+export const StickyBoardTypes = {
+    STANDARD: 'standard',
+    COLUMN:   'column'
+}

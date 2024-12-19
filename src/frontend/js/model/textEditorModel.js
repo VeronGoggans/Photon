@@ -14,6 +14,8 @@ export class TextEditorModel {
         this.#addRecentlyViewedNotes();
     }
 
+
+
     /**
      * This method stores a single editor object
      *
@@ -33,6 +35,7 @@ export class TextEditorModel {
         }
     }
 
+
     /**
      * This method updates a specified editor object
      * @param editorObject
@@ -43,6 +46,7 @@ export class TextEditorModel {
         editorObject.name = name;
         editorObject.content = content;
     }
+
 
     /**
      * This method will remove the deleted editor object from the evicting stack

@@ -14,7 +14,7 @@ export class NoteView {
         this.dialog = new Dialog();
         this.#initElements();
         this.#eventListeners();
-        this.dropdownHelper = new DropdownHelper(
+        new DropdownHelper(
             this.dropdowns, 
             this.dropdownOptions,
             this.viewElement,

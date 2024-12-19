@@ -20,7 +20,7 @@ class StickyBoard extends HTMLElement {
     constructor() {
         super();
         this.boardIconsClasses = {
-            'board': 'bi bi-stickies',
+            'standard': 'bi bi-stickies',
             'column': 'bi bi-layout-three-columns'
         }
     }

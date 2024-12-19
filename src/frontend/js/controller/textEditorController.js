@@ -22,7 +22,7 @@ export class TextEditorController {
 
     /**
      * This method will load the view the user was in before opening the editor.
-     * SIDE EFFECTS - this will clear the stored editor object from memory
+     * Side effects - this will clear the stored editor object from memory
      */
     loadPreviousView() {
         const previousView = this.applicationController.getPreviousView();
@@ -45,9 +45,9 @@ export class TextEditorController {
 
     /**
      *
+     *
      * @param editorObject
      * @param editorObjectType
-     * @returns {Promise<void>}
      */
     async loadRecentlyViewedNote(editorObject, editorObjectType) {
         // Save the new editor object to the model

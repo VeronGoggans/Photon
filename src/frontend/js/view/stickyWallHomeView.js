@@ -1,13 +1,12 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
 import { Dialog } from "../util/dialog.js";
+import { StickyBoardTypes } from "../constants/constants.js";
 
 
 export class StickyWallHomeView {
     constructor(controller, applicationController) {
         this.controller = controller;
         this.applicationController = applicationController;
-
-        this.activeFilter = null;
 
         this.dialog = new Dialog();
         this.#initElements();
@@ -19,20 +18,21 @@ export class StickyWallHomeView {
 
 
     /**
-     * This method will render an array of stickyboard objects in their dedicated section
+     * This method will render an array of sticky board objects in their dedicated section
      * e.g. standard or column boards
      * 
      * @param { Array[Object] } stickyBoards 
      */
     renderAll(stickyBoards) {
+        const { standardStickyBoards, columnStickyBoards } = stickyBoards;
 
-        if (stickyBoards.length > 0) {
+        if (standardStickyBoards.length > 0) {
             // Show the standard sticky boards title 
             this._standardBlockTitle.style.display = '';
             this._standardStickyBoardsList.style.display = '';
         }
 
-        if (stickyBoards.length > 0) {
+        if (columnStickyBoards.length > 0) {
             // show the column sticky boards title 
             this._columnBlockTitle.style.display = '';
             this._columnStickyBoardsList.style.display = '';
@@ -42,21 +42,20 @@ export class StickyWallHomeView {
         const standardContentFragment = document.createDocumentFragment();
         const columnContentFragment = document.createDocumentFragment();
 
-        for (let i = 0; i < stickyBoards.length; i++) {
+        for (let i = 0; i < standardStickyBoards.length; i++) {
 
-            const stickyBoardCard = this.#createStickyBoardCard(stickyBoards[i])
+            const stickyBoardCard = this.#createStickyBoardCard(standardStickyBoards[i])
             AnimationHandler.fadeInFromBottom(stickyBoardCard);
-
-            const { type } = stickyBoards[i];
-
-            if (type === 'board') {
-                standardContentFragment.appendChild(stickyBoardCard);
-            }
-
-            else if (type === 'column') {
-                columnContentFragment.appendChild(stickyBoardCard); 
-            }
+            standardContentFragment.appendChild(stickyBoardCard);
         }
+
+        for (let i = 0; i < columnStickyBoards.length; i++) {
+
+            const stickyBoardCard = this.#createStickyBoardCard(columnStickyBoards[i])
+            AnimationHandler.fadeInFromBottom(stickyBoardCard);
+            columnContentFragment.appendChild(stickyBoardCard); 
+        }
+
 
         this._standardStickyBoardsList.appendChild(standardContentFragment);
         this._columnStickyBoardsList.appendChild(columnContentFragment);
@@ -75,33 +74,67 @@ export class StickyWallHomeView {
     renderOne(stickyBoard) {
 
         const { type } = stickyBoard;
-
         const stickyBoardCard = this.#createStickyBoardCard(stickyBoard);
-        AnimationHandler.fadeInFromBottom(stickyBoardCard);
 
-        if (type === 'board') {
+        if (type === StickyBoardTypes.STANDARD && this._standardStickyBoardsList.children.length === 0) {
+            // show the standard sticky boards title
+            this._standardBlockTitle.style.display = '';
+            this._standardStickyBoardsList.style.display = '';
+        }
+
+        if (type === StickyBoardTypes.COLUMN && this._columnStickyBoardsList.children.length === 0) {
+            // show the column sticky boards title
+            this._columnBlockTitle.style.display = '';
+            this._columnStickyBoardsList.style.display = '';
+        }
+
+        if (type === StickyBoardTypes.STANDARD) {
             this._standardStickyBoardsList.appendChild(stickyBoardCard);
         }
 
-        else if (type === 'column') {
+        if (type === StickyBoardTypes.COLUMN) {
             this._columnStickyBoardsList.appendChild(stickyBoardCard);
         }
+
+        AnimationHandler.fadeInFromBottom(stickyBoardCard);
     }
 
 
 
 
     /**
-     * This method will delete a specified stickyboard
+     * This method will delete a specified sticky board
      * 
-     * @param { Number } stickyBoardId - The ID of the stickyboard to delete 
+     * @param { Number } stickyBoardId - The ID of the sticky board to delete
      */
     renderDelete(stickyBoardId) {
-        const stickyBoards = this._stickyBoardsList.children 
+        const standardStickyBoards = this._standardStickyBoardsList.children;
+        const columnStickyBoards = this._columnStickyBoardsList.children;
+        let stickyBoardFound = false;
         
-        for (let i = 0; i < stickyWalls.length; i++) {
-            if (stickyWalls[i].id == stickyWallId) {
-                AnimationHandler.fadeOutCard(stickyWalls[i])
+        for (let i = 0; i < standardStickyBoards.length; i++) {
+            if (standardStickyBoards[i].id === String(stickyBoardId)) {
+
+                if (this._standardStickyBoardsList.children.length === 1) {
+                    this._standardBlockTitle.style.display = 'none';
+                    this._standardStickyBoardsList.style.display = 'none';
+                }
+                AnimationHandler.fadeOutCard(standardStickyBoards[i]);
+                stickyBoardFound = true;
+            }
+        }
+
+        // If the sticky board is not present in the standard list search through the column list
+        if (!stickyBoardFound) {
+            for (let i = 0; i < columnStickyBoards.length; i++) {
+                if (columnStickyBoards[i].id === String(stickyBoardId)) {
+
+                    if (this._columnStickyBoardsList.children.length === 1) {
+                        this._columnBlockTitle.style.display = 'none';
+                        this._columnStickyBoardsList.style.display = 'none';
+                    }
+                    AnimationHandler.fadeOutCard(columnStickyBoards[i])
+                }
             }
         }
     }
@@ -150,11 +183,7 @@ export class StickyWallHomeView {
 
         this._standardBlockTitle = document.querySelector('#standard-sticky-boards-block-title');
         this._columnBlockTitle = document.querySelector('#column-sticky-boards-block-title');
-
         this._addNewstickyWallButton = document.querySelector('.add-sticky-board-btn');
-        this._filterContainer = document.querySelector('.sticky-board-filter-container');
-        this._filterBoardButton = document.querySelector('#filter-standard-boards');
-        this._filterColumnButton = document.querySelector('#filter-column-boards');
 
         this._standardBlockTitle.style.display = 'none';
         this._columnBlockTitle.style.display = 'none';

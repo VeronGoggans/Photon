@@ -10,7 +10,7 @@ export class NewStickyBoardModel {
         this.HOST.classList.add('new-sticky-board-modal');
         this.HOST.innerHTML = newStickyBoardModalTemplate;
 
-        this.boardType = 'board';
+        this.boardType = 'standard';
         this.#eventListeners();
         return this.HOST
     }
@@ -45,7 +45,7 @@ export class NewStickyBoardModel {
             if (e.target.closest('.type-one')) {
                 this.HOST.querySelector('.type-one').classList.add('selected-board-type');
                 this.HOST.querySelector('.type-two').classList.remove('selected-board-type');
-                this.boardType = 'board'
+                this.boardType = 'standard'
             }
             else if (e.target.closest('.type-two')) {
                 this.HOST.querySelector('.type-two').classList.add('selected-board-type');

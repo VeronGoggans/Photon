@@ -26,6 +26,10 @@ export class Stack {
     size() {
         return this.stack.length;
     }
+
+    view() {
+        return [...this.stack];
+    }
 }
 
 
@@ -78,10 +82,5 @@ export class UniqueEvictingStack extends Stack {
                 this.stack.splice(i, 1);
             }
         }
-    }
-
-
-    view() {
-        return [...this.stack];
     }
 }

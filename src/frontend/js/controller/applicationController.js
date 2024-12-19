@@ -30,134 +30,137 @@ export class ApplicationController {
         this.settingController = new SettingController(this);
         this.stickyWallHomeController = new StickyWallHomeController(this);
         this.viewContainer = document.querySelector('.content .view');
-        this.controllers = {
-            home: this.homeController,
-            notes: this.noteController,
-            flashcardsHome: this.flashcardDeckController,
-            flashcardsPractice: this.flashcardPracticeController,
-            flashcardEdit: this.flashcardEditController,
-            standardStickyBoard: this.stickyWallController,
-            columnStickyBoard: this.stickyWallController,
-            settings: this.settingController,
-            editor: this.textEditorController,
-            stickyWallHome: this.stickyWallHomeController
-        }
+
         this.settingController.loadSettings();
         this.initView('home');
     }
 
     initView(viewId, viewParameters = {}) {
-        const controller = this.controllers[viewId];
-        if (controller) {
-            // Rendering the correct view template on the screen
-            this.viewContainer.innerHTML = templates[viewId];
+        // Rendering the correct view template on the screen
+        this.viewContainer.innerHTML = templates[viewId];
 
-            setTimeout(() => {
+        setTimeout(() => {
 
-                if (viewId === 'home') {
-                    this.folderController.clearFolderHistory();
-                    this.sidebarView.setActiveTab('home');
-                    controller.init();
+            if (viewId === 'home') {
+                this.folderController.clearFolderHistory();
+                this.sidebarView.setActiveTab('home');
+                this.homeController.init();
+            }
+
+            else if (viewId === 'notes') {
+                const { folder, location } = viewParameters;
+
+                this.folderController.init(folder.id, folder.name, location);
+                this.noteController.init(folder.id);
+
+                this.sidebarView.setActiveTab('notes');
+            }
+
+            else if (viewId === 'editor') {
+                const { editorObjectType, editorObject, newEditorObject, previousView, editorObjectLocation } = viewParameters;
+
+                this.textEditorController.init();
+
+                if (editorObjectLocation !== null) {
+                    this.folderController.setNoteLocation(editorObjectLocation);
                 }
 
-                else if (viewId === 'notes') {
-                    const { folder, location } = viewParameters; 
-                    
-                    this.folderController.init(folder.id, folder.name, location);
-
-                    controller.init(folder.id);
-                    this.sidebarView.setActiveTab('notes');
+                else if (newEditorObject) {
+                    this.openTextEditor(editorObjectType)
                 }
 
-                else if (viewId === 'editor') {
-                    controller.init();
-                    const { editorObjectType, editorObject, newEditorObject, previousView, editorObjectLocation } = viewParameters;
-
-                    if (editorObjectLocation !== null) {
-                        this.folderController.setNoteLocation(editorObjectLocation);
-                    }
-                    
-                    if (newEditorObject) {
-                        this.openTextEditor(editorObjectType)
-                    } 
-
-                    if (!newEditorObject) {
-                        this.openInTextEditor(editorObject, editorObjectType);
-                        this.noteController.patchLastViewTime(editorObject.id);
-                    }
-
-                    this.model.setPreviousView(previousView);
-                    this.sidebarView.setActiveTab('notes');
+                else if (!newEditorObject) {
+                    this.openInTextEditor(editorObject, editorObjectType);
+                    this.noteController.patchLastViewTime(editorObject.id);
                 }
 
-                else if (viewId === 'flashcardsHome') {
-                    this.sidebarView.setActiveTab('flashcards');
-                }
+                this.model.setPreviousView(previousView);
+                this.sidebarView.setActiveTab('notes');
+            }
 
-                else if (viewId === 'flashcardsPractice') {
-                    const { deck, flashcards, previousView } = viewParameters
+            else if (viewId === 'flashcardsHome') {
+                this.sidebarView.setActiveTab('flashcards');
+            }
 
-                    controller.init(deck, flashcards);
-                    this.model.setPreviousView(previousView);
-                    this.sidebarView.setActiveTab('flashcards');
-                }
+            else if (viewId === 'flashcardsPractice') {
+                const { deck, flashcards, previousView } = viewParameters
 
-                else if (viewId === 'flashcardEdit') {
-                    const {
-                        deck, 
-                        flashcards,
-                        previousView
-                    } = viewParameters
+                this.flashcardPracticeController.init(deck, flashcards);
+                this.model.setPreviousView(previousView);
+                this.sidebarView.setActiveTab('flashcards');
+            }
 
-                    this.model.setPreviousView(previousView);
+            else if (viewId === 'flashcardEdit') {
+                const { deck, flashcards, previousView } = viewParameters
 
-                    controller.init(deck, flashcards);
-                }
+                this.model.setPreviousView(previousView);
 
-                else if (viewId === 'standardStickyBoard') {
-                    const { stickyBoard, previousView } = viewParameters;
-                    controller.initStandardStickyBoard(stickyBoard, previousView);
+                this.flashcardEditController.init(deck, flashcards);
+            }
 
-                    this.model.setPreviousView(previousView)
+            else if (viewId === 'standardStickyBoard') {
+                const { stickyBoard, previousView } = viewParameters;
+                this.stickyWallController.initStandardStickyBoard(stickyBoard);
 
-                    this.sidebarView.setActiveTab('sticky-wall-home')
-                }
+                this.model.setPreviousView(previousView)
+                this.sidebarView.setActiveTab('sticky-wall-home')
+            }
 
-                else if (viewId === 'columnStickyBoard') {
-                    const { stickyBoard, previousView } = viewParameters;
-                    controller.initColumnStickyBoard(stickyBoard, previousView);
+            else if (viewId === 'columnStickyBoard') {
+                const { stickyBoard, previousView } = viewParameters;
+                this.stickyWallController.initColumnStickyBoard(stickyBoard);
 
-                    this.model.setPreviousView(previousView)
+                this.model.setPreviousView(previousView)
+                this.sidebarView.setActiveTab('sticky-wall-home')
+            }
 
-                    this.sidebarView.setActiveTab('sticky-wall-home')
-                }
+            else if (viewId === 'settings') {
+                this.sidebarView.setActiveTab('settings')
+                this.settingController.init();
+            }
 
-                else if (viewId === 'settings') {
-                    this.sidebarView.setActiveTab('settings')
-                    controller.init();
-                }
-
-                else if (viewId === 'stickyWallHome') {
-                    this.sidebarView.setActiveTab('sticky-wall-home');
-                    controller.init();
-                }}, 0);
-        }
+            else if (viewId === 'stickyWallHome') {
+                this.sidebarView.setActiveTab('sticky-wall-home');
+                this.stickyWallHomeController.init();
+            }}, 0);
     }
+
 
     getPreviousView() {
         return this.model.getPreviousView();
     }
-    
+
+
+    /**
+     * This opens of a specified editor object within the editor view.
+     *
+     * When a user clicks on a note or template this method is executed,
+     * and will open that note/template in the editor view.
+     *
+     * @param editorObject         - The editor object that will be loaded in
+     * @param editorObjectType     - The type of the object e.g. note or template (future markdown)
+     */
     async openInTextEditor(editorObject, editorObjectType) {
         const allFolderNames = this.folderController.getAllFolderNames();
         this.textEditorController.openInTextEditor(editorObject, editorObjectType, allFolderNames);
     }
 
+
+
+    /**
+     * This method will open the text editor view.
+     *
+     * Side effect - Clears the text editor model from any previously held note data
+     *
+     * @param editorObjectType - The type of the object e.g. note or template (future markdown)
+     */
     async openTextEditor(editorObjectType) {
         this.clearEditorObject();
         const allFolderNames = this.folderController.getAllFolderNames();
         this.textEditorController.showTextEditor(editorObjectType, allFolderNames);
     }
+
+
 
     /**
      * This method ensures that the text editor model does not

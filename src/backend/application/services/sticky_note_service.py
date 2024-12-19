@@ -48,7 +48,7 @@ class StickyNoteService:
         board_name: str = request.name
         board_object = None
 
-        if board_type == 'board':   
+        if board_type == 'standard':
             board_object = StandardStickyBoard( name=board_name, type=board_type, creation=datetime.now() )
         elif board_type == 'column': 
             board_object = ColumnStickyBoard( name=board_name, type=board_type, creation=datetime.now() )

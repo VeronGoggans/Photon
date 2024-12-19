@@ -19,7 +19,7 @@ export class FolderController {
             this.model.emptyFolders();
         }
         if (location !== null) {
-            this.model.addHierarcyPath(location)
+            this.model.addHierarchyPath(location)
         } 
         this.navigateIntoFolder(folderId, folderName, true)
     }
@@ -112,6 +112,6 @@ export class FolderController {
     }
 
     setNoteLocation(location) {
-        this.model.addHierarcyPath(location)
+        this.model.addHierarchyPath(location)
     }
 }
