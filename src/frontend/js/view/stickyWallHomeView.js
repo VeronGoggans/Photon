@@ -140,9 +140,12 @@ export class StickyWallHomeView {
     }
 
 
-
-
-
+    /**
+     * This method will create a single StickyBoard component.
+     *
+     * @param stickyBoard        - A sticky board object.
+     * @returns { HTMLElement }  - A sticky board component.
+     */
     #createStickyBoardCard(stickyBoard) {
         const stickyBoardCard = document.createElement('sticky-board');
         stickyBoardCard.setData(stickyBoard)

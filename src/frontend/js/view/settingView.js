@@ -33,7 +33,7 @@ export class SettingView {
         await this.controller.updateTheme('light');
     }
     
-    async #darkmode() {
+    async #darkMode() {
         this.dropdownHelper.closeDropdowns();
         this.themeInput.value = 'Dark';
         document.body.classList.remove('light');
@@ -129,7 +129,7 @@ export class SettingView {
 
     #eventListeners() {
         this.lightTheme.addEventListener('click', () => {this.#lightMode()});
-        this.darkTheme.addEventListener('click', () => {this.#darkmode()});
+        this.darkTheme.addEventListener('click', () => {this.#darkMode()});
         this.originalSidebar.addEventListener('click', () => {this.#originalColor()});
         this.softSidebar.addEventListener('click', () => {this.#softColor()});
         this.invisibleSidebar.addEventListener('click', () => {this.#invisibleColor()});

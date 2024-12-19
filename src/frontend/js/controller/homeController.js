@@ -17,7 +17,6 @@ export class HomeController {
         await this.#initSearchbar();
         await this.getRecentFolders();
         await this.getRecentNotes();
-        await this.get5RandomDecks();
     }
 
     async getRecentFolders() {
@@ -31,11 +30,6 @@ export class HomeController {
         this.view.renderRecentNotes(notes);
     }
 
-
-    async get5RandomDecks() {
-        const { decks } = await this.model.get('/randomDecks');
-        this.view.renderRandomDecks(decks);
-    }
 
 
     async handleSearch(searchItemId, searchType) {

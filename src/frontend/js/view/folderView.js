@@ -16,15 +16,24 @@ export class FolderView {
 
 
 
+    /**
+     * This method will render an array of folder objects
+     *
+     * The "folders" subtitle will appear, if the folders array is not empty.
+     *
+     * @param folders { Array[Object] } - An array of folder objects.
+     */
     renderAll(folders) {
+
         if (folders.length === 0) {
-            // hide the folders subtitle
-            document.querySelector('#folders-block-title').style.display = 'none';
+            // remove the folders subtitle
+            this._foldersBlockTitle.style.display = 'none';
             this.foldersContainer.style.display = 'none';
         }
+
         if (folders.length > 0) {
             // show the folders subtitle
-            document.querySelector('#folders-block-title').style.display = '';
+            this._foldersBlockTitle.style.display = '';
             this.foldersContainer.style.display = '';
         }
 
@@ -40,10 +49,19 @@ export class FolderView {
     }
 
 
+
+    /**
+     * This method will render a single folder.
+     *
+     * The "folders" subtitle will appear, if the folder being rendered
+     * is the first one within the current folder.
+     *
+     * @param folder { Object } - Representing the newly created folder.
+     */
     renderOne(folder) {
+        // show the folders subtitle if this is the first folder
         if (this.foldersContainer.children.length === 0) {
-            // show the folders subtitle
-            document.querySelector('#folders-block-title').style.display = '';
+            this._foldersBlockTitle.style.display = '';
             this.foldersContainer.style.display = '';
         }
 
@@ -54,27 +72,42 @@ export class FolderView {
     }
 
 
+
+    /**
+     * This method will update the visual representation of a folder.
+     *
+     * @param folder { Object } - The updated folder.
+     */
     renderUpdate(folder) {
         const folderCards = this.foldersContainer.children; 
     
         for (let i = 0; i < folderCards.length; i++) {
-            if (folderCards[i].id == folder.id) {
+            if (folderCards[i].id === String(folder.id)) {
                 folderCards[i].setAttribute('folder', JSON.stringify(folder));
             }
         }
     }
-    
 
+
+
+    /**
+     * This method will delete a specified folder.
+     *
+     * The "folders" subtitle will disappear, if the folder being deleted
+     * is the last one within the current folder.
+     *
+     * @param folder { Object } The folder to delete
+     */
     renderDelete(folder) {
+        // remove the folders subtitle if this was the last folder
         if (this.foldersContainer.children.length === 1) {
-            // hide the folders subtitle
-            document.querySelector('#folders-block-title').style.display = 'none';
+            this._foldersBlockTitle.style.display = 'none';
             this.foldersContainer.style.display = 'none';
         }  
 
         const folders = this.foldersContainer.children;
         for (let i = 0; i < folders.length; i++) {
-            if (folders[i].id == folder.id && folders[i].tagName === 'FOLDER-CARD') {
+            if (folders[i].id === String(folder.id) && folders[i].tagName === 'FOLDER-CARD') {
                 AnimationHandler.fadeOutCard(folders[i]);
             }
         }    
@@ -82,6 +115,13 @@ export class FolderView {
     }
 
 
+
+    /**
+     * This method will create a single FolderCard component.
+     *
+     * @param folder             - A folder object.
+     * @returns { HTMLElement }  - A folder card component.
+     */
     #folder(folder) {
         const folderCard = document.createElement('folder-card');
         folderCard.setAttribute('folder', JSON.stringify(folder));
@@ -89,6 +129,12 @@ export class FolderView {
     }
 
 
+
+    /**
+     * This method will display the name of the folder the user is currently in.
+     *
+     * @param name -  The name of the current folder.
+     */
     displayFolderName(name) {
         removeContent(this.foldersContainer);
         removeContent(document.querySelector('.notes'));
@@ -96,8 +142,15 @@ export class FolderView {
     }
 
 
+
+
     #initElements() {
         this.foldersContainer = document.querySelector('.folders');
+        this._foldersBlockTitle = document.querySelector('#folders-block-title');
+
+        this._foldersBlockTitle.style.display = 'none';
+        this.foldersContainer.style.display = 'none';
+
         this.currentFolderName = document.querySelector('.current-folder-name');
         this.backButton = document.querySelector('.exit-folder-btn');
         this.createFolderButton = document.querySelector('.add-folder-btn');

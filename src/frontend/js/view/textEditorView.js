@@ -97,12 +97,6 @@ export class TextEditorView {
 
 
 
-  async loadInTemplate(templateId) {
-    const templateContent = await this.applicationController.getTemplateById(templateId, true);
-    this.page.innerHTML = this.page.innerHTML += templateContent.content;
-  }
-
-
   /**
    * This method will save the currently loaded template or note.
    * Right after it'll clear the editor for new work.
@@ -138,21 +132,6 @@ export class TextEditorView {
   }
 
 
-
-  saveFlashcard(flashcard) {
-    this.controller.saveCardToModel(flashcard);
-  }
-
-
-
-  /**
-   * Temporarely stores the deck name
-   * 
-   * @param {Object} flashcard 
-   */
-  saveDeckName(deckName) {
-    this.controller.saveDeckName(deckName)
-  }
 
   renderSearchModal() {
     this.dialog.renderSearchModal(this.toolbar);

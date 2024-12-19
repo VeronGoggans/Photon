@@ -51,7 +51,7 @@ export class SidebarView {
 
     /**
      * This method is called when the screen width 
-     * becomes smaller then 700 pixels
+     * becomes smaller than 700 pixels
      */
     #collapseButtons() {
         for (let i = 0; i < this._buttonCount; i++) {
