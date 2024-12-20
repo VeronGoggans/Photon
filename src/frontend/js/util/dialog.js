@@ -10,10 +10,10 @@ import { NewStickyBoardModel } from "../components/modals/newStickyBoardModal.js
 export class Dialog {
     constructor() {
         this.dialog = document.querySelector('.dialog');
-        this.attachEventlistener();
+        this.attachEventlisteners();
     }
 
-    attachEventlistener() {
+    attachEventlisteners() {
         this.dialog.addEventListener('click', (event) => {
             const excludedContainers = [
                 '.delete-modal',
@@ -60,18 +60,15 @@ export class Dialog {
         this.show();
     }
 
+
     renderNoteDetailsModal(noteInfo) {
         this.addChild(new NoteDetailContainer(noteInfo))
     }
-    
-    renderDeleteModal(controller, id, name, insideEditor, aditionals = {  }) {
-        this.addChild(new DeleteModal(
-            controller,
-            id, 
-            name, 
-            insideEditor,
-            aditionals
-        ))
+
+
+    renderDeleteModal(controller, id, name, insideEditor, additions = {  }) {
+        this.addChild(new DeleteModal(controller, id, name, insideEditor, additions))
+        this.dialog.querySelector('.delete-modal input').focus()
     }
 
 
@@ -80,12 +77,9 @@ export class Dialog {
         this.dialog.querySelector('.new-sticky-board-modal input').focus()
     }
 
+
     renderStickyNoteModal(controller, parentId, stickyNote = null) {
-        this.addChild(new StickyNoteModal(
-            controller, 
-            parentId, 
-            stickyNote
-        ))
+        this.addChild(new StickyNoteModal( controller, parentId, stickyNote));
     }
 
 
@@ -97,11 +91,9 @@ export class Dialog {
         modal.style.transform = 'translateY(0px)';
     }
 
+
     renderEditFolderModal(controller, folder = null) {
-        this.addChild(new EditFolderModal( 
-            controller, 
-            folder
-        ));
+        this.addChild(new EditFolderModal(controller, folder));
         this.dialog.querySelector('.edit-folder-modal input').focus()
     }
 }

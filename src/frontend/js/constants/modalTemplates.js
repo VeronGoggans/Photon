@@ -53,3 +53,15 @@ export const newStickyBoardModalTemplate = `
     <button class="save-btn">Create</button>
 </div>
 `
+
+
+export const deleteModalTemplate = `
+<i class="bi bi-trash3"></i>        
+<p>Type <b></b> to confirm</p>
+<span>Do note that this action is permanent</span>
+<input type="text" spellcheck="false">
+<div class="button-container">
+    <button class="cancel-btn">Cancel</button>
+    <button class="delete-btn">Confirm</button>
+</div>
+`

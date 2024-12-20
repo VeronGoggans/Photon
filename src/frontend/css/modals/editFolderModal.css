@@ -8,7 +8,6 @@
     padding: 30px 40px;
     border-radius: 10px;
     justify-content: center;
-    font-family: Roboto;
     box-shadow: 0 10px 20px var(--shadow);
 }
 
@@ -27,21 +26,18 @@
     font-size: 17px;
     color: var(--important);
     font-weight: 600;
-    margin: 0;
-    margin-top: 40px;
+    margin: 40px 0 0;
 }
 
 .folder-settings p {
-    
-    margin: 0;
     color: #9b9bb5;
-    margin-bottom: 5px;
+    margin: 0 0 5px;
 }
 
 .edit-folder-modal input {
     border: none;
     background-color: transparent;
-    border-bottom: 2px solid var(--folder-name-border);
+    border-bottom: 2px solid var(--inactive-border);
     padding: 5px 10px;
     height: 45px;
     margin-bottom: 10px;

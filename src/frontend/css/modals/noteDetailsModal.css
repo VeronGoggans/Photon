@@ -1,5 +1,4 @@
 .note-details-modal {
-    font-family: Roboto;
     display: flex;
     flex-direction: column;
     padding: 10px 40px;
@@ -13,6 +12,7 @@
 .note-details-modal h2 {
     color: var(--important);
     font-size: 32px;
+    font-weight: 500;
 }
 
 .note-details-modal table {

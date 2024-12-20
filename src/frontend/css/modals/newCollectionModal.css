@@ -44,6 +44,7 @@
     color: var(--important);
 }
 
+
 .new-sticky-board-modal input {
     border: none;
     background-color: transparent;
@@ -53,7 +54,7 @@
     color: #444863;
     font-size: 20px;
     transition: 200ms;
-    border-bottom: 2px solid var(--folder-name-border);
+    border-bottom: 2px solid var(--inactive-border);
 }
 
 

@@ -37,7 +37,7 @@
     --bookmark: #5063b1;
     --dragging: #27293b;
     --hover: #617fff69; 
-    --folder-name-border: #5c7dff;
+    --inactive-border: #323852;
 
     /*borders*/
     --border-notification: none;
@@ -154,7 +154,7 @@
     --dragging: #f3f4ff;
     --bookmark: #d5ddff;
     --hover: #f0f0ff;
-    --folder-name-border: #f4f5ff;
+    --inactive-border: #f4f5ff;
 
     /*Home View*/
 

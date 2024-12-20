@@ -5,20 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="Added documentation to some view classes">
+      <change afterPath="$PROJECT_DIR$/src/frontend/css/modals/deleteModal.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/css/views/home/homeView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/views/home/homeView.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/css/views/note/notesView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/views/note/notesView.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/css/views/sticky_note/stickyWallHomeView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/views/sticky_note/stickyWallHomeView.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/css/views/sticky_note/stickyWallView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/views/sticky_note/stickyWallView.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/general/themes.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/themes.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/modals/deleteContainer.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/modals/editFolderModal.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/modals/editFolderModal.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/modals/newCollectionModal.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/modals/newCollectionModal.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/frontend_playground/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/frontend_playground/test.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/frontend_playground/test7.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/frontend_playground/test7.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/components/entities/stickyNote.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/components/entities/stickyNote.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/constants/templates.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/constants/templates.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/controller/stickyWallController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/controller/stickyWallController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/util/date.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/util/date.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/view/folderView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/view/folderView.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/view/stickyNoteView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/view/stickyNoteView.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/view/textEditorView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/view/textEditorView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/components/modals/deleteModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/components/modals/deleteModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/constants/modalTemplates.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/constants/modalTemplates.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/util/dialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/util/dialog.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,6 +103,7 @@
       <workItem from="1734571032362" duration="2442000" />
       <workItem from="1734603857549" duration="15920000" />
       <workItem from="1734646506403" duration="1459000" />
+      <workItem from="1734697974949" duration="5265000" />
     </task>
     <task id="LOCAL-00001" summary="the sidebar can now be without a border in the settings tab. And the options menu for folders and notes have been changed">
       <option name="closed" value="true" />
