@@ -277,7 +277,6 @@ export class TextEditorView {
     this.documentLocation = document.querySelector('.document-location');
     this.documentNameInput = document.querySelector('.note-name-input');
     this.exitButton = document.querySelector('#exit-editor-btn');
-    this.deckButton = document.querySelector('#editor-flashcard-set-btn');
     this.colorButton = document.querySelector('.color-dropdown button');
 
     this.noteDetailsSpan = document.querySelector('.note-details-span');
@@ -334,11 +333,5 @@ export class TextEditorView {
 
     this.page.addEventListener('click', () => {this.dropdownHelper.closeDropdowns()});
     this.colorButton.addEventListener('click', () => {this.dropdownHelper.toggleDropdown(this.colorDropdown)})
-    this.deckButton.addEventListener('click', () => {
-      // Get currently stored cards
-      const { flashcards, deckName } = this.controller.getStoredDeckInfo();
-      this.dialog.renderNewDeckModal(this.controller, flashcards, deckName)});  
-
-    
   }
 }

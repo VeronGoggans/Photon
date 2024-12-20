@@ -79,40 +79,31 @@ class StickyBoard extends HTMLElement {
  * These sticky notes have a fixed size which differs them from the DynamicStickyNote class
  */
 class StickyNote extends HTMLElement {
-    static get observedAttributes() {
-        return ['sticky']; 
-    }
-
     constructor() {
         super();
     }
 
+    setData(value) {
+        this.sticky = value;
+    }
 
     connectedCallback() {
-        this.sticky = JSON.parse(this.getAttribute('sticky'));
         this.id = this.sticky.id;
         
         this.render();
-        this.addEventListener('click', this.handleCardClick.bind(this));
+        this.addEventListeners();
     }
 
-    
-    disconnectedCallback() {
-        this.removeEventListener('click', this.handleCardClick.bind(this));
-    }
-
-
-    attributeChangedCallback(name, oldValue, newValue) {
-        if (name === 'sticky') {
-            this.sticky = JSON.parse(newValue);
-            this.render();
-        }
-    }
 
     render() {
         this.innerHTML = `
             <p>${this.sticky.content}</p>
         `;
+    }
+
+
+    addEventListeners() {
+        this.addEventListener('click', this.handleCardClick.bind(this));
     }
 
     handleCardClick() {
@@ -188,6 +179,6 @@ class DynamicStickyNote extends HTMLElement {
 
 
 
-customElements.define('dynamic-sticky-card', DynamicStickyNote);
-customElements.define('sticky-card', StickyNote);
+customElements.define('dynamic-sticky-note', DynamicStickyNote);
+customElements.define('sticky-note', StickyNote);
 customElements.define('sticky-board', StickyBoard);

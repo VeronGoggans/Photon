@@ -21,146 +21,103 @@
             padding: 0;
             margin: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-color: rgb(204, 207, 214);
+            background-color: rgb(218, 221, 228);
         }
 
-        .new-sticky-board-modal {
-            padding: 30px 40px;
-            width: 650px;
-            height: 550px;
+        .delete-modal {
             display: flex;
             flex-direction: column;
-            background-color: white;
+            padding: 40px;
             border-radius: 10px;
+            width: 500px;
+            box-shadow: 0 10px 20px #5c629d1a;
+            background-color: rgb(255, 255, 255);
         }
 
-        .board-choices {
-            margin: 10px 0;
+        .delete-modal i {
+            font-size: 40px;
+            margin: 0 auto;
             width: fit-content;
-            border-radius: 50px;
-            background-color: #f4f5fa;
+            color: #383b52;
+            background-color: #f4f4fc;
             display: flex;
-            height: 50px;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+        }
+
+        .delete-modal p {
+            color: #2f3774;
+            font-size: 18px;
+            margin: 30px auto 0 auto;
+        }
+
+        .delete-modal span {
+            margin:  0 auto;
+            font-size: 16px;
+            color: #787eac;
+        }
+
+        .delete-modal input {
+            outline: none;
+            border: none;
+            text-align: center;
+            font-size: 20px;
+            padding: 5px;
+            margin-top: 30px;
+            border-bottom: 2px solid #5c7fdd;
+        }
+
+        .delete-modal .button-container {
+            padding-top: 50px;
+            display: flex;
+            justify-content: center;
             column-gap: 20px;
         }
 
-        .board-choices div {
-            cursor: pointer;
+        .delete-modal .cancel-btn {
+            background-color:transparent;
+            font-size: 16px;
+            padding: 10px 30px;
+            border-radius: 30px;
+            color: #2f3774;
+
+        }
+
+        .delete-modal .delete-btn {
+            background-color: #f4f4fc;
+            color: #2f3774;
+            padding: 10px 30px;
+            border-radius: 10px;
             transition: 200ms;
-            width: 120px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            column-gap: 5px;
-            border-radius: 50px;
         }
 
-        .selected-board-choice {
-            background-color: #d4daff;
-        }
-
-        .board-choices div:hover {
+        .delete-modal .delete-btn:hover {
+            color: #5c7fdd;
             scale: 1.05;
         }
 
-        .new-sticky-board-modal h2 {
-            font-weight: 500;
-            font-size: 32px;
-        }
-
-        .new-sticky-board-modal input {
-            border: none;
-            background-color: transparent;
-            padding: 5px 10px;
-            height: 45px;
-            margin-bottom: 10px;
-            color: #444863;
-            font-size: 20px;
-            transition: 200ms;
-            border-bottom: 2px solid #f4f5ff;
-        }
+       
 
         
-
-        .new-sticky-board-modal button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #5c7fdd;
-            background-color: transparent;
-            padding: 10px;
-            font-size: 16px;
-            width: 120px;
-            height: 40px;
-            border-radius: 7px;
-        }
-
-        .new-sticky-board-modal button:hover {
-            background-color: #d4daff;
-        }
-
-        .board-settings {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .new-sticky-board-modal #title {
-            color: #2f3773;
-            font-size: 17px;
-            font-weight: 600;
-            margin: 0;
-            margin-top: 40px;
-        }
-
-        .new-sticky-board-modal p {
-            margin: 0;
-            color: #9b9bb5;
-            margin-bottom: 5px;
-        }
-
-        .new-sticky-board-modal textarea {
-            border: 2px solid #f4f5ff;
-            border-radius: 5px;
-            font-size: 13px;
-            padding: 10px 20px;
-        }
-
-        .new-sticky-board-modal .buttons-container {
-            display: flex;
-            justify-content: end;
-            gap: 15px;
-            padding-top: 10px;
-        }
     </style>
 </head>
 <body>
-    <div class="new-sticky-board-modal">
-        <h2>New sticky board</h2>
-        <div class="board-settings">
-            <span id="title">Sticky board name</span>
-            <p>You can change the name of this sticky board below</p>
-            <input type="text" class="sticky-board-title" placeholder="Untitled">
-            <span id="title">Sticky board type</span>
-            <p>Select a type for your new sticky board</p>
-        </div>
-        <div class="board-types">
-            <div class="choice-one">
-                <i class="bi bi-stickies"></i>
-                <span>Board</span>
-            </div>
-            <div class="choice-two selected-board-choice">
-                <i class="bi bi-layout-three-columns"></i>
-                <span>Column</span>
-            </div>
-        </div>
-        <div class="buttons-container">
+    <div class="delete-modal">
+        <i class="bi bi-trash3"></i>        
+        <p>Type <b>"personal projects"</b> to confirm</p>
+        <span>Do note that this action is permanent</span>
+        <input type="text" spellcheck="false">
+        <div class="button-container">
             <button class="cancel-btn">Cancel</button>
-            <button class="save-btn">Create</button>
+            <button class="delete-btn">Confirm</button>
         </div>
-        
     </div>
-    
+
 </body>
 </html>

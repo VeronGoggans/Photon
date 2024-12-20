@@ -62,6 +62,33 @@ export class StickWallController {
     }
 
 
+
+    /**
+     *
+     *
+     * @param stickyBoardId
+     * @param changedName
+     * @param changedDescription
+     */
+    async patchStickyBoard(stickyBoardId, changedName = null, changedDescription = null) {
+        const patchRequest = {
+            'id': stickyBoardId,
+            'name': changedName,
+            'description': changedDescription
+        }
+        await this.model.patch('/stickyBoard', patchRequest)
+    }
+
+
+    /**
+     *
+     *
+     * @param stickyNoteId
+     * @param changedContent
+     */
+    async patchStickyNote(stickyNoteId, changedContent) {}
+
+
     /**
      * This method will delete a specified sticky note
      *

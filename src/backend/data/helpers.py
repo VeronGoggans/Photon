@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from src.backend.data.models import Folder, Note, Flashcard, FlashcardSet, StandardStickyBoard, ColumnStickyBoard, StickyBoardColumn, StickyNote
+from src.backend.data.models import Folder, Note, StandardStickyBoard, ColumnStickyBoard, StickyBoardColumn, StickyNote
 from src.backend.data.exceptions.exceptions import NotFoundException
 
 
@@ -17,22 +17,6 @@ def find_note(note_id: int, db: Session) -> ( Note | NotFoundException ):
     if note is None:
         raise NotFoundException(f"Note with id {note_id} not found.")
     return note
-
-
-def find_deck(id: int, db: Session) -> ( FlashcardSet | NotFoundException ):
-    deck = db.query(FlashcardSet).filter(FlashcardSet.id == id).first()
-    
-    if deck is None:
-        raise NotFoundException(f"Deck with id {id} not found.")
-    return deck
-
-
-def find_flashcard(id: int, db: Session) -> ( Flashcard | NotFoundException ):
-    flashcard = db.query(Flashcard).filter(Flashcard.id == id).first()
-    
-    if flashcard is None:
-        raise NotFoundException(f"Flashcard with id {id} not found.")
-    return flashcard
 
 
 def find_standard_sticky_board(id: int, db: Session) -> ( StandardStickyBoard | NotFoundException ):

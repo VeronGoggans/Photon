@@ -22,6 +22,7 @@
 }
 
 .home .view-title {
+    display: flex;
     position: relative;
     margin: 50px 0;
     color: var(--important);
@@ -58,4 +59,45 @@
 
 .home .flashcard-deck:hover {
     scale: 1.05;
+}
+
+
+
+
+/*__________________________ greetings art __________________________*/
+
+.time-of-day-art {
+    margin: 0 20px;
+}
+.evening-sun {
+    width: 75px; /* Width of the half-circle */
+    height: 37.5px; /* Half the height of the circle */
+    background: radial-gradient(circle at bottom, rgb(255, 212, 132), rgb(241, 155, 155)); /* Gradient for a setting sun effect */
+    border-top-left-radius: 75px; /* Make the top corners rounded */
+    border-top-right-radius: 75px; /* Make the top corners rounded */
+    border-bottom-left-radius: 0; /* No rounding at the bottom */
+    border-bottom-right-radius: 0; /* No rounding at the bottom */
+    display: inline-block;
+    margin: 0 10px; /* Center the shape horizontally */
+}
+
+.afternoon-sun,
+.morning-sun {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background: radial-gradient(circle at bottom, rgb(250, 203, 116), rgb(255, 230, 162)); /* Gradient for a setting sun effect */
+
+}
+
+.night-moon {
+    width: 75px;
+    height: 75px;
+    background: radial-gradient(circle, #e5eaf7, #e6ecff); /* Subtle texture gradient for moon surface */
+    border-radius: 50%; /* Makes it a perfect circle */
+    box-shadow: 
+        0 0 30px rgba(213, 227, 255, 0.8), /* Glow around the moon */
+        0 0 10px rgba(211, 231, 255, 0.6), 
+        inset 0 -5px 10px rgba(158, 172, 214, 0.2); /* Inner shadow for slight depth */
+    display: inline-block;
 }

@@ -13,9 +13,13 @@
 .notes-top {
     position: relative;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 10px;
+}
+
+.notes-bottom {
+    padding-top: 20px;
 }
 
 .current-folder-name-container button {
@@ -37,7 +41,6 @@
     display: flex;
     column-gap: 10px;
     align-items: center;
-    margin-top: 20px;
     color: var(--text);
 }
 
@@ -48,7 +51,8 @@
 .current-folder-name-container h1 {
     display: flex;
     height: fit-content;
-    margin: 0px;
+    margin: 0;
+    white-space: nowrap;
 }
 
 .folders {
@@ -63,8 +67,8 @@
     display: flex;
     flex-direction: column;
     padding: 0 15px;
-    height: calc(100dvh - 220px);
-    max-height: calc(100dvh - 220px);
+    height: calc(100dvh - 117px);
+    max-height: calc(100dvh - 117px);
     overflow-y: scroll;
 }
 
@@ -72,7 +76,7 @@
     outline: none;
     display: grid;
     gap: 40px;
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    grid-template-columns: repeat(auto-fill, 190px);
     grid-template-rows: repeat(auto-fill, 280px);
     padding-bottom: 5%;
 }

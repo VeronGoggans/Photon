@@ -12,7 +12,7 @@ export class SidebarView {
         this.logo = this._sidebar.querySelector('.sidebar-logo');
 
         this._wrapper = document.querySelector('.wrapper');
-        this._buttonCount = 5;
+        this._buttonCount = 4;
 
         this.#eventListeners();
 

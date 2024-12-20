@@ -5,10 +5,7 @@ import { ApplicationModel } from "../model/applicationModel.js";
 import { SidebarView } from "../view/sideBarView.js";
 import { TextEditorController } from "./textEditorController.js"
 import { SettingController } from "./settingController.js";
-import { FlashcardPracticeController } from "./flashcardPracticeController.js";
-import { FlashcardEditController } from "./flashcardEditController.js";
 import { templates } from "../constants/templates.js";
-import { FlashcardHomeController } from "./flashcardHomeController.js";
 import { StickyWallHomeController } from "./stickyWallHomeController.js";
 import { StickWallController } from "./stickyWallController.js";
 
@@ -22,9 +19,6 @@ export class ApplicationController {
         this.noteController = new NoteController(this);
         this.homeController = new HomeController(this);
         this.folderController = new FolderController(this)
-        this.flashcardDeckController = new FlashcardHomeController(this);
-        this.flashcardPracticeController = new FlashcardPracticeController(this);
-        this.flashcardEditController = new FlashcardEditController(this);
         this.textEditorController = new TextEditorController(this);
         this.stickyWallController = new StickWallController(this);
         this.settingController = new SettingController(this);
@@ -76,26 +70,6 @@ export class ApplicationController {
 
                 this.model.setPreviousView(previousView);
                 this.sidebarView.setActiveTab('notes');
-            }
-
-            else if (viewId === 'flashcardsHome') {
-                this.sidebarView.setActiveTab('flashcards');
-            }
-
-            else if (viewId === 'flashcardsPractice') {
-                const { deck, flashcards, previousView } = viewParameters
-
-                this.flashcardPracticeController.init(deck, flashcards);
-                this.model.setPreviousView(previousView);
-                this.sidebarView.setActiveTab('flashcards');
-            }
-
-            else if (viewId === 'flashcardEdit') {
-                const { deck, flashcards, previousView } = viewParameters
-
-                this.model.setPreviousView(previousView);
-
-                this.flashcardEditController.init(deck, flashcards);
             }
 
             else if (viewId === 'standardStickyBoard') {
@@ -220,21 +194,4 @@ export class ApplicationController {
         await this.folderController.move(newParentFolderId, droppedFolderId)
     }
 
-    // Deck methods
-
-    async addDeck(deckName, flashcards) {
-        await this.flashcardDeckController.addDeck(deckName, flashcards);
-    }
-
-    async getDeckById(deckId) {
-        return await this.flashcardDeckController.getDeckById(deckId)
-    }
-
-    async getDeckSearchItems() {
-        return await this.flashcardDeckController.getSearchItems();
-    }
-
-    async getFlashcards(deckId) {
-        return await this.flashcardDeckController.getFlashcards(deckId);
-    }
 }

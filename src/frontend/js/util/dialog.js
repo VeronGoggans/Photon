@@ -2,9 +2,7 @@ import { NoteDetailContainer } from "../components/modals/noteDetailModal.js";
 import { DeleteModal } from "../components/modals/deleteModal.js";
 import { SearchModal } from "../components/modals/searchModal.js";
 import { EditFolderModal } from "../components/modals/editFolderModal.js";
-import { NewDeckModal } from "../components/modals/newDeckModal.js";
 import { AnimationHandler } from "../handlers/animationHandler.js";
-import { EditFlashcardModal } from "../components/modals/editFlashcardModal.js";
 import { StickyNoteModal } from "../components/modals/stickyNoteModal.js";
 import { NewStickyBoardModel } from "../components/modals/newStickyBoardModal.js";
 
@@ -76,14 +74,6 @@ export class Dialog {
         ))
     }
 
-    renderNewDeckModal(controller, flashcards = null, deckName = null) {
-        this.addChild(new NewDeckModal(
-            controller, 
-            flashcards, 
-            deckName
-        ));
-        this.dialog.querySelector('.create-deck-modal input').focus();
-    }
 
     renderNewStickyBoardModal(controller) {
         this.addChild(new NewStickyBoardModel(controller));
@@ -98,12 +88,6 @@ export class Dialog {
         ))
     }
 
-    renderEditFlashcardModal(controller, flashcard = null) {
-        this.addChild(new EditFlashcardModal(
-            controller, 
-            flashcard
-        ));
-    }
 
     renderSearchModal(toolbar) {
         const modal = new SearchModal()

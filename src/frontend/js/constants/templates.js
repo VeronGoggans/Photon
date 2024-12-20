@@ -10,7 +10,7 @@ const homeTemplate = `
         
         </div>
         <div class="middle">
-        <h1 class="view-title"></h1>
+        <h1 class="view-title"><div class="time-of-day-art"></div></h1>
         <p class="block-title">Recent folders</p>
         <div class="recent-folders"></div>
         <p class="block-title">Your recent work</p>
@@ -24,15 +24,7 @@ const homeTemplate = `
 const notesTemplate = `
     <div class="notes-view">
     <div class="notes-top">
-
-        <div class="searchbar">
-            <i id="search-icon" class="bi bi-search"></i>
-            <input type="text" placeholder="Search..." spellcheck="false">
-            <ul class="dropdown-items soft-dropdown"></ul>
-        </div>
-
-    </div>
-    <div class="notes-bottom">
+    
         <div class="current-folder-name-container">
             <button class="exit-folder-btn"><i class="bi bi-chevron-left"></i></button>
             <div class="note-view-options-dropdown">
@@ -46,6 +38,16 @@ const notesTemplate = `
             
             <h1 class="current-folder-name view-title">Home</h1>
         </div>
+
+        <div class="searchbar">
+            <i id="search-icon" class="bi bi-search"></i>
+            <input type="text" placeholder="Search..." spellcheck="false">
+            <ul class="dropdown-items soft-dropdown"></ul>
+        </div>
+
+    </div>
+    <div class="notes-bottom">
+        
         <div class="note-view-content">
             <p class="block-title" id="folders-block-title">Folders</p>
             <div class="folders"></div>
@@ -57,64 +59,12 @@ const notesTemplate = `
     </div>
 `;
 
-const flashcardsTemplate = `
-    <div class="flashcards-view">
-        <h1 class="view-title">Flashcards</h1>
-        <div class="stats-section">
-            <p>Current streak: <span class="study-streak">0</span>d</p>
-            <p>Time studied: <span class="hours-studied">0</span>h <span class="minutes-studied">0</span>m</p>
-            <p>Total cards: <span class="flashcard-count">0</span></p>
-        </div>
-        <div class="deck-section">
-            <h2 class="subtitle">Flashcard decks</h2>
-            <button class="create-deck-btn">Add a deck</button>
-            <div class="flashcard-deck-container"></div>
-        </div>
-    </div>
-    </div>
-`;
-
-const flashcardPracticeTemplate = `
-    <div class="flashcard-practice">
-    <previous-view-button></previous-view-button>
-        <div class="center">
-            <div class="deck-section">
-                <i id="previous-card-btn" class="bi bi-caret-left"></i>
-                <i id="next-card-btn" class="bi bi-caret-right"></i>
-                <h2 class="deck-name"></h2>
-                <span class="current-card-number">1 out of 0</span>
-                <div class="flashcard">
-                    <div class="flashcard-content">
-                    </div>
-                </div>
-                <div class="progress">
-                    <div class="progress__fill"></div>
-                </div>
-                <div class="button-bar">
-                    <i id="restart-btn" class="bi bi-arrow-repeat"></i>
-                    <i id="wrong-btn" class="bi bi-x-lg"></i>
-                    <i id="correct-btn" class="bi bi-check2"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-`
-
-const flashcardEditTemplate = `
-    <div class="flashcard-edit-view">
-        <previous-view-button></previous-view-button>
-        <h1 contenteditable="true" spellCheck="false"></h1>
-        <button class="add-flashcard-btn">Add flashcard</button>
-
-        <div class="flashcards"></div>
-    </div>
-`
 
 
 const standardStickyBoardTemplate = `
     <div class="standard-sticky-board-view">
-        <h2>Brainstorm Pomodoro features</h2>
-        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, in quos? Ab suscipit perspiciatis obcaecati vel iure vitae corporis veniam quas! Mollitia eos tempore ipsam doloribus hic. Laborum, enim praesentium.</p>
+        <h2 contenteditable="true" spellcheck="false">Brainstorm Pomodoro features</h2>
+        <p class="description" contenteditable="true" spellcheck="false">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, in quos? Ab suscipit perspiciatis obcaecati vel iure vitae corporis veniam quas! Mollitia eos tempore ipsam doloribus hic. Laborum, enim praesentium.</p>
         <div class="standard-sticky-board-wrapper">
             <div></div>
             <div class="stickies-container"></div>    
@@ -126,8 +76,8 @@ const standardStickyBoardTemplate = `
 
 const columnStickyBoardTemplate = `
     <div class="wrapper">
-    <h2>Sticky wall</h2>
-    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, in quos? Ab suscipit perspiciatis obcaecati vel iure vitae corporis veniam quas! Mollitia eos tempore ipsam doloribus hic. Laborum, enim praesentium.</p>
+    <h2 contenteditable="true" spellcheck="false">Sticky wall</h2>
+    <p class="description" contenteditable="true" spellcheck="false">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, in quos? Ab suscipit perspiciatis obcaecati vel iure vitae corporis veniam quas! Mollitia eos tempore ipsam doloribus hic. Laborum, enim praesentium.</p>
     <div class="board-wrapper">
 
       <div class="board-section">
@@ -283,7 +233,6 @@ const editorTemplate = `
       </div>
 
       <div class="editor-util-btns-container">
-        <i id="editor-flashcard-set-btn" class="bi bi-card-text"></i>
       </div>
 
       <rich-text-bar></rich-text-bar>
@@ -296,9 +245,6 @@ const editorTemplate = `
 export const templates = {
     home: homeTemplate,
     notes: notesTemplate,
-    flashcardsHome: flashcardsTemplate,
-    flashcardsPractice: flashcardPracticeTemplate,
-    flashcardEdit: flashcardEditTemplate,
     standardStickyBoard: standardStickyBoardTemplate,
     columnStickyBoard: columnStickyBoardTemplate,
     stickyWallHome: stickyNoteHomeTemplate,

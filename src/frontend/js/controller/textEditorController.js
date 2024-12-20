@@ -1,6 +1,5 @@
 import { TextEditorView } from "../view/textEditorView.js";
 import { TextEditorModel } from "../model/textEditorModel.js";
-import { FlashcardModel } from "../model/flashcardModel.js";
 import { HttpModel } from "../model/httpModel.js";
 import { pushNotification } from "../handlers/notificationHandler.js";
 
@@ -16,7 +15,6 @@ export class TextEditorController {
 
     init() {
         this.textEditorView = new TextEditorView(this, this.applicationController);
-        this.flashcardModel = new FlashcardModel();
     }
 
 
@@ -148,39 +146,6 @@ export class TextEditorController {
         return this.model.getStoredObject();
     }
 
-
-    /**
-     * Temporarely saves a flashcard object
-     * 
-     * @param {Object} flashcard 
-     */
-    saveCardToModel(flashcard) {
-        this.flashcardModel.storeFlashcard(flashcard);
-    }
-
-
-    /**
-     * Temporarely stores the deck name
-     * 
-     * @param {Object} flashcard 
-     */
-    saveDeckName(deckName) {
-        this.flashcardModel.storeDeckName(deckName)
-    }
-
-
-    /**
-     * Returns an Object that contains the deck name and
-     * a list of saved flashcard objects
-     * @returns {Object}
-    */
-    getStoredDeckInfo() {
-        return this.flashcardModel.getStoredDeckInfo();
-    }
-
-    async addDeck(deckName, flashcards) {
-        await this.applicationController.addDeck(deckName, flashcards);
-    }
 
 
     /**

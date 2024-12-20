@@ -109,25 +109,25 @@ class Template(Base):
 
 
 
-class FlashcardSet(Base):
-    __tablename__ = 'flashcard_sets'
+# class FlashcardSet(Base):
+#     __tablename__ = 'flashcard_sets'
     
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String, nullable=True)
-    last_study = Column(String, nullable=False, default='Not studied yet.')
+#     id = Column(Integer, primary_key=True, autoincrement=True)
+#     name = Column(String, nullable=True)
+#     last_study = Column(String, nullable=False, default='Not studied yet.')
 
-    flashcards = relationship("Flashcard", backref="parent_flashcard_set", cascade="all, delete-orphan")
-
-
+#     flashcards = relationship("Flashcard", backref="parent_flashcard_set", cascade="all, delete-orphan")
 
 
-class Flashcard(Base):
-    __tablename__ = 'flashcards'
+
+
+# class Flashcard(Base):
+#     __tablename__ = 'flashcards'
     
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    term = Column(String, nullable=True)
-    description = Column(String, nullable=True)
-    rating = Column(String, nullable=False, default='idle')
+#     id = Column(Integer, primary_key=True, autoincrement=True)
+#     term = Column(String, nullable=True)
+#     description = Column(String, nullable=True)
+#     rating = Column(String, nullable=False, default='idle')
 
-    # Foreign keys for folder or subfolder
-    flascard_set_id = Column(Integer, ForeignKey('flashcard_sets.id', ondelete='CASCADE'), nullable=True)
+#     # Foreign keys for folder or subfolder
+#     flascard_set_id = Column(Integer, ForeignKey('flashcard_sets.id', ondelete='CASCADE'), nullable=True)

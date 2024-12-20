@@ -116,6 +116,22 @@ export function formatDate(dateString) {
 
 // ___________________GREETINGS based on time of day___________________
 
+export function greetHomeScreen() {
+    const stellarBodyStyles = { 'Good Morning': 'morning-sun', 'Good Afternoon': 'afternoon-sun', 'Good Evening': 'evening-sun', 'Good Night': 'night-moon' }
+    const greetingText = greetBasedOnTime();
+
+    const stellarIllustrationDiv = document.createElement('div');
+    const stellarIllustration = document.createElement('div');
+    const greetingSpan = document.createElement('span');
+
+    greetingSpan.textContent = greetingText;
+    stellarIllustrationDiv.classList.add('time-of-day-art');
+    stellarIllustration.classList.add(stellarBodyStyles[greetingText]);
+    stellarIllustrationDiv.appendChild(stellarIllustration);
+
+    document.querySelector('.view-title').append(greetingSpan, stellarIllustrationDiv)
+}
+
 
 export function greetBasedOnTime() {
     const now = new Date();

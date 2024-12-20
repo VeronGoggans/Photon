@@ -43,7 +43,7 @@ export const stickyNoteColors = [
     '#d4e7ff',
 ]
 
-export const sidebarButtonText = ['Home', 'Notes', 'Stickies', 'Flashcards', 'Settings']
+export const sidebarButtonText = ['Home', 'Notes', 'Stickies', 'Settings']
 
 export const widgetStyles = {
     border: 'widget-style-border',

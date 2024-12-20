@@ -117,6 +117,19 @@ export class FolderView {
 
 
     /**
+     * This method will display the name of the folder the user is currently in.
+     *
+     * @param name -  The name of the current folder.
+     */
+    displayFolderName(name) {
+        removeContent(this.foldersContainer);
+        removeContent(document.querySelector('.notes'));
+        this.currentFolderName.textContent = name;
+    }
+
+
+
+    /**
      * This method will create a single FolderCard component.
      *
      * @param folder             - A folder object.
@@ -130,15 +143,18 @@ export class FolderView {
 
 
 
-    /**
-     * This method will display the name of the folder the user is currently in.
-     *
-     * @param name -  The name of the current folder.
-     */
-    displayFolderName(name) {
-        removeContent(this.foldersContainer);
-        removeContent(document.querySelector('.notes'));
-        this.currentFolderName.textContent = name;
+    #resizeFolderName() {
+        const folderNameRect = this.currentFolderName.getBoundingClientRect();
+        const searchbarRect = document.querySelector('.searchbar').getBoundingClientRect();
+
+        if (folderNameRect.right >= searchbarRect.left) {
+            // If folder name touches the searchbar, reduce font size
+            this.currentFolderName.style.fontSize = '30px';
+            console.log('reduce fontsize')
+        } else {
+            // Revert to the original size when there's enough space
+            this.currentFolderName.style.fontSize = '45px';
+        }
     }
 
 
@@ -189,6 +205,7 @@ export class FolderView {
             }
         });
 
+        // window.addEventListener('resize', this.#resizeFolderName)
         this.backButton.addEventListener('click', async () => {await this.controller.navigateOutofFolder()})
         this.createFolderButton.addEventListener('click', () => {this.dialog.renderEditFolderModal(this.controller)});
     }
