@@ -1,6 +1,6 @@
 export class PlacementHelper {
     constructor() {
-        this.formatBarWidth = 490 //Pixels
+        this.formatBarWidth = 611.8 //Pixels
         this.formatBarHeigth = 51.6 // Pixels
         this.commandBarHeigth = 300 //Pixels
         this.commandBarWidth = 300 // Pixels

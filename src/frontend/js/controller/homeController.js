@@ -35,21 +35,9 @@ export class HomeController {
     async handleSearch(searchItemId, searchType) {
         const viewId = viewToLoad(searchType)
         if (viewId === 'editor') {
-            if (searchType === 'template') {
-                const template  = await this.applicationController.getTemplateById(searchItemId, false) 
-
-                this.applicationController.initView(viewId, {
-                    editorObjectType: 'template', 
-                    editorObject: template,
-                    newEditorObject: false, 
-                    previousView: 'home', 
-                    editorObjectLocation: null
-                })
-            }
             if (searchType === 'note') {
                 const { note, location } = await this.applicationController.getNoteById(searchItemId);
                 this.applicationController.initView(viewId, {
-                    editorObjectType: 'note', 
                     editorObject: note,
                     newEditorObject: false, 
                     previousView: 'home',

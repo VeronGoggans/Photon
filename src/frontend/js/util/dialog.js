@@ -3,7 +3,6 @@ import { DeleteModal } from "../components/modals/deleteModal.js";
 import { SearchModal } from "../components/modals/searchModal.js";
 import { EditFolderModal } from "../components/modals/editFolderModal.js";
 import { AnimationHandler } from "../handlers/animationHandler.js";
-import { StickyNoteModal } from "../components/modals/stickyNoteModal.js";
 import { NewStickyBoardModel } from "../components/modals/newStickyBoardModal.js";
 
 
@@ -75,11 +74,6 @@ export class Dialog {
     renderNewStickyBoardModal(controller) {
         this.addChild(new NewStickyBoardModel(controller));
         this.dialog.querySelector('.new-sticky-board-modal input').focus()
-    }
-
-
-    renderStickyNoteModal(controller, parentId, stickyNote = null) {
-        this.addChild(new StickyNoteModal( controller, parentId, stickyNote));
     }
 
 

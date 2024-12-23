@@ -14,12 +14,14 @@ class SettingService():
         return self.__get_config()
     
 
+
     def update_theme(self, theme: str) -> str:
         config = self.__get_config()
         config[THEME] = theme
         self.__update_config(config)
         return theme
     
+
 
     def update_sidebar_color(self, color: str) -> str:
         config = self.__get_config()
@@ -28,11 +30,13 @@ class SettingService():
         return color
     
 
+
     def update_widget_style(self, widget_style: str) -> str:
         config = self.__get_config()
         config[WIDGET_STYLE] = widget_style
         self.__update_config(config)
         return widget_style
+
 
 
     def update_folder_icon_color(self, color: str) -> str:
@@ -41,6 +45,7 @@ class SettingService():
         self.__update_config(config)
         return color
     
+
 
     def update_sidebar_state(self, state: str) -> str:
         config = self.__get_config()

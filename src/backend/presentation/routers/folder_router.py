@@ -6,65 +6,86 @@ from src.backend.presentation.request_bodies.folder_requests import FolderReques
 from src.backend.presentation.http_status import HttpStatus
 from src.backend.application.services.folder_service import FolderService
 from src.backend.data.exceptions.exception_handler import handle_exceptions
+from src.backend.presentation.response import JSONResponse
+
+
 
 class FolderRouter:
     def __init__(self):
         self.route = APIRouter()
-        self.service = FolderService(FolderManager())
+        self.manager = FolderManager()
+        self.service = FolderService(self.manager)
 
-        self.route.add_api_route('/folder', self.add_folder, methods=['POST'])
-        self.route.add_api_route('/folders/{parent_id}', self.get_folders, methods=['GET'])
-        self.route.add_api_route('/recentFolders', self.get_recent_folders, methods=['GET'])
-        self.route.add_api_route('/folderSearchItems', self.get_search_items, methods=['GET'])
-        self.route.add_api_route('/folderById/{folder_id}', self.get_folder_by_id, methods=['GET'])
-        self.route.add_api_route('/folder', self.update_folder, methods=['PUT'])
-        self.route.add_api_route('/moveFolder', self.move_folder, methods=['PUT'])
-        self.route.add_api_route('/folder/{folder_id}', self.delete_folder, methods=['DELETE'])
-        self.route.add_api_route('/viewedFolderTime/{folder_id}', self.folder_visit, methods=['PATCH'])
+        self.route.add_api_route('/folders', self.add_folder, methods=['POST'])
+        self.route.add_api_route('/folders', self.get_folders, methods=['GET'])
+        self.route.add_api_route('/folders/{folder_id}', self.get_folder_by_id, methods=['GET'])
+        self.route.add_api_route('/folders', self.update_folder, methods=['PUT'])
+        self.route.add_api_route('/folders/{folder_id}/location', self.update_folder_location, methods=['PUT'])
+        self.route.add_api_route('/folders/{folder_id}/view-time', self.update_folder_view_time, methods=['PATCH'])
+        self.route.add_api_route('/folders/{folder_id}', self.delete_folder, methods=['DELETE'])
+
 
 
     @handle_exceptions
     def add_folder(self, request: FolderRequest, db: Session = Depends(Database.get_db)):
-        return {'status': HttpStatus.OK, "folder": self.service.add_folder(request, db)}
+        folder = self.service.add_folder(request, db)
+        return JSONResponse(status_code=HttpStatus.CREATED, content={'folder': folder})
         
 
-    @handle_exceptions
-    def get_folders(self, parent_id: int, db: Session = Depends(Database.get_db)):
-        return {"status": HttpStatus.OK, "folders": self.service.get_folders(parent_id, db)}
-
-        
-    @handle_exceptions
-    def get_recent_folders(self, db: Session = Depends(Database.get_db)):
-        return {"status": HttpStatus.OK, "folders": self.service.get_recent_folders(db)}
-        
 
     @handle_exceptions
-    def get_search_items(self, db: Session = Depends(Database.get_db)):
-        return {'status': HttpStatus.OK, 'folders': self.service.get_search_items(db)}
+    def get_folders(self, 
+                    parent_id: int = None,
+                    recent: bool = False,
+                    search_items: bool = False,
+                    db: Session = Depends(Database.get_db)):
         
+        # A dictionary with all the endpoint filters that can be applied to the GET "/notes" endpoint
+        filters = { 
+            'recent': recent,
+            'search-items': search_items 
+            }
+
+
+        # Only one filter should be True with any given request
+        if sum(filters.values()) > 1:
+            raise ValueError("Only one filter can be applied at a time.")
+
+
+        folders = self.service.get_folders(db, parent_id, filters)
+        return JSONResponse(status_code=HttpStatus.OK, content={'folders': folders})
+
+
 
     @handle_exceptions
     def get_folder_by_id(self, folder_id: int, db: Session = Depends(Database.get_db)):
-        folder, hierarchy = self.service.get_folder_by_id(folder_id, db)
-        return {'status': HttpStatus.OK, 'folder': folder, 'location': hierarchy}
+        folder, hierarchy = self.manager.get_by_id(folder_id, db)
+        return JSONResponse(status_code=HttpStatus.OK, content={'folder': folder, 'location': hierarchy})
+
 
 
     @handle_exceptions
     def update_folder(self, request: PutFolderRequest, db: Session = Depends(Database.get_db)):
-        return {'status': HttpStatus.OK, "folder": self.service.update_folder(request, db)}
+        folder = self.manager.update(request, db)
+        return JSONResponse(status_code=HttpStatus.OK, content={'folder': folder})
     
 
-    @handle_exceptions
-    def move_folder(self, request: MoveFolderRequest, db: Session = Depends(Database.get_db)):
-        return {'status': HttpStatus.OK, "folder": self.service.move_folder(request, db)}
-        
 
     @handle_exceptions
-    def folder_visit(self, folder_id: int, db: Session = Depends(Database.get_db)):
-        self.service.update_visit(folder_id, db) 
-        return {'status': HttpStatus.OK}
+    def update_folder_location(self, request: MoveFolderRequest, db: Session = Depends(Database.get_db)):
+        folder = self.manager.update_location(request, db)
+        return JSONResponse(status_code=HttpStatus.OK, content={'folder': folder})
+        
+
+
+    @handle_exceptions
+    def update_folder_view_time(self, folder_id: int, db: Session = Depends(Database.get_db)):
+        self.manager.update_view_time(folder_id, db) 
+        return JSONResponse(status_code=HttpStatus.NO_CONTENT)
        
+
         
     @handle_exceptions
     def delete_folder(self, folder_id: int, db: Session = Depends(Database.get_db)):
-        return {'status': HttpStatus.OK, "folder": self.service.delete_folder(folder_id, db)}
+        folder = self.manager.delete(folder_id, db)
+        return JSONResponse(status_code=HttpStatus.OK, content={'folder': folder})

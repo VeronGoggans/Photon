@@ -17,24 +17,27 @@ class PostNoteRequest(BaseModel):
 
 
 
-class PutNoteRequest(BaseModel):
+class PatchNoteContentRequest(BaseModel):
     """
-    - note_id (int): The ID of the note that will be updated.
-    - name (str): The name of the note.
-    - content (str): The content of the note.
-    - bookmrk (bool): A boolean indicating if the note is boomarked or not.
+    - content (str): The updated content of the note.
     """
-    note_id: int
-    name: str
     content: str
-    bookmark: bool
 
 
 
 
-class BookmarkRequest(BaseModel):
+class PatchNoteNameRequest(BaseModel):
     """
-    - bookmark (bool): the new bookmark value
+    - name (str): The updated name of the note.
+    """
+    name: str
+
+
+
+
+class PatchNoteBookmarkRequest(BaseModel):
+    """
+    - bookmark (bool): the new bookmark value.
     """
     bookmark: bool
 

@@ -1,40 +1,56 @@
 from fastapi import APIRouter
 from src.backend.presentation.http_status import HttpStatus
 from src.backend.application.services.setting_service import SettingService
+from src.backend.presentation.response import JSONResponse
+
+
 
 class SettingRouter:
     def __init__(self):
         self.route = APIRouter()
         self.service = SettingService()
         
-        self.route.add_api_route('/settings', self.get_settings, methods=['GET'])
-        self.route.add_api_route('/settings/theme/{theme}', self.update_theme, methods=['PUT'])
-        self.route.add_api_route('/settings/sidebarColor/{color}', self.update_sidebar_color, methods=['PUT'])
-        self.route.add_api_route('/settings/widgetStyle/{widget_style}', self.update_widget_style, methods=['PUT'])
-        self.route.add_api_route('/settings/folderIconColor/{folder_icon_color}', self.update_folder_icon_color, methods=['PUT'])
-        self.route.add_api_route('/settings/sidebarState/{state}', self.update_sidebar_state, methods=['PUT'])
+        self.route.add_api_route('/settings',                                           self.get_settings, methods=['GET'])
+        self.route.add_api_route('/settings/theme/{theme}',                             self.update_app_theme, methods=['PATCH'])
+        self.route.add_api_route('/settings/sidebar-color/{color}',                     self.update_sidebar_color, methods=['PATCH'])
+        self.route.add_api_route('/settings/widget-style/{widget_style}',               self.update_widget_style, methods=['PATCH'])
+        self.route.add_api_route('/settings/folder-icon-color/{folder_icon_color}',     self.update_folder_icon_color, methods=['PATCH'])
+        self.route.add_api_route('/settings/sidebar-state/{state}',                     self.update_sidebar_state, methods=['PATCH'])
 
         
 
     def get_settings(self):
-        return {'status': HttpStatus.OK, 'settings': self.service.get_settings()}
+        settings: object = self.service.get_settings()
+        return JSONResponse(status_code=HttpStatus.OK, content={'settings': settings})
     
 
+
     def update_sidebar_color(self, color: str):
-        return {'status': HttpStatus.OK, 'color': self.service.update_sidebar_color(color)}
+        sidebar_color: str = self.service.update_sidebar_color(color)
+        return JSONResponse(status_code=HttpStatus.OK, content={'sidebar-color': sidebar_color})
 
 
-    def update_theme(self, theme: str):
-        return {'status': HttpStatus.OK, "theme": self.service.update_theme(theme)}
+
+    def update_app_theme(self, theme: str):
+        theme: str = self.service.update_theme(theme)
+        return JSONResponse(status_code=HttpStatus.OK, content={'theme': theme})
+    
 
 
     def update_widget_style(self, widget_style: str):
-        return {'status': HttpStatus.OK, "widgetStyle": self.service.update_widget_style(widget_style)}
+        widget_style: str = self.service.update_widget_style(widget_style)
+        return JSONResponse(status_code=HttpStatus.OK, content={'widget-style': widget_style})
+    
 
 
     def update_folder_icon_color(self, folder_icon_color: str):
-        return {'status': HttpStatus.OK, "widgetStyle": self.service.update_folder_icon_color(folder_icon_color)}
+        folder_icon_color: str = self.service.update_folder_icon_color(folder_icon_color)
+        return JSONResponse(status_code=HttpStatus.OK, content={'folder-icon-color': folder_icon_color})
     
 
+
     def update_sidebar_state(self, state: str):
-        return {'status': HttpStatus.OK, 'SidebarState': self.service.update_sidebar_state(state)}
+        sidebar_state: str = self.service.update_sidebar_state(state)
+        return JSONResponse(status_code=HttpStatus.OK, content={'sidebar-state': sidebar_state})
+    
+    

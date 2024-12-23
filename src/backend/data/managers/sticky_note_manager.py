@@ -1,7 +1,7 @@
 from enum import Enum
 from sqlalchemy.orm import Session
 from src.backend.data.models import StickyNote, StickyBoardColumn, StandardStickyBoard, ColumnStickyBoard
-from src.backend.data.exceptions.exceptions import InsertException, NotFoundException
+from src.backend.data.exceptions.exceptions import NotFoundException
 from sqlalchemy import union_all, select, text
 from src.backend.data.helpers import find_column_sticky_board, find_standard_sticky_board, find_column, find_sticky_note
 
@@ -15,7 +15,7 @@ class BoardType(Enum):
 
 class StickyNoteManager:
 
-    def add_sticky(self, sticky_note: StickyNote, db: Session) -> (StickyNote | InsertException):
+    def add_sticky(self, sticky_note: StickyNote, db: Session) -> StickyNote:
         db.add(sticky_note)
         db.commit()
         db.refresh(sticky_note)
@@ -32,7 +32,7 @@ class StickyNoteManager:
 
 
 
-    def update_sticky(self, id: int, content: str, color: str, db: Session) -> (StickyNote | NotFoundException):
+    def update_sticky(self, sticky_note_id: int, content: str, color: str, db: Session) -> (StickyNote | NotFoundException):
         sticky_note = find_sticky_note(id, db)
         sticky_note.content = content
         sticky_note.color = color
@@ -43,7 +43,7 @@ class StickyNoteManager:
 
 
 
-    def delete_sticky(self, id: int, db: Session) -> (None | NotFoundException):
+    def delete_sticky(self, sticky_note_id: int, db: Session) -> (None | NotFoundException):
         sticky_note = find_sticky_note(id, db)
         db.delete(sticky_note)
         db.commit()

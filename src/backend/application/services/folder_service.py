@@ -5,6 +5,7 @@ from src.backend.data.exceptions.exceptions import *
 from src.backend.data.models import Folder
 
 
+
 class FolderService:
     def __init__(self, manager: FolderManager):
         self.manager = manager
@@ -19,33 +20,18 @@ class FolderService:
         return self.manager.add(schema.parent_id, new_folder, db)
 
 
-    def get_folders(self, parent_id: int, db: Session) -> list[Folder]:
-        return self.manager.get(parent_id, db)
-    
 
-    def get_recent_folders(self, db: Session) -> list[Folder]:
-        return self.manager.get_recent(db)
+    def get_folders(self, db: Session, parent_id: int = None, filters: dict = None) -> list[Folder]:
+        """
         
-
-    def get_search_items(self, db: Session) -> list[object]:
-        return self.manager.get_search_items(db) 
-    
-
-    def get_folder_by_id(self, folder_id: int, db: Session) -> list[Folder]:
-        return self.manager.get_by_id(folder_id, db)
+        """
+        if parent_id is not None:
+            return self.manager.get(parent_id, db)
         
-
-    def update_folder(self, request: PutFolderRequest, db: Session) -> Folder:
-        return self.manager.update(request.folder_id, request.name, request.color, db)
-        
-        
-    def update_visit(self, folder_id: int, db: Session) -> None:
-        self.manager.update_visit_date(folder_id, db)
-        
-
-    def move_folder(self, request: MoveFolderRequest, db: Session) -> Folder:
-        return self.manager.move(request.parent_id, request.folder_id, db)
-    
-
-    def delete_folder(self, folder_id: int, db: Session) -> Folder:
-        return self.manager.delete(folder_id, db)
+        if filters:
+            if filters.get('recent'):
+                return self.manager.get_recent(db)
+            
+            elif filters.get('search-items'):
+                return self.manager.get_search_items(db)
+            

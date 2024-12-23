@@ -69,7 +69,6 @@ export class HomeView {
             const { note, location } = await this.applicationController.getNoteById(noteId)
             this.applicationController.initView('editor', 
                 {
-                    editorObjectType: 'note', 
                     editorObject: note,
                     newEditorObject: false, 
                     previousView: 'home',

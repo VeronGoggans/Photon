@@ -8,7 +8,9 @@ from datetime import datetime
 
 class NoteManager:    
 
-    def add(self, folder_id: int, note: Note, db: Session) -> (Note | NotFoundException):
+
+
+    def add(self, folder_id: int, note: Note, db: Session) -> Note:
         find_folder(folder_id, db)
         db.add(note)
         db.commit()
@@ -16,7 +18,8 @@ class NoteManager:
         return note
 
     
-    def get(self, folder_id: int, db: Session) -> (list[Note] | NotFoundException):
+
+    def get(self, folder_id: int, db: Session) -> list[Note]:
         find_folder(folder_id, db)
         notes = (
             db.query(Note)
@@ -27,11 +30,13 @@ class NoteManager:
         return notes
 
 
-    def get_by_id(self, id: int, db: Session) -> (Note | NotFoundException):
+
+    def get_by_id(self, id: int, db: Session) -> Note:
         note = find_note(id, db)
         hierarchy = get_hierarchy(id, db, is_note=True)
         return note, hierarchy
     
+
 
     def get_recent(self, db: Session) -> list[Note]:
         recent_notes = (
@@ -43,7 +48,8 @@ class NoteManager:
         return recent_notes
     
 
-    def get_recent_viewed(self, db: Session) -> list[Note]:
+
+    def get_recently_viewed(self, db: Session) -> list[Note]:
         recent_notes = (
             db.query(Note)
             .order_by(Note.last_visit.desc())
@@ -53,43 +59,47 @@ class NoteManager:
         return recent_notes
 
 
-    def get_name_id(self, db: Session) -> list[dict]:
+
+    def get_search_items(self, db: Session) -> list[dict]:
         search_items = (db.query(Note.id, Note.name).all())
         return [{"id": item.id, "name": item.name} for item in search_items]
     
 
+
     def get_bookmarks(self, db: Session) -> list[Note]:
         return db.query(Note).filter(Note.bookmark == True).all()
-               
-
-    def update(self, note_id: int, name: str, content: str, bookmark: bool, db: Session) -> (Note | NotFoundException):
-        note = find_note(note_id, db)
-
-        # Updating the note 
-        note.name = name
-        note.content = content
-        note.bookmark = bookmark
-        note.last_edit = datetime.now()
-
-        # Commiting the changes to the database
-        db.commit()
-        db.refresh(note)
-        return note
     
 
-    def update_bookmark(self, note_id: int, new_bookmark_value: bool, db: Session) -> None:
+
+    def update_name(self, note_id: int, name: str, db: Session) -> None:
         note = find_note(note_id, db)
-        note.bookmark = new_bookmark_value
+        note.name = name
         db.commit()
 
 
-    def update_visit_date(self, note_id: int, db: Session) -> (None | NotFoundException):
+
+    def update_content(self, note_id: int, content: str, db: Session) -> None:
+        note = find_note(note_id, db)
+        note.content = content
+        db.commit()
+
+
+
+    def update_bookmark(self, note_id: int, bookmark: bool, db: Session) -> None:
+        note = find_note(note_id, db)
+        note.bookmark = bookmark
+        db.commit()
+
+
+
+    def update_view_time(self, note_id: int, db: Session) -> None:
         note = find_note(note_id, db)
         note.last_visit = datetime.now()
         db.commit()
 
 
-    def move(self, parent_id: int, note_id: int, db: Session) -> Note:
+
+    def update_location(self, parent_id: int, note_id: int, db: Session) -> Note:
         find_folder(parent_id, db)
 
         note = find_note(note_id, db)
@@ -98,6 +108,7 @@ class NoteManager:
         db.commit()
         db.refresh(note)
         return note
+
 
 
     def delete(self, id: int, db: Session) -> Note:

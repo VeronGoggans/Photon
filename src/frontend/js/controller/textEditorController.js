@@ -45,11 +45,10 @@ export class TextEditorController {
      *
      *
      * @param editorObject
-     * @param editorObjectType
      */
-    async loadRecentlyViewedNote(editorObject, editorObjectType) {
+    async loadRecentlyViewedNote(editorObject) {
         // Save the new editor object to the model
-        this.model.storeEditorObject(editorObject, editorObjectType);
+        this.model.storeEditorObject(editorObject);
 
         // Get the recently viewed notes list
         const recentlyViewedNotes = this.model.getRecentlyViewedNotes();
@@ -71,32 +70,24 @@ export class TextEditorController {
      * @param clearEditorObject
      */
     async save(name, content, notify, clearEditorObject) {
-        const { editorObject, editorObjectType } = this.model.getStoredObject();
+        const { editorObject } = this.model.getStoredObject();
+
         if (clearEditorObject) {
             this.model.editorObject = null;
         }
 
-        if (editorObjectType === 'note') {
-            if (editorObject !== null) {
-                this.model.updateStoredObject(editorObject, name, content);            
-                await this.applicationController.updateNote(editorObject, notify);
-            } else {
-                console.log('Add document')
-                console.log(editorObject)
-                console.log(name)
-                await this.applicationController.addNote(name, content, notify)
-            }
+        if (editorObject !== null) {
+            this.model.updateStoredObject(editorObject, name, content);
+            await this.applicationController.updateNote(editorObject, notify);
         }
 
-        if (editorObject === 'template') {
-            if (editorObject !== null) {
-                this.model.updateStoredObject(editorObject, name, content);
-                await this.applicationController.updateTemplate(editorObject, notify)
-            } else {
-                await this.applicationController.addTemplate(name, content, notify)
-            }
+        else {
+            await this.applicationController.addNote(name, content, notify)
         }
+
     }
+
+
 
 
 
@@ -108,11 +99,10 @@ export class TextEditorController {
      * This method will open the editor with the template or note the user clicked on.
      *
      * @param editorObject     - The actual data of the template or note the user clicked on
-     * @param editorObjectType - The type of the object (e.g) template, note
      * @param objectLocation   - The location of the note within the folder structure, templates don't have a location
      */
-    openInTextEditor(editorObject, editorObjectType, objectLocation) {
-        this.model.storeEditorObject(editorObject, editorObjectType);
+    openInTextEditor(editorObject, objectLocation) {
+        this.model.storeEditorObject(editorObject);
         const viewedNotes = this.model.getRecentlyViewedNotes();
         this.textEditorView.open(editorObject, objectLocation, viewedNotes);
     }
@@ -121,19 +111,18 @@ export class TextEditorController {
     /**
      * This method will open the text editor without loading in a note or template
      *
-     * @param editorObjectType  - note if editor has been opened from the notes tab
-     *                          - template if the editor has been opened from the templates tab
+     *
      * @param objectLocation    - The location of the note within the folder structure, templates don't have a location
      */
-    showTextEditor(editorObjectType, objectLocation) {
-        this.model.storeEditorObject(null, editorObjectType);
+    showTextEditor(objectLocation) {
+        this.model.storeEditorObject(null);
         const viewedNotes = this.model.getRecentlyViewedNotes();
         this.textEditorView.show(objectLocation, viewedNotes);
     }
 
 
-    storeEditorObject(editorObject, editorObjectType) {
-        this.model.storeEditorObject(editorObject, editorObjectType);
+    storeEditorObject(editorObject) {
+        this.model.storeEditorObject(editorObject);
     }
 
 
@@ -155,18 +144,12 @@ export class TextEditorController {
      *
      * @param editorObjectId
      */
-    async handleDeleteButtonClick(editorObjectId) {
-        const { editorObjectType } = this.model.getStoredObject()
-        
-        if (editorObjectType === 'note') {
-            const { note } = await this.httpModel.delete(`/note/${editorObjectId}`);
-            this.model.removeDeletedObjectFromEvictingStack(editorObjectId)
-            pushNotification('deleted', note.name);
-        }
-        if (editorObjectType === 'template') {
-            const { template } = await this.httpModel.delete(`/template/${editorObjectId}`);
-            pushNotification('deleted', template.name);
-        }
+    async deleteEditorObject(editorObjectId) {
+
+        const { note } = await this.httpModel.delete(`/note/${editorObjectId}`);
+        this.model.removeDeletedObjectFromEvictingStack(editorObjectId)
+        pushNotification('deleted', note.name);
+
 
         // Clear the previous editor object content
         this.textEditorView.clearEditorContent();

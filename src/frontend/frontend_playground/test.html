@@ -3,113 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/general/sidebar.css">
-    <link rel="stylesheet" href="../css/general/main.css">
-    <link rel="stylesheet" href="../css/components/note.css">
-    <link rel="stylesheet" href="../css/components/folder.css">
-    <link rel="stylesheet" href="../css/components/task.css">
-    <link rel="stylesheet" href="../css/general/dialog.css">
-    <link rel="stylesheet" href="../css/general/themes.css">
-    <link rel="stylesheet" href="../css/general/animation.css">
-    <link rel="stylesheet" href="../css/notification/notification.css">
-    <link rel="stylesheet" href="../css/textEditor/textEditor.css">
-    <link rel="stylesheet" href="../css/textEditor/toolbarBottom.css">
-    <link rel="stylesheet" href="../css/textEditor/toolbarTop.css">
-    <link rel="stylesheet" href="../css/textEditor/editorSpawnables.css">
-    <link rel="stylesheet" href="../css/modals/newFolderContainer.css">
-    <link rel="stylesheet" href="../css/modals/saveContainer.css">
-    <link rel="stylesheet" href="../css/modals/deleteModal.css">
-    <link rel="stylesheet" href="../css/modals/noteDetailsModal.css">
-    <link rel="stylesheet" href="../css/general/scrollbar.css">
-    <link rel="stylesheet" href="../css/modals/searchModal.css">
-    <link rel="stylesheet" href="../css/modals/editFolderModal.css">
-    <link rel="stylesheet" href="../css/modals/newDeckModal.css">
-    <link rel="stylesheet" href="../css/textEditor/textBlocks.css">
-    <link rel="stylesheet" href="../css/views/flashcardView.css">
-    <link rel="stylesheet" href="../css/views/homeView.css">
-    <link rel="stylesheet" href="../css/views/notesView.css">
-    <link rel="stylesheet" href="../css/views/notebook/notebookHomeView.css">
-    <link rel="stylesheet" href="../css/views/templatesView.css">
-    <link rel="stylesheet" href="../css/views/settingsView.css">
-    <link rel="stylesheet" href="../css/general/searchbar.css">
-    <link rel="stylesheet" href="../css/views/flashcardPracticeView.css">
-    <link rel="stylesheet" href="../css/views/flashcardEditView.css">
-    <link rel="stylesheet" href="../css/views/stickyWallView.css">
-    <link rel="stylesheet" href="../css/modals/stickyNoteModal.css">
-    <link rel="stylesheet" href="../css/views/taskboardHomeView.css">
-    <link rel="stylesheet" href="../css/views/taskboardView.css">
-    <link rel="stylesheet" href="../css/modals/newTaskboardModal.css">
-    <link rel="stylesheet" href="../css/modals/taskModal.css">
-    <link rel="stylesheet" href="../css/general/titleBar.css">
-    <!-- CDN for the icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Neutron</title>
-    <script src="../js/components/buttons/previousViewButton.js"></script>
+    <title>AutoSave Example</title>
 </head>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
-  </style>
-<body class="light">
-  <div class="wrapper">
-    <div class="sidebar">
-        <div class="sidebar-logo">
-            <div class="logo-container">
-                <div class="logo">
-                    <span>N</span>
-                </div>
-                <div class="logo-text">eutron</div>
-            </div>
-        </div>
-        <div class="sidebar-content">
-          <div class="sidebar-content-upper">
-            <a href="/home" data-view="home" id="home-btn"><i class="bi bi-house"></i><span>Home</span></a>
-            <a href="/notes" data-view="notes" id="notes-btn"><i class="bi bi-file-earmark"></i><span>Notes</span></a>
-            <a href="/templates" data-view="templates" id="templates-btn"><i class="bi bi-file-earmark-text"></i><span>Templates</span></a>
-            <a href="/notebooks" data-view="notebook" id="notebook-btn"><i class="bi bi-journal"></i><span>Notebooks</span></a>
-            <a href="/stickyWall" data-view="stickyWall" id="sticky-wall-btn"><i class="bi bi-sticky"></i><span>Sticky wall</span></a>
-            <a href="/flashcardsHome" data-view="flashcardsHome" id="flashcards-btn"><i class="bi bi-card-text"></i><span>Flashcards</span></a>
-            <a href="/taskboard" data-view="taskboards" id="taskboards-btn"><i class="bi bi-pin"></i><span>Taskboards</span></a>
-          </div>
-          <div class="sidebar-content-lower">
-            <a href="/settings" data-view="settings" id="settings-btn"><i class="bi bi-gear"></i><span>Settings</span></a>
-          </div>
-        </div>
-    </div>
-    
-    <main class="content">
-      <div class="controls">
-        <button id="minimize"><i class="bi bi-dash-lg"></i></button>
-        <button id="maximize"><i class="bi bi-square"></i></button>
-        <button id="close"><i class="bi bi-x-lg"></i></button>
-      </div>
-      <div class="view">
-        <div class="notebook-view">
-          <div class="notebook-top">
-            <previous-view-button></previous-view-button>
+<body>
+<div contenteditable="true" class="editable" style="border: 1px solid #ccc; padding: 10px; width: 300px;">
+    Edit me and I'll autosave!
+</div>
 
-            <div class="searchbar">
-                <i id="search-icon" class="bi bi-search"></i>
-                <input type="text" placeholder="Search..." spellcheck="false">
-                <ul class="dropdown-items"></ul>
-            </div>
-          </div>
-          <div class="notebook-bottom">
-            <h1 class="view-title">Neutron</h1>
-            <span class="page-property"><i class="bi bi-grip-vertical"></i>Description</span>
-            <p class="notebook-description">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt accusantium totam perferendis aliquam quae, qui nemo a nihil laudantium porro harum saepe excepturi voluptate est sapiente quos suscipit numquam sunt.
-            </p>
-          <div class="notebook-content">
-            <div class="notebook-items"></div>
-          </div>  
-          </div>
-                  
-        </div>
-      </div>
-    </main>
-    
-</div> 
-    <div class="dialog"></div>
+<script>
+    class AutoSaveContentEditable {
+        constructor(contentEditableSelector, saveCallback, delay = 1000) {
+            this.contentEditable = document.querySelector(contentEditableSelector); // Select the contenteditable element
+            this.saveCallback = saveCallback;   // Callback function to save content
+            this.delay = delay;                 // Delay in milliseconds
+            this.timeoutId = null;              // Timeout ID for debouncing
+
+            // Bind event listener
+            this.init();
+        }
+
+        // Debounce method
+        debounce(callback, delay) {
+            clearTimeout(this.timeoutId); // Clear the previous timeout
+            this.timeoutId = setTimeout(() => {
+                callback(); // Execute the callback after the delay
+            }, delay);
+        }
+
+        // Save content method
+        saveContent() {
+            const content = this.contentEditable.innerHTML; // Get the content
+            this.saveCallback(content); // Call the save callback
+        }
+
+        // Initialize event listener
+        init() {
+            this.contentEditable.addEventListener('input', () => {
+                this.debounce(() => this.saveContent(), this.delay);
+            });
+        }
+    }
+
+    // Example usage:
+    const saveCallback = (content) => {
+        console.log("Content saved:", content);
+        // Add your save logic here (e.g., send an API request)
+    };
+
+    // Create an instance of the AutoSaveContentEditable class
+    const autoSave = new AutoSaveContentEditable('.editable', saveCallback, 1000);
+</script>
 </body>
 </html>

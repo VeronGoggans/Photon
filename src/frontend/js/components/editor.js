@@ -1,5 +1,6 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
-import { addChecklist, addCodeBlock, addHeading, addHtml, addLink, addList, addHorizontalLine, addEmbedVideo, addColor, addTerminal } from "../textFormat/textFormatter.js";
+import { addChecklist, addCodeBlock, addHeading, addHtml, addLink, addList, 
+    addHorizontalLine, addEmbedVideo, addColor, addTerminal } from "../textFormat/textFormatter.js";
 import { PlacementHelper } from "../helpers/placementHelper.js";
 
 
@@ -293,6 +294,28 @@ class SlashCommandContainer extends HTMLElement {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class RichTextBar extends HTMLElement {
     constructor() {
         super();
@@ -309,6 +332,18 @@ class RichTextBar extends HTMLElement {
 
     render() {
         this.innerHTML = `
+        <div class="btn-group">
+            <div class="heading-dropdown">
+                <span>Paragraph <i class="bi bi-chevron-down"></i></span>
+                <ul>
+                    <li data-rich-text-option="paragraph">Paragraph</li>
+                    <li data-rich-text-option="h1">Heading 1</li>
+                    <li data-rich-text-option="h2">Heading 2</li>
+                    <li data-rich-text-option="h3">Heading 3</li>
+                    <li data-rich-text-option="h4">Heading 4</li>
+                </ul>
+            </div>
+        </div>
         <div class="btn-group">
             <button data-rich-text-option="bold"><i class="bi bi-type-bold"></i></button>
             <button data-rich-text-option="italic"><i class="bi bi-type-italic"></i></button>
@@ -352,6 +387,7 @@ class RichTextBar extends HTMLElement {
         </div>
         `
         this.formatButtons = this.querySelectorAll('button');
+        this.headingButtons = this.querySelectorAll('.heading-dropdown ul li');
         this.colorList = this.querySelector('ul');
         this.colorOptions = this.colorList.querySelectorAll('li');
     }
@@ -359,18 +395,30 @@ class RichTextBar extends HTMLElement {
 
     addEventListeners() {
         this.editorPaper.addEventListener('mouseup', () => { this.showRichTextBar() });
+        this.editorPaper.addEventListener('keyup', () => {this.showRichTextBar() });
+
         this.editor.addEventListener('mouseup', () => { this.showRichTextBar() });
         this.editor.addEventListener('scroll', () => { this.removeRichTextBar() });
+
+
         this.formatButtons.forEach(button => 
             button.addEventListener('click', () => { 
                 this.formatText(button) 
             }));
+
+        this.headingButtons.forEach(button =>
+            button.addEventListener('click', () => {
+                this.wrapHeadingOrParagraph(button);
+            })
+        )
+
         this.colorOptions.forEach(color => {
             color.addEventListener('click', () => {
                 addColor(color.style.backgroundColor, 'foreColor')
              })
         })
     }
+
 
 
     showRichTextBar() {
@@ -383,7 +431,6 @@ class RichTextBar extends HTMLElement {
         } 
 
         else {
-
             AnimationHandler.fadeOut(this);
             setTimeout(() => {
             this.removeRichTextBar();
@@ -393,18 +440,41 @@ class RichTextBar extends HTMLElement {
     }
 
 
+
+    /**
+     * This method will remove the Rich text bar from the (Editor) UI.
+     *
+     * All the open dropdowns and active styles will be reset.
+     */
     removeRichTextBar() {
         this.style.display = 'none';
-        // close color dropdown
-        let colorDropdown = this.querySelector('.color-dropdown ul');
+        
+        // close open dropdowns
+        const colorDropdown = this.querySelector('.color-dropdown ul');
         colorDropdown.style.visibility = 'hidden';
         colorDropdown.style.opacity = '0';
+
+        const headingDropdown = this.querySelector('.heading-dropdown ul');
+        headingDropdown.style.visibility = 'hidden';
+        headingDropdown.style.opacity = '0';
+
+
+        // Remove the active style buttons
         this.formatButtons.forEach(button => {
             button.classList.remove('active-text-format');
         })
     }
 
 
+
+    /**
+     * This method will format that current selection with the specified style
+     * This method currently uses execCommand but will be replaced with the
+     * Range & Selection API for future proofing.
+     *
+     * @param button  - The button containing the style to apply
+     * @param value   - Is never used
+     */
     formatText(button, value = null) {
         const command = button.getAttribute('data-rich-text-option');
         if (document.queryCommandSupported(command)) {
@@ -413,6 +483,25 @@ class RichTextBar extends HTMLElement {
             this.updateToolbarState();
         }
     }
+
+
+    /**
+     * This method will wrap the current selection with the specified heading value
+     *
+     * @param button { HTMLButtonElement } - The element (h1, h2, h3, h4, paragraph) that'll wrapp the current selection
+     */
+    wrapHeadingOrParagraph(button) {
+        const element = button.getAttribute('data-rich-text-option');
+        const paragraph = 'p';
+
+        if (element !== 'paragraph') {
+            document.execCommand('formatBlock', false, element);
+        } else {
+            document.execCommand('formatBlock', false, paragraph);
+        }
+    }
+
+
 
     updateToolbarState() {
         this.formatButtons.forEach(button => {

@@ -7,7 +7,6 @@ import { getFormattedTimestamp } from "../util/date.js";
 export class TextEditorModel {
     constructor() {
         this.editorObject = null;
-        this.editorObjectType = null;
         this.stackLimit = 5;
         this.httpModel = new HttpModel();
         this.evictingStack = new UniqueEvictingStack(this.stackLimit);
@@ -23,13 +22,11 @@ export class TextEditorModel {
      * for the recently viewed notes feature inside the text editor
      *
      * @param editorObject      - The note actual object being saved
-     * @param editorObjectType  - The type of the object (e.g) note or template
      */
-    storeEditorObject(editorObject, editorObjectType) {
+    storeEditorObject(editorObject, ) {
         this.editorObject = editorObject;
-        this.editorObjectType = editorObjectType;
 
-        if (editorObject !== null && editorObjectType === 'note') {
+        if (editorObject !== null) {
             editorObject.last_visit = getFormattedTimestamp();
             this.evictingStack.push(editorObject);
         }
@@ -70,19 +67,17 @@ export class TextEditorModel {
 
     /**
      * This method returns the currently loaded (visible inside the editor) note or template
-     * @returns { editorObject: Object, editorObjectType: String }
+     * @returns { editorObject: Object }
      */
     getStoredObject() {
         return {
-            editorObject: this.editorObject, 
-            editorObjectType: this.editorObjectType
+            editorObject: this.editorObject
         }
     }
 
 
     clear() {
         this.editorObject = null;
-        this.editorObjectType = null;
     }
 
 

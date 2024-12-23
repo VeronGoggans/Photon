@@ -107,7 +107,6 @@ export class NoteView {
     #eventListeners() {
         this.viewElement.addEventListener('CreateNewNote', () => {
             this.applicationController.initView('editor', {
-                editorObjectType: 'note', 
                 editorObject: null,
                 newEditorObject: true, 
                 previousView: 'notes', 
@@ -129,7 +128,6 @@ export class NoteView {
             const { note } = event.detail;
             this.applicationController.initView('editor', 
                 {
-                    editorObjectType: 'note', 
                     editorObject: note,
                     newEditorObject: false, 
                     previousView: 'notes', 
@@ -147,7 +145,6 @@ export class NoteView {
 
         this.createNoteButton.addEventListener('click', () => {
             this.applicationController.initView('editor', {
-                editorObjectType: 'note', 
                 editorObject: null,
                 newEditorObject: true, 
                 previousView: 'notes', 

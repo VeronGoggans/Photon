@@ -21,9 +21,9 @@ export class NoteController {
 
 
     async add(folderId, name, content, notify) {
-        const { note } = await this.model.add('/note', {'folder_id': folderId,'name': name,'content': content});
-        console.log('name', name)
-        console.log('content', content);
+        const postNoteRequest = { 'folder_id': folderId,'name': name,'content': content }
+        const { note } = await this.model.add('/notes', postNoteRequest);
+        
         if (notify) {
             pushNotification('saved');
         }
@@ -47,14 +47,6 @@ export class NoteController {
         return notes
     }
 
-
-    async update(note, notify) {
-        await this.model.update('/note', {'note_id': note.id,'name': note.name,'content': note.content,'bookmark': note.bookmark});
-
-        if (notify) {
-            pushNotification('updated');
-        }
-    }
     
 
     async patchBookmark(noteId, newBookmarkValue) {
@@ -89,7 +81,6 @@ export class NoteController {
         if (viewId === 'editor') {
             const { note, location } = await this.getById(searchItemId)
             this.applicationController.initView(viewId, {
-                editorObjectType: 'note', 
                 editorObject: note,
                 newEditorObject: false, 
                 previousView: 'notes', 

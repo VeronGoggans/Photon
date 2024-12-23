@@ -5,13 +5,16 @@ import { AnimationHandler } from "../handlers/animationHandler.js";
 import { createDocumentLocation } from "../util/ui/components.js";
 import { Dialog } from "../util/dialog.js";
 import { removeContent } from "../util/ui.js";
+import { AutoSave } from "../components/Autosave.js";
+
+
 
 
 export class TextEditorView {
   constructor(controller, applicationController) {
     this.controller = controller;
     this.applicationController = applicationController;
-    
+
     this.#initElements();
     this.#eventListeners();
 
@@ -23,7 +26,23 @@ export class TextEditorView {
       this.viewElement, 
       ['.editor-options-dropdown', '.recently-viewed-notes-dropdown']
     );
+
+
+    const saveCallBack = (content) => {
+      console.log('Saving content', content)
+      this.controller.save(this.documentNameInput.value, content, false, false);
+    }
+
+
+    const deleteCallBack = (editorObjectId) => {
+      this.controller.deleteEditorObject(editorObjectId);
+      this.#removeRecentlyViewedNote(editorObjectId)
+      this.clearEditorContent()
+    }
+
+
     new KeyEventListener(this);
+    new AutoSave('.editor-paper', saveCallBack);
     AnimationHandler.fadeInFromSide(this.viewElement)
   }
 
@@ -46,30 +65,6 @@ export class TextEditorView {
     this.editor.scrollTo( { top: 0, behavior: 'smooth' } )
   }
 
-
-
-  /**
-   * This method saves the currently worked on editor object ( note or template )
-   *
-   * @param closeEditor        - Indicating if the editor should close
-   * @param notify             - Indicating if the user should be notified of their save action
-   * @param clearEditorObject  - Indicating if the currently loaded editor object should be cleared from memory
-   */
-  async saveEditorObject(closeEditor = true, notify = false, clearEditorObject = true) {
-    // Blank notes will not be saved
-    if (this.page.innerHTML === '' && this.page.textContent === '') {
-      this.controller.loadPreviousView()
-      return;
-    }
-
-    // Save the note progress ( e.g. update or add )
-    await this.#saveEditorObjectProgress(notify, clearEditorObject);
-
-    if (closeEditor) {
-      this.controller.loadPreviousView();
-    }
-
-  }
 
 
 
@@ -102,34 +97,19 @@ export class TextEditorView {
    * Right after it'll clear the editor for new work.
    */
   newEditorObject() {
-    this.saveEditorObject(false, true, true)
-        .then(r=> {
-          // Clear the editor content ( make everything blank )
-          this.clearEditorContent();
-        })
+    this.clearEditorContent();
+    this.controller.clearStoredObject();
   }
 
 
 
   /**
-   * This method will handle the deletion logic of editor objects
-   * If the editor object is a note, the corresponding recently viewed note UI element will also be removed
    *
-   * @param editorObjectId - The ID of the editor object that has been deleted
    */
-  async handleDeleteButtonClick(editorObjectId) {
-    this.controller.handleDeleteButtonClick(editorObjectId);
-    const { editorObjectType } = this.controller.getStoredObject()
+  exitEditor() {
+    this.controller.loadPreviousView();
+}
 
-    // As there can only be notes in the recently viewed notes dropdown
-    // And to overcome ID conflicts ( a template and note can have the same id )
-    // All they are, are incrementing strings per Entity
-    if (editorObjectType === 'note') {
-      this.#removeRecentlyViewedNote(editorObjectId)
-    }
-
-    this.clearEditorContent()
-  }
 
 
 
@@ -192,35 +172,6 @@ export class TextEditorView {
 
 
 
-
-
-  // ___________________________________________________________________________ //
-
-  /**
-   *
-   *
-   * @param notify
-   * @param clearEditorObject
-   */
-  async #saveEditorObjectProgress(notify = false, clearEditorObject = true) {
-    const { editorObject } = this.controller.getStoredObject()
-
-    // Get the name and content of the current editor object
-    const name = this.documentNameInput.value || 'untitled';
-    const content = this.page.innerHTML;
-
-    if (content === '') {
-      return
-    }
-
-    // Save the current note if changes have been made
-    if (editorObject === null || editorObject.content !== content) {
-      await this.controller.save(name, content, notify, clearEditorObject);
-    }
-  }
-
-
-
   /**
    *
    * @param event
@@ -229,8 +180,6 @@ export class TextEditorView {
     // The folderId of the clicked on folder within the path
     const { folderId  } = event.detail;
 
-    // Save the current note if changes have been made
-    await this.#saveEditorObjectProgress(true, true);
 
     // Loading the clicked on folder in the notes tab
     const { folder, location } = await this.applicationController.getFolderById(folderId);
@@ -250,9 +199,6 @@ export class TextEditorView {
   async #loadRecentlyViewedNote(event) {
     // The clicked on recently viewed note
     const { note } = event.detail;
-
-    // Save the current note progression
-    this.#saveEditorObjectProgress(true, true);
 
     // Load the recently viewed note into the editor
     this.controller.loadRecentlyViewedNote(note, 'note');
@@ -278,10 +224,10 @@ export class TextEditorView {
     this.documentNameInput = document.querySelector('.note-name-input');
     this.exitButton = document.querySelector('#exit-editor-btn');
     this.colorButton = document.querySelector('.color-dropdown button');
+    this.headingSpan = document.querySelector('.heading-dropdown span');
 
     this.noteDetailsSpan = document.querySelector('.note-details-span');
     this.deleteNoteSpan = document.querySelector('.delete-note-span');
-    this.saveNoteSpan = document.querySelector('.save-note-span');
     this.newNoteSpan = document.querySelector('.new-note-span');
 
     // other
@@ -292,6 +238,7 @@ export class TextEditorView {
 
     // dropdowns
     this.colorDropdown = document.querySelector('.color-dropdown ul');
+    this.headingDropdown = document.querySelector('.heading-dropdown ul');
     this.editorDropdown = document.querySelector('.editor-options-dropdown');
     this.editorDropdownOptions = this.editorDropdown.querySelector('.options');
     this.recentlyViewedNotesDropdown = document.querySelector('.recently-viewed-notes-dropdown');
@@ -325,13 +272,13 @@ export class TextEditorView {
       const noteName = this.documentNameInput.value;
       this.dialog.renderDeleteModal(this, id, noteName, true);
     });
-    this.saveNoteSpan.addEventListener('click', async () => {await this.saveEditorObject(false, false, true, false)});
+
     this.newNoteSpan.addEventListener('click', () => {this.newEditorObject()});
-  
-    this.exitButton.addEventListener('click', async () => { await this.saveEditorObject() });
+    this.exitButton.addEventListener('click', async () => { this.exitEditor() });
 
 
     this.page.addEventListener('click', () => {this.dropdownHelper.closeDropdowns()});
-    this.colorButton.addEventListener('click', () => {this.dropdownHelper.toggleDropdown(this.colorDropdown)})
+    this.colorButton.addEventListener('click', () => {this.dropdownHelper.toggleDropdown(this.colorDropdown)});
+    this.headingSpan.addEventListener('click', () => {this.dropdownHelper.toggleDropdown(this.headingDropdown)});
   }
 }

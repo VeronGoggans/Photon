@@ -1,7 +1,6 @@
 .standard-sticky-board-view {
+    container: inline-size;
     outline: none;
-    display: flex;
-    flex-direction: column;
     height: calc(100dvh - 37px);
     max-height: calc(100dvh - 37px);
     overflow-y: scroll;
@@ -47,34 +46,6 @@
 }
 
 
-.stickies-container {
-    display: grid;
-    grid-template-columns: repeat(5, 200px);
-    grid-auto-rows: 200px; /* Two rows, each 100px tall */
-    justify-content: center;
-    gap: 10px; /* Space between grid items */
-
-}
-
-@media screen and (max-width: 1120px) {
-    .stickies-container {
-        grid-template-columns: repeat(4, 200px);
-    }
-
-}
-
-@media screen and (max-width: 940px) {
-    .stickies-container {
-        grid-template-columns: repeat(3, 200px);
-    }
-}
-
-@media screen and (max-width: 690px) {
-    .stickies-container {
-        grid-template-columns: repeat(2, 200px);
-    }
-
-}
 
 .board-section input::placeholder {
     color: #ced2e6;
@@ -97,23 +68,51 @@
 }
 
 .add-sticky-btn {
-    position:sticky;
-    margin-left: auto;
+    position: sticky;
     bottom: 30px;
-    right: 0px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: none;
+    left: 0;
+    width: 35px;
+    background-color: transparent;
+    height: 35px;
+    border-radius: 10px;
     color: var(--important);
-    background-color: var(--button1-bg);
-    font-size: 30px;
-    cursor: pointer;
-    transition: 200ms;
+    font-size: 20px;
 }
 
 .add-sticky-btn:hover {
-    scale: 1.05;
+    scale: 1.25;
+    background-color: var(--button1-bg);
 }
 
+
+.standard-sticky-board-wrapper {
+    margin-top: 50px;
+    width: 100%;
+    min-height: 400px;
+    display: grid;
+    grid-template-columns: repeat(5, 200px);
+    grid-auto-rows: 200px; /* Two rows, each 100px tall */
+    justify-content: center;
+    gap: 10px; /* Space between grid items */
+}
+
+.sticky-board-name-container {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.sticky-board-name-container button {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    color: var(--text);
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+.sticky-board-name-container button:hover {
+    background-color: var(--hover-button);
+}
 

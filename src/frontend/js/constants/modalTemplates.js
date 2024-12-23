@@ -2,7 +2,7 @@ export const editFolderModalTemplate = `
 <h2>New folder</h2>
 <div class="folder-settings">
     <span id="title">Folder name</span>
-    <p>You can change the name of this folder below</p>
+    <p>You can change the name of the folder below</p>
     <input type="text" placeholder="Untitled" spellcheck="false">
 
     <span id="title">Folder color</span>
@@ -33,7 +33,7 @@ export const newStickyBoardModalTemplate = `
 <h2>New sticky board</h2>
 <div class="board-settings">
     <span id="title">Sticky board name</span>
-    <p>You can change the name of this sticky board below</p>
+    <p>You can change the name of the sticky board below</p>
     <input type="text" class="sticky-board-title" placeholder="Untitled">
     <span id="title">Sticky board type</span>
     <p>Select a type for your new sticky board</p>

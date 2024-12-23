@@ -13,6 +13,7 @@ export class StandardStickyBoardView {
         this.dialog = new Dialog();
         this.#initElements();
         this.#eventListeners();
+        this.#dynamicBoardResize();
         AnimationHandler.fadeInFromBottom(this._viewElement);
     }
 
@@ -86,23 +87,35 @@ export class StandardStickyBoardView {
     }
 
 
-    debounce(callback, delay) {
-        let timeoutId;
-        return function (...args) {
-            clearTimeout(timeoutId); // Clear the previous timeout
-            timeoutId = setTimeout(() => {
-                callback(...args); // Call the callback after the delay
-            }, delay);
-        };
+    /**
+     * This method will dynamically resize the sticky board based on the width of the view element
+     */
+    #dynamicBoardResize() {
+        let resizeTimeout;
+
+        const observer = new ResizeObserver((entries) => {
+            for (let entry of entries) {
+                console.log('resize')
+                clearTimeout(resizeTimeout);
+
+                resizeTimeout = setTimeout(() => {
+                    const width = entry.contentRect.width;
+
+                    if (width < 690) {
+                        this._stickyBoard.style.gridTemplateColumns = 'repeat(2, 200px)';
+                    } else if (width < 950) {
+                        this._stickyBoard.style.gridTemplateColumns = 'repeat(3, 200px)';
+                    } else if (width < 1120) {
+                        this._stickyBoard.style.gridTemplateColumns = 'repeat(4, 200px)';
+                    } else {
+                        this._stickyBoard.style.gridTemplateColumns = 'repeat(5, 200px)';
+                    }
+                }, 100); // Adjust debounce time as necessary
+            }
+        });
+
+        observer.observe(this._viewElement);
     }
-
-
-    // // Wrap the saveContent function with debounce
-    // const debouncedSaveContent = this.debounce((content) => {
-    //     const { id } = this.stickyBoard;
-    //     const
-    //     this.controller.patchStickyBoard(this.stickyBoard.id, content);
-    // }, 2000); // 5 seconds
 
 
 
@@ -110,20 +123,20 @@ export class StandardStickyBoardView {
 
 
     #eventListeners() {
-        this._newStickyButton.addEventListener('click', () => {this.dialog.renderStickyNoteModal(this.controller, this.stickyBoard.id)});
-        this._viewElement.addEventListener('PreviousViewButtonClick', () => {this.controller.loadPreviousView()});
+        this._newStickyButton.addEventListener('click', () => {
+            console.log('new sticky');
+        });
+        this._exitStickyBoardButton.addEventListener('click', () => {this.controller.loadPreviousView()});
 
         this._stickyBoardDescription.addEventListener('input', () => {
             const changedStickyBoardName = this._stickyBoardName.textContent.trim();
-
         });
         this._stickyBoardName.addEventListener('input', () => {
             const changedStickyBoardDescription = this._stickyBoardDescription.innerHTML;
         });
 
         this._stickyBoard.addEventListener('StickyCardClick', (event) => {
-            const { sticky } = event.detail;
-            this.dialog.renderStickyNoteModal(this.controller, this.stickyBoard.id, sticky)
+            console.log('sticky click')
         });
     }
 
@@ -131,6 +144,7 @@ export class StandardStickyBoardView {
 
     #initElements() {
         this._newStickyButton = document.querySelector('.add-sticky-btn');
+        this._exitStickyBoardButton = document.querySelector('.exit-sticky-board-btn');
         this._viewElement = document.querySelector('.standard-sticky-board-view');
         this._stickyBoard = document.querySelector('.standard-sticky-board-wrapper');
 

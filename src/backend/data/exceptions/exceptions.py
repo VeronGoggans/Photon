@@ -13,8 +13,5 @@ class NotFoundException(BaseException):
 class NoContentException(BaseException):
     pass
 
-class InsertException(BaseException):
-    pass
-
 class InvalidMoveRequestException(BaseException):
     pass

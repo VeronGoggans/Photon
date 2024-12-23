@@ -51,7 +51,7 @@ export class ApplicationController {
             }
 
             else if (viewId === 'editor') {
-                const { editorObjectType, editorObject, newEditorObject, previousView, editorObjectLocation } = viewParameters;
+                const { editorObject, newEditorObject, previousView, editorObjectLocation } = viewParameters;
 
                 this.textEditorController.init();
 
@@ -60,11 +60,11 @@ export class ApplicationController {
                 }
 
                 else if (newEditorObject) {
-                    this.openTextEditor(editorObjectType)
+                    this.openTextEditor()
                 }
 
                 else if (!newEditorObject) {
-                    this.openInTextEditor(editorObject, editorObjectType);
+                    this.openInTextEditor(editorObject, );
                     this.noteController.patchLastViewTime(editorObject.id);
                 }
 
@@ -112,11 +112,10 @@ export class ApplicationController {
      * and will open that note/template in the editor view.
      *
      * @param editorObject         - The editor object that will be loaded in
-     * @param editorObjectType     - The type of the object e.g. note or template (future markdown)
      */
-    async openInTextEditor(editorObject, editorObjectType) {
+    async openInTextEditor(editorObject) {
         const allFolderNames = this.folderController.getAllFolderNames();
-        this.textEditorController.openInTextEditor(editorObject, editorObjectType, allFolderNames);
+        this.textEditorController.openInTextEditor(editorObject, allFolderNames);
     }
 
 
@@ -126,12 +125,11 @@ export class ApplicationController {
      *
      * Side effect - Clears the text editor model from any previously held note data
      *
-     * @param editorObjectType - The type of the object e.g. note or template (future markdown)
      */
-    async openTextEditor(editorObjectType) {
+    async openTextEditor() {
         this.clearEditorObject();
         const allFolderNames = this.folderController.getAllFolderNames();
-        this.textEditorController.showTextEditor(editorObjectType, allFolderNames);
+        this.textEditorController.showTextEditor(allFolderNames);
     }
 
 

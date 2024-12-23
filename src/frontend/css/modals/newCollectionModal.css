@@ -14,7 +14,7 @@
     border-radius: 50px;
     background-color: var(--board-types);
     display: flex;
-    height: 50px;
+    height: 40px;
     column-gap: 20px;
 }
 
@@ -26,7 +26,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    column-gap: 5px;
+    column-gap: 10px;
     border-radius: 50px;
 }
 
@@ -85,14 +85,12 @@
     color: var(--important);
     font-size: 17px;
     font-weight: 600;
-    margin: 0;
-    margin-top: 40px;
+    margin: 40px 0 0;
 }
 
 .new-sticky-board-modal p {
-    margin: 0;
     color: #9b9bb5;
-    margin-bottom: 5px;
+    margin: 0 0 5px;
 }
 
 .new-sticky-board-modal .buttons-container {

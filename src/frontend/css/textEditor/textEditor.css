@@ -3,7 +3,6 @@
    display: grid;
    grid-template-rows: 120px 1fr;
    height: calc(100dvh - 37px);
-   background-color: var(--editor);
    opacity: 0;
    transform: translateX(30%);
    transition: opacity .7s ease, transform .2s ease;
@@ -68,13 +67,11 @@
 .link-container input,
 .html-container input {
    cursor: text;
-   border: none;
    border: 2px solid var(--border-sidebar-soft);
-   padding: 5px;
-   margin: 10px 0;
+    margin: 10px 0;
    border-radius: 10px;
-   padding-left: 25px;
-   background-color: var(--sidebar-soft);
+    padding: 5px 5px 5px 25px;
+    background-color: var(--sidebar-soft);
    color: var(--text);
    font-size: 16px;
    transition: 200ms;
@@ -120,6 +117,10 @@
 
  .editor a {
    color: rgb(67, 142, 255);
+ }
+
+ .editor p {
+     margin: 0;
  }
 
  .editor :where(h1, h2, h3, h4) {

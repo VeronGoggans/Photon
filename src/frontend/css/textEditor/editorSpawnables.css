@@ -44,6 +44,13 @@ rich-text-bar {
     position: relative;
 }
 
+
+.heading-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
 .color-dropdown ul {
     opacity: 0;
     visibility: hidden;
@@ -68,6 +75,46 @@ rich-text-bar {
     color: var(--text);
     width: 30px;
     height: 30px;
+}
+
+.heading-dropdown ul {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    list-style: none;
+    background-color: var(--dropdown);
+    box-shadow: 0 0 10px var(--shadow);
+    border-radius: 10px;
+    margin: 0;
+    padding: 15px;
+    transition: 150ms;
+    left: -20px;
+    top: 50px;
+}
+
+.heading-dropdown ul li {
+    cursor: pointer;
+    color: var(--text);
+    border-radius: 7px;
+    padding: 5px 10px;
+    transition: 150ms;
+}
+
+.heading-dropdown ul li:hover {
+    background-color: var(--hover-slash-command);
+}
+
+.heading-dropdown span {
+    cursor: pointer;
+    color: var(--text);
+}
+
+.heading-dropdown span i {
+    font-size: 12px;
+    margin-left: 7px;
+    color: var(--less-important);
 }
 
 

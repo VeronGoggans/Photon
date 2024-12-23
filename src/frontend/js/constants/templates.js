@@ -63,13 +63,22 @@ const notesTemplate = `
 
 const standardStickyBoardTemplate = `
     <div class="standard-sticky-board-view">
-        <h2 contenteditable="true" spellcheck="false">Brainstorm Pomodoro features</h2>
+        <div class="sticky-board-name-container">
+            <button class="exit-sticky-board-btn"><i class="bi bi-chevron-left"></i></button>
+            <h2 contenteditable="true" spellcheck="false">Brainstorm Pomodoro features</h2>
+        </div>
         <p class="description" contenteditable="true" spellcheck="false">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, in quos? Ab suscipit perspiciatis obcaecati vel iure vitae corporis veniam quas! Mollitia eos tempore ipsam doloribus hic. Laborum, enim praesentium.</p>
         <div class="standard-sticky-board-wrapper">
-            <div></div>
-            <div class="stickies-container"></div>    
+            <div class="sticky-small"><p>hello</p></div>
+            <div class="sticky-long"></div>
+            <div class="sticky-small"></div>
+            <div class="sticky-wide"></div> 
+            <div class="sticky-small"><p>hello</p></div>
+            <div class="sticky-long"></div>
+            <div class="sticky-small"></div>
+            <div class="sticky-wide"></div> 
         </div>
-        <button class="add-sticky-btn"><i class="bi bi-plus-lg"></i></button>
+        <button class="add-sticky-btn"><i class="bi bi-pencil"></i></button>
       </div>
 `
 
@@ -216,7 +225,6 @@ const editorTemplate = `
             <i id="editor-options-btn" class="bi bi-three-dots-vertical"></i>
             <div class="options">
               <button class="new-note-span"><i class="bi bi-plus-lg"></i>New</button>
-              <button class="save-note-span"><i class="bi bi-save"></i>Save</button>
               <button class="delete-note-span"><i class="bi bi-trash3"></i>Delete</button>
               <button class="note-details-span"><i class="bi bi-info-circle"></i>Details</button>
             </div>

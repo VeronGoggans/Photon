@@ -35,6 +35,11 @@ export class StickWallController {
     }
 
 
+    async save() {
+
+    }
+
+
 
     async add(sticky) {
         const { Object } = await this.model.add('/stickyNote', sticky);

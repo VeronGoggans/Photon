@@ -3,14 +3,30 @@ import { removeEmptyFolderNotification } from "../handlers/notificationHandler.j
 import { widgetStyles } from "../constants/constants.js";
 
 
-export function removeContent(contentDiv) {
-    while (contentDiv.firstChild) {
-        contentDiv.removeChild(contentDiv.firstChild);
+
+/**
+ * This method will remove all the child elements from the specified
+ * parent element
+ *
+ * @param parentElement The element you want to remove all the children from
+ */
+export function removeContent(parentElement) {
+    while (parentElement.firstChild) {
+        parentElement.removeChild(parentElement.firstChild);
     }
     removeEmptyFolderNotification();
 }
 
 
+
+/**
+ * This method will decrement a string number e.g. "1"
+ *
+ * "2" - "1"
+ *
+ * @param string        - The number string being decremented.
+ * @returns { String }  - The decremented string
+ */
 export function decrementString(string) {
     let num = Number(string);
     num--
@@ -18,11 +34,22 @@ export function decrementString(string) {
 }
 
 
+
+/**
+ * This method will increment a string number e.g. "1"
+ *
+ * "1" - "2"
+ *
+ * @param string        - The number string being incremented.
+ * @returns { String }  - The incremented string
+ */
 export function incrementString(string) {
     let num = Number(string);
     num++
     return String(num)
 }
+
+
 
 
 export function applyWidgetStyle(componentElement) {
