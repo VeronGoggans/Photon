@@ -3,6 +3,7 @@ import { Dialog } from "../util/dialog.js";
 import { StickyBoardTypes } from "../constants/constants.js";
 
 
+
 export class StickyWallHomeView {
     constructor(controller, applicationController) {
         this.controller = controller;

@@ -6,14 +6,15 @@ import { createDocumentLocation } from "../util/ui/components.js";
 import { Dialog } from "../util/dialog.js";
 import { removeContent } from "../util/ui.js";
 import { AutoSave } from "../components/Autosave.js";
+import {FETCH_FOLDER_BY_ID_EVENT, INIT_VIEW_EVENT} from "../components/eventBus.js";
 
 
 
 
 export class TextEditorView {
-  constructor(controller, applicationController) {
+  constructor(controller, eventBus) {
     this.controller = controller;
-    this.applicationController = applicationController;
+    this.eventBus = eventBus;
 
     this.#initElements();
     this.#eventListeners();
@@ -26,23 +27,27 @@ export class TextEditorView {
       this.viewElement, 
       ['.editor-options-dropdown', '.recently-viewed-notes-dropdown']
     );
+    const saveNameCallBack = (name) => {
+      console.log('Saving name', name)
+      this.controller.save(name, this.page.innerHTML, false, false);
+    }
 
-
-    const saveCallBack = (content) => {
+    const saveContentCallBack = (content) => {
       console.log('Saving content', content)
       this.controller.save(this.documentNameInput.value, content, false, false);
     }
 
 
-    const deleteCallBack = (editorObjectId) => {
-      this.controller.deleteEditorObject(editorObjectId);
+    const deleteNoteCallBack = async (editorObjectId) => {
+      await this.controller.deleteEditorObject(editorObjectId);
       this.#removeRecentlyViewedNote(editorObjectId)
       this.clearEditorContent()
     }
 
 
     new KeyEventListener(this);
-    new AutoSave('.editor-paper', saveCallBack);
+    new AutoSave('.note-name-input', saveNameCallBack, false);
+    new AutoSave('.editor-paper', saveContentCallBack);
     AnimationHandler.fadeInFromSide(this.viewElement)
   }
 
@@ -100,15 +105,6 @@ export class TextEditorView {
     this.clearEditorContent();
     this.controller.clearStoredObject();
   }
-
-
-
-  /**
-   *
-   */
-  exitEditor() {
-    this.controller.loadPreviousView();
-}
 
 
 
@@ -180,11 +176,10 @@ export class TextEditorView {
     // The folderId of the clicked on folder within the path
     const { folderId  } = event.detail;
 
-
     // Loading the clicked on folder in the notes tab
-    const { folder, location } = await this.applicationController.getFolderById(folderId);
-    const viewId = 'notes'
-    this.applicationController.initView(viewId, {
+    const { folder, location } = await this.eventBus.emit(FETCH_FOLDER_BY_ID_EVENT, folderId);
+    this.eventBus.emit(INIT_VIEW_EVENT, {
+      viewId: 'notes',
       folder: folder,
       location: location
     })
@@ -201,7 +196,7 @@ export class TextEditorView {
     const { note } = event.detail;
 
     // Load the recently viewed note into the editor
-    this.controller.loadRecentlyViewedNote(note, 'note');
+    await this.controller.loadRecentlyViewedNote(note);
 
   }
 
@@ -255,12 +250,12 @@ export class TextEditorView {
     // _________________________ Custom event listeners _________________________________ //
     this.documentLocation.addEventListener(
         'FolderPathClick',
-        async (event) => { this.#loadFolder(event)})
+        async (event) => { await this.#loadFolder(event)})
 
 
     this.recentlyViewedNotesDropdown.addEventListener(
         'RecentlyViewedNoteCardClick',
-        async (event) => { this.#loadRecentlyViewedNote(event) })
+        async (event) => { await this.#loadRecentlyViewedNote(event) })
 
 
 
@@ -274,7 +269,7 @@ export class TextEditorView {
     });
 
     this.newNoteSpan.addEventListener('click', () => {this.newEditorObject()});
-    this.exitButton.addEventListener('click', async () => { this.exitEditor() });
+    this.exitButton.addEventListener('click', () => { this.controller.loadPreviousView() });
 
 
     this.page.addEventListener('click', () => {this.dropdownHelper.closeDropdowns()});

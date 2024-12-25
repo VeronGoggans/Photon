@@ -1,4 +1,3 @@
-import { CNode } from "../../util/CNode.js";
 import { dialogEvent } from "../../util/dialog.js";
 import { editFolderModalTemplate } from "../../constants/modalTemplates.js";
  
@@ -12,14 +11,15 @@ export class EditFolderModal {
 
         this.#initElements();
         this.#eventListeners();
-        return this.HOST
+        return this.modal
     }
 
 
     #initElements() {
-        this.HOST = CNode.create('div', {'class': 'edit-folder-modal'});
-        this.HOST.innerHTML = editFolderModalTemplate;
-        this.colorsArray = this.HOST.querySelectorAll('.folder-color-options div');
+        this.modal = document.createElement('div');
+        this.modal.classList.add('edit-folder-modal');
+        this.modal.innerHTML = editFolderModalTemplate;
+        this.colorsArray = this.modal.querySelectorAll('.folder-color-options div');
         if (this.folder !== null) {
             this.#loadFolder();
             return
@@ -28,9 +28,9 @@ export class EditFolderModal {
     }
 
     #loadFolder() {
-        this.HOST.querySelector('h2').textContent = 'Edit folder';
-        this.HOST.querySelector('.save-btn').textContent = 'Save changes';
-        this.HOST.querySelector('input').value = this.folder.name;
+        this.modal.querySelector('h2').textContent = 'Edit folder';
+        this.modal.querySelector('.save-btn').textContent = 'Save changes';
+        this.modal.querySelector('input').value = this.folder.name;
         this.action = 'update';
         this.#showActiveFolderColor(this.folder.color);
     }
@@ -42,25 +42,25 @@ export class EditFolderModal {
             colorElement.addEventListener('click', () => {this.#showActiveFolderColor(color)});
         });
 
-        this.HOST.querySelector('.save-btn').addEventListener('click', () => {
+        this.modal.querySelector('.save-btn').addEventListener('click', async () => {
             if (this.action === 'update') {
-                this.controller.update({
+                await this.controller.updateFolder({
                     'id': this.folder.id,
-                    'name': this.HOST.querySelector('input').value,
+                    'name': this.modal.querySelector('input').value,
                     'color': this.preferedFolderColor
                 })    
             }
             else if (this.action === 'add') {
-                this.controller.add({
-                    'name': this.HOST.querySelector('input').value || 'Untitled',
+                await this.controller.addFolder({
+                    'name': this.modal.querySelector('input').value || 'Untitled',
                     'color': this.preferedFolderColor
                 })
             }
-            dialogEvent(this.HOST, 'close');
+            dialogEvent(this.modal, 'close');
         });
 
-        this.HOST.querySelector('.cancel-btn').addEventListener('click', () => {
-            dialogEvent(this.HOST, 'close');
+        this.modal.querySelector('.cancel-btn').addEventListener('click', () => {
+            dialogEvent(this.modal, 'close');
         });
     }
   

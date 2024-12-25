@@ -1,13 +1,14 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
 import { greetBasedOnTime } from "../util/date.js";
 import { createCustomElement } from "../util/ui/components.js";
+import {FETCH_FOLDER_BY_ID_EVENT, FETCH_NOTE_BY_ID_EVENT, INIT_VIEW_EVENT} from "../components/eventBus.js";
 
 
 
 export class HomeView {
-    constructor(controller, applicationController) {
+    constructor(controller, eventBus) {
         this.controller = controller;
-        this.applicationController = applicationController;
+        this.eventBus = eventBus;
 
         this.#initElements();
         this.#eventListeners();
@@ -18,9 +19,15 @@ export class HomeView {
 
 
     /**
-     * This method renders the top 4 most recently viewed folders.
+     * Renders a list of recently accessed folders in the view.
      *
-     * @param folders { Array[Object] } - the recently viewed folders.
+     * This method takes an array of folder objects, creates a visual representation for each folder
+     * using the private `#recentFolder` method, and appends them to the recent folder list container.
+     * It also applies a fade-in animation to each folder card as it is added.
+     *
+     * @param { Array<Object> } folders - An array of folder objects to render.
+     *
+     * @returns { void }
      */
     renderRecentFolders(folders) {
         const contentFragment = document.createDocumentFragment();
@@ -37,9 +44,15 @@ export class HomeView {
 
 
     /**
-     * This method renders the top 10 most recently changed notes.
+     * Renders a list of recently changed notes in the view.
      *
-     * @param notes { Array[Object] } - the recently changed notes.
+     * This method takes an array of note objects, creates a visual representation for each note
+     * using the imported createCustomElement method, and appends them to the recent notes list container.
+     * It also applies a fade-in animation to each note card as it is added.
+     *
+     * @param { Array<Object> } notes - An array of note objects to render.
+     *
+     * @returns { void }
      */
     renderRecentNotes(notes) {
         const contentFragment = document.createDocumentFragment();
@@ -66,9 +79,11 @@ export class HomeView {
     #eventListeners() {
         this._recentNoteList.addEventListener('RecentNoteCardClick', async (event) => {
             const { noteId } = event.detail;
-            const { note, location } = await this.applicationController.getNoteById(noteId)
-            this.applicationController.initView('editor', 
+            const { note, location } = await this.eventBus.asyncEmit(FETCH_NOTE_BY_ID_EVENT, noteId);
+
+            this.eventBus.emit(INIT_VIEW_EVENT,
                 {
+                    viewId: 'editor',
                     editorObject: note,
                     newEditorObject: false, 
                     previousView: 'home',
@@ -76,10 +91,12 @@ export class HomeView {
                 }
             );
         })
+
         this._recentFolderList.addEventListener('RecentFolderCardClick', async (event) => {
             const { folderId } = event.detail;            
-            const { folder, location } = await this.applicationController.getFolderById(folderId);            
-            this.applicationController.initView('notes', {
+            const { folder, location } = await this.eventBus.asyncEmit(FETCH_FOLDER_BY_ID_EVENT, folderId);
+            this.eventBus.emit(INIT_VIEW_EVENT, {
+                viewId: 'notes',
                 folder: folder,
                 location: location
             })

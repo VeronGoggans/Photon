@@ -7,6 +7,7 @@ class DocumentLocationPageBlock extends HTMLElement {
 
     setData(value) {
         this.folders = value
+        console.log(this.folders)
     }
 
 

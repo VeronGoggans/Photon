@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 
-class FolderRequest(BaseModel):
+class PostFolderRequest(BaseModel):
     """
     - parent_id (int): The id of the parent folder.
     - color (str): The color for the new folder.
@@ -16,17 +16,15 @@ class FolderRequest(BaseModel):
 
 class PutFolderRequest(BaseModel): 
     """
-    - folder_id (str): The id of the folder that will be updated 
     - name (str): The new name of the folder.
     - color (str): The new color for the folder.
     """
-    folder_id: int
     name: str
     color: str
 
 
 
-class MoveFolderRequest(BaseModel):
+class PatchFolderLocationRequest(BaseModel):
     """
     - parent_id (str): The id of the folder that the dropped folder will move in to. 
     """

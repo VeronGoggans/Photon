@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from src.backend.data.database import Database
 from src.backend.data.managers.folder_manager import FolderManager
-from src.backend.presentation.request_bodies.folder_requests import FolderRequest, MoveFolderRequest, PutFolderRequest
+from src.backend.presentation.request_bodies.folder_requests import PostFolderRequest, PatchFolderLocationRequest, PutFolderRequest
 from src.backend.presentation.http_status import HttpStatus
 from src.backend.application.services.folder_service import FolderService
 from src.backend.data.exceptions.exception_handler import handle_exceptions
@@ -19,15 +19,15 @@ class FolderRouter:
         self.route.add_api_route('/folders', self.add_folder, methods=['POST'])
         self.route.add_api_route('/folders', self.get_folders, methods=['GET'])
         self.route.add_api_route('/folders/{folder_id}', self.get_folder_by_id, methods=['GET'])
-        self.route.add_api_route('/folders', self.update_folder, methods=['PUT'])
-        self.route.add_api_route('/folders/{folder_id}/location', self.update_folder_location, methods=['PUT'])
+        self.route.add_api_route('/folders/{folder_id}', self.update_folder, methods=['PUT'])
+        self.route.add_api_route('/folders/{folder_id}/location', self.update_folder_location, methods=['PATCH'])
         self.route.add_api_route('/folders/{folder_id}/view-time', self.update_folder_view_time, methods=['PATCH'])
         self.route.add_api_route('/folders/{folder_id}', self.delete_folder, methods=['DELETE'])
 
 
 
     @handle_exceptions
-    def add_folder(self, request: FolderRequest, db: Session = Depends(Database.get_db)):
+    def add_folder(self, request: PostFolderRequest, db: Session = Depends(Database.get_db)):
         folder = self.service.add_folder(request, db)
         return JSONResponse(status_code=HttpStatus.CREATED, content={'folder': folder})
         
@@ -65,15 +65,15 @@ class FolderRouter:
 
 
     @handle_exceptions
-    def update_folder(self, request: PutFolderRequest, db: Session = Depends(Database.get_db)):
-        folder = self.manager.update(request, db)
+    def update_folder(self, folder_id: int, request: PutFolderRequest, db: Session = Depends(Database.get_db)):
+        folder = self.manager.update(folder_id, request.name, request.color, db)
         return JSONResponse(status_code=HttpStatus.OK, content={'folder': folder})
     
 
 
     @handle_exceptions
-    def update_folder_location(self, request: MoveFolderRequest, db: Session = Depends(Database.get_db)):
-        folder = self.manager.update_location(request, db)
+    def update_folder_location(self, folder_id: int, request: PatchFolderLocationRequest, db: Session = Depends(Database.get_db)):
+        folder = self.manager.update_location(folder_id, request.parent_id, db)
         return JSONResponse(status_code=HttpStatus.OK, content={'folder': folder})
         
 

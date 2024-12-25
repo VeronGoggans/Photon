@@ -3,9 +3,8 @@ import { DropdownHelper } from "../helpers/dropdownHelper.js";
 import { capitalizeFirstLetter } from "../util/formatters.js";
 
 export class SettingView {
-    constructor(controller, applicationController) {
+    constructor(controller) {
         this.controller = controller;
-        this.applicationController = applicationController;
         this.#initElements();
         this.#eventListeners();
         this.dropdownHelper = new DropdownHelper(

@@ -206,7 +206,7 @@ export class FolderView {
         });
 
         // window.addEventListener('resize', this.#resizeFolderName)
-        this.backButton.addEventListener('click', async () => {await this.controller.navigateOutofFolder()})
+        this.backButton.addEventListener('click', async () => {await this.controller.navigateOutOfFolder()})
         this.createFolderButton.addEventListener('click', () => {this.dialog.renderEditFolderModal(this.controller)});
     }
 }

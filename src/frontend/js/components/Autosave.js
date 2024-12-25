@@ -21,9 +21,10 @@
  * ```
  */
 export class AutoSave {
-    constructor(contentEditableSelector, saveCallback, delay = 1000) {
+    constructor(contentEditableSelector, saveCallback, isHtmlContent = true, delay = 1000) {
         this.contentEditable = document.querySelector(contentEditableSelector); // Select the contenteditable element
         this.saveCallback = saveCallback;                                       // Callback function to save content
+        this.isHtmlContent = isHtmlContent                                      // Indicator fot innerHTML or textContent
         this.delay = delay;                                                     // Delay in milliseconds
         this.timeoutId = null;                                                  // Timeout ID for debouncing
 
@@ -56,7 +57,7 @@ export class AutoSave {
      *
      */
     saveContent() {
-        const content = this.contentEditable.innerHTML; // Get the content
+        let content = this.isHtmlContent ? this.contentEditable.innerHTML : this.contentEditable.value;
         this.saveCallback(content); // Call the save callback
     }
 

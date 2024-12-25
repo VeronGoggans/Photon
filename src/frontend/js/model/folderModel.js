@@ -11,13 +11,16 @@ export class FolderModel extends HttpModel {
     }
 
 
+
     /**
      * This method removes every item within the stack
      * which keeps track of the folder hierarchy
      */
     emptyFolders() {
         this.stack.clear();
+        this.stack.push(this.homeFolder);
     }
+
 
 
     /**
@@ -30,6 +33,7 @@ export class FolderModel extends HttpModel {
         const folder = this.stack.peek();
         return folder ? folder : this.homeFolder;
     }
+
 
 
     /**
@@ -45,15 +49,17 @@ export class FolderModel extends HttpModel {
     }
 
 
+
     /**
      * This method returns a complete representation of the folder hierarchy.
      *
      * @returns { Array[{ id: number, name: string }] } - The array containing all the metadata of each folder
      *                                                    within the stack.
      */
-    getAllFolders() {
+    getBreadCrumbs() {
         return this.stack.view();
     }
+
 
 
     /**
@@ -71,6 +77,7 @@ export class FolderModel extends HttpModel {
             this.stack.push(folder);
         } 
     }
+
 
 
     /**

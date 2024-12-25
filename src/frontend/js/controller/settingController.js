@@ -1,18 +1,26 @@
 import { HttpModel } from "../model/httpModel.js";
 import { SettingView } from "../view/settingView.js";
+import { FETCH_SETTINGS_EVENT } from "../components/eventBus.js";
 
 
 export class SettingController {
-    constructor(applicationController) {
+    constructor(eventBus) {
         this.model = new HttpModel();
-        this.applicationController = applicationController;
+        this.eventBus = eventBus;
+
+        this.eventBus.registerEvents({
+            [FETCH_SETTINGS_EVENT]: async () => await this.loadSettings(),
+        })
     }
+
+
 
     async init() {
         const settings = await this.getSettings();
-        this.view = new SettingView(this, this.applicationController);
+        this.view = new SettingView(this, this.eventBus);
         this.view.setDropdownStates(settings);
     }
+
 
 
     async loadSettings() {
@@ -38,29 +46,42 @@ export class SettingController {
 
 
     async getSettings() {
-        const { settings } = await this.model.get('/settings');
-        return settings;
+        const route = '/settings'
+        const response = await this.model.get(route);
+        return response.content.settings;
     }
+
+
 
     async updateTheme(newTheme) {
-        const { theme } = await this.model.update(`/settings/theme/${newTheme}`);
-        return theme;
+        const route = `/settings/theme/${newTheme}`;
+        const response = await this.model.update(route);
+        return response.content.theme;
     }
+
+
 
     async updateSidebarColor(newColor) {
-        const { color } = await this.model.update(`/settings/sidebarColor/${newColor}`);
-        return color;
+        const route = `/settings/sidebarColor/${newColor}`;
+        const response = await this.model.update(route);
+        return response.content.color;
     }
 
-    async updateWidgetStyle(newWidgetStyle) {  
-        const { widgetStyle } = await this.model.update(`/settings/widgetStyle/${newWidgetStyle}`);
+
+
+    async updateWidgetStyle(newWidgetStyle) {
+        const route = `/settings/widgetStyle/${newWidgetStyle}`;
+        const response = await this.model.update(route);
         window.sessionStorage.setItem('widget-style', newWidgetStyle);
-        return widgetStyle;
+        return response.content.widgetStyle;
     }
+
+
 
     async updateFolderIconColor(newFolderIconColor) {
-        const { folderIconColor } = await this.model.update(`/settings/folderIconColor/${newFolderIconColor}`);
+        const route = `/settings/folderIconColor/${newFolderIconColor}`;
+        const response = await this.model.update(route);
         window.sessionStorage.setItem('folder-icon-color', newFolderIconColor);
-        return folderIconColor;
+        return response.content.folderIconColor;
     }
 }

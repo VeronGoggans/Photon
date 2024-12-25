@@ -3,30 +3,45 @@ import { StickyWallHomeView } from "../view/stickyWallHomeView.js";
 
 
 export class StickyWallHomeController {
-    constructor(applicationController) {
-        this.applicationController = applicationController;
+    constructor(eventBus) {
+        this.eventBus = eventBus;
         this.model = new HttpModel();
     }
 
+
+
     async init() {
-        this.view = new StickyWallHomeView(this, this.applicationController);
-        await this.get()
+        this.view = new StickyWallHomeView(this, this.eventBus);
+        await this.getStickyBoards();
     }
 
-    async add(stickyBoardData) {
-        const { StickyBoard }  = await this.model.add('/stickyBoard', stickyBoardData);
-        this.view.renderOne(StickyBoard);
+
+
+    async addStickyBoard(postStickyBoardRequest) {
+        const route = `/stickyBoards`
+        const response = await this.model.add(route, postStickyBoardRequest);
+
+        this.view.renderOne(response.content.stickyBoard);
     }
 
-    async get() {
-        const { StickyBoards } = await this.model.get(`/stickyBoards`);
-        this.view.renderAll(StickyBoards);
+
+
+    async getStickyBoards() {
+        const route = `/stickyBoards`;
+        const response = await this.model.get(route);
+
+        this.view.renderAll(response.content.stickyBoards);
     }
 
-    async getById(stickyBoardId) {
-        const { Object } = await this.model.get(`/stickyBoard/${stickyBoardId}`);
-        return Object
+
+
+    async getStickyBoardById(stickyBoardId) {
+        const route = `/stickyBoards/${stickyBoardId}`;
+        const response = await this.model.get(route);
+
+        return response.content.stickyBoard;
     }
+
 
 
     /**
@@ -37,8 +52,10 @@ export class StickyWallHomeController {
      * @param { Number } stickyBoardId    - The ID of the deleted sticky board
      * @param { String } stickyBoardType  - The type of the deleted sticky board
      */
-    async delete(stickyBoardId, stickyBoardType) {
-        await this.model.delete(`/stickyBoard/${stickyBoardId}/${stickyBoardType}`);
-        this.view.renderDelete(stickyBoardId, stickyBoardType);
+    async deleteStickyBoard(stickyBoardId, stickyBoardType) {
+        const route = `/stickyBoards/${stickyBoardId}/${stickyBoardType}`;
+        await this.model.delete(route);
+
+        this.view.renderDelete(stickyBoardId);
     }
 }

@@ -57,12 +57,12 @@ class FolderManager:
     
 
 
-    def update_location(self, parent_id: int, folder_id: int, db: Session) -> ( Folder | NotFoundException ):
+    def update_location(self, folder_id: int, parent_folder_id: int, db: Session) -> ( Folder | NotFoundException ):
         # Check if the new parent even exists
-        find_folder(parent_id, db)
+        find_folder(parent_folder_id, db)
 
         folder = find_folder(folder_id, db)
-        folder.parent_id = parent_id
+        folder.parent_id = parent_folder_id
 
         db.commit()
         db.refresh(folder)

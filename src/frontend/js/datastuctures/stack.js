@@ -84,3 +84,7 @@ export class UniqueEvictingStack extends Stack {
         }
     }
 }
+
+const stack = new UniqueEvictingStack(5)
+stack.push(5)
+console.log(stack.view())

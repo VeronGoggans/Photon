@@ -4,12 +4,13 @@ import { createCustomElement } from "../util/ui/components.js";
 import { DropdownHelper } from "../helpers/dropdownHelper.js";
 import { renderEmptyFolderNotification } from "../handlers/notificationHandler.js";
 import { Dialog } from "../util/dialog.js";
+import {INIT_VIEW_EVENT} from "../components/eventBus.js";
 
 
 export class NoteView {
-    constructor(controller, applicationController) {
+    constructor(controller, eventBus) {
         this.controller = controller;
-        this.applicationController = applicationController;
+        this.eventBus = eventBus;
 
         this.dialog = new Dialog();
         this.#initElements();
@@ -106,7 +107,8 @@ export class NoteView {
 
     #eventListeners() {
         this.viewElement.addEventListener('CreateNewNote', () => {
-            this.applicationController.initView('editor', {
+            this.eventBus.emit(INIT_VIEW_EVENT, {
+                viewId: 'editor',
                 editorObject: null,
                 newEditorObject: true, 
                 previousView: 'notes', 
@@ -121,30 +123,29 @@ export class NoteView {
 
         this.notesContainer.addEventListener('BookmarkNote', async (event) => {
             const { noteId, bookmark } = event.detail;
-            await this.controller.patchBookmark(noteId, bookmark);
+            await this.controller.updateNoteBookmark(noteId, bookmark);
         })
         
         this.notesContainer.addEventListener('NoteCardClick', (event) => {
             const { note } = event.detail;
-            this.applicationController.initView('editor', 
-                {
-                    editorObject: note,
-                    newEditorObject: false, 
-                    previousView: 'notes', 
-                    editorObjectLocation: null
-                }
-            );
+            this.eventBus.emit(INIT_VIEW_EVENT, {
+                viewId: 'editor',
+                editorObject: note,
+                newEditorObject: false,
+                previousView: 'notes',
+                editorObjectLocation: null
+            });
         })
 
 
-        this.bookmarkedButton.addEventListener('click', () => {
+        this.bookmarkedButton.addEventListener('click', async () => {
             removeContent(this.notesContainer);
-            const allBookmarks = -1
-            this.controller.get(allBookmarks)
+            await this.controller.getNotes({ bookmarks: true })
         });
 
         this.createNoteButton.addEventListener('click', () => {
-            this.applicationController.initView('editor', {
+            this.eventBus.emit(INIT_VIEW_EVENT, {
+                viewId: 'editor',
                 editorObject: null,
                 newEditorObject: true, 
                 previousView: 'notes', 

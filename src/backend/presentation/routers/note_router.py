@@ -20,7 +20,7 @@ class NoteRouter:
         self.route.add_api_route('/notes', self.add_note, methods=['POST'])
         self.route.add_api_route('/notes', self.get_notes, methods=['GET'])
         self.route.add_api_route('/notes/{note_id}', self.get_note_by_id, methods=['GET'])
-        self.route.add_api_route('/notes/{note_id}/location', self.update_note_location, methods=['PUT'])
+        self.route.add_api_route('/notes/{note_id}/location', self.update_note_location, methods=['PATCH'])
         self.route.add_api_route('/notes/{note_id}/name', self.update_note_name, methods=['PATCH'])
         self.route.add_api_route('/notes/{note_id}/content', self.update_note_content, methods=['PATCH'])
         self.route.add_api_route('/notes/{note_id}/bookmark', self.update_note_bookmark, methods=['PATCH'])

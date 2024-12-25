@@ -2,19 +2,35 @@ import { TextEditorView } from "../view/textEditorView.js";
 import { TextEditorModel } from "../model/textEditorModel.js";
 import { HttpModel } from "../model/httpModel.js";
 import { pushNotification } from "../handlers/notificationHandler.js";
+import {
+    CREATE_NOTE_EVENT,
+    FETCH_NOTE_BY_ID_EVENT,
+    GET_BREAD_CRUMBS_EVENT,
+    GET_CURRENT_FOLDER_EVENT,
+    GET_PREVIOUS_VIEW_EVENT,
+    INIT_VIEW_EVENT,
+    OPEN_NOTE_IN_TEXT_EDITOR_EVENT,
+    OPEN_TEXT_EDITOR_EVENT,
+    PATCH_NOTE_CONTENT_EVENT,
+    PATCH_NOTE_NAME_EVENT
+} from "../components/eventBus.js";
 
 
 
 export class TextEditorController {
-    constructor(applicationController) {
-        this.applicationController = applicationController;
+    constructor(eventBus) {
+        this.eventBus = eventBus;
         this.model = new TextEditorModel();
         this.httpModel = new HttpModel();
+        this.eventBus.registerEvents({
+            [OPEN_TEXT_EDITOR_EVENT]: () => this.showTextEditor(),
+            [OPEN_NOTE_IN_TEXT_EDITOR_EVENT]: (editorObject) => this.openInTextEditor(editorObject)
+        })
     }
 
 
     init() {
-        this.textEditorView = new TextEditorView(this, this.applicationController);
+        this.textEditorView = new TextEditorView(this, this.eventBus);
     }
 
 
@@ -23,19 +39,20 @@ export class TextEditorController {
      * Side effects - this will clear the stored editor object from memory
      */
     loadPreviousView() {
-        const previousView = this.applicationController.getPreviousView();
+        const previousViewId = this.eventBus.emit(GET_PREVIOUS_VIEW_EVENT);
 
-        if (previousView === 'notes') {
+        if (previousViewId === 'notes') {
 
             // The notes view will be initialized in the folder they were in before opening the editor
-            const currentFolder = this.applicationController.getCurrentFolder();
-            this.applicationController.initView(previousView, {
+            const currentFolder = this.eventBus.emit(GET_CURRENT_FOLDER_EVENT);
+            this.eventBus.emit(INIT_VIEW_EVENT, {
+                viewId: previousViewId,
                 folder: currentFolder,
                 location: null
             });
         } 
         else {
-            this.applicationController.initView(previousView);
+            this.eventBus.emit(INIT_VIEW_EVENT, {viewId: previousViewId});
         }
         this.model.clear();
     }
@@ -54,7 +71,7 @@ export class TextEditorController {
         const recentlyViewedNotes = this.model.getRecentlyViewedNotes();
 
         // Get the location of the editor object within the folder structure
-        const { location } = await this.applicationController.getNoteById(editorObject.id);
+        const { location } = await this.eventBus.asyncEmit(FETCH_NOTE_BY_ID_EVENT, editorObject.id)
 
         // Load the recently viewed note in the editor
         this.textEditorView.open(editorObject, location, recentlyViewedNotes);
@@ -76,22 +93,26 @@ export class TextEditorController {
             this.model.editorObject = null;
         }
 
-        if (editorObject !== null) {
-            this.model.updateStoredObject(editorObject, name, content);
-            await this.applicationController.updateNote(editorObject, notify);
+        // If the name of the note has been changed update only the name of the note
+        if (editorObject !== null && editorObject.name !== name) {
+            await this.eventBus.asyncEmit(PATCH_NOTE_NAME_EVENT, {
+                'noteId': editorObject.id, 'updatedName': name});
         }
 
-        else {
-            await this.applicationController.addNote(name, content, notify)
+        // If the content of the note has been changed update only the content of the note
+        else if (editorObject !== null && editorObject.content !== content) {
+            await this.eventBus.asyncEmit(PATCH_NOTE_CONTENT_EVENT, {
+                'noteId': editorObject.id, 'updatedContent': content});
         }
 
+        // Create a new note, if the editor object is null
+        else if (editorObject === null) {
+            const currentFolder = this.eventBus.emit(GET_CURRENT_FOLDER_EVENT);
+            await this.eventBus.asyncEmit(CREATE_NOTE_EVENT, {
+                folderId: currentFolder.id, name: name, content: content, notify: notify
+            });
+        }
     }
-
-
-
-
-
-
 
 
 
@@ -99,12 +120,12 @@ export class TextEditorController {
      * This method will open the editor with the template or note the user clicked on.
      *
      * @param editorObject     - The actual data of the template or note the user clicked on
-     * @param objectLocation   - The location of the note within the folder structure, templates don't have a location
      */
-    openInTextEditor(editorObject, objectLocation) {
+    openInTextEditor(editorObject) {
         this.model.storeEditorObject(editorObject);
+        const breadCrumbs = this.eventBus.emit(GET_BREAD_CRUMBS_EVENT);
         const viewedNotes = this.model.getRecentlyViewedNotes();
-        this.textEditorView.open(editorObject, objectLocation, viewedNotes);
+        this.textEditorView.open(editorObject, breadCrumbs, viewedNotes);
     }
 
 
@@ -112,18 +133,15 @@ export class TextEditorController {
      * This method will open the text editor without loading in a note or template
      *
      *
-     * @param objectLocation    - The location of the note within the folder structure, templates don't have a location
+     *
      */
-    showTextEditor(objectLocation) {
-        this.model.storeEditorObject(null);
+    showTextEditor() {
+        this.model.clear();
+        const breadCrumbs = this.eventBus.emit(GET_BREAD_CRUMBS_EVENT);
         const viewedNotes = this.model.getRecentlyViewedNotes();
-        this.textEditorView.show(objectLocation, viewedNotes);
+        this.textEditorView.show(breadCrumbs, viewedNotes);
     }
 
-
-    storeEditorObject(editorObject) {
-        this.model.storeEditorObject(editorObject);
-    }
 
 
     clearStoredObject() {

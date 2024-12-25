@@ -1,7 +1,7 @@
 {
     "theme": "light",
-    "sidebarColor": "original",
-    "widgetStyle": "shadow",
+    "sidebarColor": "shadow",
+    "widgetStyle": "border",
     "folderIconColor": "blue",
     "sidebarState": "small"
 }

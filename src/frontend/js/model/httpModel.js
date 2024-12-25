@@ -9,8 +9,8 @@ export class HttpModel {
     }
 
     /**
-     * Specifiy the endpoint you want to reach.
-     * @param {String} endpoint - May include a Id of some sort 
+     * Specify the endpoint you want to reach.
+     * @param {String} endpoint - May include an ID of some sort
      */
     async get(endpoint) {
         const options = RequestOptionsBuilder.buildGetOptions();
@@ -24,8 +24,8 @@ export class HttpModel {
 
     /**
      * 
-     * Specifiy the endpoint you want to reach.
-     * @param {String} endpoint - May include a Id of some sort
+     * Specify the endpoint you want to reach.
+     * @param {String} endpoint - May include an ID of some sort
      */
     async delete(endpoint, object = null) {
         const options = RequestOptionsBuilder.buildDeleteOptions(object);

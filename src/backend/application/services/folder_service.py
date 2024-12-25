@@ -1,6 +1,6 @@
 from src.backend.data.managers.folder_manager import FolderManager
 from sqlalchemy.orm import Session
-from src.backend.presentation.request_bodies.folder_requests import *
+from src.backend.presentation.request_bodies.folder_requests import PostFolderRequest
 from src.backend.data.exceptions.exceptions import *
 from src.backend.data.models import Folder
 
@@ -11,7 +11,7 @@ class FolderService:
         self.manager = manager
 
 
-    def add_folder(self, schema: FolderRequest, db: Session) -> Folder:
+    def add_folder(self, schema: PostFolderRequest, db: Session) -> Folder:
         new_folder = Folder(
             name = schema.name, 
             color = schema.color, 

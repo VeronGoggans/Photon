@@ -1,13 +1,14 @@
 import { HttpModel } from "../model/httpModel.js";
 import { StandardStickyBoardView, ColumnStickyBoardView } from "../view/stickyNoteView.js";
+import {GET_PREVIOUS_VIEW_EVENT, INIT_VIEW_EVENT} from "../components/eventBus.js";
 
 
 
 
 export class StickWallController {
-    constructor(applicationController) {
-        this.applicationController = applicationController;         // The main controller
-        this.model = new HttpModel();                               // The HttpModel is a dependency to make HTTP calls to the python backend
+    constructor(eventBus) {
+        this.eventBus = eventBus;         // The main controller
+        this.model = new HttpModel();     // The HttpModel is a dependency to make HTTP calls to the python backend
     }
 
 
@@ -42,9 +43,12 @@ export class StickWallController {
 
 
     async add(sticky) {
-        const { Object } = await this.model.add('/stickyNote', sticky);
-        this.view.renderOne(Object);
+        const route = '/sticky-note'
+        const response = await this.model.add(route, sticky);
+
+        this.view.renderOne(response.content.stickyNote);
     }
+
 
 
     /**
@@ -54,16 +58,20 @@ export class StickWallController {
      * @param boardType      - The board type of which to retrieve the sticky notes from
      */
     async get(stickyBoardId, boardType) {
-        const { Objects } = await this.model.get(`/stickyNotes/${stickyBoardId}/${boardType}`);
-        this.view.renderAll(Objects);
+        const route = `/stickyNotes/${stickyBoardId}/${boardType}`;
+        const response = await this.model.get(route);
+
+        this.view.renderAll(response.content.stickyNotes);
     }
 
 
 
 
     async update(sticky) {
-        const { Object }  = await this.model.update('/stickyNote', sticky);
-        this.view.renderUpdate(Object);
+        const route = '/stickyNote';
+        const response = await this.model.update(route, sticky);
+
+        this.view.renderUpdate(response.content.stickyNote);
     }
 
 
@@ -76,12 +84,13 @@ export class StickWallController {
      * @param changedDescription
      */
     async patchStickyBoard(stickyBoardId, changedName = null, changedDescription = null) {
-        const patchRequest = {
+        const route = `/stickyBoard`;
+        const patchStickyBoardRequest = {
             'id': stickyBoardId,
             'name': changedName,
             'description': changedDescription
         }
-        await this.model.patch('/stickyBoard', patchRequest)
+        await this.model.patch(route, patchStickyBoardRequest);
     }
 
 
@@ -100,14 +109,16 @@ export class StickWallController {
      * @param stickyNoteId  - The ID of the sticky note
      */
     async delete(stickyNoteId) {
-        await this.model.delete(`/stickyNote/${stickyNoteId}`);
+        const route = `/stickyNotes/${stickyNoteId}`;
+        await this.model.delete(route);
+
         this.view.renderDelete(stickyNoteId);
     }
 
 
 
     loadPreviousView() {        
-        const previousView = this.applicationController.getPreviousView();        
-        this.applicationController.initView(previousView);
+        const previousViewId = this.eventBus.emit(GET_PREVIOUS_VIEW_EVENT);
+        this.eventBus.emit(INIT_VIEW_EVENT, {viewId: previousViewId});
     }
 }

@@ -1,8 +1,9 @@
 import { sidebarButtonText } from "../constants/constants.js";
+import {INIT_VIEW_EVENT} from "../components/eventBus.js";
 
 export class SidebarView {
-    constructor(applicationController) {
-        this.applicationController = applicationController;
+    constructor(eventBus) {
+        this.eventBus = eventBus;
         
         this._sidebar = document.querySelector('.sidebar');
         this._icon = document.querySelector('.logo');
@@ -28,13 +29,14 @@ export class SidebarView {
                     if (viewId === 'notes') {
                         // Load the notes view and tell it to render the Home folder 
                         const homeFolder = {'id': 1, 'name': 'Home'}
-                        applicationController.initView('notes', { 
+                        this.eventBus.emit(INIT_VIEW_EVENT, {
+                            viewId: viewId,
                             folder: homeFolder,
                             location: homeFolder
                          });
                     } else {
                         // Load any other view if not the notes view.
-                        applicationController.initView(viewId);
+                        this.eventBus.emit(INIT_VIEW_EVENT, {viewId: viewId});
                     }                    
                 }
             });
@@ -59,7 +61,7 @@ export class SidebarView {
             this.sidebarSpans[i].textContent = '';
 
             this.sidebarIcons[i].style.position = 'relative';
-            this.sidebarIcons[i].style.left = 0;
+            this.sidebarIcons[i].style.left = '0';
 
             this.sidebarButtons[i].style.justifyContent = 'center';
         }

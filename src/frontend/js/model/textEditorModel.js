@@ -23,7 +23,7 @@ export class TextEditorModel {
      *
      * @param editorObject      - The note actual object being saved
      */
-    storeEditorObject(editorObject, ) {
+    storeEditorObject(editorObject) {
         this.editorObject = editorObject;
 
         if (editorObject !== null) {
@@ -32,17 +32,6 @@ export class TextEditorModel {
         }
     }
 
-
-    /**
-     * This method updates a specified editor object
-     * @param editorObject
-     * @param name
-     * @param content
-     */
-    updateStoredObject(editorObject, name, content) {
-        editorObject.name = name;
-        editorObject.content = content;
-    }
 
 
     /**
@@ -86,7 +75,7 @@ export class TextEditorModel {
      * and fills the evicting stack with the most recently viewed notes.
      */
     async #addRecentlyViewedNotes() {
-        const { notes } = await this.httpModel.get('/recentViewedNotes');
-        this.evictingStack.stack = notes    
+        const response = await this.httpModel.get('/notes?bookmarks=false&recent=false&recently_viewed=true&search_items=false');
+        this.evictingStack.stack = response.content.notes
     }
 }
