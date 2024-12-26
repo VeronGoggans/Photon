@@ -95,12 +95,14 @@ export class TextEditorController {
 
         // If the name of the note has been changed update only the name of the note
         if (editorObject !== null && editorObject.name !== name) {
+            editorObject.name = name;
             await this.eventBus.asyncEmit(PATCH_NOTE_NAME_EVENT, {
                 'noteId': editorObject.id, 'updatedName': name});
         }
 
         // If the content of the note has been changed update only the content of the note
         else if (editorObject !== null && editorObject.content !== content) {
+            editorObject.content = content;
             await this.eventBus.asyncEmit(PATCH_NOTE_CONTENT_EVENT, {
                 'noteId': editorObject.id, 'updatedContent': content});
         }
@@ -108,9 +110,11 @@ export class TextEditorController {
         // Create a new note, if the editor object is null
         else if (editorObject === null) {
             const currentFolder = this.eventBus.emit(GET_CURRENT_FOLDER_EVENT);
-            await this.eventBus.asyncEmit(CREATE_NOTE_EVENT, {
+            const note = await this.eventBus.asyncEmit(CREATE_NOTE_EVENT, {
                 folderId: currentFolder.id, name: name, content: content, notify: notify
             });
+            // Store the just created note
+            this.model.storeEditorObject(note);
         }
     }
 

@@ -118,7 +118,10 @@ export class NoteView {
 
         this.notesContainer.addEventListener('DeleteNote', (event) => {
             const { note } = event.detail;
-            this.dialog.renderDeleteModal(this.controller, note.id, note.name)
+            const deleteCallBack = async (deleteDetails) => {
+                await this.controller.deleteNote(deleteDetails.id, deleteDetails.notify)
+            }
+            this.dialog.renderDeleteModal({'id': note.id, 'name': note.name}, deleteCallBack)
         })
 
         this.notesContainer.addEventListener('BookmarkNote', async (event) => {

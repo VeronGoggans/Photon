@@ -4,17 +4,14 @@ import { deleteModalTemplate } from "../../constants/modalTemplates.js";
 
 
 export class DeleteModal {
-    constructor(controller, id, name, notify, additions) {
-        this.id = id;
-        this.notify = notify;
-        this.name = name;
-        this.controller = controller;
-        this.additions = additions;
+    constructor(deleteDetails, deleteCallback) {
+        this.deleteDetails = deleteDetails;
+        this.deleteCallback = deleteCallback;
         this.modal = document.createElement('div');
         this.modal.classList.add('delete-modal');
         this.modal.innerHTML = deleteModalTemplate;
 
-        this.handleDelete = () => { this.#deleteItem() };
+        this.handleDelete = async () => { await this.#deleteItem() };
         this.#initElements();
         this.#eventListeners();
         return this.modal;
@@ -23,7 +20,7 @@ export class DeleteModal {
 
 
     #initElements() {
-        this.modal.querySelector('b').textContent = `"${this.name}"`;
+        this.modal.querySelector('b').textContent = `"${this.deleteDetails.name}"`;
 
         this.cancelButton = this.modal.querySelector('.cancel-btn');
         this.confirmButton = this.modal.querySelector('.delete-btn');
@@ -34,26 +31,12 @@ export class DeleteModal {
     /**
      * This method will Permanently delete the specified item
      */
-    #deleteItem() {
-        const { boardType } = this.additions;
-
+    async #deleteItem() {
         // Double check because why not
-        if (this.input.value !== this.name) {
+        if (this.input.value !== this.deleteDetails.name) {
             return;
         }
-
-        else if (this.notify) {
-            this.controller.handleDeleteButtonClick(this.id);
-        }
-
-        else if (boardType !== null) {
-            this.controller.delete(this.id, boardType);
-        }
-
-        else {
-            this.controller.delete(this.id);
-        }
-
+        await this.deleteCallback(this.deleteDetails);
         dialogEvent(this.modal, 'close');
     }
 
@@ -71,7 +54,7 @@ export class DeleteModal {
         // of the specified item e.g. folder, note, template, sticky board.
         this.input.addEventListener('input', () => {
 
-            if (this.input.value === this.name) {
+            if (this.input.value === this.deleteDetails.name) {
                 // Visual feedback that the user can now click on the confirm button
                 this.input.style.borderColor = '#5c7fdd';
 

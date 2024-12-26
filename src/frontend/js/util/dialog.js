@@ -65,8 +65,8 @@ export class Dialog {
     }
 
 
-    renderDeleteModal(controller, id, name, insideEditor, additions = {  }) {
-        this.addChild(new DeleteModal(controller, id, name, insideEditor, additions))
+    renderDeleteModal(deleteDetails, deleteCallback) {
+        this.addChild(new DeleteModal(deleteDetails, deleteCallback));
         this.dialog.querySelector('.delete-modal input').focus()
     }
 

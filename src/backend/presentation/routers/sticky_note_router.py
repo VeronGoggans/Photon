@@ -38,14 +38,14 @@ class StickyNoteRouter:
     @handle_exceptions
     def get_sticky_boards(self, db: Session = Depends(Database.get_db)):
         sticky_boards = self.manager.get_sticky_boards(db)
-        return JSONResponse(status_code=HttpStatus.OK, content={'sticky-boards': sticky_boards})
+        return JSONResponse(status_code=HttpStatus.OK, content={'stickyBoards': sticky_boards})
 
 
 
     @handle_exceptions
     def patch_sticky_board(self, request: PatchStickyBoardRequest, db: Session = Depends(Database.get_db)):
         sticky_board = self.service.update_sticky_board(request, db)
-        return JSONResponse(status_code=HttpStatus.OK, content={'sticky-board': sticky_board})
+        return JSONResponse(status_code=HttpStatus.OK, content={'stickyBoard': sticky_board})
     
 
 

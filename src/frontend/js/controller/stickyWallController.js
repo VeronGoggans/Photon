@@ -20,7 +20,7 @@ export class StickWallController {
     async initStandardStickyBoard(stickyBoard) {
         const boardType = 'standard';
         this.view = new StandardStickyBoardView(this, stickyBoard, boardType);
-        await this.get(stickyBoard.id)
+        // await this.get(stickyBoard.id)
     }
 
 
@@ -32,7 +32,7 @@ export class StickWallController {
     async initColumnStickyBoard(stickyBoard) {
         const boardType = 'column';
         this.view = new ColumnStickyBoardView(this, stickyBoard, boardType);
-        await this.get(stickyBoard.id)
+        // await this.get(stickyBoard.id)
     }
 
 
@@ -119,6 +119,7 @@ export class StickWallController {
 
     loadPreviousView() {        
         const previousViewId = this.eventBus.emit(GET_PREVIOUS_VIEW_EVENT);
+        console.log(previousViewId)
         this.eventBus.emit(INIT_VIEW_EVENT, {viewId: previousViewId});
     }
 }

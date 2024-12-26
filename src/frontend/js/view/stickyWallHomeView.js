@@ -1,13 +1,14 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
 import { Dialog } from "../util/dialog.js";
 import { StickyBoardTypes } from "../constants/constants.js";
+import {INIT_VIEW_EVENT} from "../components/eventBus.js";
 
 
 
 export class StickyWallHomeView {
-    constructor(controller, applicationController) {
+    constructor(controller, eventBus) {
         this.controller = controller;
-        this.applicationController = applicationController;
+        this.eventBus = eventBus;
 
         this.dialog = new Dialog();
         this.#initElements();
@@ -162,8 +163,9 @@ export class StickyWallHomeView {
 
         this.viewElement.addEventListener('StickyBoardClick', (event) => {
             const { stickyBoard } = event.detail;
-            this.applicationController.initView('standardStickyBoard',
+            this.eventBus.emit(INIT_VIEW_EVENT,
                 {
+                    viewId: 'standardStickyBoard',
                     stickyBoard: stickyBoard,
                     previousView: 'stickyWallHome', 
                 }
@@ -172,8 +174,14 @@ export class StickyWallHomeView {
 
         this.viewElement.addEventListener('DeleteStickyBoard', (event) => {
             const { stickyBoard } = event.detail
-            const additionals = { 'boardType': stickyBoard.type }
-            this.dialog.renderDeleteModal(this.controller, stickyBoard.id, stickyBoard.name, false, additionals);
+            const deleteCallBack = async (deleteDetails) => {
+                await this.controller.deleteStickyBoard(deleteDetails.id, deleteDetails.boardType);
+            }
+            this.dialog.renderDeleteModal({
+                'id': stickyBoard.id,
+                'name': stickyBoard.name,
+                'boardType': stickyBoard.type
+            }, deleteCallBack);
         })
     }
 

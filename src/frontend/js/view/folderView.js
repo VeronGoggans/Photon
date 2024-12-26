@@ -192,7 +192,10 @@ export class FolderView {
 
         document.body.addEventListener('DeleteFolder', (event) => {
             const { folder } = event.detail;
-            this.dialog.renderDeleteModal(this.controller, folder.id, folder.name);
+            const deleteCallBack = async (deleteDetails) => {
+                await this.controller.deleteFolder(deleteDetails.id);
+            }
+            this.dialog.renderDeleteModal({'id': folder.id, 'name': folder.name}, deleteCallBack);
         });
 
         this.foldersContainer.addEventListener('DroppedItemOnFolder', async (event) => {
