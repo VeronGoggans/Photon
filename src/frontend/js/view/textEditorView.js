@@ -6,7 +6,12 @@ import { createDocumentLocation } from "../util/ui/components.js";
 import { Dialog } from "../util/dialog.js";
 import { removeContent } from "../util/ui.js";
 import { AutoSave } from "../components/Autosave.js";
-import {FETCH_FOLDER_BY_ID_EVENT, INIT_VIEW_EVENT} from "../components/eventBus.js";
+import {
+  FETCH_FOLDER_BY_ID_EVENT,
+  INIT_VIEW_EVENT,
+  RENDER_DELETE_MODAL_EVENT,
+  RENDER_NOTE_DETAILS_MODAL_EVENT
+} from "../components/eventBus.js";
 
 
 
@@ -20,21 +25,20 @@ export class TextEditorView {
     this.#eventListeners();
 
     this.textBlockHandler = new TextBlockHandler(this.page);
-    this.dialog = new Dialog();
     this.dropdownHelper = new DropdownHelper(
       this.dropdowns, 
       this.dropdownOptions, 
       this.viewElement, 
       ['.editor-options-dropdown', '.recently-viewed-notes-dropdown']
     );
-    const saveNameCallBack = (name) => {
-      console.log('Saving name', name)
-      this.controller.save(name, this.page.innerHTML, false, false);
+
+
+    const saveNameCallBack = async (name) => {
+      await this.controller.autoSave(name, this.page.innerHTML, false, false);
     }
 
-    const saveContentCallBack = (content) => {
-      console.log('Saving content', content)
-      this.controller.save(this.documentNameInput.value, content, false, false);
+    const saveContentCallBack = async (content) => {
+      await this.controller.autoSave(this.documentNameInput.value, content, false, false);
     }
 
 
@@ -151,13 +155,6 @@ export class TextEditorView {
 
 
 
-  #getStoredEditorObject() {
-    const { editorObject } = this.controller.getStoredObject()
-    return editorObject
-  }
-
-
-
   /**
    * This method just clears the editor for a fresh start ( make the editor blank )
    */
@@ -244,32 +241,67 @@ export class TextEditorView {
 
 
   #eventListeners() {
+    /**
+     *
+     */
+    this.documentLocation.addEventListener('FolderPathClick', async (event) => {
+      await this.#loadFolder(event)
+    })
 
 
-
-    // _________________________ Custom event listeners _________________________________ //
-    this.documentLocation.addEventListener(
-        'FolderPathClick',
-        async (event) => { await this.#loadFolder(event)})
-
-
-    this.recentlyViewedNotesDropdown.addEventListener(
-        'RecentlyViewedNoteCardClick',
-        async (event) => { await this.#loadRecentlyViewedNote(event) })
+    /**
+     *
+     */
+    this.recentlyViewedNotesDropdown.addEventListener('RecentlyViewedNoteCardClick', async (event) => {
+          await this.#loadRecentlyViewedNote(event);
+    })
 
 
+    /**
+     *
+     */
+    this.noteDetailsSpan.addEventListener('click', () => {
+      const storedNoteObject = this.controller.getStoredObject();
 
-
-    // _____________________________ Event listeners ____________________________________ //
-    this.noteDetailsSpan.addEventListener('click', () => { this.dialog.renderNoteDetailsModal(this.#getStoredEditorObject()) });
-    this.deleteNoteSpan.addEventListener('click', () => { 
-      const { id } = this.#getStoredEditorObject();
-      const noteName = this.documentNameInput.value;
-      this.dialog.renderDeleteModal(this, id, noteName, true);
+      // Event to tell the dialog class to render the note details modal.
+      this.eventBus.emit(RENDER_NOTE_DETAILS_MODAL_EVENT, storedNoteObject)
     });
 
-    this.newNoteSpan.addEventListener('click', () => {this.newEditorObject()});
-    this.exitButton.addEventListener('click', () => { this.controller.loadPreviousView() });
+
+    /**
+     *
+     */
+    this.deleteNoteSpan.addEventListener('click', () => { 
+      const { id } = this.controller.getStoredObject();
+      const noteName = this.documentNameInput.value;
+
+      const deleteCallBack = async () => {
+        await this.controller.deleteEditorObject();
+      }
+
+      // Event to tell the dialog class to render the delete modal.
+      this.eventBus.emit(RENDER_DELETE_MODAL_EVENT, {
+        'id': id,
+        'name': noteName,
+        'notifyUser': true
+      })
+    });
+
+
+    /**
+     *
+     */
+    this.newNoteSpan.addEventListener('click', () => {
+      this.newEditorObject()
+    });
+
+
+    /**
+     *
+     */
+    this.exitButton.addEventListener('click', () => {
+      this.controller.loadPreviousView()
+    });
 
 
     this.page.addEventListener('click', () => {this.dropdownHelper.closeDropdowns()});

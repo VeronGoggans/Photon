@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from src.backend.data.managers.sticky_note_manager import StickyNoteManager
-from src.backend.presentation.request_bodies.note_requests import PostStickyNoteRequest, PostStickyBoardRequest, PatchStickyNoteRequest, PatchStickyBoardRequest
+from src.backend.presentation.request_bodies.note_requests import PostStickyNoteRequest, PostStickyBoardRequest, PatchStickyNoteRequest
 from src.backend.data.models import StickyNote, StandardStickyBoard, ColumnStickyBoard
 from src.backend.data.exceptions.exceptions import *
 from datetime import datetime

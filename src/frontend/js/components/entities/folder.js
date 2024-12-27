@@ -189,7 +189,7 @@ class Folder extends HTMLElement {
     }
 
     handleEditClick() {        
-        this.dispatchEvent(new CustomEvent('UpdateFolder', { detail: { folder: this.folder }, bubbles: true }));
+        this.dispatchEvent(new CustomEvent('EditFolder', { detail: { folder: this.folder }, bubbles: true }));
     }
 
     handleDrop(ItemId, itemType) {

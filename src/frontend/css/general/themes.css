@@ -6,7 +6,7 @@
 
     /*sidebar*/
     --sidebar-inactive-tab: #8686a1;
-    --sidebar-shadow: 0 0 15px #000000;
+    --sidebar-shadow: 0 0 15px #0a0812;
     /*Settings view*/
     --setting-dropdown: #18182d;
     /*Editor View*/
@@ -20,13 +20,6 @@
     --hover-slash-command: #181b3b;
     --file-path: #9095aa;
 
-    /*Flashcard View*/
-    --progress-color: #49517a;
-    --shadow-practice-card: #111020;
-    --flashcard-bg: #17181f;
-    --flashcard-edit-bg: #595fc6bd;
-    --flashcard-border: #5063b1;
-    --stats-span-color: #7990ff;
 
     /*stickyWall view*/
     --add-sticky-btn: #18172b;
@@ -63,16 +56,16 @@
     --title-bar-button-color: #5c7fdd;
     --exit-btn: #28283b;
     --secondary: #5c7dff;
-    --background: #0b0a14;
+    --background: linear-gradient(7deg, rgb(7 2 22) 6%, rgb(18 18 35) 100%);
     --notification: #0f0e1a;
     --subtitle: #9196aa;
-    --sidebar: #0b0a14; 
+    --sidebar: linear-gradient(7deg, rgb(7 2 22) 6%, rgb(22 22 43) 100%);
     --sidebar-soft: #0b0a14;
-    --searchbar: #121223;
+    --searchbar: linear-gradient(7deg, rgb(21 19 47) 6%, rgb(28 28 61) 100%);
     --sidebar-text: #d6d8e5;
     --sidebar-text-hover: #5c7fdd; 
-    --card: #141322;
-    --folder: #141322; /*#1c1c2c*/
+    --card: linear-gradient(7deg, rgb(27 26 47) 6%, rgb(16 16 35) 100%);
+    --folder: linear-gradient(7deg, rgb(27 26 47) 6%, rgb(16 16 35) 100%); /* TODO #setting option color 171531*/
     --text: hsl(232, 20%, 78%);
     --text-soft: hsl(232, 20%, 60%);;
     --icon: #bbbed2;
@@ -85,7 +78,7 @@
     --hover-searchbar-options: #18182d;
     --hover-text: #5c7dff;
     --command-square-bg: transparent;
-    --hover-sidebar: #121223;
+    --hover-sidebar: #282b5e;
     --searchbar-placeholder: #d4d7e5; 
     --placeholder: #868b9e;
     --selection: #314682;
@@ -102,8 +95,8 @@
     /*Feedback variables*/
     --completed-checklist-task: #1c1d3b;
 
-    --active-tab-bg: #181b3b;
-    --active-tab-text: #5673ff;
+    --active-tab-bg: #5c7fdd;
+    --active-tab-text: #fff;
 
 
     /*Buttons*/
@@ -136,14 +129,6 @@
     --sidebar-shadow: 0 0 15px #eaecf7;
     /*Settings view*/
     --setting-dropdown: #f4f5f7;
-    /*Flashcard View*/
-    --progress-color: #e6eaff;
-    --shadow-practice-card: #e6eaf3;
-    --flashcard-bg: #ffffff;
-    --flashcard-edit-bg: #e7ebffb5;
-    --flashcard-border: #dee1ef;
-    --stats-span-color: #282d47;
-    /*Template View*/
 
     /*stickyWall view*/
     --add-sticky-btn: #eae9f9;

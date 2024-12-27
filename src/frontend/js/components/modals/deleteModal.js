@@ -1,15 +1,18 @@
-import { dialogEvent } from "../../util/dialog.js";
 import { deleteModalTemplate } from "../../constants/modalTemplates.js";
+import { closeDialogEvent } from "../../util/dialog.js";
+
 
 
 
 export class DeleteModal {
-    constructor(deleteDetails, deleteCallback) {
-        this.deleteDetails = deleteDetails;
-        this.deleteCallback = deleteCallback;
+    constructor(modalData) {
+        this.modalData = modalData;
+
+        // The modal UI element
         this.modal = document.createElement('div');
         this.modal.classList.add('delete-modal');
         this.modal.innerHTML = deleteModalTemplate;
+
 
         this.handleDelete = async () => { await this.#deleteItem() };
         this.#initElements();
@@ -20,7 +23,7 @@ export class DeleteModal {
 
 
     #initElements() {
-        this.modal.querySelector('b').textContent = `"${this.deleteDetails.name}"`;
+        this.modal.querySelector('b').textContent = `"${this.modalData.name}"`;
 
         this.cancelButton = this.modal.querySelector('.cancel-btn');
         this.confirmButton = this.modal.querySelector('.delete-btn');
@@ -33,11 +36,13 @@ export class DeleteModal {
      */
     async #deleteItem() {
         // Double check because why not
-        if (this.input.value !== this.deleteDetails.name) {
+        if (this.input.value !== this.modalData.name) {
             return;
         }
-        await this.deleteCallback(this.deleteDetails);
-        dialogEvent(this.modal, 'close');
+
+        // Executing the provided callback function.
+        await this.modalData.callBack(this.modalData);
+        closeDialogEvent(this.modal);
     }
 
 
@@ -46,7 +51,7 @@ export class DeleteModal {
 
         // Cancel the delete process e.g. close the modal.
         this.cancelButton.addEventListener('click', () => {
-            dialogEvent(this.modal, 'close');
+            closeDialogEvent(this.modal);
         })
 
 
@@ -54,7 +59,7 @@ export class DeleteModal {
         // of the specified item e.g. folder, note, template, sticky board.
         this.input.addEventListener('input', () => {
 
-            if (this.input.value === this.deleteDetails.name) {
+            if (this.input.value === this.modalData.name) {
                 // Visual feedback that the user can now click on the confirm button
                 this.input.style.borderColor = '#5c7fdd';
 

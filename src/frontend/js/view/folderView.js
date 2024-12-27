@@ -1,15 +1,15 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
 import { removeEmptyFolderNotification, renderEmptyFolderNotification } from "../handlers/notificationHandler.js";
 import { removeContent } from "../util/ui.js";
-import { Dialog } from "../util/dialog.js"
+import {RENDER_DELETE_MODAL_EVENT, RENDER_FOLDER_MODAL_EVENT} from "../components/eventBus.js";
 
 
 export class FolderView {
-    constructor(controller, applicationController) {
+    constructor(controller, eventBus) {
         this.controller = controller;
-        this.applicationController = applicationController;
+        this.eventBus = eventBus;
 
-        this.dialog = new Dialog();
+
         this.#initElements();
         this.#eventListeners();
     }
@@ -175,28 +175,104 @@ export class FolderView {
 
     
     #eventListeners() {
+
+        /**
+         * Creating a new folder by emitting an EVENT to open de Folder modal.
+         * The Dialog class will listen for this event and render the Folder modal on the screen.
+         */
         this.viewElement.addEventListener('CreateNewFolder', () => {
-            this.dialog.renderEditFolderModal(this.controller);
+
+            // The callback function that'll create the folder when the user confirms the folder creation
+            const addFolderCallBack = async (newFolderData) => {
+                this.controller.addFolder(newFolderData);
+            }
+
+            // Event to tell the dialog to render the folder modal.
+            this.eventBus.emit(RENDER_FOLDER_MODAL_EVENT, {
+                'folder': null,
+                'callBack': addFolderCallBack
+            });
         });
 
-        this.foldersContainer.addEventListener('FolderCardClick', (event) => {
+
+        /**
+         * This custom event listener will listen for the FolderCardClick event
+         * When this event happens the folder will be loaded in the current view.
+         */
+        this.foldersContainer.addEventListener('FolderCardClick', async (event) => {
             const { folder } = event.detail;
-            this.controller.navigateIntoFolder(folder.id, folder.name);
+            await this.controller.navigateIntoFolder(folder.id, folder.name);
         });
 
-        document.body.addEventListener('UpdateFolder', (event) => {
-            const { folder } = event.detail;
-            this.dialog.renderEditFolderModal(this.controller, folder); 
-        });
-    
 
-        document.body.addEventListener('DeleteFolder', (event) => {
+        /**
+         * This custom event listener will listen for the EditFolderClick event
+         * When this event happens the FolderModal is rendered to the dialog.
+         *
+         * When the user confirms the changes made to the folder,
+         * the callback will confirm the changes mad to the folder.
+         */
+        this.foldersContainer.addEventListener('EditFolder', (event) => {
             const { folder } = event.detail;
+
+            // The callback function that'll update the folder when the user confirms the folder changes
+            const updateCallBack = async (updatedFolderData) => {
+                await this.controller.updateFolder(updatedFolderData);
+            }
+
+            // Event to tell the dialog to render the folder modal.
+            this.eventBus.emit(RENDER_FOLDER_MODAL_EVENT, {
+                'folder': folder,
+                'callBack': updateCallBack
+            })
+        });
+
+
+        /**
+         * This custom event listener will listen for the DeleteFolder event
+         * When this event happens the DeleteModal is rendered to the dialog
+         *
+         * When the user fills in a complete match with the name of the folder they are trying to delete,
+         * the callback function will tell the controller to confirm the deletion of that folder.
+         */
+        this.foldersContainer.addEventListener('DeleteFolder', (event) => {
+            const { folder } = event.detail;
+
+            // The callback function that'll delete the folder when the user types in the full name.
             const deleteCallBack = async (deleteDetails) => {
                 await this.controller.deleteFolder(deleteDetails.id);
             }
-            this.dialog.renderDeleteModal({'id': folder.id, 'name': folder.name}, deleteCallBack);
+
+            // Event to tell the dialog to render the delete modal.
+            this.eventBus.emit(RENDER_DELETE_MODAL_EVENT, {
+                'id': folder.id,
+                'name': folder.name,
+                'callBack': deleteCallBack
+            });
         });
+
+
+        /**
+         * This event listener will listen for clicks on the create new folder option button.
+         * When this button is clicked the FolderModal is rendered to the dialog.
+         *
+         * When the user confirms the creation of the folder within the folder modal,
+         * the callback function will tell the controller to confirm the creation of a new folder.
+         */
+        this.createFolderButton.addEventListener('click', () => {
+
+            // The callback function that'll create the folder when the user confirms the creation in the modal.
+            const addFolderCallBack = async (newFolderData) => {
+                await this.controller.addFolder(newFolderData);
+            }
+
+            //  Event to tell the dialog to render the folder modal.
+            this.eventBus.emit(RENDER_FOLDER_MODAL_EVENT, {
+                'folder': null,
+                'callBack': addFolderCallBack
+            })
+        });
+
 
         this.foldersContainer.addEventListener('DroppedItemOnFolder', async (event) => {
             const { folderId, droppedItemId, droppedItemType } = event.detail;
@@ -210,6 +286,6 @@ export class FolderView {
 
         // window.addEventListener('resize', this.#resizeFolderName)
         this.backButton.addEventListener('click', async () => {await this.controller.navigateOutOfFolder()})
-        this.createFolderButton.addEventListener('click', () => {this.dialog.renderEditFolderModal(this.controller)});
+
     }
 }

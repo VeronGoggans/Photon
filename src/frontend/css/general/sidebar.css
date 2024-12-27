@@ -2,7 +2,7 @@
     position: relative;
     display: grid;
     grid-template-rows: 70px 1fr;
-    background-color: var(--sidebar);
+    background: var(--sidebar);
     border-right: var(--border-sidebar-right);
 }
 

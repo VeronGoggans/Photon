@@ -57,7 +57,7 @@ export class AutoSave {
      *
      */
     saveContent() {
-        let content = this.isHtmlContent ? this.contentEditable.innerHTML : this.contentEditable.value;
+        let content = this.isHtmlContent ? this.contentEditable.innerHTML : this.contentEditable.textContent;
         this.saveCallback(content); // Call the save callback
     }
 

@@ -70,11 +70,31 @@ class StickyNoteManager:
             'standardStickyBoards': standard_sticky_boards,
             'columnStickyBoards': column_sticky_boards
         }
+    
 
+
+    def update_sticky_board_name(self,sticky_board_id: int, board_type: str, updated_name: str, db: Session) -> None:
+        sticky_board = self.__get_sticky_board(sticky_board_id, board_type, db)
+        sticky_board.name = updated_name
+        db.commit()
+    
+
+
+    def update_sticky_board_description(self, sticky_board_id: int, board_type: str, updated_description: str, db: Session ) -> None:
+        sticky_board = self.__get_sticky_board(sticky_board_id, board_type, db)
+        sticky_board.description = updated_description
+        db.commit()
 
 
 
     def delete_sticky_board(self, sticky_board_id: int, board_type: str, db: Session) -> None:
+        sticky_board = self.__get_sticky_board(sticky_board_id, board_type, db)
+        db.delete(sticky_board)
+        db.commit()
+
+
+    
+    def __get_sticky_board(self, sticky_board_id: int, board_type: str, db: Session) -> (ColumnStickyBoard | StandardStickyBoard):
         sticky_board = None
 
         if board_type == BoardType.STANDARD.value:
@@ -83,8 +103,4 @@ class StickyNoteManager:
         elif board_type == BoardType.COLUMN.value:
             sticky_board = find_column_sticky_board(sticky_board_id, db)
 
-
-        db.delete(sticky_board)
-        db.commit()
-
-
+        return sticky_board

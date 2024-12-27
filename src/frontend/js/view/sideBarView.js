@@ -1,55 +1,35 @@
 import { sidebarButtonText } from "../constants/constants.js";
 import {INIT_VIEW_EVENT} from "../components/eventBus.js";
 
+
+
+/**
+ *
+ */
 export class SidebarView {
     constructor(eventBus) {
         this.eventBus = eventBus;
-        
-        this._sidebar = document.querySelector('.sidebar');
-        this._icon = document.querySelector('.logo');
-        this.sidebarButtons = this._sidebar.querySelectorAll('.sidebar-content a');
-        this.sidebarIcons = this._sidebar.querySelectorAll('.sidebar-content a i')
-        this.sidebarSpans = this._sidebar.querySelectorAll('.sidebar-content a span');
-        this.logo = this._sidebar.querySelector('.sidebar-logo');
-
-        this._wrapper = document.querySelector('.wrapper');
         this._buttonCount = 4;
 
+        this.#initElements();
         this.#eventListeners();
-
-        this.sidebarButtons.forEach(link => {
-            link.addEventListener('click', (event) => {
-                event.preventDefault();
-
-                const anchor = event.target.closest('a[data-view]')
-                if (anchor) {
-
-                    const viewId = anchor.getAttribute('data-view')
-
-                    if (viewId === 'notes') {
-                        // Load the notes view and tell it to render the Home folder 
-                        const homeFolder = {'id': 1, 'name': 'Home'}
-                        this.eventBus.emit(INIT_VIEW_EVENT, {
-                            viewId: viewId,
-                            folder: homeFolder,
-                            location: homeFolder
-                         });
-                    } else {
-                        // Load any other view if not the notes view.
-                        this.eventBus.emit(INIT_VIEW_EVENT, {viewId: viewId});
-                    }                    
-                }
-            });
-        });
     }
 
+
+    /**
+     * Sets the active tab in the sidebar by updating the CSS classes of the tab buttons.
+     *
+     * @param {string} view - The identifier for the tab to activate.
+     *                        This should correspond to the ID of the tab button, excluding the "-btn" suffix.
+     */
     setActiveTab(view) {
         // Remove the previous active tab
         this.sidebarButtons.forEach(button => button.classList.remove('active-tab'));
 
-        // Set new active tab
+        // Set the new active tab
         this._sidebar.querySelector(`#${view}-btn`).classList.add('active-tab')
     }
+
 
     /**
      * This method is called when the screen width 
@@ -69,7 +49,8 @@ export class SidebarView {
         document.querySelector('.logo-container').style.justifyContent = 'center'
         document.querySelector('.logo-text').textContent = '';
     }
-    
+
+
     /**
      * This method is called when the screen width 
      * becomes bigger than 700 pixels
@@ -89,6 +70,7 @@ export class SidebarView {
         document.querySelector('.logo-text').textContent = 'hoton';
     }
 
+
     #toggleSidebar() {
         if (this._sidebar.offsetWidth === 220) {
             this._wrapper.style.transition = '150ms'
@@ -107,11 +89,13 @@ export class SidebarView {
         }
     }
 
+
     #removeTransition() {
         setTimeout(() => {
             this._wrapper.style.transition = '0ms'
         }, 160);
     }
+
 
     /**
      * This method checks if the app should display 
@@ -132,10 +116,76 @@ export class SidebarView {
         }
     }
 
+
+    #initElements() {
+        this._sidebar = document.querySelector('.sidebar');
+        this._icon = document.querySelector('.logo');
+        this.sidebarButtons = this._sidebar.querySelectorAll('.sidebar-content a');
+        this.sidebarIcons = this._sidebar.querySelectorAll('.sidebar-content a i')
+        this.sidebarSpans = this._sidebar.querySelectorAll('.sidebar-content a span');
+        this.logo = this._sidebar.querySelector('.sidebar-logo');
+
+        this._wrapper = document.querySelector('.wrapper');
+    }
+
+
     #eventListeners() {
-        this._icon.addEventListener('click', () => {this.#toggleSidebar()});
+
+        /**
+         * This event listener will listen for click events on the app logo within the sidebar.
+         * Clicking on the logo will toggle the sidebar size (state)
+         */
+        this._icon.addEventListener('click', () => {
+            this.#toggleSidebar();
+        });
+
+
+        /**
+         * This event listener will listen for the resize event on the window,
+         * if the width of the window (viewport) becomes smaller than 940 pixels
+         *
+         * @function #resizeSidebar will collapse the sidebar to its small state.
+         */
         window.addEventListener('resize', () => this.#resizeSidebar());
 
+
+        /**
+         * This collection of event listeners will listen for the click event on the sidebar buttons.
+         *
+         * If the notes tab button is clicked the ApplicationController will be notified to initialize the
+         * note view and load the home folder (root folder)
+         *
+         * All the other tabs will just notify the ApplicationController to initialize the corresponding view,
+         * without any other logic
+         */
+        this.sidebarButtons.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+
+                const anchor = event.target.closest('a[data-view]')
+                const viewId = anchor.getAttribute('data-view')
+
+                if (viewId === 'notes') {
+                    // Event that tells the ApplicationController to initialize the notes view
+                    // and load the home folder (root folder).
+                    this.eventBus.emit(INIT_VIEW_EVENT, {
+                        viewId: viewId,
+                        folder: {'id': 1, 'name': 'Home'},
+                        location: {'id': 1, 'name': 'Home'}
+                    });
+                }
+
+                // load other views (e.g. sticky board, home, settings view)
+                else {
+                    this.eventBus.emit(INIT_VIEW_EVENT, {viewId: viewId});
+                }
+            });
+        });
+
+
+        /**
+         *
+         */
         this._sidebar.addEventListener('drop', (event) => {
             event.preventDefault();
 
@@ -155,18 +205,27 @@ export class SidebarView {
             }
         })
 
+
+        /**
+         *
+         */
         this._sidebar.addEventListener('SetSidebarState', (event) => {
             const { state } = event.detail;
 
-            console.log("sidebar state");
-            
-
         })
 
+
+        /**
+         *
+         */
         this._sidebar.addEventListener('dragover', (event) => {
             event.preventDefault();
         })
 
+
+        /**
+         *
+         */
         this._sidebar.addEventListener('dragleave', (event) => {
             event.preventDefault();
         })

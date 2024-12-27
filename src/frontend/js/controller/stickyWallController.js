@@ -76,21 +76,28 @@ export class StickWallController {
 
 
 
-    /**
-     *
-     *
-     * @param stickyBoardId
-     * @param changedName
-     * @param changedDescription
-     */
-    async patchStickyBoard(stickyBoardId, changedName = null, changedDescription = null) {
-        const route = `/stickyBoard`;
-        const patchStickyBoardRequest = {
-            'id': stickyBoardId,
-            'name': changedName,
-            'description': changedDescription
+
+    async updateStickyBoardName(updatedStickyBoardData) {
+        const { stickyBoardId, boardType, updatedName } = updatedStickyBoardData;
+        const patchStickyBoardNameRequest = {
+            "board_type": "standard",
+            "name": "Test sticky board"
         }
-        await this.model.patch(route, patchStickyBoardRequest);
+        console.log(patchStickyBoardNameRequest)
+        const route = `/stickyBoards/${stickyBoardId}/name`;
+        await this.model.patch(route, patchStickyBoardNameRequest);
+    }
+
+
+
+    async updateStickyBoardDescription(updatedStickyBoardData) {
+        const { stickyBoardId, boardType, updatedDescription } = updatedStickyBoardData;
+        const patchStickyBoardDescriptionRequest = {
+            'board_type': boardType,
+            'description': updatedDescription
+        }
+        const route = `/stickyBoards/${stickyBoardId}/description`;
+        await this.model.patch(route, patchStickyBoardDescriptionRequest);
     }
 
 

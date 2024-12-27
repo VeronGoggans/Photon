@@ -86,7 +86,7 @@ export class TextEditorController {
      * @param notify
      * @param clearEditorObject
      */
-    async save(name, content, notify, clearEditorObject) {
+    async autoSave(name, content, notify, clearEditorObject) {
         const { editorObject } = this.model.getStoredObject();
 
         if (clearEditorObject) {

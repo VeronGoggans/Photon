@@ -1,12 +1,13 @@
-import { dialogEvent } from "../../util/dialog.js";
 import { editFolderModalTemplate } from "../../constants/modalTemplates.js";
- 
+import { closeDialogEvent } from "../../util/dialog.js";
 
-export class EditFolderModal {
-    constructor(controller, folder) {
-        this.folder = folder;
-        this.controller = controller;
-        this.action = 'add';
+
+
+
+export class FolderModal {
+    constructor(modalData) {
+        this.modalData = modalData;
+        this.folder = modalData.folder;
         this.preferedFolderColor = null;
 
         this.#initElements();
@@ -20,18 +21,20 @@ export class EditFolderModal {
         this.modal.classList.add('edit-folder-modal');
         this.modal.innerHTML = editFolderModalTemplate;
         this.colorsArray = this.modal.querySelectorAll('.folder-color-options div');
+
         if (this.folder !== null) {
             this.#loadFolder();
             return
         }
+
         this.#showActiveFolderColor('rgb(255, 255, 255)');
     }
+
 
     #loadFolder() {
         this.modal.querySelector('h2').textContent = 'Edit folder';
         this.modal.querySelector('.save-btn').textContent = 'Save changes';
         this.modal.querySelector('input').value = this.folder.name;
-        this.action = 'update';
         this.#showActiveFolderColor(this.folder.color);
     }
 
@@ -42,28 +45,36 @@ export class EditFolderModal {
             colorElement.addEventListener('click', () => {this.#showActiveFolderColor(color)});
         });
 
+
+        /**
+         *
+         */
         this.modal.querySelector('.save-btn').addEventListener('click', async () => {
-            if (this.action === 'update') {
-                await this.controller.updateFolder({
+
+            if (this.folder !== null) {
+                await this.modalData.callBack({
                     'id': this.folder.id,
                     'name': this.modal.querySelector('input').value,
                     'color': this.preferedFolderColor
                 })    
             }
-            else if (this.action === 'add') {
-                await this.controller.addFolder({
+
+            else {
+                await this.modalData.callBack({
                     'name': this.modal.querySelector('input').value || 'Untitled',
                     'color': this.preferedFolderColor
                 })
             }
-            dialogEvent(this.modal, 'close');
+
+            closeDialogEvent(this.modal);
         });
 
         this.modal.querySelector('.cancel-btn').addEventListener('click', () => {
-            dialogEvent(this.modal, 'close');
+            closeDialogEvent(this.modal);
         });
     }
-  
+
+
 
     #showActiveFolderColor(color) {
         for (let i = 0; i < this.colorsArray.length; i++) {

@@ -4,7 +4,7 @@ folder-card {
     display: flex;
     align-items: center;
     padding: 10px;
-    background-color: var(--folder);
+    background: var(--folder);
     border-radius: 10px;
     color: var(--important);
     opacity: 0;
@@ -36,7 +36,7 @@ recent-folder-card {
     display: flex;
     align-items: center;
     padding: 10px;
-    background-color: var(--folder);
+    background: var(--folder);
     border-radius: 10px;
     color: var(--important);
     opacity: 0;
@@ -72,18 +72,18 @@ folder-path:hover {
 }
 
 
-.color-blue-1 {background-color: rgb(121, 144, 255)}
-.color-blue-2 {background-color: rgb(169, 215, 255)}
-.color-blue-3 {background-color: rgb(217, 237, 255)}
-.color-green-1 {background-color: rgb(158, 213, 197)}
-.color-green-2 {background-color: rgb(203, 255, 197)}
-.color-green-3 {background-color: rgb(173, 255, 164)}
-.color-purple-1 {background-color: rgb(142, 122, 181)}
-.color-purple-2 {background-color: rgb(223, 193, 255)}
-.color-red-1 {background-color: rgb(255, 163, 163)}
-.color-red-2 {background-color: rgb(255, 197, 197)}
-.color-orange-1 {background-color: rgb(255, 182, 116)}
-.color-orange-2 {background-color: rgb(255, 224, 158)}
+.color-blue-1 {background: rgb(121, 144, 255)}
+.color-blue-2 {background: rgb(169, 215, 255)}
+.color-blue-3 {background: rgb(217, 237, 255)}
+.color-green-1 {background: rgb(158, 213, 197)}
+.color-green-2 {background: rgb(203, 255, 197)}
+.color-green-3 {background: rgb(173, 255, 164)}
+.color-purple-1 {background: rgb(142, 122, 181)}
+.color-purple-2 {background: rgb(223, 193, 255)}
+.color-red-1 {background: rgb(255, 163, 163)}
+.color-red-2 {background: rgb(255, 197, 197)}
+.color-orange-1 {background: rgb(255, 182, 116)}
+.color-orange-2 {background: rgb(255, 224, 158)}
 
 
 .color-blue-1 p,

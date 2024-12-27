@@ -53,6 +53,12 @@ export class EventBus {
     }
 
 
+    /**
+     *
+     * @param eventName
+     * @param data
+     * @returns {*|*[]}
+     */
     emit(eventName, data) {
         let results = [];
         if (this.events[eventName]) {
@@ -115,4 +121,14 @@ export const OPEN_NOTE_IN_TEXT_EDITOR_EVENT = 'open-note-in-text-editor';
 
 export const SET_NOTE_LOCATION_EVENT = 'set-note-location';
 export const SET_PREVIOUS_VIEW_EVENT = 'set-previous-view';
+
+
+// Dialog events (synchronous)
+export const RENDER_FOLDER_MODAL_EVENT = 'render-folder-modal';
+export const RENDER_NOTE_DETAILS_MODAL_EVENT = 'render-note-details-modal';
+export const RENDER_DELETE_MODAL_EVENT = 'render-delete-note-modal';
+export const RENDER_STICKY_BOARD_MODAL_EVENT = 'render-sticky-board-modal';
+export const RENDER_SEARCH_MODAL_EVENT = 'render-search-modal';
+
+
 

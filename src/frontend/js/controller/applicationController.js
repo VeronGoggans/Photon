@@ -15,6 +15,7 @@ import {
     INIT_VIEW_EVENT, OPEN_NOTE_IN_TEXT_EDITOR_EVENT, OPEN_TEXT_EDITOR_EVENT,
     SET_NOTE_LOCATION_EVENT, SET_PREVIOUS_VIEW_EVENT
 } from "../components/eventBus.js";
+import {Dialog} from "../util/dialog.js";
 
 
 
@@ -24,6 +25,7 @@ export class ApplicationController {
         this.viewStack = new Stack();
         this.eventBus = new EventBus();
         this.router = new Router(this.eventBus);
+        this.dialog = new Dialog(this.eventBus);
 
         this.eventBus.emit(FETCH_SETTINGS_EVENT);
         this.eventBus.registerEvents({
@@ -96,7 +98,7 @@ class Router {
             }
 
             else if (viewId === 'standardStickyBoard') {
-                const {stickyBoard, previousView} = viewParameters;
+                const { stickyBoard, previousView } = viewParameters;
                 await this.stickyWallController.initStandardStickyBoard(stickyBoard);
 
                 this.eventBus.emit(SET_PREVIOUS_VIEW_EVENT, previousView);

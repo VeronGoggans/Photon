@@ -4,7 +4,7 @@ recently-changed-note-card{
     min-height: 280px;
     max-height: 280px;
     border-radius: 15px;
-    background-color: var(--card);
+    background: var(--card);
     display: grid;
     grid-template-rows: 40px 1fr;
     overflow: visible;
@@ -86,7 +86,7 @@ recently-changed-note-card .note-content-box a {color: rgb(67, 142, 255)}
 }
 
 .bookmarked-note {
-    background-color: var(--bookmark) !important;
+    background: var(--bookmark) !important;
 }
 
 recently-viewed-note-card {

@@ -72,16 +72,23 @@ class PostStickyBoardRequest(BaseModel):
 
 
 
-class PatchStickyBoardRequest(BaseModel):
+class PatchStickyBoardNameRequest(BaseModel):
     """
-    - id (str): The ID of the sticky wall that will be updated.
-    - name (str): The name of the sticky wall
-    - content (str): The description of the sticky wall
+    - board_type (str): The type of sticky board
+    - name (str): The new name of the sticky board
     """
-    id: int
-    name: Optional[str] = None
-    description: Optional[str] = None
+    board_type: str
+    name: str
 
+
+
+class PatchStickyBoardDescriptionRequest(BaseModel):
+    """
+    - board_type (str): The type of sticky board
+    - description (str): The new description of the sticky board
+    """
+    board_type: str
+    description: str
 
 
 

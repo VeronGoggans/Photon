@@ -52,7 +52,6 @@ empty-notification {
     height: 400px;
     max-width: 400px;
     margin: auto;
-    margin-top: 5%;
     display: grid;
     opacity: 0;
     transform: translateY(30%);
@@ -75,7 +74,7 @@ empty-notification #floating-icon3,
 empty-notification #floating-icon4 {
     position: absolute;
     background-color: var(--hover-sidebar);
-    color: #7e8392;
+    color: var(--text);
     border-radius: 5px;
     display: flex;
     justify-content: center;
@@ -136,28 +135,30 @@ empty-notification p {
     font-size: 25px;
     margin: 5px 0;
     font-weight: 400;
-    color: var(--text);
+    color: var(--important);
 }
 
 empty-notification span {
     max-width: 400px;
     font-weight: 300;
     text-align: center;
-    color: var(--placeholder);
+    color: var(--less-important);
 }
 
 empty-notification .emtpy-message-buttons {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: end;
     column-gap: 25px;
+    height: 100px;
 }
 
 .emtpy-message-buttons button {
     border: none;
     background-color: #5c7fdd;
-    padding: 7px;
-    border-radius: 4px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
     color: #fff;
     font-size: 14px;
     transition: .2s;
@@ -165,4 +166,5 @@ empty-notification .emtpy-message-buttons {
 
 .emtpy-message-buttons button:hover {
     background-color: #466edb;
+    scale: 1.05;
 }

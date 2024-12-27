@@ -39,7 +39,7 @@ sticky-board {
     display: grid;
     grid-template-rows: 1fr 1fr;
     border-radius: 10px;
-    background-color: var(--card);
+    background: var(--card);
     min-height: 200px;
     opacity: 0;
     transform: translateY(30%);

@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from src.backend.data.database import Database
 from src.backend.application.services.sticky_note_service import StickyNoteService
 from src.backend.data.managers.sticky_note_manager import StickyNoteManager
-from src.backend.presentation.request_bodies.note_requests import PostStickyBoardRequest, PostStickyNoteRequest, PatchStickyBoardRequest, PatchStickyNoteRequest
+from src.backend.presentation.request_bodies.note_requests import PostStickyBoardRequest, PostStickyNoteRequest, PatchStickyNoteRequest, PatchStickyBoardNameRequest, PatchStickyBoardDescriptionRequest
 from src.backend.presentation.http_status import HttpStatus
 from src.backend.data.exceptions.exception_handler import handle_exceptions
 from src.backend.presentation.response import JSONResponse
@@ -16,15 +16,16 @@ class StickyNoteRouter:
         self.manager = StickyNoteManager()
         self.service = StickyNoteService(self.manager)
 
-        self.route.add_api_route('/stickyNotes',                                     self.add_sticky_note, methods=['POST'])
-        self.route.add_api_route('/stickyNotes/{sticky_board_id}/{board_type}',      self.get_sticky_notes, methods=['GET'])
-        self.route.add_api_route('/stickyNotes{sticky_note_id}',                     self.update_sticky_note, methods=['PUT'])
-        self.route.add_api_route('/stickyNotes/{sticky_note_id}',                    self.delete_sticky_note, methods=['DELETE'])
+        self.route.add_api_route('/stickyNotes',                                        self.add_sticky_note, methods=['POST'])
+        self.route.add_api_route('/stickyNotes/{sticky_board_id}/{board_type}',         self.get_sticky_notes, methods=['GET'])
+        self.route.add_api_route('/stickyNotes{sticky_note_id}',                        self.update_sticky_note, methods=['PUT'])
+        self.route.add_api_route('/stickyNotes/{sticky_note_id}',                       self.delete_sticky_note, methods=['DELETE'])
 
-        self.route.add_api_route('/stickyBoards',                                    self.add_sticky_board, methods=['POST'])
-        self.route.add_api_route('/stickyBoards',                                    self.get_sticky_boards, methods=['GET'])
-        self.route.add_api_route('/stickyBoards',                                    self.patch_sticky_board, methods=['PATCH'])
-        self.route.add_api_route('/stickyBoards/{sticky_board_id}/{board_type}',     self.delete_sticky_board, methods=['DELETE'])
+        self.route.add_api_route('/stickyBoards',                                       self.add_sticky_board, methods=['POST'])
+        self.route.add_api_route('/stickyBoards',                                       self.get_sticky_boards, methods=['GET'])
+        self.route.add_api_route('/stickyBoards/{stickyboardId}/name',                  self.update_sticky_board_name, methods=['PATCH'])
+        self.route.add_api_route('/stickyBoards/{stickyboardId}/description',           self.update_sticky_board_description, methods=['PATCH'])
+        self.route.add_api_route('/stickyBoards/{sticky_board_id}/{board_type}',        self.delete_sticky_board, methods=['DELETE'])
         
 
 
@@ -43,9 +44,16 @@ class StickyNoteRouter:
 
 
     @handle_exceptions
-    def patch_sticky_board(self, request: PatchStickyBoardRequest, db: Session = Depends(Database.get_db)):
-        sticky_board = self.service.update_sticky_board(request, db)
-        return JSONResponse(status_code=HttpStatus.OK, content={'stickyBoard': sticky_board})
+    def update_sticky_board_name(self, sticky_board_id: int, request: PatchStickyBoardNameRequest, db: Session = Depends(Database.get_db)):
+        self.manager.update_sticky_board_name(sticky_board_id, request.board_type, request.name, db)
+        return JSONResponse(status_code=HttpStatus.OK)
+    
+
+
+    @handle_exceptions
+    def update_sticky_board_description(self, sticky_board_id: int, request: PatchStickyBoardDescriptionRequest, db: Session = Depends(Database.get_db)):
+        self.manager.update_sticky_board_description(sticky_board_id, request.board_type, request.description, db)
+        return JSONResponse(status_code=HttpStatus.OK)
     
 
 

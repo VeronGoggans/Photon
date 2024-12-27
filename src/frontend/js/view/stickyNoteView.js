@@ -1,7 +1,6 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
-import { Dialog } from "../util/dialog.js";
 import { createCustomElement } from "../util/ui/components.js";
-
+import { AutoSave } from "../components/Autosave.js";
 
 
 
@@ -10,10 +9,28 @@ export class StandardStickyBoardView {
         this.controller = controller;
         this.stickyBoard = stickyBoard;
 
-        this.dialog = new Dialog();
         this.#initElements();
         this.#eventListeners();
         this.#dynamicBoardResize();
+
+        const saveNameCallBack = async (name) => {
+            await this.controller.updateStickyBoardName({
+                'stickyBoardId': this.stickyBoard.id,
+                'boardType': this.stickyBoard.type,
+                'updatedName': name
+            })
+        }
+
+        const saveDescriptionCallBack = async (description) => {
+            await this.controller.updateStickyBoardDescription({
+                'stickyBoardId': this.stickyBoard.id,
+                'boardType': this.stickyBoard.type,
+                'updatedDescription': description
+            })
+        }
+
+        new AutoSave('.sticky-board-name-container h2', saveNameCallBack, false);
+        new AutoSave('.description', saveDescriptionCallBack);
         AnimationHandler.fadeInFromBottom(this._viewElement);
     }
 
@@ -128,13 +145,6 @@ export class StandardStickyBoardView {
         });
         this._exitStickyBoardButton.addEventListener('click', () => {this.controller.loadPreviousView()});
 
-        this._stickyBoardDescription.addEventListener('input', () => {
-            const changedStickyBoardName = this._stickyBoardName.textContent.trim();
-        });
-        this._stickyBoardName.addEventListener('input', () => {
-            const changedStickyBoardDescription = this._stickyBoardDescription.innerHTML;
-        });
-
         this._stickyBoard.addEventListener('StickyCardClick', (event) => {
             console.log('sticky click')
         });
@@ -150,6 +160,9 @@ export class StandardStickyBoardView {
 
         this._stickyBoardDescription = document.querySelector('.description');
         this._stickyBoardName = document.querySelector('h2');
+
+        this._stickyBoardName.textContent = this.stickyBoard.name;
+        this._stickyBoardDescription.innerHTML = this.stickyBoard.description;
     }
 }
 
@@ -165,7 +178,6 @@ export class ColumnStickyBoardView {
         this.controller = controller;                   // The parent controller "StickyBoardController"
         this.stickyColumnBoard = stickyColumnBoard;     // The data related to the clicked on sticky board
 
-        this.dialog = new Dialog();                     // Dependency to render modals if necessary
         this.#initElements();                           // Will register all the relevant UI elements
         this.#eventListeners();                         // Adds eventlisteners to all the relevant UI elements
 

@@ -69,7 +69,7 @@ i {
     height: calc(100dvh);
     display: grid;
     grid-template-columns: 220px 1fr;
-    background-color: var(--background);
+    background: var(--background);
 }
 
 .content {

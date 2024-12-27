@@ -1,7 +1,6 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
-import { Dialog } from "../util/dialog.js";
 import { StickyBoardTypes } from "../constants/constants.js";
-import {INIT_VIEW_EVENT} from "../components/eventBus.js";
+import {INIT_VIEW_EVENT, RENDER_DELETE_MODAL_EVENT, RENDER_STICKY_BOARD_MODAL_EVENT} from "../components/eventBus.js";
 
 
 
@@ -10,7 +9,6 @@ export class StickyWallHomeView {
         this.controller = controller;
         this.eventBus = eventBus;
 
-        this.dialog = new Dialog();
         this.#initElements();
         this.#eventListeners();
         AnimationHandler.fadeInFromBottom(this.viewElement);
@@ -157,12 +155,33 @@ export class StickyWallHomeView {
 
 
     #eventListeners() {
+
+        /**
+         * This event listener will listen for click events on the create board button
+         * When this button is clicked the StickyBoardModal will be rendered to the dialog.
+         */
         this._addNewstickyWallButton.addEventListener('click', () => {
-            this.dialog.renderNewStickyBoardModal(this.controller)
+
+            // The callback function that'll create a new sticky board when the user clicks on the create button.
+            const addStickyBoardCallBack = async () => {
+                await this.controller.addStickyBoard()
+            }
+
+            // Event to tell the dialog class to render the sticky board modal.
+            this.eventBus.emit(RENDER_STICKY_BOARD_MODAL_EVENT, {
+                'callBack': addStickyBoardCallBack
+            })
         });
 
+
+        /**
+         * This custom event listener will listen for the StickyBoardClick event
+         * When this event happens the sticky board will be rendered within the corresponding view.
+         */
         this.viewElement.addEventListener('StickyBoardClick', (event) => {
             const { stickyBoard } = event.detail;
+
+            // Event to tell the ApplicationController to initialize the standard sticky board view
             this.eventBus.emit(INIT_VIEW_EVENT,
                 {
                     viewId: 'standardStickyBoard',
@@ -172,16 +191,29 @@ export class StickyWallHomeView {
             )
         })
 
+
+        /**
+         * This custom event listener will listen for the DeleteStickyBoard event
+         * When this event happens the DeleteModal is rendered to the dialog
+         *
+         * When the user fills in a complete match with the name of the sticky board they are trying to delete,
+         * the callback function will tell the controller to confirm the deletion of that sticky board.
+         */
         this.viewElement.addEventListener('DeleteStickyBoard', (event) => {
             const { stickyBoard } = event.detail
+
+            // The callback function that'll delete the sticky board when the user types in the full name.
             const deleteCallBack = async (deleteDetails) => {
-                await this.controller.deleteStickyBoard(deleteDetails.id, deleteDetails.boardType);
+                await this.controller.deleteStickyBoard(deleteDetails.id, deleteDetails.type);
             }
-            this.dialog.renderDeleteModal({
+
+            // Event to tell the dialog to render the delete modal.
+            this.eventBus.emit(RENDER_DELETE_MODAL_EVENT, {
                 'id': stickyBoard.id,
                 'name': stickyBoard.name,
-                'boardType': stickyBoard.type
-            }, deleteCallBack);
+                'boardType': stickyBoard.type,
+                'callBack': deleteCallBack
+            })
         })
     }
 

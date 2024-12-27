@@ -59,9 +59,7 @@ export class TextEditorModel {
      * @returns { editorObject: Object }
      */
     getStoredObject() {
-        return {
-            editorObject: this.editorObject
-        }
+        return this.editorObject
     }
 
 

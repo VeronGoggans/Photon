@@ -55,23 +55,23 @@ export class SettingController {
 
     async updateTheme(newTheme) {
         const route = `/settings/theme/${newTheme}`;
-        const response = await this.model.update(route);
+        const response = await this.model.patch(route);
         return response.content.theme;
     }
 
 
 
     async updateSidebarColor(newColor) {
-        const route = `/settings/sidebarColor/${newColor}`;
-        const response = await this.model.update(route);
+        const route = `/settings/sidebar-color/${newColor}`;
+        const response = await this.model.patch(route);
         return response.content.color;
     }
 
 
 
     async updateWidgetStyle(newWidgetStyle) {
-        const route = `/settings/widgetStyle/${newWidgetStyle}`;
-        const response = await this.model.update(route);
+        const route = `/settings/widget-style/${newWidgetStyle}`;
+        const response = await this.model.patch(route);
         window.sessionStorage.setItem('widget-style', newWidgetStyle);
         return response.content.widgetStyle;
     }
@@ -79,8 +79,8 @@ export class SettingController {
 
 
     async updateFolderIconColor(newFolderIconColor) {
-        const route = `/settings/folderIconColor/${newFolderIconColor}`;
-        const response = await this.model.update(route);
+        const route = `/settings/folder-icon-color/${newFolderIconColor}`;
+        const response = await this.model.patch(route);
         window.sessionStorage.setItem('folder-icon-color', newFolderIconColor);
         return response.content.folderIconColor;
     }

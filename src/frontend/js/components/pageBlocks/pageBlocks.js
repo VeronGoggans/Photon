@@ -1,13 +1,11 @@
 import { createCustomElement } from "../../util/ui/components.js";
 import { formatDate } from "../../util/date.js";
-import { pixelToPercentage } from "../../util/ui.js";
 
 
 class DocumentLocationPageBlock extends HTMLElement {
 
     setData(value) {
         this.folders = value
-        console.log(this.folders)
     }
 
 
@@ -74,10 +72,11 @@ class EntityOptionsMenu extends HTMLElement {
 
         // Place the options menu slightly above the card it's assigned to.
         const rect = this.boundedElement.getBoundingClientRect();
-        const { x, y } = pixelToPercentage(rect.left, rect.top);
+        const optionMenuHeight = this.offsetHeight;
+        const padding = 20; // To create a gap between the card and the options menu
 
-        this.style.left = `${x}%`;
-        this.style.top =  `${y - 20}%`;
+        this.style.left = `${rect.left}px`;
+        this.style.top =  `${rect.top - optionMenuHeight - padding}px`;
     }
 
 

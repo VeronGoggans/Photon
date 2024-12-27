@@ -4,7 +4,7 @@
     width: 50%;
     max-width: 450px;
     min-width: 300px;
-    background-color: var(--searchbar);
+    background: var(--searchbar);
     border-radius: 50px;
     display: flex;
 }
