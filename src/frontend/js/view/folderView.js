@@ -9,7 +9,6 @@ export class FolderView {
         this.controller = controller;
         this.eventBus = eventBus;
 
-
         this.#initElements();
         this.#eventListeners();
     }
@@ -17,11 +16,16 @@ export class FolderView {
 
 
     /**
-     * This method will render an array of folder objects
+     * Renders a collection of folders in the folders container, updating the UI accordingly.
      *
-     * The "folders" subtitle will appear, if the folders array is not empty.
+     * If there are no folders, it hides the folders subtitle and the container. If folders do exist,
+     * it ensures the subtitle and container are visible, creates folder cards for each folder,
+     * and animates their appearance.
      *
-     * @param folders { Array[Object] } - An array of folder objects.
+     * @param {Array<Object>} folders               - An array of folder objects to be rendered. Each object represents a folder.
+     *
+     * @requires createCustomElement                - A utility function to create a DOM element for a folder.
+     * @requires AnimationHandler.fadeInFromBottom  - A utility method that animates the fade-in effect for a folder card.
      */
     renderAll(folders) {
 
@@ -51,12 +55,18 @@ export class FolderView {
 
 
     /**
-     * This method will render a single folder.
+     * Renders a single folder in the UI and updates the container's visibility if needed.
      *
-     * The "folders" subtitle will appear, if the folder being rendered
-     * is the first one within the current folder.
+     * If this is the first folder being added, the method ensures the folder subtitle and container
+     * are made visible. It then creates a folder card, appends it to the container, applies an
+     * animation effect, and removes any "empty folder" notifications.
      *
-     * @param folder { Object } - Representing the newly created folder.
+     * @param {Object} folder                       - The folder object to be rendered.
+     *
+     * @requires AnimationHandler.fadeInFromBottom  - Animates the appearance of the newly added folder card.
+     * @requires removeEmptyFolderNotification      - Removes any "empty folder" notification displayed in the UI.
+     * @private
+     * @method #folder                              - A private method that creates a DOM element for the folder card.
      */
     renderOne(folder) {
         // show the folders subtitle if this is the first folder
@@ -74,9 +84,16 @@ export class FolderView {
 
 
     /**
-     * This method will update the visual representation of a folder.
+     * Updates the attributes of a folder card in the UI when the folder data is modified.
      *
-     * @param folder { Object } - The updated folder.
+     * This method iterates through the folder cards in the folder container to find the one
+     * matching the given folder's ID. Once found, it updates the `folder` attribute of the
+     * folder card with the serialized folder data.
+     *
+     * @param {Object} folder            - The folder object containing updated data.
+     * @param {number|string} folder.id  - The unique identifier of the folder to be updated.
+     *
+     * @requires JSON.stringify          - Converts the folder object to a JSON string for storage as an attribute.
      */
     renderUpdate(folder) {
         const folderCards = this.foldersContainer.children; 
@@ -91,12 +108,18 @@ export class FolderView {
 
 
     /**
-     * This method will delete a specified folder.
+     * Handles the deletion of a folder by updating the UI and removing its visual representation.
      *
-     * The "folders" subtitle will disappear, if the folder being deleted
-     * is the last one within the current folder.
+     * If the folder container contains only one folder, it hides the folder subtitle and container.
+     * The method then finds and animates the removal of the folder that matches the given folder ID.
+     * Finally, it displays a notification for an empty folder, if empty.
      *
-     * @param folder { Object } The folder to delete
+     * @param {Object} folder                   - The folder object to be deleted.
+     * @param {number|string} folder.id         - The unique identifier of the folder to be removed.
+     *                                            This must match the ID of a folder card in the container.
+     *
+     * @requires AnimationHandler.fadeOutCard   - A utility method to animate the fade-out of an element.
+     * @requires renderEmptyFolderNotification  - A function that displays a notification for an empty folder.
      */
     renderDelete(folder) {
         // remove the folders subtitle if this was the last folder

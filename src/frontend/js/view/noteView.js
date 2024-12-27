@@ -13,6 +13,7 @@ export class NoteView {
 
         this.#initElements();
         this.#eventListeners();
+
         new DropdownHelper(
             this.dropdowns, 
             this.dropdownOptions,
@@ -25,11 +26,16 @@ export class NoteView {
 
 
     /**
-     * This method will render an array of note objects
+     * Renders a collection of notes in the notes container, updating the UI accordingly.
      *
-     * The "documents" subtitle will appear, if the notes array is not empty.
+     * If there are no notes, it hides the notes subtitle and the container. If notes do exist,
+     * it ensures the subtitle and container are visible, creates note cards for each note,
+     * and animates their appearance.
      *
-     * @param notes { Array[Object] } - An array of note objects.
+     * @param {Array<Object>} notes                 - An array of note objects to be rendered. Each object represents a note.
+     *
+     * @requires createCustomElement                - A utility function to create a DOM element for a note.
+     * @requires AnimationHandler.fadeInFromBottom  - A utility method that animates the fade-in effect for a note card.
      */
     renderAll(notes) {
 
@@ -59,20 +65,27 @@ export class NoteView {
 
 
     /**
-     * This method will delete a specified note (document).
+     * Handles the deletion of a note by removing its visual representation and updating the UI.
      *
-     *  The "Documents" subtitle will disappear, if the note being deleted
-     * is the last one within the current folder.
+     * If the notes container has only one child, it hides the notes subtitle and the notes container.
+     * The method then finds and animates the removal of the note that matches the given note ID.
+     * Finally, it displays a notification for an empty folder, if empty.
      *
-     * @param note { Object } - The note to delete.
+     * @param {Object} note                     - The note object that is being deleted.
+     * @param {number|string} note.id           - The unique identifier of the note to be removed. It must match the ID
+     *                                            of a child element in the notes' container.
+     *
+     * @requires AnimationHandler.fadeOutCard   - A utility method that animates the fade-out of an element.
+     * @requires renderEmptyFolderNotification  - A function that displays a notification for an empty folder.
      */
     renderDelete(note) {
         if (this.notesContainer.children.length === 1) {
-            // hide the notes subtitle
+            // hide the notes subtitle & container
             this._notesBlockTitle.style.display = 'none';
             this.notesContainer.style.display = 'none';
         }
 
+        // Search for the specified note card
         const cards = this.notesContainer.children;
         for (let i = 0; i < cards.length; i++) {
             if (cards[i].id === String(note.id)) {
@@ -102,6 +115,8 @@ export class NoteView {
         this.dropdowns = [this.noteViewOptionsButton];
         this.dropdownOptions = [this.noteViewOptions];
     }
+
+
 
     #eventListeners() {
 
