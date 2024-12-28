@@ -3,12 +3,13 @@ import { TextEditorModel } from "../model/textEditorModel.js";
 import { HttpModel } from "../model/httpModel.js";
 import { pushNotification } from "../handlers/notificationHandler.js";
 import {
+    CLEAR_STORED_NOTE_EVENT,
     CREATE_NOTE_EVENT,
     FETCH_NOTE_BY_ID_EVENT,
     GET_BREAD_CRUMBS_EVENT,
     GET_CURRENT_FOLDER_EVENT,
     GET_PREVIOUS_VIEW_EVENT,
-    INIT_VIEW_EVENT,
+    INIT_VIEW_EVENT, LOAD_NOTES_IN_MEMORY_EVENT,
     OPEN_NOTE_IN_TEXT_EDITOR_EVENT,
     OPEN_TEXT_EDITOR_EVENT,
     PATCH_NOTE_CONTENT_EVENT,
@@ -24,7 +25,9 @@ export class TextEditorController {
         this.httpModel = new HttpModel();
         this.eventBus.registerEvents({
             [OPEN_TEXT_EDITOR_EVENT]: () => this.showTextEditor(),
-            [OPEN_NOTE_IN_TEXT_EDITOR_EVENT]: (editorObject) => this.openInTextEditor(editorObject)
+            [OPEN_NOTE_IN_TEXT_EDITOR_EVENT]: (editorObject) => this.openInTextEditor(editorObject),
+            [LOAD_NOTES_IN_MEMORY_EVENT]: (notes) => this.model.storeNotesInMemory(notes),
+            [CLEAR_STORED_NOTE_EVENT]: () => this.model.clear()
         })
     }
 
@@ -87,34 +90,55 @@ export class TextEditorController {
      * @param clearEditorObject
      */
     async autoSave(name, content, notify, clearEditorObject) {
-        const { editorObject } = this.model.getStoredObject();
+        const editorObject = this.model.getStoredObject();
 
         if (clearEditorObject) {
             this.model.editorObject = null;
         }
 
+
         // If the name of the note has been changed update only the name of the note
         if (editorObject !== null && editorObject.name !== name) {
+
+            // Store the new name
             editorObject.name = name;
-            await this.eventBus.asyncEmit(PATCH_NOTE_NAME_EVENT, {
-                'noteId': editorObject.id, 'updatedName': name});
+
+            // Event that'll notify the NoteController to make a backend call to update the name in the backend
+            const note = await this.eventBus.asyncEmit(
+                PATCH_NOTE_NAME_EVENT,
+                { 'noteId': editorObject.id, 'updatedName': name }
+            );
+
+            this.model.modifyEditorCache('update', note);
         }
+
 
         // If the content of the note has been changed update only the content of the note
         else if (editorObject !== null && editorObject.content !== content) {
+
+            // Store the new content
             editorObject.content = content;
-            await this.eventBus.asyncEmit(PATCH_NOTE_CONTENT_EVENT, {
-                'noteId': editorObject.id, 'updatedContent': content});
+
+            // Event that'll notify the NoteController to make a backend call to update the content in the backend
+            const note = await this.eventBus.asyncEmit(
+                PATCH_NOTE_CONTENT_EVENT,
+                { 'noteId': editorObject.id, 'updatedContent': content }
+            );
+
+            this.model.modifyEditorCache('update', note);
         }
+
 
         // Create a new note, if the editor object is null
         else if (editorObject === null) {
             const currentFolder = this.eventBus.emit(GET_CURRENT_FOLDER_EVENT);
-            const note = await this.eventBus.asyncEmit(CREATE_NOTE_EVENT, {
-                folderId: currentFolder.id, name: name, content: content, notify: notify
-            });
+            const note = await this.eventBus.asyncEmit(
+                CREATE_NOTE_EVENT,
+                { folderId: currentFolder.id, name: name, content: content, notify: notify }
+            );
             // Store the just created note
             this.model.storeEditorObject(note);
+            this.model.modifyEditorCache('add', note);
         }
     }
 
@@ -147,16 +171,40 @@ export class TextEditorController {
     }
 
 
-
+    /**
+     *
+     */
     clearStoredObject() {
         this.model.clear();
     }
 
 
+    /**
+     *
+     * @returns {currentLoadedNote:Object}
+     */
     getStoredObject() {
         return this.model.getStoredObject();
     }
 
+
+    /**
+     *
+     * @returns {*}
+     */
+    getNextNote() {
+        return this.model.getNextNoteInMemory();
+    }
+
+
+    /**
+     * This
+     *
+     * @returns {*}
+     */
+    getPreviousNote() {
+        return this.model.getPreviousNoteInMemory();
+    }
 
 
     /**

@@ -4,10 +4,26 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="code improvements">
+    <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="Added docs">
+      <change afterPath="$PROJECT_DIR$/docs/bugs.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/frontend/js/components/cache.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/frontend/js/datastuctures/array.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/view/folderView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/view/folderView.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/view/noteView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/view/noteView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/data/managers/note_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/data/managers/note_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/presentation/routers/note_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/presentation/routers/note_router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/general/themes.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/themes.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/textEditor/toolbarTop.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/textEditor/toolbarTop.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/components/Autosave.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/components/Autosave.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/components/eventBus.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/components/eventBus.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/constants/templates.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/constants/templates.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/controller/folderController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/controller/folderController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/controller/noteController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/controller/noteController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/controller/textEditorController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/controller/textEditorController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/datastuctures/stack.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/datastuctures/stack.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/model/textEditorModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/model/textEditorModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/view/textEditorView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/view/textEditorView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +79,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-WS-243.22562.112" />
+        <option value="bundled-python-sdk-d7ad00fb9fc3-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23726.102" />
       </set>
     </attachedChunks>
   </component>
@@ -110,7 +126,8 @@
       <workItem from="1735141436080" duration="23554000" />
       <workItem from="1735172609035" duration="8393000" />
       <workItem from="1735224605855" duration="9516000" />
-      <workItem from="1735240133867" duration="19250000" />
+      <workItem from="1735240133867" duration="19344000" />
+      <workItem from="1735296935553" duration="36867000" />
     </task>
     <task id="LOCAL-00001" summary="the sidebar can now be without a border in the settings tab. And the options menu for folders and notes have been changed">
       <option name="closed" value="true" />
@@ -200,7 +217,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735258223331</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Added docs">
+      <option name="closed" value="true" />
+      <created>1735259695500</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1735259695500</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,6 +243,7 @@
     <MESSAGE value="Added event driven design to the frontend code" />
     <MESSAGE value="I dont event know its 4 am" />
     <MESSAGE value="code improvements" />
-    <option name="LAST_COMMIT_MESSAGE" value="code improvements" />
+    <MESSAGE value="Added docs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added docs" />
   </component>
 </project>

@@ -9,27 +9,33 @@
     border-radius: 10px;
     font-size: 20px;
     color: var(--editor-text);
-} 
+}
 
 
+.toolbar-top-right {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+}
 
-.save-note-btn {
-    cursor: pointer;
+
+.cycle-container {
     color: var(--editor-text);
+    column-gap: 20px;
+    margin-right: 20px;
+}
+
+.cycle-container i {
+    cursor: pointer;
     padding: 5px 10px;
     border-radius: 7px;
-    margin-left: auto;
+    transition: 150ms;
 }
 
-.editor-util-btns-container {
-    display: flex;
-    flex-direction: column;
+.cycle-container i:hover {
+    background-color: var(--hover);
+    color: #5c7dff;
 }
-
-.editor-util-btns-container i {
-    color: var(--placeholder) !important;
-}
-
 
 
 .editor-options-dropdown {

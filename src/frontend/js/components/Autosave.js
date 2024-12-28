@@ -21,12 +21,20 @@
  * ```
  */
 export class AutoSave {
-    constructor(contentEditableSelector, saveCallback, isHtmlContent = true, delay = 1000) {
+    constructor(
+        contentEditableSelector,
+        saveCallback,
+        inputContent = false,
+        htmlContent = false,
+        plainTextContent = false,
+        delay = 1000) {
         this.contentEditable = document.querySelector(contentEditableSelector); // Select the contenteditable element
         this.saveCallback = saveCallback;                                       // Callback function to save content
-        this.isHtmlContent = isHtmlContent                                      // Indicator fot innerHTML or textContent
         this.delay = delay;                                                     // Delay in milliseconds
         this.timeoutId = null;                                                  // Timeout ID for debouncing
+        this.inputContent = inputContent;
+        this.htmlContent = htmlContent;
+        this.plainTextContent = plainTextContent;
 
         // Bind event listener
         this.init();
@@ -57,7 +65,19 @@ export class AutoSave {
      *
      */
     saveContent() {
-        let content = this.isHtmlContent ? this.contentEditable.innerHTML : this.contentEditable.textContent;
+        let content;
+
+        if (this.inputContent) {
+            content = this.contentEditable.value;
+        }
+
+        if (this.plainTextContent) {
+            content = this.contentEditable.textContent;
+        }
+
+        if (this.htmlContent) {
+            content = this.contentEditable.innerHTML;
+        }
         this.saveCallback(content); // Call the save callback
     }
 

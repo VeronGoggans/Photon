@@ -71,19 +71,23 @@ class NoteManager:
     
 
 
-    def update_name(self, note_id: int, name: str, db: Session) -> None:
+    def update_name(self, note_id: int, name: str, db: Session) -> Note:
         note = find_note(note_id, db)
         note.name = name
         note.last_edit = datetime.now()
         db.commit()
+        db.refresh(note)
+        return note
 
 
 
-    def update_content(self, note_id: int, content: str, db: Session) -> None:
+    def update_content(self, note_id: int, content: str, db: Session) -> Note:
         note = find_note(note_id, db)
         note.content = content
         note.last_edit = datetime.now()
         db.commit()
+        db.refresh(note)
+        return note
 
 
 

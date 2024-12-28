@@ -221,7 +221,12 @@ const editorTemplate = `
           </div>
           <p class="document-location"></p>
           
-          <div class="editor-options-dropdown">
+          <div class="toolbar-top-right">
+            <div class="cycle-container">
+                <i id="load-previous-note-btn" class="bi bi-caret-left"></i>
+                <i id="load-next-note-btn" class="bi bi-caret-right"></i>
+            </div>
+            <div class="editor-options-dropdown">
             <i id="editor-options-btn" class="bi bi-three-dots-vertical"></i>
             <div class="options">
               <button class="new-note-span"><i class="bi bi-plus-lg"></i>New</button>
@@ -229,6 +234,8 @@ const editorTemplate = `
               <button class="note-details-span"><i class="bi bi-info-circle"></i>Details</button>
             </div>
           </div>
+          </div>
+          
 
         </div>
         <div class="toolbar-bottom">
@@ -238,9 +245,6 @@ const editorTemplate = `
       </div>
       <div class="editor">
         <div class="editor-paper" contenteditable="true" spellcheck="false"></div>
-      </div>
-
-      <div class="editor-util-btns-container">
       </div>
 
       <rich-text-bar></rich-text-bar>

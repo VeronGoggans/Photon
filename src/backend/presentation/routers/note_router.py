@@ -73,15 +73,15 @@ class NoteRouter:
 
     @handle_exceptions
     def update_note_name(self, note_id: int, request: PatchNoteNameRequest, db: Session = Depends(Database.get_db)):
-        self.manager.update_name(note_id, request.name, db)
-        return JSONResponse(status_code=HttpStatus.NO_CONTENT)
+        note = self.manager.update_name(note_id, request.name, db)
+        return JSONResponse(status_code=HttpStatus.OK, content={'note': note})
     
 
 
     @handle_exceptions
     def update_note_content(self, note_id: int, request: PatchNoteContentRequest, db: Session = Depends(Database.get_db)):
-        self.manager.update_content(note_id, request.content, db)
-        return JSONResponse(status_code=HttpStatus.NO_CONTENT)
+        note = self.manager.update_content(note_id, request.content, db)
+        return JSONResponse(status_code=HttpStatus.OK, content={'note': note})
 
 
 

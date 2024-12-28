@@ -116,8 +116,11 @@ export const GET_PARENT_FOLDER_EVENT = 'get-parent-folder';
 export const GET_BREAD_CRUMBS_EVENT = 'get-bread-crumbs';
 export const GET_PREVIOUS_VIEW_EVENT = 'get-previous-view';
 export const INIT_VIEW_EVENT = 'init-view';
+
 export const OPEN_TEXT_EDITOR_EVENT = 'open-text-editor';
 export const OPEN_NOTE_IN_TEXT_EDITOR_EVENT = 'open-note-in-text-editor';
+export const LOAD_NOTES_IN_MEMORY_EVENT = 'load-notes-in-memory';
+export const CLEAR_STORED_NOTE_EVENT = 'clear-loaded-note';
 
 export const SET_NOTE_LOCATION_EVENT = 'set-note-location';
 export const SET_PREVIOUS_VIEW_EVENT = 'set-previous-view';

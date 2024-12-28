@@ -34,10 +34,14 @@ export class TextEditorView {
 
 
     const saveNameCallBack = async (name) => {
+      console.log('document name', name)
+      console.log('document content', this.page.innerHTML);
       await this.controller.autoSave(name, this.page.innerHTML, false, false);
     }
 
     const saveContentCallBack = async (content) => {
+      console.log('document name', this.documentNameInput.value)
+      console.log('document content', content);
       await this.controller.autoSave(this.documentNameInput.value, content, false, false);
     }
 
@@ -50,8 +54,8 @@ export class TextEditorView {
 
 
     new KeyEventListener(this);
-    new AutoSave('.note-name-input', saveNameCallBack, false);
-    new AutoSave('.editor-paper', saveContentCallBack);
+    new AutoSave('.note-name-input', saveNameCallBack, true);
+    new AutoSave('.editor-paper', saveContentCallBack, false, true);
     AnimationHandler.fadeInFromSide(this.viewElement)
   }
 
@@ -221,6 +225,8 @@ export class TextEditorView {
     this.noteDetailsSpan = document.querySelector('.note-details-span');
     this.deleteNoteSpan = document.querySelector('.delete-note-span');
     this.newNoteSpan = document.querySelector('.new-note-span');
+    this.loadNextNoteButton = document.querySelector('#load-next-note-btn');
+    this.loadPreviousNoteButton = document.querySelector('#load-previous-note-btn');
 
     // other
     this.viewElement = document.querySelector('.editor-wrapper');
@@ -241,6 +247,32 @@ export class TextEditorView {
 
 
   #eventListeners() {
+
+
+    /**
+     *
+     */
+    this.loadNextNoteButton.addEventListener('click', () => {
+      const nextNote = this.controller.getNextNote();
+
+      this.documentNameInput.value = nextNote.name;
+      this.page.innerHTML = nextNote.content;
+      this.editor.scrollTo( { top: 0, behavior: 'smooth' } );
+    })
+
+
+    /**
+     *
+     */
+    this.loadPreviousNoteButton.addEventListener('click', () => {
+      const previousNote = this.controller.getPreviousNote();
+
+      this.documentNameInput.value = previousNote.name;
+      this.page.innerHTML = previousNote.content;
+      this.editor.scrollTo( { top: 0, behavior: 'smooth' } );
+    })
+
+
     /**
      *
      */

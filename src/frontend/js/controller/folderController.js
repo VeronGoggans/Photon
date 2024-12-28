@@ -181,7 +181,11 @@ export class FolderController {
 
         await this.model.patch(`/folders/${folderId}/view-time`);
         await this.getFolders({childFolders: true});
-        await this.eventBus.asyncEmit(FETCH_NOTES_EVENT, folderId);
+        await this.eventBus.asyncEmit(FETCH_NOTES_EVENT, {
+            'folderId': folderId,
+            'render': true,
+            'storeResultInMemory': true
+        });
 
         renderEmptyFolderNotification();   
     }

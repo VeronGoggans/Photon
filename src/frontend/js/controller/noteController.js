@@ -12,7 +12,7 @@ import {
     FETCH_RECENT_NOTES_EVENT,
     INIT_VIEW_EVENT,
     PATCH_NOTE_NAME_EVENT,
-    PATCH_NOTE_CONTENT_EVENT
+    PATCH_NOTE_CONTENT_EVENT, LOAD_NOTES_IN_MEMORY_EVENT, CLEAR_STORED_NOTE_EVENT
 } from "../components/eventBus.js";
 
 
@@ -25,7 +25,7 @@ export class NoteController {
         this.eventBus.registerEvents({
             [FETCH_RECENT_NOTES_EVENT]: async () => await this.getNotes({recent: true}),
             [FETCH_NOTE_BY_ID_EVENT]: async (noteId) => await this.getNoteById(noteId),
-            [FETCH_NOTES_EVENT]: async (folderId) => await this.getNotes({folderId: folderId}),
+            [FETCH_NOTES_EVENT]: async (params) => await this.getNotes({folderId: params.folderId, render: params.render, storeResultInMemory: params.storeResultInMemory}),
             [FETCH_NOTE_SEARCH_ITEMS_EVENT]: async () => await this.getNotes({searchItems: true}),
             [CREATE_NOTE_EVENT]: async (noteId) => await this.addNote(noteId),
             [PATCH_NOTE_NAME_EVENT]: async (updatedNoteData) => await this.updateNoteName(updatedNoteData),
@@ -38,6 +38,10 @@ export class NoteController {
     async init() {
         this.searchbar = new Searchbar(this);
         this.view = new NoteView(this, this.eventBus);
+
+        // Event that'll notify the TextEditorController to clear any previously loaded note
+        // This will clean up the memory that was used to store the note as soon as the user leaves the editor
+        this.eventBus.emit(CLEAR_STORED_NOTE_EVENT);
         await this.#initSearchbar();
     }
 
@@ -65,16 +69,19 @@ export class NoteController {
 
     /**
      *
-     * @param folderId
-     * @param bookmarks
-     * @param recent
-     * @param recentlyViewed
-     * @param searchItems
+     * @param folderId              - Query parameter
+     * @param bookmarks             - Query parameter
+     * @param recent                - Query parameter
+     * @param recentlyViewed        - Query parameter
+     * @param searchItems           - Query parameter
+     * @param render                - Behavioral parameter
+     * @param storeResultInMemory   - Behavioral parameter
      */
     async getNotes(
         { folderId = undefined, bookmarks = false,
             recent = false, recentlyViewed = false,
-            searchItems = false
+            searchItems = false, render = false,
+            storeResultInMemory = false
         } = {}) {
 
         // Construct query parameters dynamically
@@ -93,21 +100,39 @@ export class NoteController {
         const response = await this.model.get(route);
         const notes = response.content.notes;
 
+
         // Render notes if necessary
-        if (folderId || bookmarks) {
+        if (render) {
             this.view.renderAll(notes);
         }
 
-        else {
+        if (storeResultInMemory) {
+            this.eventBus.emit(LOAD_NOTES_IN_MEMORY_EVENT, notes);
+        }
+
+        if (!render) {
             return notes;
         }
     }
 
 
-
+    /**
+     *
+     *
+     * @param noteId
+     */
     async getNoteById(noteId) {
         const route = `/notes/${noteId}`;
         const response = await this.model.get(route);
+
+        const parentFolderId = response.content.note.folder_id;
+
+        // Fetch all the notes that are within the same parent folder as the specified note ID
+        await this.getNotes({
+            folderId: parentFolderId,
+            storeResultInMemory: true,
+        });
+
         return response.content;
     }
 
@@ -117,7 +142,8 @@ export class NoteController {
         const { noteId, updatedName } = updatedNoteData;
         const patchNoteContentRequest = { 'name': updatedName };
         const route = `/notes/${noteId}/name`;
-        await this.model.patch(route, patchNoteContentRequest);
+        const response = await this.model.patch(route, patchNoteContentRequest);
+        return response.content.note;
     }
 
 
@@ -126,7 +152,8 @@ export class NoteController {
         const { noteId, updatedContent } = updatedNoteData;
         const patchNoteContentRequest = { 'content': updatedContent };
         const route = `/notes/${noteId}/content`;
-        await this.model.patch(route, patchNoteContentRequest);
+        const response = await this.model.patch(route, patchNoteContentRequest);
+        return response.content.note;
     }
 
     
