@@ -4,24 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="Added docs">
-      <change afterPath="$PROJECT_DIR$/docs/bugs.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/frontend/js/components/cache.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/frontend/js/datastuctures/array.js" afterDir="false" />
+    <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="Cycling through a folders notes is now possible from within the editor">
+      <change afterPath="$PROJECT_DIR$/src/frontend/js/controller/SidebarController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backend/data/managers/note_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/data/managers/note_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backend/presentation/routers/note_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/presentation/routers/note_router.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/css/general/themes.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/themes.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/css/textEditor/toolbarTop.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/textEditor/toolbarTop.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/components/Autosave.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/components/Autosave.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/presentation/routers/setting_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/presentation/routers/setting_router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/general/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/general/sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/sidebar.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/js/components/eventBus.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/components/eventBus.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/constants/templates.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/constants/templates.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/controller/folderController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/controller/folderController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/controller/noteController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/controller/noteController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/controller/textEditorController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/controller/textEditorController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/datastuctures/stack.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/datastuctures/stack.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/js/model/textEditorModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/model/textEditorModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/controller/applicationController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/controller/applicationController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/controller/settingController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/controller/settingController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/js/view/sideBarView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/view/sideBarView.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/js/view/textEditorView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/js/view/textEditorView.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/settings.json" afterDir="false" />
     </list>
@@ -127,7 +121,7 @@
       <workItem from="1735172609035" duration="8393000" />
       <workItem from="1735224605855" duration="9516000" />
       <workItem from="1735240133867" duration="19344000" />
-      <workItem from="1735296935553" duration="36867000" />
+      <workItem from="1735296935553" duration="51309000" />
     </task>
     <task id="LOCAL-00001" summary="the sidebar can now be without a border in the settings tab. And the options menu for folders and notes have been changed">
       <option name="closed" value="true" />
@@ -225,7 +219,15 @@
       <option name="project" value="LOCAL" />
       <updated>1735259695500</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Cycling through a folders notes is now possible from within the editor">
+      <option name="closed" value="true" />
+      <created>1735398684565</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1735398684565</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,6 +246,7 @@
     <MESSAGE value="I dont event know its 4 am" />
     <MESSAGE value="code improvements" />
     <MESSAGE value="Added docs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added docs" />
+    <MESSAGE value="Cycling through a folders notes is now possible from within the editor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cycling through a folders notes is now possible from within the editor" />
   </component>
 </project>

@@ -193,11 +193,8 @@ export class TextEditorView {
    * @param event
    */
   async #loadRecentlyViewedNote(event) {
-    // The clicked on recently viewed note
-    const { note } = event.detail;
-
     // Load the recently viewed note into the editor
-    await this.controller.loadRecentlyViewedNote(note);
+    await this.controller.loadRecentlyViewedNote(event.detail.note);
 
   }
 

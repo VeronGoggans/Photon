@@ -27,7 +27,7 @@ class SettingRouter:
 
     def update_sidebar_color(self, color: str):
         sidebar_color: str = self.service.update_sidebar_color(color)
-        return JSONResponse(status_code=HttpStatus.OK, content={'sidebar-color': sidebar_color})
+        return JSONResponse(status_code=HttpStatus.OK, content={'sidebarColor': sidebar_color})
 
 
 
@@ -39,18 +39,18 @@ class SettingRouter:
 
     def update_widget_style(self, widget_style: str):
         widget_style: str = self.service.update_widget_style(widget_style)
-        return JSONResponse(status_code=HttpStatus.OK, content={'widget-style': widget_style})
+        return JSONResponse(status_code=HttpStatus.OK, content={'widgetStyle': widget_style})
     
 
 
     def update_folder_icon_color(self, folder_icon_color: str):
         folder_icon_color: str = self.service.update_folder_icon_color(folder_icon_color)
-        return JSONResponse(status_code=HttpStatus.OK, content={'folder-icon-color': folder_icon_color})
+        return JSONResponse(status_code=HttpStatus.OK, content={'folderIconColor': folder_icon_color})
     
 
 
     def update_sidebar_state(self, state: str):
         sidebar_state: str = self.service.update_sidebar_state(state)
-        return JSONResponse(status_code=HttpStatus.OK, content={'sidebar-state': sidebar_state})
+        return JSONResponse(status_code=HttpStatus.OK, content={'sidebarState': sidebar_state})
     
     

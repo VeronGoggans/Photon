@@ -1,9 +1,9 @@
 import { NoteController } from "./noteController.js";
 import { HomeController } from "./homeController.js";
 import { FolderController } from "./folderController.js";
-import { SidebarView } from "../view/sideBarView.js";
 import { TextEditorController } from "./textEditorController.js"
 import { SettingController } from "./settingController.js";
+import { SidebarController } from "./SidebarController.js";
 import { templates } from "../constants/templates.js";
 import { StickyWallHomeController } from "./stickyWallHomeController.js";
 import { StickWallController } from "./stickyWallController.js";
@@ -12,7 +12,7 @@ import {
     EventBus,
     FETCH_SETTINGS_EVENT,
     GET_PREVIOUS_VIEW_EVENT,
-    INIT_VIEW_EVENT, OPEN_NOTE_IN_TEXT_EDITOR_EVENT, OPEN_TEXT_EDITOR_EVENT,
+    INIT_VIEW_EVENT, OPEN_NOTE_IN_TEXT_EDITOR_EVENT, OPEN_TEXT_EDITOR_EVENT, SET_ACTIVE_TAB_EVENT,
     SET_NOTE_LOCATION_EVENT, SET_PREVIOUS_VIEW_EVENT
 } from "../components/eventBus.js";
 import {Dialog} from "../util/dialog.js";
@@ -49,8 +49,8 @@ class Router {
         this.textEditorController = new TextEditorController(this.eventBus);
         this.stickyWallController = new StickWallController(this.eventBus);
         this.settingController = new SettingController(this.eventBus);
+        this.sidebarController = new SidebarController(this.eventBus);
         this.stickyWallHomeController = new StickyWallHomeController(this.eventBus);
-        this.sidebarView = new SidebarView(this.eventBus);
 
         this.viewElement = document.querySelector('.content .view');
 
@@ -66,8 +66,8 @@ class Router {
 
         setTimeout(async () => {
             if (viewId === 'home') {
-                this.sidebarView.setActiveTab('home');
                 await this.homeController.init();
+                this.eventBus.emit(SET_ACTIVE_TAB_EVENT, 'home');
             }
 
             else if (viewId === 'notes') {
@@ -75,7 +75,7 @@ class Router {
 
                 await this.noteController.init();
                 await this.folderController.init(folder.id, folder.name, location);
-                this.sidebarView.setActiveTab('notes');
+                this.eventBus.emit(SET_ACTIVE_TAB_EVENT, 'notes');
             }
 
             else if (viewId === 'editor') {
@@ -94,7 +94,7 @@ class Router {
                 }
 
                 this.eventBus.emit(SET_PREVIOUS_VIEW_EVENT, previousView);
-                this.sidebarView.setActiveTab('notes');
+                this.eventBus.emit(SET_ACTIVE_TAB_EVENT, 'notes');
             }
 
             else if (viewId === 'standardStickyBoard') {
@@ -102,7 +102,7 @@ class Router {
                 await this.stickyWallController.initStandardStickyBoard(stickyBoard);
 
                 this.eventBus.emit(SET_PREVIOUS_VIEW_EVENT, previousView);
-                this.sidebarView.setActiveTab('sticky-wall-home')
+                this.eventBus.emit(SET_ACTIVE_TAB_EVENT,'sticky-wall-home');
             }
 
             else if (viewId === 'columnStickyBoard') {
@@ -110,17 +110,17 @@ class Router {
                 await this.stickyWallController.initColumnStickyBoard(stickyBoard);
 
                 this.eventBus.emit(SET_PREVIOUS_VIEW_EVENT, previousView);
-                this.sidebarView.setActiveTab('sticky-wall-home')
+                this.eventBus.emit(SET_ACTIVE_TAB_EVENT, 'sticky-wall-home');
             }
 
             else if (viewId === 'settings') {
-                this.sidebarView.setActiveTab('settings')
                 await this.settingController.init();
+                this.eventBus.emit(SET_ACTIVE_TAB_EVENT,'settings');
             }
 
             else if (viewId === 'stickyWallHome') {
-                this.sidebarView.setActiveTab('sticky-wall-home');
                 await this.stickyWallHomeController.init();
+                this.eventBus.emit(SET_ACTIVE_TAB_EVENT,'sticky-wall-home');
             }
         }, 0)
     }

@@ -44,12 +44,13 @@
     padding: 10px;
 }
 
-.sidebar-content a {
+.sidebar[data-width="large"] .sidebar-content a {
     text-decoration: none;
     position: relative;
     border: none;
     display: flex;
     align-items: center;
+    justify-content: normal;
     margin: 10px 0;
     border-radius: 10px;
     width: 100%;
@@ -59,21 +60,54 @@
     transition: .2s;
 }
 
-.sidebar-content a span {
+
+.sidebar .sidebar-content a,
+.sidebar[data-width="small"] .sidebar-content a{
+    text-decoration: none;
+    position: relative;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    border-radius: 10px;
+    width: 100%;
+    height: 45px;
+    background-color: transparent;
+    color: var(--sidebar-text);
+    transition: .2s;
+}
+
+.sidebar[data-width="large"] .sidebar-content a span {
     margin-left: 40px;
     font-size: 16px;
 }
 
-.sidebar-content a i {
+.sidebar[data-width="small"] .sidebar-content a span {
+    position: absolute;
+    margin-left: 40px;
+    font-size: 16px;
+}
+
+.sidebar[data-width="large"] .sidebar-content a i {
     position: absolute;
     font-size: 18px;
     left: 12px;
 }
 
-.sidebar-content a:hover {
+.sidebar[data-width="small"] .sidebar-content a i {
+    position: relative;
+    font-size: 18px;
+    left: 0;
+}
+
+
+.sidebar[data-width="small"] .sidebar-content a:hover,
+.sidebar[data-width="large"] .sidebar-content a:hover {
     background-color: var(--hover-sidebar);
     color: var(--sidebar-text-hover);
 }
+
 
 .active-tab {
     background-color: var(--active-tab-bg) !important;
@@ -96,3 +130,15 @@
 .invisible a{
     color: var(--sidebar-inactive-tab) ;
 }
+
+
+
+/* Style classes for opening the sidebar */
+
+.open-sidebar {
+
+}
+
+
+
+

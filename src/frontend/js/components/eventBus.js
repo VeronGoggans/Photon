@@ -125,6 +125,10 @@ export const CLEAR_STORED_NOTE_EVENT = 'clear-loaded-note';
 export const SET_NOTE_LOCATION_EVENT = 'set-note-location';
 export const SET_PREVIOUS_VIEW_EVENT = 'set-previous-view';
 
+export const SET_ACTIVE_TAB_EVENT = 'set-active-tab';
+export const SET_SIDEBAR_STYLE_EVENT = 'set-sidebar-style';
+export const SET_SIDEBAR_STATE_EVENT = 'set-sidebar-state';
+export const SIDEBAR_TOGGLE_EVENT = 'sidebar-toggle';
 
 // Dialog events (synchronous)
 export const RENDER_FOLDER_MODAL_EVENT = 'render-folder-modal';

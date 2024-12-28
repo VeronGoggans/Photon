@@ -1,5 +1,5 @@
 import { sidebarButtonText } from "../constants/constants.js";
-import {INIT_VIEW_EVENT} from "../components/eventBus.js";
+import {INIT_VIEW_EVENT, SIDEBAR_TOGGLE_EVENT} from "../components/eventBus.js";
 
 
 
@@ -10,6 +10,8 @@ export class SidebarView {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this._buttonCount = 4;
+        this._sidebarTransitionTime = 160; // Milliseconds
+        this._sidebarShrinkLimit = 950; // Pixels
 
         this.#initElements();
         this.#eventListeners();
@@ -31,23 +33,44 @@ export class SidebarView {
     }
 
 
+
+
+    setSidebarStyle(sidebarColor) {
+        if (sidebarColor !== 'original') {
+            this._sidebar.classList.add(sidebarColor);
+        }
+    }
+
+
+    setSidebarState(sidebarState) {
+        this._sidebar.dataset.width = sidebarState;
+
+        if (sidebarState === 'large') {
+            this.logo.style.justifyContent = '';
+            this.#resizeSidebar(220);
+            this.#removeSidebarResizeTransition();
+            this.#openButtons();
+        }
+
+        else if (sidebarState === 'small') {
+            this.logo.style.justifyContent = 'center';
+            this.#resizeSidebar(70);
+            this.#removeSidebarResizeTransition();
+            this.#collapseButtons();
+        }
+    }
+
+
     /**
      * This method is called when the screen width 
      * becomes smaller than 700 pixels
      */
     #collapseButtons() {
-        for (let i = 0; i < this._buttonCount; i++) {
-            this.sidebarSpans[i].style.position = 'absolute';
-            this.sidebarSpans[i].textContent = '';
-
-            this.sidebarIcons[i].style.position = 'relative';
-            this.sidebarIcons[i].style.left = '0';
-
-            this.sidebarButtons[i].style.justifyContent = 'center';
+        for (const span of this.sidebarSpans) {
+            span.textContent = '';
         }
-
-        document.querySelector('.logo-container').style.justifyContent = 'center'
-        document.querySelector('.logo-text').textContent = '';
+        this._logoContainer.style.justifyContent = 'center'
+        this._logoText.textContent = '';
     }
 
 
@@ -57,43 +80,50 @@ export class SidebarView {
      */
     #openButtons() {
         for (let i = 0; i < this._buttonCount; i++) {
-            this.sidebarSpans[i].style.position = 'relative';
             this.sidebarSpans[i].textContent = sidebarButtonText[i];
-
-            this.sidebarIcons[i].style.position = 'absolute';
-            this.sidebarIcons[i].style.left = '12px';
-
-            this.sidebarButtons[i].style.justifyContent = 'normal';
         }
-
-        document.querySelector('.logo-container').style.justifyContent = 'normal'
-        document.querySelector('.logo-text').textContent = 'hoton';
+        this._logoContainer.style.justifyContent = 'normal'
+        this._logoText.textContent = 'hoton';
     }
 
 
+
     #toggleSidebar() {
-        if (this._sidebar.offsetWidth === 220) {
-            this._wrapper.style.transition = '150ms'
-            this._wrapper.style.gridTemplateColumns = '80px 1fr';
+
+        if (this._sidebar.dataset.width === 'large') {
             this._sidebar.dataset.width = 'small';
+            this.eventBus.emit(SIDEBAR_TOGGLE_EVENT, 'small');
+
             this.logo.style.justifyContent = 'center';
-            this.#removeTransition();
+            this.#resizeSidebar(70);
+            this.#removeSidebarResizeTransition();
             this.#collapseButtons();
-        } else {
-            this._wrapper.style.transition = '150ms'
-            this._wrapper.style.gridTemplateColumns = '220px 1fr';
+        }
+
+        else if (this._sidebar.dataset.width === 'small') {
             this._sidebar.dataset.width = 'large';
+            this.eventBus.emit(SIDEBAR_TOGGLE_EVENT, 'large');
+
             this.logo.style.justifyContent = '';
-            this.#removeTransition();
+            this.#resizeSidebar(220);
+            this.#removeSidebarResizeTransition();
             this.#openButtons();
         }
     }
 
 
-    #removeTransition() {
+
+    #resizeSidebar(sidebarWidth) {
+        this._wrapper.style.transition = '150ms'
+        this._wrapper.style.gridTemplateColumns = `${sidebarWidth}px 1fr`; // 70px or 220px
+    }
+
+
+
+    #removeSidebarResizeTransition() {
         setTimeout(() => {
             this._wrapper.style.transition = '0ms'
-        }, 160);
+        }, this._sidebarTransitionTime);
     }
 
 
@@ -103,16 +133,11 @@ export class SidebarView {
      * 
      * This method is called when the window resizes
      */
-    #resizeSidebar() {
-        if (window.innerWidth < 940) {
+    #autoResizeSidebar() {
+        if (window.innerWidth < this._sidebarShrinkLimit) {
             this._wrapper.style.gridTemplateColumns = '70px 1fr';
             this._sidebar.dataset.width = 'small';
             this.#collapseButtons();
-        } else {
-            if (this._sidebar.dataset.width !== 'small') {
-                this._wrapper.style.gridTemplateColumns = '220px 1fr';
-                this.#openButtons();
-            }
         }
     }
 
@@ -120,11 +145,11 @@ export class SidebarView {
     #initElements() {
         this._sidebar = document.querySelector('.sidebar');
         this._icon = document.querySelector('.logo');
+        this._logoContainer = document.querySelector('.logo-container');
+        this._logoText = document.querySelector('.logo-text');
         this.sidebarButtons = this._sidebar.querySelectorAll('.sidebar-content a');
-        this.sidebarIcons = this._sidebar.querySelectorAll('.sidebar-content a i')
         this.sidebarSpans = this._sidebar.querySelectorAll('.sidebar-content a span');
         this.logo = this._sidebar.querySelector('.sidebar-logo');
-
         this._wrapper = document.querySelector('.wrapper');
     }
 
@@ -146,7 +171,7 @@ export class SidebarView {
          *
          * @function #resizeSidebar will collapse the sidebar to its small state.
          */
-        window.addEventListener('resize', () => this.#resizeSidebar());
+        window.addEventListener('resize', () => this.#autoResizeSidebar());
 
 
         /**
@@ -203,15 +228,6 @@ export class SidebarView {
                     this.applicationController.moveNote(newParentDFolderId, droppedCardId)
                 }
             }
-        })
-
-
-        /**
-         *
-         */
-        this._sidebar.addEventListener('SetSidebarState', (event) => {
-            const { state } = event.detail;
-
         })
 
 
