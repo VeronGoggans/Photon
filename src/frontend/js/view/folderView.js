@@ -1,7 +1,11 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
 import { removeEmptyFolderNotification, renderEmptyFolderNotification } from "../handlers/notificationHandler.js";
 import { removeContent } from "../util/ui.js";
-import {RENDER_DELETE_MODAL_EVENT, RENDER_FOLDER_MODAL_EVENT} from "../components/eventBus.js";
+import {
+    RENDER_DELETE_MODAL_EVENT,
+    RENDER_FOLDER_MODAL_EVENT, UPDATE_FOLDER_LOCATION_EVENT,
+    UPDATE_NOTE_LOCATION_EVENT
+} from "../components/eventBus.js";
 
 
 export class FolderView {
@@ -96,11 +100,11 @@ export class FolderView {
      * @requires JSON.stringify          - Converts the folder object to a JSON string for storage as an attribute.
      */
     renderUpdate(folder) {
-        const folderCards = this.foldersContainer.children; 
-    
-        for (let i = 0; i < folderCards.length; i++) {
-            if (folderCards[i].id === String(folder.id)) {
-                folderCards[i].setAttribute('folder', JSON.stringify(folder));
+        const folderCards = this.foldersContainer.children;
+
+        for (const folderCard of folderCards) {
+            if (folderCard.id === String(folder.id)) {
+                folderCard.setAttribute('folder', JSON.stringify(folder));
             }
         }
     }
@@ -298,12 +302,19 @@ export class FolderView {
 
 
         this.foldersContainer.addEventListener('DroppedItemOnFolder', async (event) => {
-            const { folderId, droppedItemId, droppedItemType } = event.detail;
-            if (droppedItemType === 'note') {
-                await this.applicationController.moveNote(folderId, droppedItemId);
+            const { parentFolderId, droppedEntityId, droppedEntityName } = event.detail;
+            if (droppedEntityName === 'note') {
+                await this.eventBus.asyncEmit(UPDATE_NOTE_LOCATION_EVENT, {
+                    parentFolderId: parentFolderId,
+                    droppedEntityId: droppedEntityId,
+                });
             }
-            if (droppedItemType === 'folder') {
-                await this.applicationController.moveFolder(folderId, droppedItemId);
+
+            else if (droppedEntityName === 'folder') {
+                await this.eventBus.asyncEmit(UPDATE_FOLDER_LOCATION_EVENT, {
+                    parentFolderId: parentFolderId,
+                    droppedEntityId: droppedEntityId,
+                });
             }
         });
 

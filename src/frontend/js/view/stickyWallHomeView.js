@@ -181,15 +181,22 @@ export class StickyWallHomeView {
         this.viewElement.addEventListener('StickyBoardClick', (event) => {
             const { stickyBoard } = event.detail;
 
-            // Event to tell the ApplicationController to initialize the standard sticky board view
-            this.eventBus.emit(INIT_VIEW_EVENT,
-                {
-                    viewId: 'standardStickyBoard',
-                    stickyBoard: stickyBoard,
-                    previousView: 'stickyWallHome', 
-                }
-            )
-        })
+            // Mapping for board types to corresponding view IDs
+            const viewTypeMapping = {
+                standard: 'standardStickyBoard',
+                column: 'columnStickyBoard'
+            };
+
+            const viewId = viewTypeMapping[stickyBoard.type];
+
+            // Event to tell the ApplicationController to initialize the according sticky board view
+            this.eventBus.emit(INIT_VIEW_EVENT, {
+                viewId,
+                stickyBoard,
+                previousView: 'stickyWallHome',
+            });
+        });
+
 
 
         /**

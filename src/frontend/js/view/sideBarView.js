@@ -1,5 +1,10 @@
 import { sidebarButtonText } from "../constants/constants.js";
-import {INIT_VIEW_EVENT, SIDEBAR_TOGGLE_EVENT} from "../components/eventBus.js";
+import {
+    GET_PARENT_FOLDER_EVENT,
+    INIT_VIEW_EVENT,
+    SIDEBAR_TOGGLE_EVENT,
+    UPDATE_FOLDER_LOCATION_EVENT, UPDATE_NOTE_LOCATION_EVENT
+} from "../components/eventBus.js";
 
 
 
@@ -211,22 +216,27 @@ export class SidebarView {
         /**
          *
          */
-        this._sidebar.addEventListener('drop', (event) => {
+        this._sidebar.addEventListener('drop', async (event) => {
             event.preventDefault();
 
-            const droppedCardInfo = JSON.parse(event.dataTransfer.getData('text/plain'));
-            const droppedCardId = droppedCardInfo.draggedCardId;
-            const draggedItemType = droppedCardInfo.draggedItem;
+            const droppedCardData = JSON.parse(event.dataTransfer.getData('text/plain'));
+            const droppedEntityId = droppedCardData.draggedEntityId;
+            const droppedEntityName = droppedCardData.draggedEntityName;
 
-            const newParentDFolderId = this.applicationController.getParentFolder().id;
+            const parentFolderId = this.eventBus.emit(GET_PARENT_FOLDER_EVENT).id;
+            console.log(parentFolderId)
 
-            if (droppedCardId !== this.id) {
-                if (draggedItemType === 'folder') {
-                    this.applicationController.moveFolder(newParentDFolderId, droppedCardId)
-                }
-                if (draggedItemType === 'note') {
-                    this.applicationController.moveNote(newParentDFolderId, droppedCardId)
-                }
+            if (droppedEntityName === 'folder') {
+                await this.eventBus.asyncEmit(UPDATE_FOLDER_LOCATION_EVENT, {
+                    parentFolderId: parentFolderId,
+                    droppedEntityId: droppedEntityId
+                })
+            }
+            if (droppedEntityName === 'note') {
+                await this.eventBus.asyncEmit(UPDATE_NOTE_LOCATION_EVENT, {
+                    parentFolderId: parentFolderId,
+                    droppedEntityId: droppedEntityId
+                })
             }
         })
 

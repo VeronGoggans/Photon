@@ -57,7 +57,7 @@ class FolderManager:
     
 
 
-    def update_location(self, folder_id: int, parent_folder_id: int, db: Session) -> ( Folder | NotFoundException ):
+    def update_location(self, folder_id: int, parent_folder_id: int, db: Session) -> Folder :
         # Check if the new parent even exists
         find_folder(parent_folder_id, db)
 

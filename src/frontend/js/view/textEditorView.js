@@ -304,15 +304,16 @@ export class TextEditorView {
       const { id } = this.controller.getStoredObject();
       const noteName = this.documentNameInput.value;
 
-      const deleteCallBack = async () => {
-        await this.controller.deleteEditorObject();
+      const deleteCallBack = async (deleteDetails) => {
+        await this.controller.deleteEditorObject(deleteDetails.id);
       }
 
       // Event to tell the dialog class to render the delete modal.
       this.eventBus.emit(RENDER_DELETE_MODAL_EVENT, {
         'id': id,
         'name': noteName,
-        'notifyUser': true
+        'notifyUser': true,
+        'callBack': deleteCallBack
       })
     });
 

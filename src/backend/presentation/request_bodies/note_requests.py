@@ -44,12 +44,11 @@ class PatchNoteBookmarkRequest(BaseModel):
 
 
 
-class MoveNoteRequest(BaseModel):
+class PatchNoteLocationRequest(BaseModel):
     """
-    FolderId is the id of the folder the note is moved into
+    - parent_id (str): is the id of the folder the note is moved into
     """
-    folder_id: int
-    note_id: int
+    parent_id: int
 
 
 

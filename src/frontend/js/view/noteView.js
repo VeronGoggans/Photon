@@ -147,7 +147,13 @@ export class NoteView {
 
             // The callback function that'll delete the note when the user types in the full name
             const deleteCallBack = async (deleteDetails) => {
-                await this.controller.deleteNote(deleteDetails.id, deleteDetails.notifyUser);
+                await this.controller.deleteNote(
+                    {
+                        noteId: deleteDetails.id,
+                        notifyUser: deleteDetails.notifyUser,
+                        render: true
+                    }
+                );
             }
 
             // Event to tell the dialog class to render the delete modal.

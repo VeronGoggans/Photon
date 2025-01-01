@@ -8,11 +8,16 @@ import {
     FETCH_FOLDER_BY_ID_EVENT,
     FETCH_FOLDER_SEARCH_ITEMS_EVENT,
     FETCH_NOTE_BY_ID_EVENT,
-    FETCH_NOTE_SEARCH_ITEMS_EVENT, FETCH_NOTES_EVENT,
+    FETCH_NOTE_SEARCH_ITEMS_EVENT,
+    FETCH_NOTES_EVENT,
     FETCH_RECENT_NOTES_EVENT,
     INIT_VIEW_EVENT,
     PATCH_NOTE_NAME_EVENT,
-    PATCH_NOTE_CONTENT_EVENT, LOAD_NOTES_IN_MEMORY_EVENT, CLEAR_STORED_NOTE_EVENT
+    PATCH_NOTE_CONTENT_EVENT,
+    LOAD_NOTES_IN_MEMORY_EVENT,
+    CLEAR_STORED_NOTE_EVENT,
+    DELETE_NOTE_EVENT,
+    UPDATE_NOTE_LOCATION_EVENT
 } from "../components/eventBus.js";
 
 
@@ -29,7 +34,9 @@ export class NoteController {
             [FETCH_NOTE_SEARCH_ITEMS_EVENT]: async () => await this.getNotes({searchItems: true}),
             [CREATE_NOTE_EVENT]: async (noteId) => await this.addNote(noteId),
             [PATCH_NOTE_NAME_EVENT]: async (updatedNoteData) => await this.updateNoteName(updatedNoteData),
-            [PATCH_NOTE_CONTENT_EVENT]: async (updatedNoteData) => await this.updateNoteContent(updatedNoteData)
+            [PATCH_NOTE_CONTENT_EVENT]: async (updatedNoteData) => await this.updateNoteContent(updatedNoteData),
+            [DELETE_NOTE_EVENT]: async (noteId) => await this.deleteNote(noteId),
+            [UPDATE_NOTE_LOCATION_EVENT]: async (params) => await this.updateNoteLocation(params.parentFolderId, params.droppedEntityId)
         });
     }
 
@@ -173,9 +180,9 @@ export class NoteController {
 
 
 
-    async updateNoteLocation(folderId, droppedNoteId) {
-        const route = `/notes/${droppedNoteId}/location`;
-        const patchNoteLocationRequest = { 'folder_id': folderId }
+    async updateNoteLocation(parentFolderId, droppedEntityId) {
+        const route = `/notes/${droppedEntityId}/location`;
+        const patchNoteLocationRequest = { 'parent_id': parentFolderId }
 
         const response = await this.model.patch(route, patchNoteLocationRequest);
         const note = response.content.note;
@@ -184,16 +191,29 @@ export class NoteController {
 
 
 
-    async deleteNote(noteId, notify) {
+    async deleteNote(
+        {
+            noteId = undefined,
+            render = false,
+            notifyUser = false
+
+        } = {}) {
+
         const route = `/notes/${noteId}`
         const response = await this.model.delete(route);
         const note = response.content.note;
-                
-        this.searchbar.deleteSearchItem(noteId);
-        this.view.renderDelete(note);
+
+        if (render) {
+            this.searchbar.deleteSearchItem(noteId);
+            this.view.renderDelete(note);
+        }
         
-        if (notify) {
+        if (notifyUser) {
             pushNotification('deleted', note.name)
+        }
+
+        if(!render) {
+            return note
         }
     }
 

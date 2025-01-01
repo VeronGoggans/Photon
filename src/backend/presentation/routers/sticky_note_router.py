@@ -23,8 +23,8 @@ class StickyNoteRouter:
 
         self.route.add_api_route('/stickyBoards',                                       self.add_sticky_board, methods=['POST'])
         self.route.add_api_route('/stickyBoards',                                       self.get_sticky_boards, methods=['GET'])
-        self.route.add_api_route('/stickyBoards/{stickyboardId}/name',                  self.update_sticky_board_name, methods=['PATCH'])
-        self.route.add_api_route('/stickyBoards/{stickyboardId}/description',           self.update_sticky_board_description, methods=['PATCH'])
+        self.route.add_api_route('/stickyBoards/{sticky_board_id}/name',                self.update_sticky_board_name, methods=['PATCH'])
+        self.route.add_api_route('/stickyBoards/{sticky_board_id}/description',         self.update_sticky_board_description, methods=['PATCH'])
         self.route.add_api_route('/stickyBoards/{sticky_board_id}/{board_type}',        self.delete_sticky_board, methods=['DELETE'])
         
 

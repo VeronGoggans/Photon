@@ -1,9 +1,8 @@
 import { folderColors } from "../../constants/constants.js";
 import { formatName } from "../../util/formatters.js";
-import { addDraggImage, showContextMenu } from "../../util/ui.js";
+import {addDragImage, removeDragImage, showContextMenu} from "../../util/ui.js";
 import { applyFolderIconColor, applyWidgetStyle } from "../../util/ui.js";
-
-
+import {checkAutoScroll, stopScrolling} from "../draggable.js";
 
 
 const optionsMenuTemplate = `
@@ -16,6 +15,8 @@ const optionsMenuTemplate = `
         <span>Delete folder</span>
     </div>
 ` 
+
+
 
 class RecentFolder extends HTMLElement {
     constructor() {
@@ -70,10 +71,6 @@ class FolderPath extends HTMLElement {
         this.addEventListener('click', this.handleClick.bind(this));
     }
 
-    disconnectedCallback() {
-        this.removeEventListener('click', this.handleClick.bind(this));
-    }
-
     handleClick() {     
         if (this.textContent !== '. . . . .') {
             this.dispatchEvent(new CustomEvent('FolderPathClick', { detail: { folderId: this.id }, bubbles: true }));
@@ -90,6 +87,7 @@ class Folder extends HTMLElement {
 
     constructor() {
         super();
+        this.scrollableParent = document.querySelector('.note-view-content')
     }
 
     connectedCallback() {
@@ -122,14 +120,66 @@ class Folder extends HTMLElement {
 
 
     addEventListeners() {
-        this.addEventListener('click', (event) => { this.handleCardClick() });
-        this.addEventListener('contextmenu', (event) => { showContextMenu(event, this, optionsMenuTemplate) });
-        this.addEventListener('dragstart', (event) => {this.dragStart(event)}); 
-        this.addEventListener('dragend', () => {this.dragEnd()});
-        this.addEventListener('dragover', (event) => {this.onHover(event)});
-        this.addEventListener('dragleave', (event) => {this.onLeave(event)});
-        this.addEventListener('drop', (event) => {this.drop(event)});
+        this.addEventListener('click', () => { this.handleCardClick() });
+        this.addEventListener('contextmenu', (event) => {
+            showContextMenu(event, this, optionsMenuTemplate)
+        });
+
+        this.addEventListener('dragstart', (event) => {
+            this.classList.add('dragging');
+            addDragImage(event, 'folder');
+
+            const dragDataStruct = {
+                draggedEntityName: 'folder',
+                draggedEntityId: this.id,
+            }
+
+            event.dataTransfer.setData('text/plain', JSON.stringify(dragDataStruct));
+        });
+
+        this.addEventListener('dragend', () => {
+            this.classList.remove('dragging');
+            removeDragImage();
+            stopScrolling();
+        });
+
+        this.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            this.classList.add('hovered');
+        });
+
+        this.addEventListener('dragleave', (event) => {
+            event.preventDefault();
+            this.classList.remove('hovered');
+        });
+
+        this.addEventListener('drag', (event) => {
+            checkAutoScroll(this.scrollableParent, event.clientX, event.clientY);
+        });
+
+        this.addEventListener('drop', (event) => {
+            event.preventDefault();
+            // Get the ID and name of the element being dropped
+            const droppedCardData = JSON.parse(event.dataTransfer.getData('text/plain'));
+            console.log(droppedCardData)
+            const droppedEntityId = droppedCardData.draggedEntityId;
+            const droppedEntityName = droppedCardData.draggedEntityName;
+
+            // In other words nothing will happen if a user drops a folder on itself.
+            if (droppedEntityId !== String(this.id)) {
+                this.dispatchEvent(new CustomEvent('DroppedItemOnFolder', {
+                        detail: {
+                            parentFolderId: this.id,
+                            droppedEntityId: droppedEntityId,
+                            droppedEntityName: droppedEntityName
+                        },
+                        bubbles: true
+                }));
+            }
+            this.classList.remove('hovered');
+        });
     }
+
 
     addColor() {
         const newColor = folderColors[this.folder.color];
@@ -144,42 +194,6 @@ class Folder extends HTMLElement {
     }
 
 
-    drop(event) {
-        event.preventDefault();
-        // Get the id of the element being dragged
-        const droppedCardInfo = JSON.parse(event.dataTransfer.getData('text/plain'));
-        const droppedCardId = droppedCardInfo.draggedCardId;
-        const draggedItemType = droppedCardInfo.draggedItem;
-
-        // In other words nothing will happen if a user drops a folder on itself. 
-        // != is used instead of !== because a id attribute of a html tag is a string and 
-        // the id from the backend is a integer
-        if (droppedCardId != this.id) {
-            this.handleDrop(droppedCardId, draggedItemType);                    
-        }
-        this.classList.remove('hovered');
-    }
-
-    onHover(event) {
-        event.preventDefault();
-        this.classList.add('hovered');
-    }
-
-    onLeave(event) {
-        event.preventDefault();
-        this.classList.remove('hovered');
-    }
-
-    dragStart(event) {
-        this.classList.add('dragging');
-        addDraggImage(event, 'folder');
-        event.dataTransfer.setData('text/plain', `{"draggedItem": "folder", "draggedCardId": "${this.id}"}`);
-    }
-
-    dragEnd() {
-        this.classList.remove('dragging');
-    }
-
     handleCardClick() {
         this.dispatchEvent(new CustomEvent('FolderCardClick', { detail: { folder: this.folder }, bubbles: true }));
     }
@@ -190,10 +204,6 @@ class Folder extends HTMLElement {
 
     handleEditClick() {        
         this.dispatchEvent(new CustomEvent('EditFolder', { detail: { folder: this.folder }, bubbles: true }));
-    }
-
-    handleDrop(ItemId, itemType) {
-        this.dispatchEvent(new CustomEvent('DroppedItemOnFolder', { detail: { folderId: this.id, droppedItemId: ItemId, droppedItemType: itemType }, bubbles: true}));
     }
 }
 

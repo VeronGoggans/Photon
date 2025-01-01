@@ -84,7 +84,7 @@ const standardStickyBoardTemplate = `
 
 
 const columnStickyBoardTemplate = `
-    <div class="wrapper">
+    <div class="column-sticky-board-view">
     <h2 contenteditable="true" spellcheck="false">Sticky wall</h2>
     <p class="description" contenteditable="true" spellcheck="false">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, in quos? Ab suscipit perspiciatis obcaecati vel iure vitae corporis veniam quas! Mollitia eos tempore ipsam doloribus hic. Laborum, enim praesentium.</p>
     <div class="board-wrapper">

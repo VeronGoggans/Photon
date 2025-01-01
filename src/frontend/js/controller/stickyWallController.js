@@ -79,12 +79,10 @@ export class StickWallController {
 
     async updateStickyBoardName(updatedStickyBoardData) {
         const { stickyBoardId, boardType, updatedName } = updatedStickyBoardData;
-        const patchStickyBoardNameRequest = {
-            "board_type": "standard",
-            "name": "Test sticky board"
-        }
-        console.log(patchStickyBoardNameRequest)
+        const patchStickyBoardNameRequest = { "board_type": boardType, "name": updatedName }
         const route = `/stickyBoards/${stickyBoardId}/name`;
+        console.log(patchStickyBoardNameRequest);
+        
         await this.model.patch(route, patchStickyBoardNameRequest);
     }
 

@@ -4,7 +4,7 @@ import { HttpModel } from "../model/httpModel.js";
 import { pushNotification } from "../handlers/notificationHandler.js";
 import {
     CLEAR_STORED_NOTE_EVENT,
-    CREATE_NOTE_EVENT,
+    CREATE_NOTE_EVENT, DELETE_NOTE_EVENT,
     FETCH_NOTE_BY_ID_EVENT,
     GET_BREAD_CRUMBS_EVENT,
     GET_CURRENT_FOLDER_EVENT,
@@ -212,18 +212,22 @@ export class TextEditorController {
      * This method is called when the user clicks on the delete option inside the editor,
      * which means the user still remains inside the editor when this function is called.
      *
-     * @param editorObjectId
+     * @param noteId
      */
-    async deleteEditorObject(editorObjectId) {
+    async deleteEditorObject(noteId) {
 
-        const { note } = await this.httpModel.delete(`/note/${editorObjectId}`);
-        this.model.removeDeletedObjectFromEvictingStack(editorObjectId)
+        const note = await this.eventBus.asyncEmit(DELETE_NOTE_EVENT, {
+            noteId: noteId,
+            notifyUser: true,
+            render: false
+        });
+
+        this.model.removeDeletedObjectFromEvictingStack(noteId);
+        this.model.modifyEditorCache('delete', note);
         pushNotification('deleted', note.name);
 
-
-        // Clear the previous editor object content
-        this.textEditorView.clearEditorContent();
         // Remove the previous editor object from memory
-        this.model.editorObject = null;
+        this.model.clear();
+        this.textEditorView.clearEditorContent();
     }
 }

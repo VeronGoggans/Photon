@@ -58,8 +58,8 @@ export class ArrayNavigator {
     }
 
 
-    setIndex(index) {
-        this.index = index;
+    setIndex(noteId) {
+        this.index = this.array.findIndex(note => note.id === noteId);
     }
 
 

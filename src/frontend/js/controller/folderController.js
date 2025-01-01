@@ -9,7 +9,7 @@ import {
     FETCH_NOTES_EVENT,
     SET_NOTE_LOCATION_EVENT,
     FETCH_RECENT_FOLDERS_EVENT,
-    GET_BREAD_CRUMBS_EVENT
+    GET_BREAD_CRUMBS_EVENT, UPDATE_FOLDER_LOCATION_EVENT
 } from "../components/eventBus.js";
 
 
@@ -24,12 +24,13 @@ export class FolderController {
         // Listening for custom events
         this.eventBus.registerEvents({
             [GET_CURRENT_FOLDER_EVENT]: () => this.model.getCurrentFolder(),
-            [GET_PARENT_FOLDER_EVENT]: () => this.model.getParentFolder(),
+            [GET_PARENT_FOLDER_EVENT]: () => this.model.peekParentFolder(),
             [GET_BREAD_CRUMBS_EVENT]: () => this.model.getBreadCrumbs(),
             [SET_NOTE_LOCATION_EVENT]: (location) => this.model.addHierarchyPath(location),
             [FETCH_FOLDER_BY_ID_EVENT]: async (folderId) => await this.getFolderById(folderId),
             [FETCH_RECENT_FOLDERS_EVENT]: async () => await this.getFolders({recent: true}),
             [FETCH_FOLDER_SEARCH_ITEMS_EVENT]: async () => await this.getFolders({ searchItems: true }),
+            [UPDATE_FOLDER_LOCATION_EVENT]: async (params) => await this.updateFolderLocation(params.parentFolderId, params.droppedEntityId)
         });
     }
 
@@ -131,9 +132,9 @@ export class FolderController {
 
 
 
-    async updateFolderLocation(newParentFolderId, droppedFolderId) {
-        const route = `/folders/${droppedFolderId}/location`;
-        const patchFolderLocationRequest = { 'parent_id': newParentFolderId };
+    async updateFolderLocation(parentFolderId, droppedEntityId) {
+        const route = `/folders/${droppedEntityId}/location`;
+        const patchFolderLocationRequest = { 'parent_id': parentFolderId };
 
         const response = await this.model.patch(route, patchFolderLocationRequest);
         const folder = response.content.folder;

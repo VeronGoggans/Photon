@@ -7,7 +7,7 @@ rich-text-bar {
     display: flex;
     width: fit-content;
     height: fit-content;
-    background-color: var(--dropdown);
+    background: var(--dropdown);
     padding: 10px 15px;
     border-radius: 10px;
     box-shadow: var(--shadow-dropdown);
@@ -18,7 +18,7 @@ rich-text-bar {
 
 .btn-group {
     display: flex;
-    padding: 0px 10px;
+    padding: 0 10px;
 }
 
 .btn-group button {
@@ -61,7 +61,7 @@ rich-text-bar {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     gap: 7px;
     list-style: none;
-    background-color: var(--dropdown);
+    background: var(--dropdown);
     box-shadow: 0 0 10px var(--shadow);
     border-radius: 10px;
     margin: 0;
@@ -84,7 +84,7 @@ rich-text-bar {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     list-style: none;
-    background-color: var(--dropdown);
+    background: var(--dropdown);
     box-shadow: 0 0 10px var(--shadow);
     border-radius: 10px;
     margin: 0;
@@ -134,7 +134,7 @@ slash-command-container {
     padding: 20px;
     row-gap: 10px;
     max-height: 300px;
-    background-color: var(--dropdown);
+    background: var(--dropdown);
     opacity: 0;
     transition: 150ms;
 }

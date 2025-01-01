@@ -5,53 +5,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AutoSave Example</title>
 </head>
-<body>
-<div contenteditable="true" class="editable" style="border: 1px solid #ccc; padding: 10px; width: 300px;">
-    Edit me and I'll autosave!
+<body><div id="scrollableParent" style="overflow-y: auto; height: 300px; border: 1px solid #ccc; position: relative;">
+    <div style="height: 1000px; padding: 10px; position: relative;">
+        <div id="childElement" style="width: 50px; height: 50px; background: red; position: absolute; top: 50px; left: 50px; cursor: grab;">
+            Drag Me
+        </div>
+    </div>
 </div>
 
 <script>
-    class AutoSaveContentEditable {
-        constructor(contentEditableSelector, saveCallback, delay = 1000) {
-            this.contentEditable = document.querySelector(contentEditableSelector); // Select the contenteditable element
-            this.saveCallback = saveCallback;   // Callback function to save content
-            this.delay = delay;                 // Delay in milliseconds
-            this.timeoutId = null;              // Timeout ID for debouncing
+    const parent = document.getElementById('scrollableParent');
+    const childElement = document.getElementById('childElement');
+    let dragImage = null; // To store the drag image
+    let isDragging = false;
+    let scrollInterval = null; // To store the scrolling interval
 
-            // Bind event listener
-            this.init();
-        }
+    // Create a drag image dynamically
+    function createDragImage() {
+        const img = document.createElement('div');
+        img.style.width = '50px';
+        img.style.height = '50px';
+        img.style.background = 'rgba(0, 0, 0, 0.5)';
+        img.style.position = 'absolute';
+        img.style.pointerEvents = 'none';
+        img.style.zIndex = '1000';
+        img.innerText = 'Dragging';
+        img.style.color = 'white';
+        img.style.display = 'flex';
+        img.style.justifyContent = 'center';
+        img.style.alignItems = 'center';
+        img.style.borderRadius = '5px';
+        document.body.appendChild(img);
+        return img;
+    }
 
-        // Debounce method
-        debounce(callback, delay) {
-            clearTimeout(this.timeoutId); // Clear the previous timeout
-            this.timeoutId = setTimeout(() => {
-                callback(); // Execute the callback after the delay
-            }, delay);
-        }
+    // Start scrolling in a direction (up or down)
+    function startScrolling(direction) {
+        stopScrolling(); // Clear any existing interval
+        scrollInterval = setInterval(() => {
+            parent.scrollBy({ top: direction === 'up' ? -15 : 15 });
+        }, 16); // 60fps (~16ms per frame)
+    }
 
-        // Save content method
-        saveContent() {
-            const content = this.contentEditable.innerHTML; // Get the content
-            this.saveCallback(content); // Call the save callback
-        }
-
-        // Initialize event listener
-        init() {
-            this.contentEditable.addEventListener('input', () => {
-                this.debounce(() => this.saveContent(), this.delay);
-            });
+    // Stop scrolling
+    function stopScrolling() {
+        if (scrollInterval) {
+            clearInterval(scrollInterval);
+            scrollInterval = null;
         }
     }
 
-    // Example usage:
-    const saveCallback = (content) => {
-        console.log("Content saved:", content);
-        // Add your save logic here (e.g., send an API request)
-    };
+    // Check if the drag image is near the boundary and start/stop scrolling
+    function checkAutoScroll(mouseY) {
+        const rect = parent.getBoundingClientRect();
+        const topEdge = rect.top;
+        const bottomEdge = rect.bottom;
+        const proximity = 50; // Trigger scrolling within 30px from the edge
 
-    // Create an instance of the AutoSaveContentEditable class
-    const autoSave = new AutoSaveContentEditable('.editable', saveCallback, 1000);
+        if (mouseY < topEdge + proximity) {
+            startScrolling('up'); // Scroll up
+        } else if (mouseY > bottomEdge - proximity) {
+            startScrolling('down'); // Scroll down
+        } else {
+            stopScrolling(); // Stop scrolling if not near edges
+        }
+    }
+
+    // Start dragging
+    childElement.addEventListener('mousedown', (event) => {
+        event.preventDefault(); // Prevent text selection during drag
+        isDragging = true;
+
+        // Create and position the drag image
+        dragImage = createDragImage();
+        dragImage.style.left = `${event.clientX}px`;
+        dragImage.style.top = `${event.clientY}px`;
+    });
+
+    // Handle dragging and auto-scrolling
+    document.addEventListener('mousemove', (event) => {
+        if (isDragging && dragImage) {
+            // Move the drag image with the mouse
+            dragImage.style.left = `${event.clientX}px`;
+            dragImage.style.top = `${event.clientY}px`;
+
+            // Check for auto-scroll
+            checkAutoScroll(event.clientY);
+        }
+    });
+
+    // Stop dragging
+    document.addEventListener('mouseup', () => {
+        if (isDragging) {
+            isDragging = false;
+
+            // Remove the drag image
+            if (dragImage) {
+                dragImage.remove();
+                dragImage = null;
+            }
+
+            // Stop scrolling
+            stopScrolling();
+        }
+    });
 </script>
+
+
+
+
 </body>
 </html>

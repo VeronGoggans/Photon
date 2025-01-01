@@ -99,6 +99,7 @@ export const FETCH_RECENT_FOLDERS_EVENT = 'fetch-recent-folders';
 export const UPDATE_FOLDER_LOCATION_EVENT = 'update-folder-location';
 
 export const CREATE_NOTE_EVENT = 'create-note';
+export const DELETE_NOTE_EVENT = 'delete-note';
 export const FETCH_NOTES_EVENT = 'fetch-notes';
 export const FETCH_RECENT_NOTES_EVENT = 'fetch-recent-notes';
 export const FETCH_NOTE_BY_ID_EVENT = 'fetch-note-by-id';

@@ -1,8 +1,4 @@
 .dark {
-    /* Folder colors */
-
-
-
 
     /*sidebar*/
     --sidebar-inactive-tab: #8686a1;
@@ -14,7 +10,7 @@
     --editor-container: #23252e;
     --editor-container-shadow: transparent;
     --editor-container-input: #16171c;
-    --dropdown: #121223;
+    --dropdown: linear-gradient(7deg, rgb(13 11 34) 6%, rgb(27 27 52) 100%);
     --heading3: #9da0bd;
     --heading4: #8e91a3;
     --hover-slash-command: #181b3b;
@@ -36,6 +32,7 @@
     --border-notification: none;
     --border-note-view-dropdown: none;
     --border-card: #282a3d;
+    --border-column-board: #444d7d;
     --border-sidebar-right: 1px solid#282a3d;
     --border-sidebar-soft: none;
     --border-checklist: 1px solid #27293b;
@@ -64,8 +61,8 @@
     --searchbar: linear-gradient(7deg, rgb(21 19 47) 6%, rgb(28 28 61) 100%);
     --sidebar-text: #d6d8e5;
     --sidebar-text-hover: #5c7fdd; 
-    --card: linear-gradient(7deg, rgb(27 26 47) 6%, rgb(16 16 35) 100%);
-    --folder: linear-gradient(7deg, rgb(27 26 47) 6%, rgb(16 16 35) 100%); /* TODO #setting option color 171531*/
+    --card: linear-gradient(7deg, #151430 6%, #121124 100%) ;/*linear-gradient(7deg, rgb(27 26 47) 6%, rgb(16 16 35) 100%)*/
+    --folder: linear-gradient(20deg, #151430 6%, #121124 100%); /* TODO #setting option color 171531*/
     --text: hsl(232, 20%, 78%);
     --text-soft: hsl(232, 20%, 60%);;
     --icon: #bbbed2;
@@ -75,7 +72,7 @@
     --less-important: hsl(232 22% 68% / 1);
     
     
-    --hover-searchbar-options: #18182d;
+    --hover-searchbar-options: #0a0d1c;
     --hover-text: #5c7dff;
     --command-square-bg: transparent;
     --hover-sidebar: #282b5e;
@@ -89,8 +86,8 @@
     --scrollbar-content-view: #20274a;
     --stats-background: #141322;
     --home-tab: #28283b;
-    --options-menu: hsl(240, 32%, 10%);
-    --options-menu-hover: hsl(240, 32%, 13%);
+    --options-menu: hsl(240 36.17% 13.41%);
+    --options-menu-hover: hsl(240 53.85% 7.65%);
 
     /*Feedback variables*/
     --completed-checklist-task: #1c1d3b;
@@ -98,7 +95,7 @@
     --active-tab-bg: #5c7fdd;
     --active-tab-text: #fff;
 
-
+    --scrollbar-editor: #20274a;
     /*Buttons*/
     --button1-bg: #181b3b;
     --button1-hover: #151838;
@@ -158,6 +155,7 @@
     /*Borders*/
     --border-notification: #f3f5fb;
     --border-card: #dee1ef;
+    --border-column-board: #ced2e6;
     --border-sidebar-right: 1px solid #dee1ef; 
     --border-sidebar-soft: 1px solid #ffffff;
     --border-note-view-dropdown: none;
@@ -213,6 +211,7 @@
     --options-menu: hsl(235, 100%, 98%);
     --options-menu-hover: hsl(235, 100%, 95%);
 
+    --scrollbar-editor: #cfd2e2;
     /*Feedback variables*/
     --completed-checklist-task: #f8f9ff;
 

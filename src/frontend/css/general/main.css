@@ -11,6 +11,10 @@ body {
     font-family: Poppins;
 }
 
+body.dragging-card {
+    cursor: grabbing !important;
+}
+
 button {
     cursor: pointer;
     border: none;
@@ -49,6 +53,7 @@ i {
 }
 
 .drag-image {
+    user-select: none;
     position: absolute;
     opacity: .8;
     background-color: var(--dragging);
@@ -59,6 +64,7 @@ i {
     color: var(--icon);
     width: 125px;
     height: 100px;
+    cursor: grabbing !important;
     font-size: 25px;
 }
 
@@ -134,7 +140,7 @@ textarea::placeholder {
     overflow-y: auto;
     border: var(--border-sidebar-right);
     border-radius: 10px;
-    background-color: var(--dropdown);
+    background: var(--dropdown);
     list-style: none;
     margin: 0;
     padding: 10px;

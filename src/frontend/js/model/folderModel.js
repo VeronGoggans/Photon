@@ -49,6 +49,25 @@ export class FolderModel extends HttpModel {
     }
 
 
+    /**
+     * This method returns an object containing the name and ID
+     * of the parent folder relative to the current folder the user is currently within.
+     *
+     * The difference between this method and the getParentFolder method is that this method returns
+     * the parent folder while keeping the current folder on the stack.
+     *
+     * Useful for if you want to see the parent folder without having to remove (pop) the current (top) folder
+     *
+     * @returns { {id: number, name: string} } - Metadata of the parent folder
+     */
+    peekParentFolder() {
+        const currentFolder = this.stack.pop();
+        const parentFolder = this.stack.peek();
+        this.stack.push(currentFolder);
+        return parentFolder ? parentFolder : this.homeFolder;
+    }
+
+
 
     /**
      * This method returns a complete representation of the folder hierarchy.

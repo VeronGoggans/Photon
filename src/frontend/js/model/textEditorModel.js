@@ -8,7 +8,7 @@ import { EditorNotesCache } from "../components/cache.js";
 export class TextEditorModel {
     constructor() {
         this.currentLoadedNote = null;
-        this.stackLimit = 5;
+        this.stackLimit = 10;
         this.httpModel = new HttpModel();
         this.editorNotesCache = new EditorNotesCache();
         this.recentlyViewedNotesStack = new UniqueEvictingStack(this.stackLimit);
@@ -32,6 +32,7 @@ export class TextEditorModel {
 
         if (currentLoadedNote !== null) {
             currentLoadedNote.last_visit = getFormattedTimestamp();
+            this.editorNotesCache.setIndex(currentLoadedNote.id);
             this.recentlyViewedNotesStack.push(currentLoadedNote);
         }
     }

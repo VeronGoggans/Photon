@@ -65,14 +65,6 @@ export function applyFolderIconColor(componentElement) {
 }
 
 
-export function addDraggImage(event, imageType) {
-    // Adding the drag image to the body
-    const dragImage = createDragImage(imageType);
-    document.body.appendChild(dragImage);
-    event.dataTransfer.setDragImage(dragImage, 0, 0)
-}
-
-
 
 export function showContextMenu(event, parentElement, menuTemplate) {
     event.preventDefault()
@@ -95,32 +87,39 @@ export function showContextMenu(event, parentElement, menuTemplate) {
 
 
 /**
+ * Creates a visual representation of the draggable element
+ * to follow the mouse pointer during dragging.
  *
- * @param {Number} x
- * @param {number} y
+ * @param { string } draggableEntityName - The type of entity being dragged (e.g., "folder", "note" or "sticky note").
+ *
+ * @returns { HTMLElement } The drag image element.
  */
-export function pixelToPercentage(x, y) {
-    const winWidth = window.innerWidth;
-    const winHeight = window.innerHeight;
+export function addDragImage(event, draggableEntityName) {
+    const folderDragIconClass = 'bi bi-folder';
+    const noteDragIconClass = 'bi bi-file-earmark';
 
-    const xPercentage = x / winWidth * 100;
-    const yPercentage = y / winHeight * 100;
+    const dragImage = document.createElement('div');
+    const iconElement = document.createElement('i');
 
-    return { x: xPercentage, y: yPercentage }
+    let imageIconClass;
+    if (draggableEntityName === 'folder') {
+        imageIconClass = folderDragIconClass
+    }
+
+    if (draggableEntityName === 'note') {
+        imageIconClass = noteDragIconClass;
+    }
+
+    iconElement.setAttribute('class', imageIconClass)
+    dragImage.appendChild(iconElement);
+    dragImage.classList.add('drag-image');
+
+    document.body.appendChild(dragImage);
+    event.dataTransfer.setDragImage(dragImage, 0, 0)
+
 }
 
 
-
-function createDragImage(type) {
-     /**
-     * type is either ( folder ) or ( file ) or ( thumbtack )
-     * representing the fontAwesome icon class of 
-     * ( fa-solid fa-folder ) or ( fa-solid fa-file ) or ( fa-solid fa-thumbtack )
-    */    
-    const image = document.createElement('div');
-    const icon = document.createElement('i');
-    icon.setAttribute('class', `fa-solid fa-${type}`)
-    image.classList.add('drag-image');
-    image.appendChild(icon);
-    return image
+export function removeDragImage() {
+    document.querySelector('.drag-image').remove();
 }

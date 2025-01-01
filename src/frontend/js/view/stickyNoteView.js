@@ -29,8 +29,8 @@ export class StandardStickyBoardView {
             })
         }
 
-        new AutoSave('.sticky-board-name-container h2', saveNameCallBack, false);
-        new AutoSave('.description', saveDescriptionCallBack);
+        new AutoSave('.sticky-board-name-container h2', saveNameCallBack, false, false, true);
+        new AutoSave('.description', saveDescriptionCallBack, false, true);
         AnimationHandler.fadeInFromBottom(this._viewElement);
     }
 

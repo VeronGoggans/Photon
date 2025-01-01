@@ -1,50 +1,42 @@
 .searchbar ul::-webkit-scrollbar,
-.linkable-notes-list::-webkit-scrollbar,
 .content-view::-webkit-scrollbar,
 .note-view-content::-webkit-scrollbar,
 .font-options::-webkit-scrollbar,
-.linkable-notes-list::-webkit-scrollbar,
-.flashcard-deck-container::-webkit-scrollbar,
-.flashcard-deck-progression-container::-webkit-scrollbar,
-.create-deck-modal .card-description::-webkit-scrollbar,
-.edit-flashcard-modal .card-description::-webkit-scrollbar,
-.editor::-webkit-scrollbar,
 .home .middle::-webkit-scrollbar,
-.templates::-webkit-scrollbar,
-.flashcards-view::-webkit-scrollbar,
-.flashcard-practice .deck-section .flashcard::-webkit-scrollbar,
 .editor-wrapper .templates-container::-webkit-scrollbar,
-.flashcard-edit-view::-webkit-scrollbar,
 .sticky-wall-view::-webkit-scrollbar,
 .sticky-home-view::-webkit-scrollbar,
 .standard-sticky-board-view::-webkit-scrollbar,
-slash-command-container .commands::-webkit-scrollbar {
+.column-sticky-board-view::-webkit-scrollbar,
+.slash-command-container .commands::-webkit-scrollbar,
+.recently-viewed-notes-dropdown .options::-webkit-scrollbar {
     background-color: transparent;
     width: 5px;
 }
 
+.editor::-webkit-scrollbar {
+    background-color: transparent;
+    width: 10px;
+}
+
+.editor::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-editor);
+    border-radius: 5px;
+}
+
+
 .searchbar ul::-webkit-scrollbar-thumb,
 .font-options::-webkit-scrollbar-thumb,
-.linkable-notes-list::-webkit-scrollbar-thumb,
-.create-deck-modal .card-description::-webkit-scrollbar-thumb,
-.edit-flashcard-modal .card-description::-webkit-scrollbar-thumb,
-.templates::-webkit-scrollbar-thumb,
-.flashcard-deck-container::-webkit-scrollbar-thumb,
-.flashcard-deck-progression-container::-webkit-scrollbar-thumb,
 .content-view::-webkit-scrollbar-thumb,
 .note-view-content::-webkit-scrollbar-thumb,
-.editor::-webkit-scrollbar-thumb,
 .home .middle::-webkit-scrollbar-thumb,
-.templates::-webkit-scrollbar-thumb,
-.flashcards-view::-webkit-scrollbar-thumb,
-.flashcard-practice .deck-section .flashcard::-webkit-scrollbar-thumb,
 .editor-wrapper .templates-container::-webkit-scrollbar-thumb,
-.flashcard-edit-view::-webkit-scrollbar-thumb,
 .sticky-wall-view::-webkit-scrollbar-thumb,
-.task-board-cards::-webkit-scrollbar-thumb,
 .standard-sticky-board-view::-webkit-scrollbar-thumb,
+.column-sticky-board-view::-webkit-scrollbar-thumb,
 .sticky-home-view::-webkit-scrollbar-thumb,
-slash-command-container .commands::-webkit-scrollbar-thumb {
+.slash-command-container .commands::-webkit-scrollbar-thumb,
+.recently-viewed-notes-dropdown .options::-webkit-scrollbar-thumb {
     background-color: var(--scrollbar-content-view);
     border-radius: 10px;
 }

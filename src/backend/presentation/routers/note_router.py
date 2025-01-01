@@ -100,9 +100,9 @@ class NoteRouter:
 
 
     @handle_exceptions
-    def update_note_location(self, request: MoveNoteRequest, db: Session = Depends(Database.get_db)):
-        self.manager.update_location(request.folder_id, request.note_id, db)
-        return JSONResponse(status_code=HttpStatus.NO_CONTENT)
+    def update_note_location(self, note_id: int, request: PatchNoteLocationRequest, db: Session = Depends(Database.get_db)):
+        note = self.manager.update_location(request.parent_id, note_id, db)
+        return JSONResponse(status_code=HttpStatus.NO_CONTENT, content={'note': note})
     
 
 

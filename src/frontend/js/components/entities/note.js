@@ -1,7 +1,7 @@
 import { formatName, filterNotePreview } from "../../util/formatters.js";
-import { addDraggImage, showContextMenu } from "../../util/ui.js";
-import { applyWidgetStyle } from "../../util/ui.js";
+import { addDragImage, removeDragImage, showContextMenu, applyWidgetStyle } from "../../util/ui.js";
 import { formatDate } from "../../util/date.js";
+import { checkAutoScroll, stopScrolling } from "../draggable.js";
 
 
 const optionMenuTemplate = `
@@ -19,6 +19,7 @@ const optionMenuTemplate = `
 class Note extends HTMLElement {
     constructor() {
         super();
+        this.scrollableParent = document.querySelector('.note-view-content')
     }
 
     setData(value) {
@@ -46,8 +47,28 @@ class Note extends HTMLElement {
     addEventListeners() {
         this.addEventListener('click', () => { this.handleCardClick() });
         this.addEventListener('contextmenu', (event) => {showContextMenu(event, this, optionMenuTemplate)});
-        this.addEventListener('dragstart', (event) => {this.dragStart(event)}); 
-        this.addEventListener('dragend', () => {this.classList.remove('dragging')});
+
+        this.addEventListener('dragstart', (event) => {
+            this.classList.add('dragging')
+            addDragImage(event, 'note');
+
+            const dragDataStruct = {
+                draggedEntityName: 'note',
+                draggedEntityId: this.id,
+            }
+
+            event.dataTransfer.setData('text/plain', JSON.stringify(dragDataStruct));
+        });
+
+        this.addEventListener('drag', (event) => {
+            checkAutoScroll(this.scrollableParent, event.clientX, event.clientY);
+        });
+
+        this.addEventListener('dragend', () => {
+            this.classList.remove('dragging');
+            removeDragImage();
+            stopScrolling();
+        });
     }
 
     applyBookmarkStyle() {
@@ -66,12 +87,6 @@ class Note extends HTMLElement {
     
     handleCardClick() {
         this.dispatchEvent(new CustomEvent('NoteCardClick', { detail: { note: this.note }, bubbles: true }));
-    }
-
-    dragStart(event) {
-        this.classList.add('dragging')
-        addDraggImage(event, 'file');
-        event.dataTransfer.setData('text/plain', `{"draggedItem": "note", "draggedCardId": "${this.id}"}`)
     }
 
     handleDeleteClick() {
