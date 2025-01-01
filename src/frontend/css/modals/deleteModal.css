@@ -52,30 +52,3 @@
     justify-content: center;
     column-gap: 20px;
 }
-
-.delete-modal .cancel-btn {
-    background-color:transparent;
-    font-size: 16px;
-    padding: 10px 30px;
-    border-radius: 30px;
-    color: var(--important);
-
-}
-
-.delete-modal .delete-btn {
-    background-color: var(--button1-bg);
-    color: var(--important);
-    padding: 10px 30px;
-    border-radius: 10px;
-    transition: 200ms;
-}
-
-.delete-modal .delete-btn:hover {
-    color: #fff;
-    background-color: #5c7dff;
-    scale: 1.05;
-}
-
-.delete-modal .cancel-btn:hover {
-    scale: 1.05;
-}

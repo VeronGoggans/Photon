@@ -78,6 +78,7 @@ folder-path:hover {
 .color-blue-1 p,
 .color-blue-2 p,
 .color-blue-3 p,
+.color-blue-4 p,
 .color-green-1 p,
 .color-green-2 p,
 .color-green-3 p,
@@ -92,6 +93,7 @@ folder-path:hover {
 .light .color-blue-1 {background: rgb(121, 144, 255)}
 .light .color-blue-2 {background: rgb(169, 215, 255)}
 .light .color-blue-3 {background: rgb(217, 237, 255)}
+.light .color-blue-4 {background: rgb(124, 199, 211)}
 .light .color-green-1 {background: rgb(158, 213, 197)}
 .light .color-green-2 {background: rgb(203, 255, 197)}
 .light .color-green-3 {background: rgb(173, 255, 164)}
@@ -105,6 +107,7 @@ folder-path:hover {
 .light .color-blue-1 #folder-icon {color: rgb(50, 72, 177) !important;}
 .light .color-blue-2 #folder-icon {color: rgb(70, 158, 239)  !important;}
 .light .color-blue-3 #folder-icon {color: rgb(143, 191, 236) !important;}
+.light .color-blue-4 #folder-icon {color: rgb(34, 97, 94) !important;}
 .light .color-green-1 #folder-icon {color: rgb(36, 169, 130) !important;}
 .light .color-green-2 #folder-icon {color: rgb(85, 183, 73) !important;}
 .light .color-green-3 #folder-icon {color: rgb(32, 146, 20) !important;}
@@ -119,6 +122,7 @@ folder-path:hover {
 .dark .color-blue-1 {background: rgb(121, 144, 255)}
 .dark .color-blue-2 {background: rgb(80 141 196)}
 .dark .color-blue-3 {background: rgb(122 179 228)}
+.dark .color-blue-4 {background: rgb(81, 159, 172)}
 .dark .color-green-1 {background: rgb(100 174 152)}
 .dark .color-green-2 {background: rgb(153 230 145)}
 .dark .color-green-3 {background: rgb(123 219 113)}
@@ -132,6 +136,7 @@ folder-path:hover {
 .dark .color-blue-1 #folder-icon {color: rgb(31 41 89) !important;}
 .dark .color-blue-2 #folder-icon {color: rgb(7 63 113) !important;}
 .dark .color-blue-3 #folder-icon {color: rgb(34 122 200) !important;}
+.dark .color-blue-4 #folder-icon {color: rgb(34, 97, 94) !important;}
 .dark .color-green-1 #folder-icon {color: rgb(49 122 101) !important;}
 .dark .color-green-2 #folder-icon {color: rgb(80 175 69) !important;}
 .dark .color-green-3 #folder-icon {color: rgb(9 90 0) !important;}

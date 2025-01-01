@@ -8,23 +8,24 @@ export const editFolderModalTemplate = `
     <span id="title">Folder color</span>
     <p>Select a color for this folder</p>
     <div class="folder-color-options">
-        <div style="background-color: rgb(121, 144, 255)"></div>
-        <div style="background-color: rgb(169, 215, 255)"></div>
-        <div style="background-color: rgb(217, 237, 255)"></div>
-        <div style="background-color: rgb(158, 213, 197)"></div>
-        <div style="background-color: rgb(203, 255, 197)"></div>
-        <div style="background-color: rgb(173, 255, 164)"></div>
-        <div style="background-color: rgb(142, 122, 181)"></div>
-        <div style="background-color: rgb(223, 193, 255)"></div>
-        <div style="background-color: rgb(255, 163, 163)"></div>
-        <div style="background-color: rgb(255, 197, 197)"></div>
-        <div style="background-color: rgb(255, 182, 116)"></div>
-        <div style="background-color: rgb(255, 224, 158)"></div>
-        <div class="original-folder-color" style="background-color: #fff"></div>
+        <div style="background-color: rgb(121, 144, 255)" data-folder-css-class="color-blue-1"></div>
+        <div style="background-color: rgb(169, 215, 255)" data-folder-css-class="color-blue-2"></div>
+        <div style="background-color: rgb(217, 237, 255)" data-folder-css-class="color-blue-3"></div>
+        <div style="background-color: rgb(124, 199, 211)"  data-folder-css-class="color-blue-4"></div>
+        <div style="background-color: rgb(158, 213, 197)" data-folder-css-class="color-green-1"></div>
+        <div style="background-color: rgb(203, 255, 197)" data-folder-css-class="color-green-2"></div>
+        <div style="background-color: rgb(173, 255, 164)" data-folder-css-class="color-green-3"></div>
+        <div style="background-color: rgb(142, 122, 181)" data-folder-css-class="color-purple-1"></div>
+        <div style="background-color: rgb(223, 193, 255)" data-folder-css-class="color-purple-2"></div>
+        <div style="background-color: rgb(255, 163, 163)" data-folder-css-class="color-red-1"></div>
+        <div style="background-color: rgb(255, 197, 197)" data-folder-css-class="color-red-2"></div>
+        <div style="background-color: rgb(255, 182, 116)" data-folder-css-class="color-orange-1"></div>
+        <div style="background-color: rgb(255, 224, 158)" data-folder-css-class="color-orange-2"></div>
+        <div class="color-original" style="background-color: #fff" data-folder-css-class="color-original"></div>
     </div>
     <div class="buttons-container">
-        <button class="cancel-btn">Cancel</button>
-        <button class="save-btn">Add folder</button>
+        <button class="modal-cancel-button cancel-btn">Cancel</button>
+        <button class="modal-confirm-button save-btn">Add folder</button>
     </div>
 </div>
 `
@@ -49,8 +50,8 @@ export const newStickyBoardModalTemplate = `
     </div>
 </div>
 <div class="buttons-container">
-    <button class="cancel-btn">Cancel</button>
-    <button class="save-btn">Create</button>
+    <button class="modal-cancel-button cancel-btn">Cancel</button>
+    <button class="modal-confirm-button save-btn">Create</button>
 </div>
 `
 
@@ -61,7 +62,7 @@ export const deleteModalTemplate = `
 <span>Do note that this action is permanent</span>
 <input type="text" spellcheck="false">
 <div class="button-container">
-    <button class="cancel-btn">Cancel</button>
-    <button class="delete-btn">Confirm</button>
+    <button class="modal-cancel-button cancel-btn">Cancel</button>
+    <button class="modal-confirm-button delete-btn">Confirm</button>
 </div>
 `

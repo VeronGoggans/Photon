@@ -1,4 +1,3 @@
-import { folderColors } from "../../constants/constants.js";
 import { formatName } from "../../util/formatters.js";
 import {addDragImage, removeDragImage, showContextMenu} from "../../util/ui.js";
 import { applyFolderIconColor, applyWidgetStyle } from "../../util/ui.js";
@@ -161,7 +160,6 @@ class Folder extends HTMLElement {
             event.preventDefault();
             // Get the ID and name of the element being dropped
             const droppedCardData = JSON.parse(event.dataTransfer.getData('text/plain'));
-            console.log(droppedCardData)
             const droppedEntityId = droppedCardData.draggedEntityId;
             const droppedEntityName = droppedCardData.draggedEntityName;
 
@@ -181,17 +179,30 @@ class Folder extends HTMLElement {
     }
 
 
+
+    /**
+     * The `addColor` method dynamically updates the CSS classes of an element
+     * to ensure it reflects the current folder color. It removes any existing
+     * color-related classes and applies the new color class from the folder's
+     * `color` property.
+     *
+     * @method
+     * @name addColor
+     * @description This method iterates through the element's class list, removes
+     * any class that includes 'color', and adds the new color class based on the
+     * `folder.color` property.
+     */
     addColor() {
-        const newColor = folderColors[this.folder.color];
-        const folderClasses = Array.from(this.classList);
-        
-        for (const cls of folderClasses) {
+        const allFolderClasses = Array.from(this.classList);
+
+        for (const cls of allFolderClasses) {
             if (cls.includes('color')) {
                 this.classList.remove(cls);
             }
-        }        
-        this.classList.add(newColor);
+        }
+        this.classList.add(this.folder.color);
     }
+
 
 
     handleCardClick() {

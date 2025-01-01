@@ -5,10 +5,18 @@ import { closeDialogEvent } from "../../util/dialog.js";
 
 
 export class FolderModal {
+    /**
+     * Constructs a FolderModal instance.
+     *
+     * @param {Object} modalData             - Data required for the modal.
+     * @param {Object|null} modalData.folder - The folder to edit (if applicable). If null, a new folder is being created.
+     * @param {Function} modalData.callBack  - A callback function to handle saving folder data.
+     * @returns {HTMLElement} The modal DOM element.
+     */
     constructor(modalData) {
         this.modalData = modalData;
         this.folder = modalData.folder;
-        this.preferedFolderColor = null;
+        this.preferredFolderColor = null;
 
         this.#initElements();
         this.#eventListeners();
@@ -16,33 +24,55 @@ export class FolderModal {
     }
 
 
+    /**
+     * Initializes the modal DOM elements and sets the initial state of the modal.
+     *
+     * @private
+     */
     #initElements() {
         this.modal = document.createElement('div');
         this.modal.classList.add('edit-folder-modal');
         this.modal.innerHTML = editFolderModalTemplate;
-        this.colorsArray = this.modal.querySelectorAll('.folder-color-options div');
+        this.colorOptions = this.modal.querySelectorAll('.folder-color-options div');
 
         if (this.folder !== null) {
             this.#loadFolder();
             return
         }
 
-        this.#showActiveFolderColor('rgb(255, 255, 255)');
+        this.#showActiveFolderColor('color-original');
     }
 
 
+    /**
+     * Loads the folder's data into the modal for editing.
+     *
+     * @private
+     * @description This method will render the current data from the folder the user wants to edit on the
+     * `FolderModal`.
+     */
     #loadFolder() {
         this.modal.querySelector('h2').textContent = 'Edit folder';
         this.modal.querySelector('.save-btn').textContent = 'Save changes';
         this.modal.querySelector('input').value = this.folder.name;
-        this.#showActiveFolderColor(this.folder.color);
+        const folderCSSClass = this.folder.color;
+
+        this.#showActiveFolderColor(folderCSSClass);
     }
 
 
+    /**
+     * Attaches event listeners to modal elements for user interactions.
+     *
+     * @private
+     */
     #eventListeners() {
-        this.colorsArray.forEach(colorElement => {
-            const color = colorElement.style.backgroundColor;
-            colorElement.addEventListener('click', () => {this.#showActiveFolderColor(color)});
+        this.colorOptions.forEach(colorOption => {
+            const folderCSSClass = colorOption.getAttribute('data-folder-css-class');
+
+            colorOption.addEventListener('click', () => {
+                this.#showActiveFolderColor(folderCSSClass)
+            });
         });
 
 
@@ -55,14 +85,14 @@ export class FolderModal {
                 await this.modalData.callBack({
                     'id': this.folder.id,
                     'name': this.modal.querySelector('input').value,
-                    'color': this.preferedFolderColor
+                    'color': this.preferredFolderColor
                 })    
             }
 
             else {
                 await this.modalData.callBack({
                     'name': this.modal.querySelector('input').value || 'Untitled',
-                    'color': this.preferedFolderColor
+                    'color': this.preferredFolderColor
                 })
             }
 
@@ -76,16 +106,30 @@ export class FolderModal {
 
 
 
-    #showActiveFolderColor(color) {
-        for (let i = 0; i < this.colorsArray.length; i++) {
-            const colorDiv = this.colorsArray[i];
-
-            if (colorDiv.style.backgroundColor !== color) {
-                colorDiv.classList.remove('selected-folder-color');                
+    /**
+     * The `#showActiveFolderColor` method updates the visual state of folder color options
+     * in the UI by highlighting the currently selected color and storing it as the preferred
+     * folder color. It iterates over an array of color options, modifies their classes to
+     * reflect the active selection, and updates the internal state.
+     *
+     * @private
+     * @method
+     * @name #showActiveFolderColor
+     * @description This method ensures that only the folder color option matching the
+     * given `styleClass` is highlighted by adding the `selected-folder-color` class to it.
+     * Other color options have the `selected-folder-color` class removed. The selected
+     * color is saved as `this.preferredFolderColor`.
+     *
+     * @param {string} folderCSSClass   - The CSS class corresponding to the selected folder color.
+     */
+    #showActiveFolderColor(folderCSSClass) {
+        for (let colorOption of this.colorOptions) {
+            if(colorOption.getAttribute('data-folder-css-class') !== folderCSSClass) {
+                colorOption.classList.remove('selected-folder-color');
                 continue
             }
-            this.preferedFolderColor = color;
-            colorDiv.classList.add('selected-folder-color');
+            this.preferredFolderColor = folderCSSClass;
+            colorOption.classList.add('selected-folder-color');
         }
     }  
 }

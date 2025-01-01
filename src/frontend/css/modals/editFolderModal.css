@@ -4,7 +4,7 @@
     flex-direction: column;
     gap: 10px;
     width: 650px;
-    height: 550px;
+    height: fit-content;
     padding: 30px 40px;
     border-radius: 10px;
     justify-content: center;
@@ -52,69 +52,31 @@
     border-color: #5c7dff;
 }
 
-.edit-folder-modal .cancel-btn {
-    border-radius: 7px;
-    width: 120px;
-    height: 40px;
-    background-color: transparent;
-    font-size: 16px;
-    color: var(--text);
-}
-
-.edit-folder-modal .save-btn {
-    position: relative;
-    border-radius: 7px;
-    background-color: transparent;
-    color: #5c7dff;
-    font-size: 16px;
-    width: 135px;
-    overflow: hidden;
-}
-
-.edit-folder-modal .save-btn::before {
-    content: '';
-    position: absolute;
-    width: 0;
-    left: 0;
-    bottom: 0;
-    height: 100%;
-    transition: 150ms;
-    background-color: var(--hover);
-    z-index: -1
-}
-
-.edit-folder-modal .save-btn:hover::before {
-    width: 100%;
-}
-
-.edit-folder-modal .cancel-btn:hover {
-    color: #5c7dff;
-}
 
 .folder-color-options div {
     min-width: 30px;
     height: 30px;
     margin: 0 5px;
-    border-radius: 10px;
+    border-radius: 50%;
     cursor: pointer;
     transition: 50ms;
     border: 2px solid transparent;
 }
 
-.folder-color-options .original-folder-color {
+.folder-color-options .color-original {
     width: 30px;
     height: 30px;
     margin: 0 5px;
-    border-radius: 10px;
+    border-radius: 50%;
     cursor: pointer;
     transition: 50ms;
     background-color: var(--card);
-    border: 1px solid var(--border-card);
+    border: 2px solid var(--border-card);
 }
 .buttons-container {
     display: flex;
     gap: 15px;
-    padding-top: 10px;
+    padding: 10px 0;
     justify-content: end;
 }
 
