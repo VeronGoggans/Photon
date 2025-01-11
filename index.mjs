@@ -40,6 +40,9 @@ function createWindow () {
   })
 }
 
+
+
+
 function startFastAPIServer() {
   fastApiProcess = spawn('python', ['-m', 'uvicorn', 'server:app', '--reload']);
 

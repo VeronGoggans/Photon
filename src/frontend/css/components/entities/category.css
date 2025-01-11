@@ -1,0 +1,22 @@
+.category {
+    cursor: pointer;
+    padding: 10px 30px;
+    margin: 5px 0;
+    border-radius: 7px;
+    font-size: 14px;
+    color: var(--less-important);
+    transition: background .15s ease;
+}
+
+
+.active-category {
+    background: var(--hover);
+    color: #5c7dff !important;
+}
+
+
+.category:hover {
+    background: var(--hover);
+    color: var(--important);
+}
+

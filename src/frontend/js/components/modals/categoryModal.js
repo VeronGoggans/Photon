@@ -1,22 +1,22 @@
-import { editFolderModalTemplate } from "../../constants/modalTemplates.js";
+import { categoryModalTemplate } from "../../constants/modalTemplates.js";
 import { closeDialogEvent } from "../../util/dialog.js";
 
 
 
 
-export class FolderModal {
+export class CategoryModal {
     /**
      * Constructs a FolderModal instance.
      *
      * @param {Object} modalData             - Data required for the modal.
-     * @param {Object|null} modalData.folder - The folder to edit (if applicable). If null, a new folder is being created.
-     * @param {Function} modalData.callBack  - A callback function to handle saving folder data.
+     * @param {Object|null} modalData.category - The category to edit (if applicable). If null, a new category is being created.
+     * @param {Function} modalData.callBack  - A callback function to handle saving category data.
      * @returns {HTMLElement} The modal DOM element.
      */
     constructor(modalData) {
         this.modalData = modalData;
-        this.folder = modalData.folder;
-        this.preferredFolderColor = null;
+        this.category = modalData.category;
+        this.preferredCategoryColor = null;
 
         this.#initElements();
         this.#eventListeners();
@@ -31,8 +31,8 @@ export class FolderModal {
      */
     #initElements() {
         this.modal = document.createElement('div');
-        this.modal.classList.add('edit-folder-modal');
-        this.modal.innerHTML = editFolderModalTemplate;
+        this.modal.classList.add('category-modal');
+        this.modal.innerHTML = categoryModalTemplate;
 
         this.emojiPickerContainer = document.createElement('div');
         this.emojiPickerContainer.classList.add('emoji-picker-container');
@@ -51,35 +51,35 @@ export class FolderModal {
         this.emojiPickerContainer.appendChild(this.picker);
         this.modal.appendChild(this.emojiPickerContainer);
 
-        this.folderNameInput = this.modal.querySelector('input');
+        this.categoryNameInput = this.modal.querySelector('input');
         this.saveButton = this.modal.querySelector('.save-btn');
         this.cancelButton = this.modal.querySelector('.cancel-btn');
         this.emojiButton = this.modal.querySelector('#open-emoji-picker-btn');
-        this.colorOptions = this.modal.querySelectorAll('.folder-color-options div');
+        this.colorOptions = this.modal.querySelectorAll('.category-color-options div');
 
-        if (this.folder !== null) {
-            this.#loadFolder();
+        if (this.category !== null) {
+            this.#loadCategory();
             return
         }
 
-        this.#showActiveFolderColor('color-original');
+        this.#showActiveCategoryColor('color-original');
     }
 
 
     /**
-     * Loads the folder's data into the modal for editing.
+     * Loads the category's data into the modal for editing.
      *
      * @private
-     * @description This method will render the current data from the folder the user wants to edit on the
-     * `FolderModal`.
+     * @description This method will render the current data from the category the user wants to edit on the
+     * `CategoryModal`.
      */
-    #loadFolder() {
-        this.modal.querySelector('h2').textContent = 'Edit folder';
+    #loadCategory() {
+        this.modal.querySelector('h2').textContent = 'Edit category';
         this.modal.querySelector('.save-btn').textContent = 'Save changes';
-        this.modal.querySelector('input').value = this.folder.name;
-        const folderCSSClass = this.folder.color;
+        this.modal.querySelector('input').value = this.category.name;
+        const categoryCSSClass = this.category.color;
 
-        this.#showActiveFolderColor(folderCSSClass);
+        this.#showActiveCategoryColor(categoryCSSClass);
     }
 
 
@@ -106,7 +106,7 @@ export class FolderModal {
 
         this.picker.addEventListener('emoji-click', event => {
             const emoji = event.detail.unicode;
-            this.folderNameInput.value = this.folderNameInput.value + emoji;
+            this.categoryNameInput.value = this.categoryNameInput.value + emoji;
         });
 
 
@@ -114,10 +114,10 @@ export class FolderModal {
          *
          */
         this.colorOptions.forEach(colorOption => {
-            const folderCSSClass = colorOption.getAttribute('data-folder-css-class');
+            const categoryCSSClass = colorOption.getAttribute('data-category-css-class');
 
             colorOption.addEventListener('click', () => {
-                this.#showActiveFolderColor(folderCSSClass)
+                this.#showActiveCategoryColor(categoryCSSClass)
             });
         });
 
@@ -127,18 +127,18 @@ export class FolderModal {
          */
         this.saveButton.addEventListener('click', async () => {
 
-            if (this.folder !== null) {
+            if (this.category !== null) {
                 await this.modalData.callBack({
-                    'id': this.folder.id,
-                    'name': this.folderNameInput.value,
-                    'color': this.preferredFolderColor
-                })    
+                    'id': this.category.id,
+                    'name': this.categoryNameInput.value,
+                    'color': this.preferredCategoryColor
+                })
             }
 
             else {
                 await this.modalData.callBack({
-                    'name': this.folderNameInput.value || 'Untitled',
-                    'color': this.preferredFolderColor
+                    'name': this.categoryNameInput.value || 'Untitled',
+                    'color': this.preferredCategoryColor
                 })
             }
 
@@ -163,29 +163,29 @@ export class FolderModal {
 
 
     /**
-     * The `#showActiveFolderColor` method updates the visual state of folder color options
+     * The `#showActiveCategoryColor` method updates the visual state of category color options
      * in the UI by highlighting the currently selected color and storing it as the preferred
-     * folder color. It iterates over an array of color options, modifies their classes to
+     * category color. It iterates over an array of color options, modifies their classes to
      * reflect the active selection, and updates the internal state.
      *
      * @private
      * @method
-     * @name #showActiveFolderColor
-     * @description This method ensures that only the folder color option matching the
-     * given `styleClass` is highlighted by adding the `selected-folder-color` class to it.
-     * Other color options have the `selected-folder-color` class removed. The selected
-     * color is saved as `this.preferredFolderColor`.
+     * @name #showActivecategoryColor
+     * @description This method ensures that only the category color option matching the
+     * given `styleClass` is highlighted by adding the `selected-category-color` class to it.
+     * Other color options have the `selected-category-color` class removed. The selected
+     * color is saved as `this.preferredCategoryColor`.
      *
-     * @param {string} folderCSSClass   - The CSS class corresponding to the selected folder color.
+     * @param {string} categoryCSSClass   - The CSS class corresponding to the selected category color.
      */
-    #showActiveFolderColor(folderCSSClass) {
+    #showActiveCategoryColor(categoryCSSClass) {
         for (let colorOption of this.colorOptions) {
-            if(colorOption.getAttribute('data-folder-css-class') !== folderCSSClass) {
-                colorOption.classList.remove('selected-folder-color');
+            if(colorOption.getAttribute('data-category-css-class') !== categoryCSSClass) {
+                colorOption.classList.remove('selected-category-color');
                 continue
             }
-            this.preferredFolderColor = folderCSSClass;
-            colorOption.classList.add('selected-folder-color');
+            this.preferredcategoryColor = categoryCSSClass;
+            colorOption.classList.add('selected-category-color');
         }
-    }  
+    }
 }

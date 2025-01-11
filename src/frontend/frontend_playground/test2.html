@@ -23,124 +23,75 @@
             font-family: Poppins;
         }
 
-       .sticky-image-container {
-        width: 220px;
-        height: 220px;
-        background-color: rgb(255, 255, 255);
-        position: relative;
-        display: flex;
-        align-items: end;
-       }
+        /* Sidebar styling */
+        .sidebar {
+            width: 250px;
+            background-color: #f4f4f4;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+        }
 
-       .sticky-one {
-        position: absolute;
-        rotate: 5deg;
-        border-radius: 10px ;
-        width: 220px;
-        height: 220px;
-        background-color: rgb(177, 209, 255);
-       }
+        /* Section styling */
+        .section {
+            margin-bottom: 20px;
+        }
 
-       .sticky-two {
-        position: absolute;
-        rotate: 10deg;
-        border-radius: 10px ;
-        width: 190px;
-        height: 190px;
-        display: flex;
-        flex-direction: column;
-        row-gap: 20px;
-        align-items: center;
-        justify-content: center;
-        background-color: rgb(141, 177, 255);
-       }
+        /* Button styling */
+        .toggle-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            text-align: left;
+            background: #ddd;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
 
-       .sticky-two .line {
-        height: 7px;
-        border-radius: 5px;
-        background-color: rgb(91, 125, 224);
-       }
+        .toggle-button:hover {
+            background: #ccc;
+        }
 
-       .pin {
-        position: absolute;
-        width: 15px;
-        height: 15px;
-        border-radius: 50%;
-        background-color: rgb(231, 237, 255);
-        z-index: 1;
-        top: 20px;
-        left: 30px;
-       }
+        /* Collapsible section styling */
+        .collapsible {
+            max-height: 0; /* Hidden by default */
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
 
-       .sticky-boards {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        grid-template-rows: repeat(auto-fill, 200px);
-        gap: 20px;
-       }
+        .collapsible ul {
+            list-style: none;
+            padding: 10px;
+            margin: 0;
+        }
 
-       .sticky-board {
-        cursor: pointer;
-        display: grid;
-        grid-template-rows: 1fr 1fr;
-        box-shadow: 5px 5px 18px #eaecf7;
-        border-radius: 10px;
-        transition: 200ms;
-       }
+        .collapsible ul li {
+            margin: 5px 0;
+            padding: 5px 10px;
+            background: #e0e0e0;
+            border-radius: 4px;
+        }
 
-       .sticky-board:hover {
-        scale: 1.05;
-       }
-
-       .sticky-board i {
-        margin: auto;
-        font-size: 30px;
-        color: #5c7fdd;
-       }
-
-       .sticky-board div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-       }
-
-       .sticky-board p {
-        margin: 0;
-       }
-
-       .sticky-board span {
-        color: #c9ccdc;
-       }
 
         
     </style>
 </head>
 <body>
-    <div class="sticky-image-container">
-        <div class="pin"></div>
-        <div class="sticky-one"></div>
-        <div class="sticky-two">
-            <div class="line" style="width: 50%;"></div>
-            <div class="line" style="width: 70%;"></div>
-            <div class="line" style="width: 60%;"></div>
+<div class="sidebar">
+    <div class="section">
+        <button class="toggle-button">Pinned Folders</button>
+        <div class="collapsible">
+            <ul>
+                <li>Folder 1</li>
+                <li>Folder 2</li>
+                <li>Folder 3</li>
+            </ul>
         </div>
     </div>
-    <div class="sticky-boards">
-        <div class="sticky-board">
-            <i class="bi bi-stickies"></i>
-            <div>
-                <p>Brainstorm app features</p>
-                <span>19 stickies</span>
-            </div>
-        </div>
-        <div class="sticky-board">
-            <i class="bi bi-layout-three-columns"></i>
-            <div>
-                <p>Task tracking photon</p>
-                <span>30 stickies</span>
-            </div>
-        </div>
-    </div>
-    
+</div>
+
+
 </body>
 </html>

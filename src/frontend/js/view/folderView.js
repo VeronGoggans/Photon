@@ -2,8 +2,9 @@ import { AnimationHandler } from "../handlers/animationHandler.js";
 import { removeEmptyFolderNotification, renderEmptyFolderNotification } from "../handlers/notificationHandler.js";
 import { removeContent } from "../util/ui.js";
 import {
+    RENDER_CATEGORY_MODAL_EVENT,
     RENDER_DELETE_MODAL_EVENT,
-    RENDER_FOLDER_MODAL_EVENT, UPDATE_FOLDER_LOCATION_EVENT,
+    RENDER_FOLDER_MODAL_EVENT, UPDATE_FOLDER_LOCATION_EVENT, UPDATE_FOLDER_PIN_VALUE_EVENT,
     UPDATE_NOTE_LOCATION_EVENT
 } from "../components/eventBus.js";
 
@@ -69,7 +70,6 @@ export class FolderView {
      *
      * @requires AnimationHandler.fadeInFromBottom  - Animates the appearance of the newly added folder card.
      * @requires removeEmptyFolderNotification      - Removes any "empty folder" notification displayed in the UI.
-     * @private
      * @method #folder                              - A private method that creates a DOM element for the folder card.
      */
     renderOne(folder) {
@@ -170,22 +170,6 @@ export class FolderView {
 
 
 
-    #resizeFolderName() {
-        const folderNameRect = this.currentFolderName.getBoundingClientRect();
-        const searchbarRect = document.querySelector('.searchbar').getBoundingClientRect();
-
-        if (folderNameRect.right >= searchbarRect.left) {
-            // If folder name touches the searchbar, reduce font size
-            this.currentFolderName.style.fontSize = '30px';
-            console.log('reduce fontsize')
-        } else {
-            // Revert to the original size when there's enough space
-            this.currentFolderName.style.fontSize = '45px';
-        }
-    }
-
-
-
 
     #initElements() {
         this.foldersContainer = document.querySelector('.folders');
@@ -197,6 +181,7 @@ export class FolderView {
         this.currentFolderName = document.querySelector('.current-folder-name');
         this.backButton = document.querySelector('.exit-folder-btn');
         this.createFolderButton = document.querySelector('.add-folder-btn');
+        this._createCategoryButton = document.querySelector('.add-category-btn');
         this.viewElement = document.querySelector('.notes-view');
     }
 
@@ -255,6 +240,14 @@ export class FolderView {
         });
 
 
+
+        this.foldersContainer.addEventListener('PinFolder', async (event) => {
+            await this.eventBus.asyncEmit(UPDATE_FOLDER_PIN_VALUE_EVENT, {
+                'folder': event.detail.folder,
+            })
+        });
+
+
         /**
          * This custom event listener will listen for the DeleteFolder event
          * When this event happens the DeleteModal is rendered to the dialog
@@ -299,6 +292,22 @@ export class FolderView {
                 'callBack': addFolderCallBack
             })
         });
+
+
+
+        this._createCategoryButton.addEventListener('click', () => {
+            // The callback function that'll create the category when the user confirms the creation in the modal.
+            const addCategoryCallBack = async (newCategoryData) => {
+                console.log('New Category')
+            }
+
+            //  Event to tell the dialog to render the category modal.
+            this.eventBus.emit(RENDER_CATEGORY_MODAL_EVENT, {
+                'category': null,
+                'folder': null,
+                'callBack': addCategoryCallBack
+            })
+        })
 
 
         this.foldersContainer.addEventListener('DroppedItemOnFolder', async (event) => {

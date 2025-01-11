@@ -4,7 +4,7 @@ export const editFolderModalTemplate = `
     <span id="title">Folder name</span>
     <p>You can change the name of the folder below</p>
     <input type="text" placeholder="Untitled" spellcheck="false">
-
+    <i id="open-emoji-picker-btn" class="bi bi-emoji-smile"></i>
     <span id="title">Folder color</span>
     <p>Select a color for this folder</p>
     <div class="folder-color-options">
@@ -26,6 +26,38 @@ export const editFolderModalTemplate = `
     <div class="buttons-container">
         <button class="modal-cancel-button cancel-btn">Cancel</button>
         <button class="modal-confirm-button save-btn">Add folder</button>
+    </div>
+</div>
+`
+
+export const categoryModalTemplate = `
+<h2>New category</h2>
+<div class="category-settings">
+    <span id="title">Category name</span>
+    <p>You can change the name of the category below</p>
+    <input type="text" placeholder="Untitled" spellcheck="false">
+
+    <span id="title">Category color</span>
+    <p>Select a color for this category</p>
+    <div class="category-color-options">
+        <div style="background-color: rgb(121, 144, 255)" data-folder-css-class="color-blue-1"></div>
+        <div style="background-color: rgb(169, 215, 255)" data-folder-css-class="color-blue-2"></div>
+        <div style="background-color: rgb(217, 237, 255)" data-folder-css-class="color-blue-3"></div>
+        <div style="background-color: rgb(124, 199, 211)"  data-folder-css-class="color-blue-4"></div>
+        <div style="background-color: rgb(158, 213, 197)" data-folder-css-class="color-green-1"></div>
+        <div style="background-color: rgb(203, 255, 197)" data-folder-css-class="color-green-2"></div>
+        <div style="background-color: rgb(173, 255, 164)" data-folder-css-class="color-green-3"></div>
+        <div style="background-color: rgb(142, 122, 181)" data-folder-css-class="color-purple-1"></div>
+        <div style="background-color: rgb(223, 193, 255)" data-folder-css-class="color-purple-2"></div>
+        <div style="background-color: rgb(255, 163, 163)" data-folder-css-class="color-red-1"></div>
+        <div style="background-color: rgb(255, 197, 197)" data-folder-css-class="color-red-2"></div>
+        <div style="background-color: rgb(255, 182, 116)" data-folder-css-class="color-orange-1"></div>
+        <div style="background-color: rgb(255, 224, 158)" data-folder-css-class="color-orange-2"></div>
+        <div class="color-original" style="background-color: #fff" data-folder-css-class="color-original"></div>
+    </div>
+    <div class="buttons-container">
+        <button class="modal-cancel-button cancel-btn">Cancel</button>
+        <button class="modal-confirm-button save-btn">Add category</button>
     </div>
 </div>
 `

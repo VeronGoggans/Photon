@@ -31,7 +31,9 @@ const notesTemplate = `
                 <button><i class="bi bi-three-dots-vertical"></i></button>
                 <ul class="dropdown-items soft-dropdown">
                     <li class="add-note-btn"><i class="bi bi-file-earmark"></i> Add a note</li>
-                    <li class="add-folder-btn"><i class="bi bi-folder-plus"></i> Add a Folder</li>
+                    <li class="add-folder-btn"><i class="bi bi-folder-plus"></i> Add a folder</li>
+                    <li class="add-category-btn"><i class="bi bi-archive"></i> Add a category</li>
+                    <li class="add-category-btn"><i class="bi bi-pin"></i> Pin current folder</li>
                     <li class="view-bookmarks-btn"><i class="bi bi-bookmarks"></i> View bookmarks</li>
                 </ul>
             </div>
@@ -128,7 +130,7 @@ const columnStickyBoardTemplate = `
 
 const stickyNoteHomeTemplate = `
     <div class="sticky-home-view">
-        <h1 class="view-title">Sticky walls</h1>
+        <h1 class="view-title">Sticky boards</h1>
         <div class="sticky-presentation">
             <div class="sticky-image-container">
                 <div class="pin"></div>

@@ -22,6 +22,7 @@ class FolderRouter:
         self.route.add_api_route('/folders/{folder_id}', self.update_folder, methods=['PUT'])
         self.route.add_api_route('/folders/{folder_id}/location', self.update_folder_location, methods=['PATCH'])
         self.route.add_api_route('/folders/{folder_id}/view-time', self.update_folder_view_time, methods=['PATCH'])
+        self.route.add_api_route('/folders/{folder_id}/pin-folder', self.update_folder_pin_value, methods=['PATCH'])
         self.route.add_api_route('/folders/{folder_id}', self.delete_folder, methods=['DELETE'])
 
 
@@ -38,12 +39,14 @@ class FolderRouter:
                     parent_id: int = None,
                     recent: bool = False,
                     search_items: bool = False,
+                    pinned: bool = False,
                     db: Session = Depends(Database.get_db)):
         
         # A dictionary with all the endpoint filters that can be applied to the GET "/notes" endpoint
         filters = { 
             'recent': recent,
-            'search-items': search_items 
+            'search-items': search_items,
+            'pinned': pinned
             }
 
 
@@ -81,6 +84,13 @@ class FolderRouter:
     @handle_exceptions
     def update_folder_view_time(self, folder_id: int, db: Session = Depends(Database.get_db)):
         self.manager.update_view_time(folder_id, db) 
+        return JSONResponse(status_code=HttpStatus.NO_CONTENT)
+    
+
+
+    @handle_exceptions
+    def update_folder_pin_value(self, folder_id: int, db: Session = Depends(Database.get_db)):
+        self.manager.update_pin_value(folder_id, db) 
         return JSONResponse(status_code=HttpStatus.NO_CONTENT)
        
 

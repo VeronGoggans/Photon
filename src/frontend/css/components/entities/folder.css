@@ -73,6 +73,29 @@ folder-path:hover {
 
 
 
+pinned-folder {
+    cursor: pointer;
+    display: block;
+    padding: 10px 30px;
+    margin: 5px 0;
+    border-radius: 7px;
+    font-size: 14px;
+    color: var(--less-important);
+    transition: background .15s ease;
+}
+
+pinned-folder i {
+    margin: 0 5px;
+}
+
+
+pinned-folder:hover {
+    background: var(--hover);
+    color: var(--important);
+}
+
+
+
 
 
 .color-blue-1 p,

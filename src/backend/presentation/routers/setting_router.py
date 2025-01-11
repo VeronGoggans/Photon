@@ -10,12 +10,13 @@ class SettingRouter:
         self.route = APIRouter()
         self.service = SettingService()
         
-        self.route.add_api_route('/settings',                                           self.get_settings, methods=['GET'])
-        self.route.add_api_route('/settings/theme/{theme}',                             self.update_app_theme, methods=['PATCH'])
-        self.route.add_api_route('/settings/sidebar-color/{color}',                     self.update_sidebar_color, methods=['PATCH'])
-        self.route.add_api_route('/settings/widget-style/{widget_style}',               self.update_widget_style, methods=['PATCH'])
-        self.route.add_api_route('/settings/folder-icon-color/{folder_icon_color}',     self.update_folder_icon_color, methods=['PATCH'])
-        self.route.add_api_route('/settings/sidebar-state/{state}',                     self.update_sidebar_state, methods=['PATCH'])
+        self.route.add_api_route('/settings',                                               self.get_settings, methods=['GET'])
+        self.route.add_api_route('/settings/theme/{theme}',                                 self.update_app_theme, methods=['PATCH'])
+        self.route.add_api_route('/settings/sidebar-color/{color}',                         self.update_sidebar_color, methods=['PATCH'])
+        self.route.add_api_route('/settings/widget-style/{widget_style}',                   self.update_widget_style, methods=['PATCH'])
+        self.route.add_api_route('/settings/folder-icon-color/{folder_icon_color}',         self.update_folder_icon_color, methods=['PATCH'])
+        self.route.add_api_route('/settings/sidebar-state/{state}',                         self.update_sidebar_state, methods=['PATCH'])
+        self.route.add_api_route('/settings/sidebar-subsection-state/{sidebar_subsection}', self.update_sidebar_subsection_state, methods=['PATCH'])
 
         
 
@@ -52,5 +53,11 @@ class SettingRouter:
     def update_sidebar_state(self, state: str):
         sidebar_state: str = self.service.update_sidebar_state(state)
         return JSONResponse(status_code=HttpStatus.OK, content={'sidebarState': sidebar_state})
+    
+
+
+    def update_sidebar_subsection_state(self, sidebar_subsection: str):
+        sidebar_subsection_state: str = self.service.update_collapse_sidebar_subsection(sidebar_subsection)
+        return JSONResponse(status_code=HttpStatus.OK, content={'sidebarSubsectionState': sidebar_subsection_state})
     
     

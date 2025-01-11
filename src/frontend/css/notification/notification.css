@@ -73,7 +73,7 @@ empty-notification #floating-icon2,
 empty-notification #floating-icon3,
 empty-notification #floating-icon4 {
     position: absolute;
-    background-color: var(--hover-sidebar);
+    background-color: var(--empty-folder-icon-background);
     color: var(--text);
     border-radius: 5px;
     display: flex;

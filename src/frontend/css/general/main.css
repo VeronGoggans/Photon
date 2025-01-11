@@ -83,6 +83,8 @@ i {
     grid-template-rows: 37px 1fr;
     max-height: calc(100dvh);
 }
+
+
 .view {
     max-height: calc(100dvh - 37px);
 }
@@ -101,28 +103,6 @@ i {
     padding: 20px 0;
 }
 
-.subtitle {
-    font-weight: 500;
-    color: var(--less-important);
-    margin: 30px 0;
-}
-
-
-.util-bar-type-2 {
-    display: flex;
-    justify-content: end;
-    column-gap: 10px;
-    align-items: center;
-    padding: 0 10px;
-    border-bottom: 1px solid var(--border-sidebar-right);
-}
-
-.util-bar-type-2 button {
-    font-size: 16px;
-    background-color: transparent;
-    color: var(--text);
-    padding: 5px 10px;
-}
 
 input::placeholder,
 textarea::placeholder {
@@ -179,6 +159,7 @@ entity-options-menu {
     background-color: var(--options-menu);
     color: var(--text-soft);
     padding: 10px;
+    box-shadow: 10px 10px 20px var(--shadow);
     border-radius: 10px;
     opacity: 0;
     transition: .15s;
@@ -250,4 +231,54 @@ entity-options-menu span {
 
 .modal-cancel-button:hover {
     scale: 1.05;
+}
+
+
+
+
+
+
+/*__________________________EMOJI PICKER STYLES__________________________*/
+.emoji-picker-container {
+    position: absolute;
+    background: var(--modal);
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: var(--shadow-card);
+    top: 50px;
+    right: 10px;
+    opacity: 0;
+    transform: translateY(50%);
+    visibility: hidden;
+    transition: opacity .25s ease, transform .25s ease, scale .25s ease, visibility .25s ease;
+}
+
+.open-emoji-picker {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    visibility: visible !important;
+}
+
+
+.emoji-picker-container:hover {
+    scale: 1.03;
+}
+
+emoji-picker {
+    --background: var(--color-picker-background);
+    --border-radius: 10px;
+    --border-color: transparent;
+    --input-border-color: var(--border-card);
+    --input-border-radius: 20px;
+    --input-font-color: var(--text);
+    --input-placeholder-color: var(--placeholder);
+    --outline-color: #5c7fdd;
+    --input-padding: 7px 15px;
+    --button-hover-background: var(--hover);
+    --button-active-background: var(--hover);
+
+}
+
+.emoji-picker-container button {
+    color: var(--text) !important;
 }

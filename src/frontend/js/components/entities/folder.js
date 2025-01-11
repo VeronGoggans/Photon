@@ -9,6 +9,10 @@ const optionsMenuTemplate = `
         <i class="bi bi-pencil-square"></i>
         <span>Edit folder</span>
     </div>
+    <div id="pin-folder-btn" >
+        <i class="bi bi-star"></i>
+        <span>Pin folder</span>
+    </div>
     <div id="delete-folder-btn">
         <i class="bi bi-folder-x"></i>
         <span>Delete folder</span>
@@ -79,6 +83,39 @@ class FolderPath extends HTMLElement {
 
 
 
+
+
+class PinnedFolder extends HTMLElement {
+    constructor() {
+        super();
+    }
+
+    setData(value) {
+        this.folder = value;
+        this.render();
+    }
+
+    render() {
+        this.id = this.folder.id;
+        this.innerHTML = `
+            <span>${this.folder.name}</span>
+        `
+    }
+
+    connectedCallback() {
+        this.addEventListener('click', this.handleClick.bind(this));
+    }
+
+
+    handleClick() {
+        this.dispatchEvent(new CustomEvent('PinnedFolderClick', { detail: { folderId: this.id }, bubbles: true }));
+    }
+}
+
+
+
+
+
 class Folder extends HTMLElement {
     static get observedAttributes() {
         return ['folder']; 
@@ -120,8 +157,10 @@ class Folder extends HTMLElement {
 
     addEventListeners() {
         this.addEventListener('click', () => { this.handleCardClick() });
+
+
         this.addEventListener('contextmenu', (event) => {
-            showContextMenu(event, this, optionsMenuTemplate)
+            showContextMenu(event, this, optionsMenuTemplate, 'folder-card');
         });
 
         this.addEventListener('dragstart', (event) => {
@@ -213,12 +252,26 @@ class Folder extends HTMLElement {
         this.dispatchEvent(new CustomEvent('DeleteFolder', { detail: { folder: this.folder }, bubbles: true }));
     }
 
-    handleEditClick() {        
+    handleEditClick() {
         this.dispatchEvent(new CustomEvent('EditFolder', { detail: { folder: this.folder }, bubbles: true }));
     }
+
+    handlePinClick() {
+        this.dispatchEvent(new CustomEvent('PinFolder', { detail: { folder: this.folder }, bubbles: true }));
+    }
 }
+
+
+
+
+
+
+
+
+
 
 // Register the custom elements
 customElements.define('folder-card', Folder);
 customElements.define('recent-folder-card', RecentFolder);
 customElements.define('folder-path', FolderPath);
+customElements.define('pinned-folder', PinnedFolder);

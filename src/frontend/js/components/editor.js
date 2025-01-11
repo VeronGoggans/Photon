@@ -35,9 +35,10 @@ class SlashCommandContainer extends HTMLElement {
             <div class="heading-2" data-command="h2"><i class="bi bi-type-h2"></i>Add heading 2</div>
             <div class="heading-3" data-command="h3"><i class="bi bi-type-h3"></i>Add heading 3</div>
             <div class="heading-4" data-command="h4"><i class="bi bi-type-h4"></i>Add heading 4</div>
-            <div class="snippit" data-command="snippet"><i class="bi bi-code-slash"></i>Add code snippit</div>
             <div class="terminal" data-command="terminal"><i class="bi bi-terminal"></i>Add terminal command</div>
-            <div class="note" data-command="ref"><i class="bi bi-file-earmark"></i>Add note reference</div>
+            <div class="note-reference" data-command="note-reference"><i class="bi bi-file-earmark"></i>Add note reference</div>
+            <div class="folder-reference" data-command="folder-reference"><i class="bi bi-folder-symlink"></i>Add folder reference</div>
+            <div class="sticky-board-reference" data-command="sticky-board-reference"><i class="bi bi-stickies"></i>Add sticky board reference</div>
             <div class="template" data-command="template"><i class="bi bi-file-earmark-text"></i>Apply template</div>
             <div class="insert-html" data-command="html"><i class="bi bi-filetype-html"></i>Insert HTML</div>
         </div>

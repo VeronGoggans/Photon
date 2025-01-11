@@ -9,6 +9,10 @@ const optionMenuTemplate = `
         <i class="bi bi-bookmark"></i>
         <span>Bookmark note</span>
     </div>
+    <div id="apply-category-note-btn" >
+        <i class="bi bi-archive"></i>
+        <span>Apply category</span>
+    </div>
     <div id="delete-note-btn">
         <i class="bi bi-file-earmark-x"></i>
         <span>Delete note</span>
@@ -32,9 +36,9 @@ class Note extends HTMLElement {
         this.draggable = true;
         this.addEventListeners();
     }
-    
 
-    render() {       
+
+    render() {
         this.innerHTML = `
             <h4>${formatName(this.note.name)}</h4>
             <div class="note-content-box">${filterNotePreview(this.note.content)}</div>
@@ -46,7 +50,9 @@ class Note extends HTMLElement {
 
     addEventListeners() {
         this.addEventListener('click', () => { this.handleCardClick() });
-        this.addEventListener('contextmenu', (event) => {showContextMenu(event, this, optionMenuTemplate)});
+        this.addEventListener('contextmenu', (event) => {
+            showContextMenu(event, this, optionMenuTemplate, 'note-card')
+        });
 
         this.addEventListener('dragstart', (event) => {
             this.classList.add('dragging')
@@ -78,13 +84,13 @@ class Note extends HTMLElement {
     }
 
     toggleBookmarkStyle() {
-        this.classList.contains('bookmarked-note') ? 
+        this.classList.contains('bookmarked-note') ?
         this.classList.remove('bookmarked-note') :
         this.classList.add('bookmarked-note');
         this.note.bookmark = !this.note.bookmark;
     }
 
-    
+
     handleCardClick() {
         this.dispatchEvent(new CustomEvent('NoteCardClick', { detail: { note: this.note }, bubbles: true }));
     }
@@ -114,12 +120,12 @@ class RecentlyChangedNote extends HTMLElement {
     }
 
     connectedCallback() {
-        this.id = this.note.id;        
+        this.id = this.note.id;
         this.addEventListeners();
     }
-    
 
-    render() {        
+
+    render() {
         this.innerHTML = `
             <h4>${formatName(this.note.name)}</h4>
             <div class="note-content-box">${filterNotePreview(this.note.content)}</div>
@@ -167,7 +173,7 @@ class RecentlyViewedNote extends HTMLElement {
             <span class="name">${this.note.name}</span>
         </div>
         <span class="view-date">${formatDate(this.note.last_visit)}</span>
-        `        
+        `
     }
 
     handleCardClick() {

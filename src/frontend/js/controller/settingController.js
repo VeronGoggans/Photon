@@ -1,7 +1,8 @@
 import { HttpModel } from "../model/httpModel.js";
 import { SettingView } from "../view/settingView.js";
 import {
-    FETCH_SETTINGS_EVENT,
+    COLLAPSE_SIDEBAR_SUB_TITLE_EVENT,
+    FETCH_SETTINGS_EVENT, SET_SIDEBAR_DROPDOWN_STATE_EVENT,
     SET_SIDEBAR_STATE_EVENT,
     SET_SIDEBAR_STYLE_EVENT,
     SIDEBAR_TOGGLE_EVENT
@@ -16,7 +17,8 @@ export class SettingController {
 
         this.eventBus.registerEvents({
             [FETCH_SETTINGS_EVENT]: async () => await this.loadSettings(),
-            [SIDEBAR_TOGGLE_EVENT]: async (state) => await this.updateSidebarState(state)
+            [SIDEBAR_TOGGLE_EVENT]: async (state) => await this.updateSidebarState(state),
+            [COLLAPSE_SIDEBAR_SUB_TITLE_EVENT]: async (sidebarSection) => await this.updateSidebarSubsectionState(sidebarSection)
         })
     }
 
@@ -37,6 +39,10 @@ export class SettingController {
 
         this.eventBus.emit(SET_SIDEBAR_STATE_EVENT, settings.sidebarState);
         this.eventBus.emit(SET_SIDEBAR_STYLE_EVENT, settings.sidebarColor);
+        this.eventBus.emit(SET_SIDEBAR_DROPDOWN_STATE_EVENT, {
+            'pinnedFoldersDropdown': settings.collapsePinnedFolders,
+            'categoriesDropdown': settings.collapseCategories
+        })
 
         // Save widget style & folder icon color in session storage
         // The folder and note UI components will read these values from the session storage
@@ -86,6 +92,14 @@ export class SettingController {
 
 
 
+    async updateSidebarSubsectionState(sidebarSubsection) {
+        const route = `/settings/sidebar-subsection-state/${sidebarSubsection}`;
+        const response = await this.model.patch(route);
+        return response.content.sidebarSubsectionState;
+    }
+
+
+
     async updateFolderIconColor(newFolderIconColor) {
         const route = `/settings/folder-icon-color/${newFolderIconColor}`;
         const response = await this.model.patch(route);
@@ -103,5 +117,7 @@ class Settings {
         this.folderIconColor = settings.folderIconColor;
         this.sidebarColor = settings.sidebarColor;
         this.sidebarState = settings.sidebarState;
+        this.collapsePinnedFolders = settings.collapsePinnedFolders;
+        this.collapseCategories = settings.collapseCategories;
     }
 }

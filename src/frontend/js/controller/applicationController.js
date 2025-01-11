@@ -27,7 +27,7 @@ export class ApplicationController {
         this.router = new Router(this.eventBus);
         this.dialog = new Dialog(this.eventBus);
 
-        this.eventBus.emit(FETCH_SETTINGS_EVENT);
+        this.eventBus.asyncEmit(FETCH_SETTINGS_EVENT);
         this.eventBus.registerEvents({
             [GET_PREVIOUS_VIEW_EVENT]: () => this.viewStack.pop(),
             [SET_PREVIOUS_VIEW_EVENT]: (viewId) => this.viewStack.push(viewId),
@@ -51,18 +51,22 @@ class Router {
         this.settingController = new SettingController(this.eventBus);
         this.sidebarController = new SidebarController(this.eventBus);
         this.stickyWallHomeController = new StickyWallHomeController(this.eventBus);
-
         this.viewElement = document.querySelector('.content .view');
 
 
         this.initView({viewId: 'home'});
+        this.initView({viewId: 'sidebar'});
     }
 
 
     initView(viewParameters = {}) {
         const viewId = viewParameters.viewId;
-        this.viewElement.innerHTML = templates[viewId];
 
+        // The sidebar view doesn't have a template.
+        // So this function does not need to load in any html template.
+        if (viewId !== 'sidebar') {
+            this.viewElement.innerHTML = templates[viewId];
+        }
 
         setTimeout(async () => {
             if (viewId === 'home') {
@@ -116,6 +120,10 @@ class Router {
             else if (viewId === 'settings') {
                 await this.settingController.init();
                 this.eventBus.emit(SET_ACTIVE_TAB_EVENT,'settings');
+            }
+
+            else if (viewId === 'sidebar') {
+                await this.sidebarController.init();
             }
 
             else if (viewId === 'stickyWallHome') {

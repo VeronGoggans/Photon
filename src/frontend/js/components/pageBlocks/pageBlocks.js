@@ -1,5 +1,6 @@
 import { createCustomElement } from "../../util/ui/components.js";
 import { formatDate } from "../../util/date.js";
+import { DynamicElementPlacer } from "../dynamicElementPlacer.js";
 
 
 class DocumentLocationPageBlock extends HTMLElement {
@@ -42,6 +43,8 @@ class DocumentLocationPageBlock extends HTMLElement {
 
 
 
+
+
 class EntityOptionsMenu extends HTMLElement {
     constructor() {
         super();
@@ -53,9 +56,10 @@ class EntityOptionsMenu extends HTMLElement {
      *                         The menu template, bounded HTML element and the bounded entity data
      */
     setData(value) {
-        const { boundedElement, menuTemplate } = value;
+        const { boundedElement, menuTemplate, entityName } = value;
         this.boundedElement = boundedElement;
         this.menuTemplate = menuTemplate;
+        this.entityName = entityName;
     }
 
 
@@ -69,14 +73,23 @@ class EntityOptionsMenu extends HTMLElement {
 
     render() {
         this.innerHTML = this.menuTemplate;
+        this.checkCorrectOptionStates();
+        DynamicElementPlacer.placeContextMenu(this, this.boundedElement);
+    }
 
-        // Place the options menu slightly above the card it's assigned to.
-        const rect = this.boundedElement.getBoundingClientRect();
-        const optionMenuHeight = this.offsetHeight;
-        const padding = 20; // To create a gap between the card and the options menu
 
-        this.style.left = `${rect.left}px`;
-        this.style.top =  `${rect.top - optionMenuHeight - padding}px`;
+
+    checkCorrectOptionStates() {
+        // Set the pin folder button's text content to Unpin if the folder is pinned.
+        if (this.entityName === 'folder-card' && this.boundedElement.folder.pinned) {
+            this.querySelector('#pin-folder-btn span').textContent = 'Unpin folder'
+        }
+
+        // Set the bookmark note button's text content to Remove bookmark if the note is bookmarked.
+        if (this.entityName === 'note-card' && this.boundedElement.note.bookmark) {
+            this.querySelector('#bookmark-note-btn span').textContent = 'Remove bookmark'
+        }
+
     }
 
 
@@ -97,7 +110,7 @@ class EntityOptionsMenu extends HTMLElement {
     handleOption(event) {
         // The ID's of all the options available
         const option = event.target.closest(
-            '#bookmark-note-btn, #edit-folder-btn, #delete-note-btn, #delete-folder-btn, #delete-sticky-board-btn');
+            '#bookmark-note-btn, #edit-folder-btn, #delete-note-btn, #delete-folder-btn, #delete-sticky-board-btn, #pin-folder-btn');
 
         switch (option.id) {
             case 'bookmark-note-btn':
@@ -106,6 +119,10 @@ class EntityOptionsMenu extends HTMLElement {
 
             case 'edit-folder-btn':
                 this.boundedElement.handleEditClick();
+                break;
+
+            case 'pin-folder-btn':
+                this.boundedElement.handlePinClick();
                 break;
 
             case 'delete-note-btn':
@@ -137,7 +154,7 @@ class NoteLink extends HTMLElement {
 
 
     connectedCallback() {
-        this.contentEditable = false
+        this.contentEditable = 'false'
         this.render();
         this.addEventListeners();
     }

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="src/frontend/css/components/entities/note.css">
     <link rel="stylesheet" href="src/frontend/css/components/entities/sticky.css">
     <link rel="stylesheet" href="src/frontend/css/components/entities/folder.css">
+    <link rel="stylesheet" href="src/frontend/css/components/entities/category.css">
     <link rel="stylesheet" href="src/frontend/css/general/dialog.css">
     <link rel="stylesheet" href="src/frontend/css/general/themes.css">
     <link rel="stylesheet" href="src/frontend/css/general/animation.css">
@@ -33,16 +34,14 @@
     <!-- CDN for the icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
-    <!--CDN for Google fonts-->
+
+    <!-- CDN for Emoji picker element -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
+
+    <!-- CDN for Google fonts-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:wght@100&display=swap" rel="stylesheet">
-
-    <!-- CND for code highlights-->
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/atom-one-dark.min.css">
-    <!-- Include Highlight.js script -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
     <title>Photon</title>
     
     <script src="src/frontend/js/components/lists/lists.js"></script>
@@ -69,10 +68,30 @@
         </div>
         <div class="sidebar-content">
           <div class="sidebar-content-upper">
-            <a href="/home" data-view="home" id="home-btn"><i class="bi bi-house"></i><span></span></a>
-            <a href="/notes" data-view="notes" id="notes-btn"><i class="bi bi-file-earmark"></i><span></span></a>
-            <a href="/stickyWallHome" data-view="stickyWallHome" id="sticky-wall-home-btn"><i class="bi bi-sticky"></i><span></span></a>
+                <a href="/home" data-view="home" id="home-btn"><i class="bi bi-house"></i><span></span></a>
+                <a href="/notes" data-view="notes" id="notes-btn"><i class="bi bi-file-earmark"></i><span></span></a>
+                <a href="/todos" data-view="notes" id="todos-btn"><i class="bi bi-check2-circle"></i><span></span></a>
+                <a href="/stickyWallHome" data-view="stickyWallHome" id="sticky-wall-home-btn"><i class="bi bi-sticky"></i><span></span></a>
+
+              <p class="sidebar-section-title">Other</p>
+              <div id="pinned-folders-dropdown" class="sidebar-dropdown">
+                  <i id="chevron-pinned-folder" class="bi bi-chevron-right"></i>
+                  <i id="pinned-folder-icon" class="bi bi-folder-symlink"></i>
+                  <span class="pinned-folders-title">Pinned folders</span>
+              </div>
+              <div class="pinned-folders collapsed-sidebar-dropdown"></div>
+              <div id="categories-dropdown" class="sidebar-dropdown">
+                  <i id="chevron-categories" class="bi bi-chevron-right"></i>
+                  <i id="categories-icon" class="bi bi-archive"></i>
+                  <span class="category-title">Categories</span>
+              </div>
+              <div class="categories collapsed-sidebar-dropdown">
+                  <div class="category">Work</div>
+                  <div class="category active-category">👨🏻‍🎓School</div>
+                  <div class="category">🙋🏼‍♂️Personal</div>
+              </div>
           </div>
+
           <div class="sidebar-content-lower">
             <a href="/settings" data-view="settings" id="settings-btn"><i class="bi bi-gear"></i><span></span></a>
           </div>

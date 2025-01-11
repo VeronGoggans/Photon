@@ -3,8 +3,8 @@ import { DropdownHelper } from "../helpers/dropdownHelper.js";
 import { TextBlockHandler } from "../textFormat/textBlockHandler.js";
 import { AnimationHandler } from "../handlers/animationHandler.js";
 import { createDocumentLocation } from "../util/ui/components.js";
-import { Dialog } from "../util/dialog.js";
 import { removeContent } from "../util/ui.js";
+import { loadFolder } from "./viewFunctions.js";
 import { AutoSave } from "../components/Autosave.js";
 import {
   FETCH_FOLDER_BY_ID_EVENT,
@@ -173,25 +173,6 @@ export class TextEditorView {
    *
    * @param event
    */
-  async #loadFolder(event) {
-    // The folderId of the clicked on folder within the path
-    const { folderId  } = event.detail;
-
-    // Loading the clicked on folder in the notes tab
-    const { folder, location } = await this.eventBus.emit(FETCH_FOLDER_BY_ID_EVENT, folderId);
-    this.eventBus.emit(INIT_VIEW_EVENT, {
-      viewId: 'notes',
-      folder: folder,
-      location: location
-    })
-  }
-
-
-
-  /**
-   *
-   * @param event
-   */
   async #loadRecentlyViewedNote(event) {
     // Load the recently viewed note into the editor
     await this.controller.loadRecentlyViewedNote(event.detail.note);
@@ -274,7 +255,7 @@ export class TextEditorView {
      *
      */
     this.documentLocation.addEventListener('FolderPathClick', async (event) => {
-      await this.#loadFolder(event)
+      await loadFolder(event.detail.folderId, this.eventBus);
     })
 
 
@@ -282,7 +263,7 @@ export class TextEditorView {
      *
      */
     this.recentlyViewedNotesDropdown.addEventListener('RecentlyViewedNoteCardClick', async (event) => {
-          await this.#loadRecentlyViewedNote(event);
+      await this.#loadRecentlyViewedNote(event);
     })
 
 

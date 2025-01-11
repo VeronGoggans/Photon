@@ -9,7 +9,8 @@
 .standard-sticky-board-view::-webkit-scrollbar,
 .column-sticky-board-view::-webkit-scrollbar,
 .slash-command-container .commands::-webkit-scrollbar,
-.recently-viewed-notes-dropdown .options::-webkit-scrollbar {
+.recently-viewed-notes-dropdown .options::-webkit-scrollbar,
+.emoji-picker-container .tabpanel::-webkit-scrollbar {
     background-color: transparent;
     width: 5px;
 }
@@ -36,7 +37,18 @@
 .column-sticky-board-view::-webkit-scrollbar-thumb,
 .sticky-home-view::-webkit-scrollbar-thumb,
 .slash-command-container .commands::-webkit-scrollbar-thumb,
-.recently-viewed-notes-dropdown .options::-webkit-scrollbar-thumb {
+.recently-viewed-notes-dropdown .options::-webkit-scrollbar-thumb,
+.emoji-picker-container .tabpanel::-webkit-scrollbar-thumb {
     background-color: var(--scrollbar-content-view);
+    border-radius: 10px;
+}
+
+.sidebar-content-upper::-webkit-scrollbar {
+    background-color: transparent;
+    width: 0;
+}
+
+.sidebar-content-upper::-webkit-scrollbar-thumb {
+    background-color: transparent;
     border-radius: 10px;
 }

@@ -1,7 +1,9 @@
 {
     "theme": "light",
-    "sidebarColor": "invisible",
-    "widgetStyle": "shadow",
-    "folderIconColor": "blue",
-    "sidebarState": "small"
+    "sidebarColor": "original",
+    "widgetStyle": "border",
+    "folderIconColor": "gray",
+    "sidebarState": "large",
+    "collapsePinnedFolders": false,
+    "collapseCategories": false
 }

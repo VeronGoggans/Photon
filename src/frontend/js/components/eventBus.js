@@ -96,7 +96,9 @@ export class EventBus {
 export const FETCH_FOLDER_BY_ID_EVENT = 'fetch-folder-by-id';
 export const FETCH_FOLDER_SEARCH_ITEMS_EVENT = 'fetch-folder-search-items';
 export const FETCH_RECENT_FOLDERS_EVENT = 'fetch-recent-folders';
+export const FETCH_PINNED_FOLDERS_EVENT = 'fetch-pinned-folders';
 export const UPDATE_FOLDER_LOCATION_EVENT = 'update-folder-location';
+export const UPDATE_FOLDER_PIN_VALUE_EVENT = 'update-folder-pin-value';
 
 export const CREATE_NOTE_EVENT = 'create-note';
 export const DELETE_NOTE_EVENT = 'delete-note';
@@ -129,10 +131,13 @@ export const SET_PREVIOUS_VIEW_EVENT = 'set-previous-view';
 export const SET_ACTIVE_TAB_EVENT = 'set-active-tab';
 export const SET_SIDEBAR_STYLE_EVENT = 'set-sidebar-style';
 export const SET_SIDEBAR_STATE_EVENT = 'set-sidebar-state';
+export const SET_SIDEBAR_DROPDOWN_STATE_EVENT = 'set-sidebar-dropdown-state';
+export const COLLAPSE_SIDEBAR_SUB_TITLE_EVENT = "collapse-sidebar-title"
 export const SIDEBAR_TOGGLE_EVENT = 'sidebar-toggle';
 
 // Dialog events (synchronous)
 export const RENDER_FOLDER_MODAL_EVENT = 'render-folder-modal';
+export const RENDER_CATEGORY_MODAL_EVENT = 'render-category-modal';
 export const RENDER_NOTE_DETAILS_MODAL_EVENT = 'render-note-details-modal';
 export const RENDER_DELETE_MODAL_EVENT = 'render-delete-note-modal';
 export const RENDER_STICKY_BOARD_MODAL_EVENT = 'render-sticky-board-modal';

@@ -40,13 +40,25 @@
 
 .sidebar-content {
     display: grid;
-    grid-template-rows: 1fr 50px;
+    grid-template-rows: 1fr 55px;
     padding: 10px;
+    height: calc(100dvh - 70px);
 }
 
-.sidebar[data-width="large"] .sidebar-content a {
+.sidebar-content-upper {
+    overflow-y: scroll;
+}
+
+.sidebar-content-lower {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar[data-width="large"] .sidebar-content a,
+.sidebar[data-width="large"] .sidebar-dropdown {
     text-decoration: none;
     position: relative;
+    cursor: pointer;
     border: none;
     display: flex;
     align-items: center;
@@ -102,10 +114,42 @@
 }
 
 
-.sidebar[data-width="small"] .sidebar-content a:hover,
-.sidebar[data-width="large"] .sidebar-content a:hover {
+.sidebar .sidebar-content a:hover,
+.sidebar .sidebar-dropdown:hover{
     background-color: var(--hover-sidebar);
     color: var(--sidebar-text-hover);
+}
+
+
+
+/*______________________________Sidebar dropdown code___________________________________*/
+.sidebar[data-width="large"] .sidebar-dropdown i {
+    font-size: 18px;
+}
+
+
+.sidebar[data-width="large"] .sidebar-dropdown span {
+    font-size: 16px;
+}
+
+
+.sidebar[data-width="large"] #chevron-pinned-folder,
+.sidebar[data-width="large"] #chevron-categories {
+    margin: 0 12px;
+}
+
+
+#pinned-folder-icon,
+#categories-icon {
+    display: none;
+}
+
+
+
+.sidebar-section-title {
+    color: var(--less-important);
+    padding: 0 15px;
+    margin-top: 40px;
 }
 
 
@@ -133,12 +177,13 @@
 
 
 
-/* Style classes for opening the sidebar */
-
-.open-sidebar {
-
+.collapsed-sidebar-dropdown {
+    max-height: 0; /* Hidden by default */
+    overflow: hidden;
+    display: none;
+    transition: max-height 0.3s ease;
 }
 
-
-
-
+.open-sidebar-dropdown-chevron {
+    rotate: 90deg;
+}

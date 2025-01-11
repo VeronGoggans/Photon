@@ -36,6 +36,12 @@ class FolderManager:
     def get_search_items(self, db: Session) -> list:
         search_items = (db.query(Folder.id, Folder.name).all() )
         return [{"id": item.id, "name": item.name} for item in search_items]
+    
+
+
+    def get_pinned(self, db: Session) -> list:
+        pinned_folders = (db.query(Folder).filter(Folder.pinned == True).all())
+        return pinned_folders
 
 
 
@@ -73,6 +79,13 @@ class FolderManager:
     def update_view_time(self, folder_id: int, db: Session) -> (None | NotFoundException):
         folder = find_folder(folder_id, db)
         folder.last_visit = datetime.now()
+        db.commit()
+
+
+
+    def update_pin_value(self, folder_id: int, db: Session) -> (None | NotFoundException):
+        folder = find_folder(folder_id, db)
+        folder.pinned = not folder.pinned
         db.commit()
         
 

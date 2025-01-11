@@ -91,4 +91,24 @@
     flex-flow: wrap;
     height: 80px;
     align-items: center;
-}   
+}
+
+
+#open-emoji-picker-btn {
+    position: absolute;
+    top: 43%;
+    right: 10%;
+    color: var(--placeholder);
+    font-size: 20px;
+    cursor: pointer;
+    transition: scale .15s ease, color .15s ease;
+}
+
+#open-emoji-picker-btn:hover {
+    color: var(--text);
+    scale: 1.2;
+}
+
+#open-emoji-picker-btn:active {
+    scale: 1.4;
+}

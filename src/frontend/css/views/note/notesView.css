@@ -29,11 +29,13 @@
     font-size: 20px;
     color: var(--text);
     border-radius: 10px;
-    background-color: transparent; 
+    background-color: transparent;
+    transition: background-color .15s ease, scale .2s ease;
 }
 
 .current-folder-name-container button:hover {
     background-color: var(--hover-button);
+    scale: 1.2;
 }
 
 

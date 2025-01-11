@@ -35,3 +35,6 @@ class FolderService:
             elif filters.get('search-items'):
                 return self.manager.get_search_items(db)
             
+            elif filters.get('pinned'):
+                return self.manager.get_pinned(db)
+            

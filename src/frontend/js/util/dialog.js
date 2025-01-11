@@ -6,7 +6,7 @@ import { AnimationHandler } from "../handlers/animationHandler.js";
 import { StickyBoardModel } from "../components/modals/stickyBoardModal.js";
 import {
     RENDER_DELETE_MODAL_EVENT,
-    RENDER_FOLDER_MODAL_EVENT,
+    RENDER_FOLDER_MODAL_EVENT, RENDER_CATEGORY_MODAL_EVENT,
     RENDER_NOTE_DETAILS_MODAL_EVENT, RENDER_SEARCH_MODAL_EVENT, RENDER_STICKY_BOARD_MODAL_EVENT
 } from "../components/eventBus.js";
 
@@ -26,6 +26,7 @@ export class Dialog {
             [RENDER_NOTE_DETAILS_MODAL_EVENT]: (modalData) => this.renderNoteDetailsModal(modalData),
             [RENDER_STICKY_BOARD_MODAL_EVENT]: (modalData) => this.renderStickyBoardModal(modalData),
             [RENDER_SEARCH_MODAL_EVENT]: () => this.renderSearchModal(),
+            [RENDER_CATEGORY_MODAL_EVENT]: (modalData) => this.renderCategoryModal(modalData)
         })
     }
 
@@ -40,6 +41,7 @@ export class Dialog {
                 '.settings-container',
                 '.note-details-modal',
                 '.edit-folder-modal',
+                '.category-modal',
                 '.new-sticky-board-modal',
             ];
 
@@ -147,6 +149,19 @@ export class Dialog {
      * @param modalData
      */
     renderFolderModal(modalData) {
+        const modal = new FolderModal(modalData);
+        this.#renderModal(modal);
+
+        // Focus on the first input field (improves the UX)
+        this.dialog.querySelector('.edit-folder-modal input').focus()
+    }
+
+
+    /**
+     *
+     * @param modalData
+     */
+    renderCategoryModal(modalData) {
         const modal = new FolderModal(modalData);
         this.#renderModal(modal);
 

@@ -201,7 +201,7 @@ export class NoteView {
          */
         this.bookmarkedButton.addEventListener('click', async () => {
             removeContent(this.notesContainer);
-            await this.controller.getNotes({ bookmarks: true })
+            await this.controller.getNotes({ bookmarks: true, render: true })
         });
 
 

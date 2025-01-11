@@ -1,10 +1,12 @@
 import { sidebarButtonText } from "../constants/constants.js";
 import {
+    COLLAPSE_SIDEBAR_SUB_TITLE_EVENT,
     GET_PARENT_FOLDER_EVENT,
     INIT_VIEW_EVENT,
     SIDEBAR_TOGGLE_EVENT,
     UPDATE_FOLDER_LOCATION_EVENT, UPDATE_NOTE_LOCATION_EVENT
 } from "../components/eventBus.js";
+import {loadFolder} from "./viewFunctions.js";
 
 
 
@@ -14,9 +16,11 @@ import {
 export class SidebarView {
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this._buttonCount = 4;
+        this._buttonCount = 5;
         this._sidebarTransitionTime = 160; // Milliseconds
         this._sidebarShrinkLimit = 950; // Pixels
+        this._bigSidebarWidth = 250; // Pixels
+        this._smallSidebarWidth = 70; // Pixels
 
         this.#initElements();
         this.#eventListeners();
@@ -52,17 +56,76 @@ export class SidebarView {
 
         if (sidebarState === 'large') {
             this.logo.style.justifyContent = '';
-            this.#resizeSidebar(220);
+            this.#resizeSidebar(this._bigSidebarWidth);
             this.#removeSidebarResizeTransition();
             this.#openButtons();
         }
 
         else if (sidebarState === 'small') {
             this.logo.style.justifyContent = 'center';
-            this.#resizeSidebar(70);
+            this.#resizeSidebar(this._smallSidebarWidth);
             this.#removeSidebarResizeTransition();
             this.#collapseButtons();
         }
+    }
+
+
+    /**
+     *
+     * @param dropdown1State
+     * @param dropdown2State
+     */
+    setSidebarDropdownStates(dropdown1State, dropdown2State) {
+       if (dropdown1State) {
+           this._pinnedFolders.classList.remove('collapsed-sidebar-dropdown')
+           this._pinnedFoldersChevron.classList.add('open-sidebar-dropdown-chevron')
+       }
+
+       if (dropdown2State) {
+           this._categories.classList.remove('collapsed-sidebar-dropdown')
+           this._categoriesChevron.classList.add('open-sidebar-dropdown-chevron')
+       }
+    }
+
+
+
+    /**
+     * Renders a list of pinned folders by creating and appending DOM elements.
+     *
+     * @param {Array<Object>} folders - An array of folder objects to render.
+     * Each object represents a folder's data that will be set in the `pinned-folder` elements.
+     *
+     * The method performs the following steps:
+     * 1. Iterates over the provided `folders` array.
+     * 2. For each folder:
+     *    - Creates a new `pinned-folder` custom element.
+     *    - Sets the folder data in the `pinned-folder` element using its `setData` method.
+     *    - Wraps the `pinned-folder` element in a `DocumentFragment` for efficient DOM updates.
+     *    - Appends the `DocumentFragment` to the `_pinnedFolders` container.
+     *
+     * @example
+     * const folders = [
+     *   { id: 1, name: "Work", items: [...] },
+     *   { id: 2, name: "Personal", items: [...] }
+     * ];
+     *
+     * renderPinnedFolders(folders);
+     *
+     * // Result: The `_pinnedFolders` container is populated with custom `pinned-folder` elements
+     * // displaying the data provided in the `folders` array.
+     */
+    renderPinnedFolders(folders) {
+        const domFragment = document.createDocumentFragment();
+
+        for (const folder of folders) {
+
+            const pinnedFolder = document.createElement("pinned-folder");
+            pinnedFolder.setData(folder);
+
+            domFragment.appendChild(pinnedFolder);
+        }
+
+        this._pinnedFolders.appendChild(domFragment);
     }
 
 
@@ -77,6 +140,21 @@ export class SidebarView {
         this._logoContainer.style.justifyContent = 'center'
         this._logoText.textContent = '';
     }
+
+
+
+
+    /**
+     *
+     * @param sidebarDropdown
+     * @param chevron
+     */
+    #collapseSidebarDropdown(sidebarDropdown, chevron) {
+        sidebarDropdown.classList.toggle('collapsed-sidebar-dropdown');
+        chevron.classList.toggle('open-sidebar-dropdown-chevron');
+    }
+
+
 
 
     /**
@@ -110,7 +188,7 @@ export class SidebarView {
             this.eventBus.emit(SIDEBAR_TOGGLE_EVENT, 'large');
 
             this.logo.style.justifyContent = '';
-            this.#resizeSidebar(220);
+            this.#resizeSidebar(this._bigSidebarWidth);
             this.#removeSidebarResizeTransition();
             this.#openButtons();
         }
@@ -120,7 +198,7 @@ export class SidebarView {
 
     #resizeSidebar(sidebarWidth) {
         this._wrapper.style.transition = '150ms'
-        this._wrapper.style.gridTemplateColumns = `${sidebarWidth}px 1fr`; // 70px or 220px
+        this._wrapper.style.gridTemplateColumns = `${sidebarWidth}px 1fr`; // 70px or 250px
     }
 
 
@@ -147,6 +225,8 @@ export class SidebarView {
     }
 
 
+
+
     #initElements() {
         this._sidebar = document.querySelector('.sidebar');
         this._icon = document.querySelector('.logo');
@@ -156,6 +236,15 @@ export class SidebarView {
         this.sidebarSpans = this._sidebar.querySelectorAll('.sidebar-content a span');
         this.logo = this._sidebar.querySelector('.sidebar-logo');
         this._wrapper = document.querySelector('.wrapper');
+        this._categoriesDropdown = document.querySelector('#categories-dropdown');
+        this._categoriesTitle = document.querySelector('.category-title');
+        this._categories = document.querySelector('.categories');
+        this._categoriesChevron = document.querySelector('#chevron-categories');
+
+        this._pinnedFoldersDropdown = document.querySelector('#pinned-folders-dropdown');
+        this._pinnedFoldersTitle = document.querySelector('.pinned-folders-title');
+        this._pinnedFolders = document.querySelector('.pinned-folders');
+        this._pinnedFoldersChevron = document.querySelector('#chevron-pinned-folder');
     }
 
 
@@ -168,6 +257,23 @@ export class SidebarView {
         this._icon.addEventListener('click', () => {
             this.#toggleSidebar();
         });
+
+
+        this._pinnedFoldersDropdown.addEventListener('click', async () => {
+            await this.eventBus.asyncEmit(COLLAPSE_SIDEBAR_SUB_TITLE_EVENT, "pinned-folders")
+            this.#collapseSidebarDropdown(this._pinnedFolders, this._pinnedFoldersChevron);
+        })
+
+
+        this._categoriesDropdown.addEventListener('click', async () => {
+            await this.eventBus.asyncEmit(COLLAPSE_SIDEBAR_SUB_TITLE_EVENT, "categories")
+            this.#collapseSidebarDropdown(this._categories, this._categoriesChevron);
+        })
+
+
+        this._sidebar.addEventListener('PinnedFolderClick', async (event) => {
+            await loadFolder(event.detail.folderId, this.eventBus);
+        })
 
 
         /**

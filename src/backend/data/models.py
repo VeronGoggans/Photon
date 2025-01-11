@@ -13,6 +13,7 @@ class Folder(Base):
     name = Column(String, nullable=False)
     color = Column(String, nullable=True, default='rgb(255, 255, 255)')
     last_visit = Column(String, nullable=False, default=datetime.now())
+    pinned = Column(Boolean, nullable=False, default=False)
     
     # Self-referential foreign key
     parent_id = Column(Integer, ForeignKey('folders.id', ondelete='CASCADE'), nullable=True)
