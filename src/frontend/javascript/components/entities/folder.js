@@ -6,11 +6,11 @@ import {checkAutoScroll, stopScrolling} from "../draggable.js";
 
 const optionsMenuTemplate = `
     <div id="edit-folder-btn" >
-        <i class="bi bi-pencil-square"></i>
+        <i class="bi bi-pen"></i>
         <span>Edit folder</span>
     </div>
-    <div id="pin-folder-btn" >
-        <i class="bi bi-star"></i>
+    <div id="pin-folder-btn">
+        <i class="bi bi-pin"></i>
         <span>Pin folder</span>
     </div>
     <div id="delete-folder-btn">

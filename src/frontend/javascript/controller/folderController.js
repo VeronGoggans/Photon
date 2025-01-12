@@ -38,14 +38,19 @@ export class FolderController {
 
 
 
-    async init(folderId = null, folderName = null, location = null) {
+    async init(folder, location = null) {
         this.view = new FolderView(this, this.eventBus);
-        const homeFolderId = 1;
-        // If a folder on the home view has been clicked.
-        if (folderId === homeFolderId) this.model.emptyFolders();
-        if (location !== null) this.model.addHierarchyPath(location);
 
-        await this.navigateIntoFolder(folderId, folderName)
+        // If a folder on the home view has been clicked.
+        if (folder.id === this.homeFolderId) {
+            this.model.emptyFolders();
+        }
+
+        if (location !== null) {
+            this.model.addHierarchyPath(location);
+        }
+
+        await this.navigateIntoFolder(folder)
     }
 
 
@@ -227,16 +232,23 @@ export class FolderController {
      * // and the view is updated to reflect the changes.
      */
     async updateFolder(updatedFolderData) {
-        const route = `/folders/${updatedFolderData.id}`;
+        const { id, eventTriggeredInsideFolder, name, color } = updatedFolderData;
+        const route = `/folders/${id}`;
         const putFolderRequest = {
-            'name': updatedFolderData.name,
-            'color': updatedFolderData.color
+            'name': name,
+            'color': color
         }
 
         const response = await this.model.update(route, putFolderRequest);
         const folder = response.content.folder;
 
-        this.view.renderUpdate(folder);
+        if (eventTriggeredInsideFolder) {
+            this.view.updateFolderNameDisplay(name)
+        }
+
+        else {
+            this.view.renderUpdate(folder);
+        }
     }
 
 
@@ -277,7 +289,7 @@ export class FolderController {
 
     async updateFolderPinValue(folder) {
         const route = `/folders/${folder.id}/pin-folder`;
-        const response = await this.model.patch(route);
+        await this.model.patch(route);
     }
 
 
@@ -324,8 +336,8 @@ export class FolderController {
      * await navigateOutOfFolder();
      */
     async navigateOutOfFolder() {
-        const { id, name } = this.model.getParentFolder();
-        await this.navigateIntoFolder(id, name);
+        const folder = this.model.getParentFolder();
+        await this.navigateIntoFolder(folder);
     }
 
 
@@ -334,8 +346,7 @@ export class FolderController {
      * Navigates into a specified folder by its ID and name, updates the view and data models,
      * and loads the folder’s child folders and associated notes.
      *
-     * @param { Number } folderId   - The unique identifier of the folder to navigate into.
-     * @param { string } name       - The name of the folder to display in the view.
+     * @param { Object } folder   - An object containing the data representing a folder.
      * @returns { Promise<void> }   - Resolves when the folder navigation and related actions are complete.
      *
      * The function performs the following steps:
@@ -355,18 +366,19 @@ export class FolderController {
      * // Navigates into the folder with ID 12345, updates the UI,
      * // fetches child folders and notes, and handles any folder-specific notifications.
      */
-    async navigateIntoFolder(folderId, name) {
-        this.view.displayFolderName(name);
-        this.model.addFolder(folderId, name);
+    async navigateIntoFolder(folder) {
 
-        if (folderId === this.homeFolderId) {
+        this.view.displayFolderName(folder.name);
+        this.model.addFolder(folder);
+
+        if (folder.id === this.homeFolderId) {
             this.model.emptyFolders();
         }
 
-        await this.model.patch(`/folders/${folderId}/view-time`);
+        await this.model.patch(`/folders/${folder.id}/view-time`);
         await this.getFolders({childFolders: true});
         await this.eventBus.asyncEmit(FETCH_NOTES_EVENT, {
-            'folderId': folderId,
+            'folderId': folder.id,
             'render': true,
             'storeResultInMemory': true
         });

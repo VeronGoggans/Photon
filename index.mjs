@@ -15,7 +15,7 @@ function createWindow () {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true, // Don't expose remote modules directly
-      preload: 'titleBar.js' // Path to the preload script
+      preload: 'titleBar.javascript' // Path to the preload script
     }
   });
 

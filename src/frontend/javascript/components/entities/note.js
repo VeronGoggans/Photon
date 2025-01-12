@@ -14,7 +14,7 @@ const optionMenuTemplate = `
         <span>Apply category</span>
     </div>
     <div id="delete-note-btn">
-        <i class="bi bi-file-earmark-x"></i>
+        <i class="bi bi-trash3"></i>
         <span>Delete note</span>
     </div>
 `

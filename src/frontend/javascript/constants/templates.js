@@ -30,11 +30,16 @@ const notesTemplate = `
             <div class="note-view-options-dropdown">
                 <button><i class="bi bi-three-dots-vertical"></i></button>
                 <ul class="dropdown-items soft-dropdown">
+                    <span class="note-view-options-dropdown-section">Document</span>
                     <li class="add-note-btn"><i class="bi bi-file-earmark"></i> Add a note</li>
+                    <li class="view-bookmarks-btn"><i class="bi bi-bookmarks"></i> Show bookmarks</li>
+                    <span class="note-view-options-dropdown-section">Folder</span>
                     <li class="add-folder-btn"><i class="bi bi-folder-plus"></i> Add a folder</li>
+                    <li class="edit-current-folder-btn"><i class="bi bi-pen"></i> Edit current folder</li>
+                    <li class="pin-current-folder-btn"><i class="bi bi-pin"></i> Pin current folder</li>
+                    <li class="export-current-folder-btn"><i class="bi bi-box-seam"></i> Export current folder</li>
+                    <span class="note-view-options-dropdown-section">Other</span>
                     <li class="add-category-btn"><i class="bi bi-archive"></i> Add a category</li>
-                    <li class="add-category-btn"><i class="bi bi-pin"></i> Pin current folder</li>
-                    <li class="view-bookmarks-btn"><i class="bi bi-bookmarks"></i> View bookmarks</li>
                 </ul>
             </div>
             

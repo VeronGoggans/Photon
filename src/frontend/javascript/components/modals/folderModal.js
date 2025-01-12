@@ -16,6 +16,7 @@ export class FolderModal {
     constructor(modalData) {
         this.modalData = modalData;
         this.folder = modalData.folder;
+        this.eventTriggeredInsideFolder = modalData.eventTriggeredInsideFolder;
         this.preferredFolderColor = null;
 
         this.#initElements();
@@ -131,7 +132,8 @@ export class FolderModal {
                 await this.modalData.callBack({
                     'id': this.folder.id,
                     'name': this.folderNameInput.value,
-                    'color': this.preferredFolderColor
+                    'color': this.preferredFolderColor,
+                    'eventTriggeredInsideFolder': this.eventTriggeredInsideFolder
                 })    
             }
 

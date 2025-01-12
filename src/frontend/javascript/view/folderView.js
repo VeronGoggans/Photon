@@ -2,6 +2,7 @@ import { AnimationHandler } from "../handlers/animationHandler.js";
 import { removeEmptyFolderNotification, renderEmptyFolderNotification } from "../handlers/notificationHandler.js";
 import { removeContent } from "../util/ui.js";
 import {
+    GET_CURRENT_FOLDER_EVENT,
     RENDER_CATEGORY_MODAL_EVENT,
     RENDER_DELETE_MODAL_EVENT,
     RENDER_FOLDER_MODAL_EVENT, UPDATE_FOLDER_LOCATION_EVENT, UPDATE_FOLDER_PIN_VALUE_EVENT,
@@ -155,6 +156,14 @@ export class FolderView {
     }
 
 
+    /**
+     *
+     */
+    updateFolderNameDisplay(newFolderName) {
+        this.currentFolderName.textContent = newFolderName;
+    }
+
+
 
     /**
      * This method will create a single FolderCard component.
@@ -180,9 +189,14 @@ export class FolderView {
 
         this.currentFolderName = document.querySelector('.current-folder-name');
         this.backButton = document.querySelector('.exit-folder-btn');
-        this.createFolderButton = document.querySelector('.add-folder-btn');
-        this._createCategoryButton = document.querySelector('.add-category-btn');
         this.viewElement = document.querySelector('.notes-view');
+
+
+        // Notes view options menu buttons
+        this._createFolderButton = document.querySelector('.add-folder-btn');
+        this._createCategoryButton = document.querySelector('.add-category-btn');
+        this._editCurrentFolderButton = document.querySelector('.edit-current-folder-btn');
+        this._pinCurrentFolderButton = document.querySelector('.pin-current-folder-btn');
     }
 
     
@@ -212,8 +226,7 @@ export class FolderView {
          * When this event happens the folder will be loaded in the current view.
          */
         this.foldersContainer.addEventListener('FolderCardClick', async (event) => {
-            const { folder } = event.detail;
-            await this.controller.navigateIntoFolder(folder.id, folder.name);
+            await this.controller.navigateIntoFolder(event.detail.folder);
         });
 
 
@@ -224,8 +237,20 @@ export class FolderView {
          * When the user confirms the changes made to the folder,
          * the callback will confirm the changes mad to the folder.
          */
-        this.foldersContainer.addEventListener('EditFolder', (event) => {
-            const { folder } = event.detail;
+        this.viewElement.addEventListener('EditFolder', (event) => {
+            // If the EditFolder event was triggered from a folder's context menu
+            let folder = event.detail.folder;
+
+            // Will result in true if the EditFolder event was triggered from the notes view options menu.
+            // Will stay false if the EditFolder event was triggered from a folders context menu,
+            // thus outside the folder that's being updated
+            let eventTriggeredInsideFolder = false;
+
+            // Will result true, if the EditFolder event was triggered from the notes tab options menu
+            if (folder === null) {
+                folder = this.eventBus.emit(GET_CURRENT_FOLDER_EVENT);
+                eventTriggeredInsideFolder = true;
+            }
 
             // The callback function that'll update the folder when the user confirms the folder changes
             const updateCallBack = async (updatedFolderData) => {
@@ -235,15 +260,32 @@ export class FolderView {
             // Event to tell the dialog to render the folder modal.
             this.eventBus.emit(RENDER_FOLDER_MODAL_EVENT, {
                 'folder': folder,
-                'callBack': updateCallBack
+                'callBack': updateCallBack,
+                'eventTriggeredInsideFolder': eventTriggeredInsideFolder
             })
         });
 
 
+        /**
+         * This custom event listener will listen for the PinFolder event
+         * When this event is triggered the corresponding folder's pin value will
+         * be updated.
+         *
+         * This event can be triggered by a folder's context menu and also by the note
+         * view's options menu.
+         */
+        this.viewElement.addEventListener('PinFolder', async (event) => {
+            // If the PinFolder event was triggered from a folder's context menu
+            let folder = event.detail.folder;
 
-        this.foldersContainer.addEventListener('PinFolder', async (event) => {
+            // Will result true, if the PinFolder event was triggered from the notes tab options menu
+            if (folder === null) {
+                folder = this.eventBus.emit(GET_CURRENT_FOLDER_EVENT)
+            }
+
+            // Update the folders pin value accordingly
             await this.eventBus.asyncEmit(UPDATE_FOLDER_PIN_VALUE_EVENT, {
-                'folder': event.detail.folder,
+                'folder': folder,
             })
         });
 
@@ -279,7 +321,7 @@ export class FolderView {
          * When the user confirms the creation of the folder within the folder modal,
          * the callback function will tell the controller to confirm the creation of a new folder.
          */
-        this.createFolderButton.addEventListener('click', () => {
+        this._createFolderButton.addEventListener('click', () => {
 
             // The callback function that'll create the folder when the user confirms the creation in the modal.
             const addFolderCallBack = async (newFolderData) => {
@@ -292,6 +334,24 @@ export class FolderView {
                 'callBack': addFolderCallBack
             })
         });
+
+
+        /**
+         *
+         */
+        this._pinCurrentFolderButton.addEventListener('click', () => {
+            // Dispatch the PinFolder custom event
+            this.viewElement.dispatchEvent(new CustomEvent('PinFolder', {detail: {folder: null}, bubbles: true}));
+        })
+
+
+        /**
+         *
+         */
+        this._editCurrentFolderButton.addEventListener('click', () => {
+            // Dispatch the PinFolder custom event
+            this.viewElement.dispatchEvent(new CustomEvent('EditFolder', {detail: {folder: null}, bubbles: true}));
+        })
 
 
 

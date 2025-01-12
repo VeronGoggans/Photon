@@ -83,6 +83,15 @@
     padding-bottom: 5%;
 }
 
+.note-view-options-dropdown .dropdown-items li {
+    font-size: 14px !important;
+}
+
+.note-view-options-dropdown-section {
+    color: var(--less-important);
+    padding-left: 20px;
+}
+
 @media screen and (max-width: 700px ) {
     .current-folder-name-container h1 {
         font-size: 40px;

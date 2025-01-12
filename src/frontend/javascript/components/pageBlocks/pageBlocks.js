@@ -24,7 +24,10 @@ class DocumentLocationPageBlock extends HTMLElement {
             // Remove the second element
             this.folders.splice(1, 1);
         }
+
+
         const folderPaths = [];
+
         this.folders.forEach(folder => {
             const folderPath = createCustomElement(folder, 'folder-path');
             const icon = document.createElement('i');
@@ -34,6 +37,8 @@ class DocumentLocationPageBlock extends HTMLElement {
             folderPaths.push(folderPath);
             folderPaths.push(icon);           
         });
+
+
         folderPaths.pop();
         folderPaths.forEach(item => {
             this.appendChild(item);

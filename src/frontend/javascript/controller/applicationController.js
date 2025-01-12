@@ -75,10 +75,10 @@ class Router {
             }
 
             else if (viewId === 'notes') {
-                const {folder, location} = viewParameters;
+                const { folder, location } = viewParameters;
 
                 await this.noteController.init();
-                await this.folderController.init(folder.id, folder.name, location);
+                await this.folderController.init(folder, location);
                 this.eventBus.emit(SET_ACTIVE_TAB_EVENT, 'notes');
             }
 

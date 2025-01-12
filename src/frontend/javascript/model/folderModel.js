@@ -85,14 +85,12 @@ export class FolderModel extends HttpModel {
      * This method will add a new folder object to the stack,
      * if the provided ID isn't already within the folder object at the top of the stack.
      *
-     * @param id    - The ID of the visited folder
-     * @param name  - The name of the visited folder
+     * @param folder    - An object containing the data representing a folder.
      */
-    addFolder(id, name) {
-        const folder = { 'id': id, 'name': name };
+    addFolder(folder) {
         const topFolder = this.stack.peek();
 
-        if (this.stack.isEmpty() || id !== topFolder.id) {
+        if (this.stack.isEmpty() || folder.id !== topFolder.id) {
             this.stack.push(folder);
         } 
     }
@@ -107,9 +105,9 @@ export class FolderModel extends HttpModel {
      */
     addHierarchyPath(folders) {
         this.stack.clear();
-        for (let i = 0; i < folders.length; i++) {
-            const { id, name } = folders[i]
-            this.addFolder(id, name)
+
+        for (const folder of folders) {
+            this.addFolder(folder);
         }
     }
 }

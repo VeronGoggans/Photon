@@ -307,7 +307,7 @@ export class SidebarView {
                     this.eventBus.emit(INIT_VIEW_EVENT, {
                         viewId: viewId,
                         folder: {'id': 1, 'name': 'Home'},
-                        location: {'id': 1, 'name': 'Home'}
+                        location: [{'id': 1, 'name': 'Home'}]
                     });
                 }
 
