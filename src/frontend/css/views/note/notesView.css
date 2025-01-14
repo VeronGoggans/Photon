@@ -22,7 +22,28 @@
     padding-top: 20px;
 }
 
-.current-folder-name-container button {
+
+.current-folder-options-container {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    color: var(--text);
+}
+
+.current-folder-name-container {
+    position: relative;
+}
+
+#folder-color-circle {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    border-radius: 50%;
+    top: 0;
+    right: -25px;
+}
+
+.current-folder-options-container button {
     position: relative;
     width: 35px;
     height: 35px;
@@ -33,24 +54,19 @@
     transition: background-color .15s ease, scale .2s ease;
 }
 
-.current-folder-name-container button:hover {
+.current-folder-options-container button:hover {
     background-color: var(--hover-button);
     scale: 1.2;
 }
 
 
-.current-folder-name-container {
-    display: flex;
-    column-gap: 10px;
-    align-items: center;
-    color: var(--text);
-}
+
 
 .note-view-options-dropdown {
     position: relative;
 }
 
-.current-folder-name-container h1 {
+.current-folder-options-container h1 {
     display: flex;
     height: fit-content;
     margin: 0;

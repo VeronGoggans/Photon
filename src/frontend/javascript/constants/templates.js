@@ -25,7 +25,7 @@ const notesTemplate = `
     <div class="notes-view">
     <div class="notes-top">
     
-        <div class="current-folder-name-container">
+        <div class="current-folder-options-container">
             <button class="exit-folder-btn"><i class="bi bi-chevron-left"></i></button>
             <div class="note-view-options-dropdown">
                 <button><i class="bi bi-three-dots-vertical"></i></button>
@@ -42,8 +42,11 @@ const notesTemplate = `
                     <li class="add-category-btn"><i class="bi bi-archive"></i> Add a category</li>
                 </ul>
             </div>
+            <div class="current-folder-name-container">
+                <h1 class="current-folder-name view-title">Home</h1>
+                <div id="folder-color-circle"></div>
+            </div>
             
-            <h1 class="current-folder-name view-title">Home</h1>
         </div>
 
         <div class="searchbar">

@@ -245,7 +245,7 @@ export class FolderController {
 
         if (eventTriggeredInsideFolder) {
             this.view.updateFolderNameDisplay(folder);
-            console.log(folder)
+            this.view.displayFolderColorCircle(folder.color);
             this.model.updateFolder(folder);
         }
 
@@ -383,6 +383,7 @@ export class FolderController {
     async navigateIntoFolder(folder) {
 
         this.view.displayFolderName(folder.name);
+        this.view.displayFolderColorCircle(folder.color);
         this.model.addFolder(folder);
 
         if (folder.id === this.homeFolderId) {

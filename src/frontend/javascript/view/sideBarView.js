@@ -22,6 +22,7 @@ export class SidebarView {
         this._sidebarShrinkLimit = 950; // Pixels
         this._bigSidebarWidth = 250; // Pixels
         this._smallSidebarWidth = 70; // Pixels
+        this.homeFolder = {'id': 1, 'name': 'Home', 'color': 'color-original', 'parent_id': null}
 
         this.#initElements();
         this.#eventListeners();
@@ -308,8 +309,8 @@ export class SidebarView {
                     // and load the home folder (root folder).
                     this.eventBus.emit(INIT_VIEW_EVENT, {
                         viewId: viewId,
-                        folder: {'id': 1, 'name': 'Home'},
-                        location: [{'id': 1, 'name': 'Home'}]
+                        folder: this.homeFolder,
+                        location: [this.homeFolder]
                     });
                 }
 

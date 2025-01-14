@@ -195,6 +195,19 @@ export class FolderView {
 
 
 
+    /**
+     *
+     * @param folderCSSClass
+     */
+    displayFolderColorCircle(folderCSSClass) {
+        this._folderColorCircle.classList.remove(...this._folderColorCircle.classList);
+
+        if (folderCSSClass !== 'color-original') {
+            this._folderColorCircle.classList.add(folderCSSClass);
+        }
+    }
+
+
     #updatePinnedFolder(folder) {
         const pinnedFolderCards = this._pinnedFolders.children;
 
@@ -242,6 +255,7 @@ export class FolderView {
         this.foldersContainer.style.display = 'none';
 
         this.currentFolderName = document.querySelector('.current-folder-name');
+        this._folderColorCircle = document.querySelector('#folder-color-circle');
         this.backButton = document.querySelector('.exit-folder-btn');
         this.viewElement = document.querySelector('.notes-view');
 

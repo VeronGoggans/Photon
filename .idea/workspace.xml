@@ -4,17 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="Fixed some bugs">
+    <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="Pinning folders is now a feature.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backend/data/managers/folder_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/data/managers/folder_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/backend/presentation/routers/folder_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/presentation/routers/folder_router.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/css/components/entities/folder.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/components/entities/folder.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/components/entities/folder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/components/entities/folder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/components/eventBus.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/components/eventBus.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/general/sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/sidebar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/views/note/notesView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/views/note/notesView.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/constants/templates.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/constants/templates.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/javascript/controller/folderController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/controller/folderController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/datastuctures/stack.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/datastuctures/stack.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/model/folderModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/model/folderModel.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/javascript/view/folderView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/view/folderView.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/javascript/view/sideBarView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/view/sideBarView.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/settings.json" afterDir="false" />
@@ -145,7 +142,7 @@
       <workItem from="1736722767600" duration="8000" />
       <workItem from="1736776419331" duration="815000" />
       <workItem from="1736788452503" duration="831000" />
-      <workItem from="1736846362934" duration="8947000" />
+      <workItem from="1736846362934" duration="12560000" />
     </task>
     <task id="LOCAL-00001" summary="the sidebar can now be without a border in the settings tab. And the options menu for folders and notes have been changed">
       <option name="closed" value="true" />
@@ -299,7 +296,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736847708436</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Pinning folders is now a feature.">
+      <option name="closed" value="true" />
+      <created>1736857598377</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1736857598377</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,6 +329,7 @@
     <MESSAGE value="Working on the pin folders feature." />
     <MESSAGE value="You can now edit the current folder" />
     <MESSAGE value="Fixed some bugs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed some bugs" />
+    <MESSAGE value="Pinning folders is now a feature." />
+    <option name="LAST_COMMIT_MESSAGE" value="Pinning folders is now a feature." />
   </component>
 </project>
