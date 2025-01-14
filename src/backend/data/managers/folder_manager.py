@@ -83,11 +83,16 @@ class FolderManager:
 
 
 
-    def update_pin_value(self, folder_id: int, db: Session) -> (None | NotFoundException):
+    def update_pin_value(self, folder_id: int, db: Session) -> (Folder | NotFoundException):
         folder = find_folder(folder_id, db)
-        folder.pinned = not folder.pinned
+
+        toggle_pin_value: bool = not folder.pinned
+        folder.pinned = toggle_pin_value
         db.commit()
-        
+        db.refresh(folder)
+
+        return folder
+
 
 
     def delete(self, folder_id: int, db: Session) -> (Folder | NotFoundException):

@@ -90,8 +90,8 @@ class FolderRouter:
 
     @handle_exceptions
     def update_folder_pin_value(self, folder_id: int, db: Session = Depends(Database.get_db)):
-        self.manager.update_pin_value(folder_id, db) 
-        return JSONResponse(status_code=HttpStatus.NO_CONTENT)
+        folder = self.manager.update_pin_value(folder_id, db) 
+        return JSONResponse(status_code=HttpStatus.NO_CONTENT, content={'folder': folder})
        
 
         

@@ -30,7 +30,6 @@ export class FolderModel extends HttpModel {
      * @returns { {id: number, name: string} } - Metadata of the current folder
      */
     getCurrentFolder() {
-        console.log(this.stack.view())
         const folder = this.stack.peek();
         return folder ? folder : this.homeFolder;
     }
@@ -94,6 +93,22 @@ export class FolderModel extends HttpModel {
         if (this.stack.isEmpty() || folder.id !== topFolder.id) {
             this.stack.push(folder);
         } 
+    }
+
+
+    /**
+     * This method will update the specified folder in the stack.
+     *
+     * @param folder    - An object containing the data representing the updated folder.
+     */
+    updateFolder(folder) {
+        const stackArray = this.stack.getArrayInstance();
+        const index = stackArray.findIndex(storedFolder => storedFolder.id === folder.id);
+        const notFound = -1;
+
+        if (index !== notFound) {
+            stackArray[index] = folder; // Update the folder at the found index
+        }
     }
 
 

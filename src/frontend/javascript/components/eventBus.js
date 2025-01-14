@@ -117,6 +117,7 @@ export const FETCH_SETTINGS_EVENT = 'fetch-settings';
 export const GET_CURRENT_FOLDER_EVENT = 'get-current-folder';
 export const GET_PARENT_FOLDER_EVENT = 'get-parent-folder';
 export const GET_BREAD_CRUMBS_EVENT = 'get-bread-crumbs';
+export const RENDER_PINNED_FOLDERS_EVENT = 'render-pinned-folders';
 export const GET_PREVIOUS_VIEW_EVENT = 'get-previous-view';
 export const INIT_VIEW_EVENT = 'init-view';
 

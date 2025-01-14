@@ -86,24 +86,37 @@ class FolderPath extends HTMLElement {
 
 
 class PinnedFolder extends HTMLElement {
+    static get observedAttributes() {
+        return ['pinned-folder'];
+    }
+
+
     constructor() {
         super();
     }
 
-    setData(value) {
-        this.folder = value;
-        this.render();
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (name === 'pinned-folder') {
+            this.pinnedFolder = JSON.parse(newValue);
+            this.render();
+        }
     }
 
-    render() {
-        this.id = this.folder.id;
-        this.innerHTML = `
-            <span>${this.folder.name}</span>
-        `
-    }
 
     connectedCallback() {
+        this.pinnedFolder = JSON.parse(this.getAttribute('pinned-folder'));
+        this.id = this.pinnedFolder.id;
+
+        this.render();
         this.addEventListener('click', this.handleClick.bind(this));
+    }
+
+
+    render() {
+        this.innerHTML = `
+            <span>${this.pinnedFolder.name}</span>
+        `
     }
 
 
@@ -125,6 +138,7 @@ class Folder extends HTMLElement {
         super();
         this.scrollableParent = document.querySelector('.note-view-content')
     }
+
 
     connectedCallback() {
         this.folder = JSON.parse(this.getAttribute('folder'));

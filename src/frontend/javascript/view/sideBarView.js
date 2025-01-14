@@ -7,6 +7,7 @@ import {
     UPDATE_FOLDER_LOCATION_EVENT, UPDATE_NOTE_LOCATION_EVENT
 } from "../components/eventBus.js";
 import {loadFolder} from "./viewFunctions.js";
+import {AnimationHandler} from "../handlers/animationHandler.js";
 
 
 
@@ -117,12 +118,13 @@ export class SidebarView {
     renderPinnedFolders(folders) {
         const domFragment = document.createDocumentFragment();
 
-        for (const folder of folders) {
+        for (const pinnedFolder of folders) {
 
-            const pinnedFolder = document.createElement("pinned-folder");
-            pinnedFolder.setData(folder);
+            const pinnedFolderCard = document.createElement("pinned-folder");
+            pinnedFolderCard.setAttribute('pinned-folder', JSON.stringify(pinnedFolder));
 
-            domFragment.appendChild(pinnedFolder);
+            domFragment.appendChild(pinnedFolderCard);
+            AnimationHandler.fadeInFromBottom(pinnedFolderCard);
         }
 
         this._pinnedFolders.appendChild(domFragment);

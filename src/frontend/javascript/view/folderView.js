@@ -103,9 +103,11 @@ export class FolderView {
     renderUpdate(folder) {
         const folderCards = this.foldersContainer.children;
 
+        // Updating the folder card
         for (const folderCard of folderCards) {
             if (folderCard.id === String(folder.id)) {
                 folderCard.setAttribute('folder', JSON.stringify(folder));
+                this.#updatePinnedFolder(folder);
             }
         }
     }
@@ -134,12 +136,39 @@ export class FolderView {
         }  
 
         const folders = this.foldersContainer.children;
-        for (let i = 0; i < folders.length; i++) {
-            if (folders[i].id === String(folder.id) && folders[i].tagName === 'FOLDER-CARD') {
-                AnimationHandler.fadeOutCard(folders[i]);
+        for (const folderCard of folders) {
+            if (folderCard.id === String(folder.id) && folderCard.tagName === 'FOLDER-CARD') {
+                AnimationHandler.fadeOutCard(folderCard);
             }
-        }    
+        }
+
         renderEmptyFolderNotification(705);
+    }
+
+
+    /**
+     *
+     * @param folder
+     */
+    renderOnePinnedFolder(folder) {
+        const pinnedFolderCard = this.#pinnedFolder(folder);
+        this._pinnedFolders.appendChild(pinnedFolderCard);
+        AnimationHandler.fadeInFromBottom(pinnedFolderCard);
+    }
+
+
+    /**
+     *
+     * @param folder
+     */
+    removePinnedFolder(folder) {
+        const pinnedFolders = this._pinnedFolders.children;
+
+        for (const pinnedFolder of pinnedFolders) {
+            if (pinnedFolder.id === String(folder.id)) {
+                AnimationHandler.fadeOutCard(pinnedFolder);
+            }
+        }
     }
 
 
@@ -159,10 +188,24 @@ export class FolderView {
     /**
      *
      */
-    updateFolderNameDisplay(newFolderName) {
-        this.currentFolderName.textContent = newFolderName;
+    updateFolderNameDisplay(folder) {
+        this.currentFolderName.textContent = folder.name;
+        this.#updatePinnedFolder(folder);
     }
 
+
+
+    #updatePinnedFolder(folder) {
+        const pinnedFolderCards = this._pinnedFolders.children;
+
+        if (folder.pinned) {
+            for (const pinnedFolderCard of pinnedFolderCards) {
+                if (pinnedFolderCard.id === String(folder.id)) {
+                    pinnedFolderCard.setAttribute('pinned-folder', JSON.stringify(folder));
+                }
+            }
+        }
+    }
 
 
     /**
@@ -175,6 +218,16 @@ export class FolderView {
         const folderCard = document.createElement('folder-card');
         folderCard.setAttribute('folder', JSON.stringify(folder));
         return folderCard
+    }
+
+
+    /**
+     *
+     */
+    #pinnedFolder(pinnedFolder) {
+       const pinnedFolderCard = document.createElement('pinned-folder');
+       pinnedFolderCard.setAttribute('pinned-folder', JSON.stringify(pinnedFolder));
+       return pinnedFolderCard
     }
 
 
@@ -253,7 +306,6 @@ export class FolderView {
                 eventTriggeredInsideFolder = true;
             }
 
-            console.log(folder)
             // The callback function that'll update the folder when the user confirms the folder changes
             const updateCallBack = async (updatedFolderData) => {
                 await this.controller.updateFolder(updatedFolderData);
@@ -338,24 +390,18 @@ export class FolderView {
         });
 
 
-        /**
-         *
-         */
+
+
+
         this._pinCurrentFolderButton.addEventListener('click', () => {
             // Dispatch the PinFolder custom event
             this.viewElement.dispatchEvent(new CustomEvent('PinFolder', {detail: {folder: null}, bubbles: true}));
         })
 
-
-        /**
-         *
-         */
         this._editCurrentFolderButton.addEventListener('click', () => {
             // Dispatch the PinFolder custom event
             this.viewElement.dispatchEvent(new CustomEvent('EditFolder', {detail: {folder: null}, bubbles: true}));
         })
-
-
 
         this._createCategoryButton.addEventListener('click', () => {
             // The callback function that'll create the category when the user confirms the creation in the modal.

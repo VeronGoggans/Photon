@@ -81,7 +81,9 @@ pinned-folder {
     border-radius: 7px;
     font-size: 14px;
     color: var(--less-important);
-    transition: background .15s ease;
+    opacity: 0;
+    transform: translateY(30%);
+    transition: opacity .7s ease, transform .25s ease, scale .2s ease, background .15s ease;
 }
 
 pinned-folder i {

@@ -9,7 +9,8 @@ import {
     FETCH_NOTES_EVENT,
     SET_NOTE_LOCATION_EVENT,
     FETCH_RECENT_FOLDERS_EVENT,
-    GET_BREAD_CRUMBS_EVENT, UPDATE_FOLDER_LOCATION_EVENT, FETCH_PINNED_FOLDERS_EVENT, UPDATE_FOLDER_PIN_VALUE_EVENT
+    GET_BREAD_CRUMBS_EVENT, UPDATE_FOLDER_LOCATION_EVENT, FETCH_PINNED_FOLDERS_EVENT, UPDATE_FOLDER_PIN_VALUE_EVENT,
+    RENDER_PINNED_FOLDERS_EVENT
 } from "../components/eventBus.js";
 
 
@@ -243,7 +244,9 @@ export class FolderController {
         const folder = response.content.folder;
 
         if (eventTriggeredInsideFolder) {
-            this.view.updateFolderNameDisplay(name)
+            this.view.updateFolderNameDisplay(folder);
+            console.log(folder)
+            this.model.updateFolder(folder);
         }
 
         else {
@@ -290,6 +293,17 @@ export class FolderController {
     async updateFolderPinValue(folder) {
         const route = `/folders/${folder.id}/pin-folder`;
         const response = await this.model.patch(route);
+
+        const updatedFolder = response.content.folder;
+        const folderPinValue = updatedFolder.pinned;
+
+        if (folderPinValue) {
+            this.view.renderOnePinnedFolder(updatedFolder);
+        }
+
+        else if (!folderPinValue) {
+            this.view.removePinnedFolder(updatedFolder);
+        }
     }
 
 

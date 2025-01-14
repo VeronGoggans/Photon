@@ -30,6 +30,10 @@ export class Stack {
     view() {
         return [...this.stack];
     }
+
+    getArrayInstance() {
+        return this.stack;
+    }
 }
 
 
