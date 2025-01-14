@@ -85,6 +85,7 @@ export class HomeController {
         if (viewId === 'notes') {
             const { folder, location } = await this.eventBus.asyncEmit(FETCH_FOLDER_BY_ID_EVENT, searchItemId);
             this.eventBus.emit(INIT_VIEW_EVENT, {
+                viewId: viewId,
                 folder: folder,
                 location: location
             });

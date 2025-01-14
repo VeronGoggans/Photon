@@ -30,6 +30,7 @@ export class FolderModel extends HttpModel {
      * @returns { {id: number, name: string} } - Metadata of the current folder
      */
     getCurrentFolder() {
+        console.log(this.stack.view())
         const folder = this.stack.peek();
         return folder ? folder : this.homeFolder;
     }

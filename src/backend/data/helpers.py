@@ -51,7 +51,10 @@ def find_sticky_note(id: int, db: Session) -> ( StickyNote | NotFoundException )
     return sticky_note
 
 
-def get_hierarchy(item_id: int, db: Session, is_note: bool) -> list[dict]:
+
+
+
+def get_entity_path(item_id: int, db: Session, is_note: bool = False) -> list[dict]:
     """
     Retrieve the folder hierarchy for a given folder or note ID.
     The hierarchy is a list of dictionaries with {id, name} for each folder in the path.

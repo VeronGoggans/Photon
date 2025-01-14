@@ -1,7 +1,7 @@
 {
-    "theme": "dark",
+    "theme": "light",
     "sidebarColor": "original",
-    "widgetStyle": "shadow",
+    "widgetStyle": "border",
     "folderIconColor": "gray",
     "sidebarState": "large",
     "collapsePinnedFolders": true,

@@ -182,6 +182,7 @@ export class FolderView {
 
     #initElements() {
         this.foldersContainer = document.querySelector('.folders');
+        this._pinnedFolders = document.querySelector('.pinned-folders');
         this._foldersBlockTitle = document.querySelector('#folders-block-title');
 
         this._foldersBlockTitle.style.display = 'none';
@@ -252,6 +253,7 @@ export class FolderView {
                 eventTriggeredInsideFolder = true;
             }
 
+            console.log(folder)
             // The callback function that'll update the folder when the user confirms the folder changes
             const updateCallBack = async (updatedFolderData) => {
                 await this.controller.updateFolder(updatedFolderData);

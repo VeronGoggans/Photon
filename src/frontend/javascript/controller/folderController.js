@@ -289,7 +289,7 @@ export class FolderController {
 
     async updateFolderPinValue(folder) {
         const route = `/folders/${folder.id}/pin-folder`;
-        await this.model.patch(route);
+        const response = await this.model.patch(route);
     }
 
 
