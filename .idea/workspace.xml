@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="Pinning folders is now a feature.">
+    <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="The current folder now shows its color next to its name">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/css/general/sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/sidebar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/css/views/note/notesView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/views/note/notesView.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/constants/templates.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/constants/templates.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/controller/folderController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/controller/folderController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/view/folderView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/view/folderView.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/view/sideBarView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/view/sideBarView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/components/Autosave.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/components/Autosave.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/view/textEditorView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/view/textEditorView.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -142,7 +137,7 @@
       <workItem from="1736722767600" duration="8000" />
       <workItem from="1736776419331" duration="815000" />
       <workItem from="1736788452503" duration="831000" />
-      <workItem from="1736846362934" duration="12560000" />
+      <workItem from="1736846362934" duration="13912000" />
     </task>
     <task id="LOCAL-00001" summary="the sidebar can now be without a border in the settings tab. And the options menu for folders and notes have been changed">
       <option name="closed" value="true" />
@@ -304,7 +299,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736857598377</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="The current folder now shows its color next to its name">
+      <option name="closed" value="true" />
+      <created>1736861472078</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1736861472078</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -330,6 +333,7 @@
     <MESSAGE value="You can now edit the current folder" />
     <MESSAGE value="Fixed some bugs" />
     <MESSAGE value="Pinning folders is now a feature." />
-    <option name="LAST_COMMIT_MESSAGE" value="Pinning folders is now a feature." />
+    <MESSAGE value="The current folder now shows its color next to its name" />
+    <option name="LAST_COMMIT_MESSAGE" value="The current folder now shows its color next to its name" />
   </component>
 </project>

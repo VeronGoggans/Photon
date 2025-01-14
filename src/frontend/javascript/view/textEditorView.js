@@ -7,8 +7,6 @@ import { removeContent } from "../util/ui.js";
 import { loadFolder } from "./viewFunctions.js";
 import { AutoSave } from "../components/Autosave.js";
 import {
-  FETCH_FOLDER_BY_ID_EVENT,
-  INIT_VIEW_EVENT,
   RENDER_DELETE_MODAL_EVENT,
   RENDER_NOTE_DETAILS_MODAL_EVENT
 } from "../components/eventBus.js";
@@ -34,14 +32,10 @@ export class TextEditorView {
 
 
     const saveNameCallBack = async (name) => {
-      console.log('document name', name)
-      console.log('document content', this.page.innerHTML);
       await this.controller.autoSave(name, this.page.innerHTML, false, false);
     }
 
     const saveContentCallBack = async (content) => {
-      console.log('document name', this.documentNameInput.value)
-      console.log('document content', content);
       await this.controller.autoSave(this.documentNameInput.value, content, false, false);
     }
 
@@ -225,6 +219,17 @@ export class TextEditorView {
 
 
   #eventListeners() {
+
+    /**
+     * THis event listener will listen for the Enter keypress on the document name input.
+     * When this event listener is triggered the cursor will be put to the documents content section
+     * (e.g. A4 paper right under the name)
+     */
+    this.documentNameInput.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+        this.page.focus();
+      }
+    })
 
 
     /**

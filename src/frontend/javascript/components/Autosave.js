@@ -68,15 +68,19 @@ export class AutoSave {
         let content;
 
         if (this.inputContent) {
-            content = this.contentEditable.value;
+            content = this.contentEditable.value.trim() // Remove any white space at the start and end of the string;
         }
 
         if (this.plainTextContent) {
-            content = this.contentEditable.textContent;
+            content = this.contentEditable.textContent.trim() // Remove any white space at the start and end of the string;
         }
 
         if (this.htmlContent) {
             content = this.contentEditable.innerHTML;
+            // Note that trim() is not used for the innerHTML property.
+            // This is because when a user leaves white space in the form of newline breaks towards the end of the page
+            // It could be done for clarity reasons, and thus using trim would mess with the users memory
+            // of how they left their note
         }
         this.saveCallback(content); // Call the save callback
     }
