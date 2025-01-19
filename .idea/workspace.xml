@@ -4,11 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="The current folder now shows its color next to its name">
+    <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="Names of folders and notes no are longer allowed to have any whites space at the start and end of the name And pressing enter whilst the document name input is active will focus the cursor to the document page (content of the document).">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/components/Autosave.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/components/Autosave.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/view/textEditorView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/view/textEditorView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/general/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/general/scrollbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/scrollbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/general/searchbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/searchbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/general/themes.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/themes.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/views/sticky_note/stickyWallView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/views/sticky_note/stickyWallView.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/components/entities/folder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/components/entities/folder.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/components/searchbar/searchbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/components/searchbar/searchbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/constants/templates.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/constants/templates.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/controller/homeController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/controller/homeController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/controller/noteController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/controller/noteController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/view/homeView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/view/homeView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/view/noteView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/view/noteView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/view/searchbar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/view/viewFunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/view/viewFunctions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,6 +73,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\WebStorm 2024.3.1\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -67,7 +81,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-WS-243.22562.112" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-WS-243.23654.120" />
       </set>
     </attachedChunks>
   </component>
@@ -137,7 +151,12 @@
       <workItem from="1736722767600" duration="8000" />
       <workItem from="1736776419331" duration="815000" />
       <workItem from="1736788452503" duration="831000" />
-      <workItem from="1736846362934" duration="13912000" />
+      <workItem from="1736846362934" duration="14159000" />
+      <workItem from="1736869399158" duration="8340000" />
+      <workItem from="1736930004289" duration="5995000" />
+      <workItem from="1737206907245" duration="10917000" />
+      <workItem from="1737293071639" duration="281000" />
+      <workItem from="1737293457973" duration="4230000" />
     </task>
     <task id="LOCAL-00001" summary="the sidebar can now be without a border in the settings tab. And the options menu for folders and notes have been changed">
       <option name="closed" value="true" />
@@ -307,7 +326,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736861472078</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Names of folders and notes no are longer allowed to have any whites space at the start and end of the name And pressing enter whilst the document name input is active will focus the cursor to the document page (content of the document).">
+      <option name="closed" value="true" />
+      <created>1736862781405</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1736862781405</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -334,6 +361,7 @@
     <MESSAGE value="Fixed some bugs" />
     <MESSAGE value="Pinning folders is now a feature." />
     <MESSAGE value="The current folder now shows its color next to its name" />
-    <option name="LAST_COMMIT_MESSAGE" value="The current folder now shows its color next to its name" />
+    <MESSAGE value="Names of folders and notes no are longer allowed to have any whites space at the start and end of the name And pressing enter whilst the document name input is active will focus the cursor to the document page (content of the document)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Names of folders and notes no are longer allowed to have any whites space at the start and end of the name And pressing enter whilst the document name input is active will focus the cursor to the document page (content of the document)." />
   </component>
 </project>

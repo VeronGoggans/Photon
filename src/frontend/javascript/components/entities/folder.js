@@ -1,7 +1,7 @@
 import { formatName } from "../../util/formatters.js";
-import {addDragImage, removeDragImage, showContextMenu} from "../../util/ui.js";
+import { addDragImage, removeDragImage, showContextMenu } from "../../util/ui.js";
 import { applyFolderIconColor, applyWidgetStyle } from "../../util/ui.js";
-import {checkAutoScroll, stopScrolling} from "../draggable.js";
+import { checkAutoScroll, stopScrolling } from "../draggable.js";
 
 
 const optionsMenuTemplate = `

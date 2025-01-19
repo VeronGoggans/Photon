@@ -2,11 +2,7 @@ const homeTemplate = `
     <div class="home">
         <div class="top">
 
-        <div class="searchbar">
-            <i id="search-icon" class="bi bi-search"></i>
-            <input type="text" placeholder="Search..." spellcheck="false">
-            <ul class="dropdown-items soft-dropdown"></ul>
-        </div>
+        <autocomplete-searchbar></autocomplete-searchbar>
         
         </div>
         <div class="middle">
@@ -48,12 +44,7 @@ const notesTemplate = `
             </div>
             
         </div>
-
-        <div class="searchbar">
-            <i id="search-icon" class="bi bi-search"></i>
-            <input type="text" placeholder="Search..." spellcheck="false">
-            <ul class="dropdown-items soft-dropdown"></ul>
-        </div>
+        <autocomplete-searchbar></autocomplete-searchbar>
 
     </div>
     <div class="notes-bottom">
@@ -99,37 +90,35 @@ const columnStickyBoardTemplate = `
     <p class="description" contenteditable="true" spellcheck="false">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, in quos? Ab suscipit perspiciatis obcaecati vel iure vitae corporis veniam quas! Mollitia eos tempore ipsam doloribus hic. Laborum, enim praesentium.</p>
     <div class="board-wrapper">
 
-      <div class="board-section">
+      <div class="board-column">
         <div class="board-section-top">
-          <input type="text" class="board-section-name" placeholder="Section name">
-          <i class="bi bi-three-dots-vertical"></i>
+          <input type="text" class="board-section-name" placeholder="Column name" spellcheck="false">
+          <button><i class="bi bi-plus-lg"></i></button> 
         </div>
         <div class="stickies-container">
             <p class="no-stickies-message">No stickies here</p>
         </div>
-        <button><i class="bi bi-plus-lg"></i></button> 
       </div>
 
-      <div class="board-section">
+      <div class="board-column">
         <div class="board-section-top">
-          <input type="text" class="board-section-name" placeholder="Section name">
-          <i class="bi bi-three-dots-vertical"></i>
+          <input type="text" class="board-section-name" placeholder="Column name" spellcheck="false">
+          <button><i class="bi bi-plus-lg"></i></button> 
         </div>
         <div class="stickies-container">
             <p class="no-stickies-message">No stickies here</p>
         </div>
-        <button><i class="bi bi-plus-lg"></i></button> 
       </div>
 
-      <div class="board-section">
+      <div class="board-column">
         <div class="board-section-top">
-          <input type="text" class="board-section-name" placeholder="Section name">
-          <i class="bi bi-three-dots-vertical"></i>
+          <input type="text" class="board-section-name" placeholder="Column name" spellcheck="false">
+          <div></div>
+          <button><i class="bi bi-plus-lg"></i></button> 
         </div>
         <div class="stickies-container">
           <p class="no-stickies-message">No stickies here</p>
         </div>
-        <button><i class="bi bi-plus-lg"></i></button> 
       </div>
     </div>
   </div>

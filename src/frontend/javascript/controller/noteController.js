@@ -1,17 +1,13 @@
 import { HttpModel } from "../model/httpModel.js";
 import { NoteView } from "../view/noteView.js";
-import { Searchbar } from "../view/searchbar.js";
-import { viewToLoad } from "../helpers/random.js";
 import { pushNotification } from "../handlers/notificationHandler.js"
 import {
     CREATE_NOTE_EVENT,
-    FETCH_FOLDER_BY_ID_EVENT,
     FETCH_FOLDER_SEARCH_ITEMS_EVENT,
     FETCH_NOTE_BY_ID_EVENT,
     FETCH_NOTE_SEARCH_ITEMS_EVENT,
     FETCH_NOTES_EVENT,
     FETCH_RECENT_NOTES_EVENT,
-    INIT_VIEW_EVENT,
     PATCH_NOTE_NAME_EVENT,
     PATCH_NOTE_CONTENT_EVENT,
     LOAD_NOTES_IN_MEMORY_EVENT,
@@ -43,7 +39,6 @@ export class NoteController {
     
 
     async init() {
-        this.searchbar = new Searchbar(this);
         this.view = new NoteView(this, this.eventBus);
 
         // Event that'll notify the TextEditorController to clear any previously loaded note
@@ -219,37 +214,14 @@ export class NoteController {
 
 
 
-    async handleSearch(searchItemId, searchType) {
-        const viewId = viewToLoad(searchType)
-        if (viewId === 'editor') {
-            const { note, location } = await this.getNoteById(searchItemId)
-            this.eventBus.emit(INIT_VIEW_EVENT, {
-                viewId: viewId,
-                editorObject: note,
-                newEditorObject: false, 
-                previousView: 'notes', 
-                editorObjectLocation: location
-            })
-        }
-
-        if (viewId === 'notes') {
-            const { folder, location } = await this.eventBus.asyncEmit(FETCH_FOLDER_BY_ID_EVENT, searchItemId);
-            this.eventBus.emit(INIT_VIEW_EVENT, {
-                viewId: viewId,
-                folder: folder,
-                location: location
-            });
-        }
-    }
-
-
     
     async #initSearchbar() {
-        const [noteSearchItems, folderSearchItems] = await Promise.all([
-            this.getNotes({ searchItems: true }),
-            this.eventBus.asyncEmit(FETCH_FOLDER_SEARCH_ITEMS_EVENT)
-        ]);
-        this.searchbar.fillSearchbar('note', noteSearchItems);
-        this.searchbar.fillSearchbar('folder', folderSearchItems);
+        const notes = await this.eventBus.asyncEmit(FETCH_NOTE_SEARCH_ITEMS_EVENT);
+        const folders = await this.eventBus.asyncEmit(FETCH_FOLDER_SEARCH_ITEMS_EVENT);
+        const searchbar = document.querySelector('autocomplete-searchbar');
+
+        searchbar.insertItems('note', notes);
+        searchbar.insertItems('folder', folders);
+        searchbar.renderItems();
     }
 }

@@ -1,7 +1,8 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
 import { greetBasedOnTime } from "../util/date.js";
 import { createCustomElement } from "../util/ui/components.js";
-import {FETCH_FOLDER_BY_ID_EVENT, FETCH_NOTE_BY_ID_EVENT, INIT_VIEW_EVENT} from "../components/eventBus.js";
+import { FETCH_FOLDER_BY_ID_EVENT, FETCH_NOTE_BY_ID_EVENT, INIT_VIEW_EVENT } from "../components/eventBus.js";
+import { handleSearch} from "./viewFunctions.js";
 
 
 
@@ -100,6 +101,12 @@ export class HomeView {
                 folder: folder,
                 location: location
             })
+        })
+
+
+        this._viewElement.addEventListener('SearchBarItemClick', async (event) => {
+            const { searchType, searchItem } = event.detail;
+            await handleSearch(searchItem.id, searchType, this.eventBus);
         })
     }
 

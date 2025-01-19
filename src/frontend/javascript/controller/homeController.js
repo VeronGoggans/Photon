@@ -1,6 +1,5 @@
 import { HomeView } from "../view/homeView.js";
 import { HttpModel } from "../model/httpModel.js";
-import { Searchbar } from "../view/searchbar.js";
 import { viewToLoad } from "../helpers/random.js";
 import {
     FETCH_FOLDER_BY_ID_EVENT, FETCH_FOLDER_SEARCH_ITEMS_EVENT,
@@ -19,7 +18,6 @@ export class HomeController {
 
 
     async init() {
-        this.searchbar = new Searchbar(this);        
         this.view = new HomeView(this, this.eventBus);
 
         await this.#initSearchbar();
@@ -63,42 +61,13 @@ export class HomeController {
 
 
 
-    /**
-     *
-     * @param searchItemId
-     * @param searchType
-     */
-    async handleSearch(searchItemId, searchType) {
-        const viewId = viewToLoad(searchType)
-        if (viewId === 'editor') {
-            if (searchType === 'note') {
-                const { note, location } = await this.eventBus.asyncEmit(FETCH_NOTE_BY_ID_EVENT, searchItemId);
-                this.eventBus.emit(INIT_VIEW_EVENT, {
-                    viewId: viewId,
-                    editorObject: note,
-                    newEditorObject: false,
-                    previousView: 'home',
-                    editorObjectLocation: location
-                })
-            }
-        }
-        if (viewId === 'notes') {
-            const { folder, location } = await this.eventBus.asyncEmit(FETCH_FOLDER_BY_ID_EVENT, searchItemId);
-            this.eventBus.emit(INIT_VIEW_EVENT, {
-                viewId: viewId,
-                folder: folder,
-                location: location
-            });
-        }
-    }
-
-
-
     async #initSearchbar() {
         const notes = await this.eventBus.asyncEmit(FETCH_NOTE_SEARCH_ITEMS_EVENT);
         const folders = await this.eventBus.asyncEmit(FETCH_FOLDER_SEARCH_ITEMS_EVENT);
+        const searchbar = document.querySelector('autocomplete-searchbar');
 
-        this.searchbar.fillSearchbar('note', notes);
-        this.searchbar.fillSearchbar('folder', folders);
+        searchbar.insertItems('note', notes);
+        searchbar.insertItems('folder', folders);
+        searchbar.renderItems();
     }
 }

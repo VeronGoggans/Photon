@@ -1,4 +1,4 @@
-.searchbar {
+autocomplete-searchbar {
     position: relative;
     height: 45px;
     width: 50%;
@@ -10,7 +10,7 @@
 }
 
 
-.searchbar input {
+autocomplete-searchbar input {
     border: none;
     background-color: transparent;
     width: 100%;
@@ -19,11 +19,11 @@
     color: var(--text);
 }
 
-.searchbar input::placeholder {
+autocomplete-searchbar input::placeholder {
     color: var(--less-important);
 }
 
-.searchbar #search-icon {
+autocomplete-searchbar #search-icon {
     position: absolute;
     top: 10px;
     left: 20px;
@@ -31,12 +31,35 @@
 }
 
 
-.searchbar ul i {
+autocomplete-searchbar ul i {
     margin-right: 5px;
     color: var(--placeholder);
     font-size: 18px;
 }
 
-.searchbar ul #folder-search-type{color: #5c7fdd}
-.searchbar ul #note-search-type {color: #a8b2ff}
-.searchbar ul #template-search-type {color: #abb8ff}
+
+
+
+searchbar-item {
+    display: block;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+    padding: 10px;
+    color: var(--editor-text);
+    border-radius: 5px;
+    transition: background-color 150ms ease
+}
+
+searchbar-item:hover {
+    background-color: var(--hover-searchbar-options);
+}
+
+.selected-searchbar-item {
+    background-color: var(--hover-searchbar-options);
+}
+
+
+#folder-search-type{color: #5c7fdd}
+#note-search-type {color: #a8b2ff}
+#template-search-type {color: #abb8ff}

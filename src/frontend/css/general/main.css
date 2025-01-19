@@ -109,7 +109,8 @@ textarea::placeholder {
     color: var(--placeholder);
 }
 
-.dropdown-items {
+.dropdown-items,
+autocomplete-searchbar .searchbar-dropdown{
     position: absolute;
     top: 60px;
     left: -1px;

@@ -32,7 +32,7 @@
     --border-notification: none;
     --border-note-view-dropdown: none;
     --border-card: #181821;
-    --border-column-board: #444d7d;
+    --border-column-board: #6d78b1;
     --border-sidebar-right: 1px solid #1e202f;
     --border-sidebar-soft: none;
     --border-checklist: 1px solid #27293b;
@@ -71,7 +71,7 @@
     --important: hsl(232, 22%, 87%);
     --less-important: hsl(232 22% 68% / 1);
     
-    
+    --background-column: #eaedf2;
     --hover-searchbar-options: #181821;
     --hover-text: #5c7dff;
     --command-square-bg: transparent;
@@ -99,6 +99,7 @@
     /*Buttons*/
     --button1-bg: #20202f;
     --button1-hover: #2a2a40;
+    --column-board-button: #d2defb;
 }
 
 .light {
@@ -210,7 +211,7 @@
     --stats-background: #f4f5fa;
     --options-menu: hsl(235, 100%, 98%);
     --options-menu-hover: hsl(235, 100%, 95%);
-
+    --background-column: #f3f5f8;
     --color-picker-background: #fff;
     --scrollbar-editor: #cfd2e2;
     /*Feedback variables*/
@@ -222,4 +223,5 @@
     /*Buttons*/
     --button1-bg: #f4f4fc;
     --button1-hover: #eaeaf7;
+    --column-board-button: #d2defb;
 }

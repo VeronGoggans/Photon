@@ -3,7 +3,8 @@ import { removeContent } from "../util/ui.js";
 import { createCustomElement } from "../util/ui/components.js";
 import { DropdownHelper } from "../helpers/dropdownHelper.js";
 import { renderEmptyFolderNotification } from "../handlers/notificationHandler.js";
-import {INIT_VIEW_EVENT, RENDER_DELETE_MODAL_EVENT} from "../components/eventBus.js";
+import { INIT_VIEW_EVENT, RENDER_DELETE_MODAL_EVENT } from "../components/eventBus.js";
+import { handleSearch } from "./viewFunctions.js";
 
 
 export class NoteView {
@@ -132,6 +133,12 @@ export class NoteView {
                 previousView: 'notes', 
                 editorObjectLocation: null
             })
+        })
+
+
+        this.viewElement.addEventListener('SearchBarItemClick', async (event) => {
+            const { searchType, searchItem } = event.detail;
+            await handleSearch(searchItem.id, searchType, this.eventBus);
         })
 
 

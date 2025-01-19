@@ -131,8 +131,10 @@
 .board-wrapper {
     position: relative;
     display: flex;
+    column-gap: 40px;
     margin: 50px 0;
     max-width: 100%;
+    min-height: 600px;
     height: 100%;
     overflow-x: scroll;
     overflow-y: hidden;
@@ -150,31 +152,22 @@
 }
 
 
-.board-section {
+.board-column {
     display: grid;
-    grid-template-rows: 50px 1fr 30px;
+    grid-template-rows: 50px 1fr;
     height: 550px;
-    width: 460px;
-    min-width: 460px;
+    width: 310px;
+    min-width: 310px;
+    background: var(--background-column);
+    border-radius: 10px;
     margin-bottom: 20px;
 }
 
+
+
 .board-section-top {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: 0 10px;
-}
-
-.board-section-top i {
-    cursor: pointer;
-    width: 25px;
-    height: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    color: #ced2e6;
 }
 
 .stickies-container::-webkit-scrollbar {
@@ -188,7 +181,6 @@
 }
 
 .stickies-container {
-    border-top: 1px solid var(--border-column-board);
     position: relative;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -196,26 +188,30 @@
     gap: 20px;
     padding: 10px;
     overflow-y: scroll;
-    border-right: 1px solid var(--border-column-board);
 }
 
-.board-section input {
+.board-column input {
     outline: none;
     border: none;
     padding-left: 20px;
-    font-size: 22px;
+    font-size: 18px;
     color: var(--important);
     background-color: transparent;
 }
 
-.board-section input::placeholder {
+.board-column input::placeholder {
     color: var(--placeholder);
 }
 
-.board-section button {
+.board-column button {
     cursor: pointer;
     border: none;
-    background-color: var(--button1-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    background-color: var(--column-board-button);
     border-radius: 5px;
     color: var(--text);
     font-size: 16px;
