@@ -21,16 +21,7 @@ export class StandardStickyBoardView {
             })
         }
 
-        const saveDescriptionCallBack = async (description) => {
-            await this.controller.updateStickyBoardDescription({
-                'stickyBoardId': this.stickyBoard.id,
-                'boardType': this.stickyBoard.type,
-                'updatedDescription': description
-            })
-        }
-
         new AutoSave('.sticky-board-name-container h2', saveNameCallBack, false, false, true);
-        new AutoSave('.description', saveDescriptionCallBack, false, true);
         AnimationHandler.fadeInFromBottom(this._viewElement);
     }
 
@@ -42,15 +33,12 @@ export class StandardStickyBoardView {
      * @param stickyNotes
      */
     renderAll(stickyNotes) {
-        this._stickyBoardName.textContent = this.stickyBoard.name;
-        // this._description.textContent = this.stickyBoard.description;
-        
         const contentFragment = document.createDocumentFragment();
 
-        for (let i = 0; i < stickyNotes.length; i++) {
-            const stickyNote = createCustomElement(stickyNotes[i], 'sticky-note');
-            AnimationHandler.fadeInFromBottom(stickyNote)
-            contentFragment.appendChild(stickyNote);
+        for (const stickyNote of stickyNotes) {
+            const stickyNoteComponent = createCustomElement(stickyNote, 'sticky-note');
+            AnimationHandler.fadeInFromBottom(stickyNoteComponent)
+            contentFragment.appendChild(stickyNoteComponent);
         }
 
         this._stickyBoard.appendChild(contentFragment);
@@ -64,9 +52,9 @@ export class StandardStickyBoardView {
      * @param stickyNote
      */
     renderOne(stickyNote) {
-        const stickyNoteCard = createCustomElement(stickyNote, 'sticky-note');
-        AnimationHandler.fadeInFromBottom(stickyNoteCard);
-        this._stickyBoard.appendChild(stickyNoteCard);
+        const stickyNoteComponent = createCustomElement(stickyNote, 'sticky-note');
+        AnimationHandler.fadeInFromBottom(stickyNoteComponent);
+        this._stickyBoard.appendChild(stickyNoteComponent);
     }
 
 
@@ -112,7 +100,6 @@ export class StandardStickyBoardView {
 
         const observer = new ResizeObserver((entries) => {
             for (let entry of entries) {
-                console.log('resize')
                 clearTimeout(resizeTimeout);
 
                 resizeTimeout = setTimeout(() => {
@@ -158,11 +145,8 @@ export class StandardStickyBoardView {
         this._viewElement = document.querySelector('.standard-sticky-board-view');
         this._stickyBoard = document.querySelector('.standard-sticky-board-wrapper');
 
-        this._stickyBoardDescription = document.querySelector('.description');
         this._stickyBoardName = document.querySelector('h2');
-
         this._stickyBoardName.textContent = this.stickyBoard.name;
-        this._stickyBoardDescription.innerHTML = this.stickyBoard.description;
     }
 }
 
@@ -174,15 +158,23 @@ export class StandardStickyBoardView {
 
 
 export class ColumnStickyBoardView {
-    constructor(controller, stickyColumnBoard) {
+    constructor(controller, columnBoard) {
         this.controller = controller;                   // The parent controller "StickyBoardController"
-        this.stickyColumnBoard = stickyColumnBoard;     // The data related to the clicked on sticky board
+        this.columnBoard = columnBoard;                 // The data related to the clicked on sticky board
 
         this.#initElements();                           // Will register all the relevant UI elements
         this.#eventListeners();                         // Adds eventlisteners to all the relevant UI elements
 
+        const saveNameCallBack = async (name) => {
+            await this.controller.updateStickyBoardName({
+                'stickyBoardId': this.columnBoard.id,
+                'boardType': this.columnBoard.type,
+                'updatedName': name
+            })
+        }
 
         AnimationHandler.fadeInFromBottom(this.viewElement);
+        new AutoSave('.sticky-board-name-container h2', saveNameCallBack, false, false, true);
     }
 
 
@@ -192,9 +184,12 @@ export class ColumnStickyBoardView {
 
     #initElements() {
         this.viewElement = document.querySelector('.column-sticky-board-view');
+        this._exitStickyBoardButton = document.querySelector('.exit-sticky-board-btn');
+        this._columnBoard = document.querySelector('h2');
+        this._columnBoard.textContent = this.columnBoard.name;
     }
 
     #eventListeners() {
-
+        this._exitStickyBoardButton.addEventListener('click', () => {this.controller.loadPreviousView()});
     }
 }

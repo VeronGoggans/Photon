@@ -99,7 +99,8 @@ export class HomeView {
             this.eventBus.emit(INIT_VIEW_EVENT, {
                 viewId: 'notes',
                 folder: folder,
-                location: location
+                location: location,
+                clearFilters: true
             })
         })
 

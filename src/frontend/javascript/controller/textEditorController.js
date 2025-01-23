@@ -48,12 +48,14 @@ export class TextEditorController {
 
             // The notes view will be initialized in the folder they were in before opening the editor
             const currentFolder = this.eventBus.emit(GET_CURRENT_FOLDER_EVENT);
+
             this.eventBus.emit(INIT_VIEW_EVENT, {
                 viewId: previousViewId,
                 folder: currentFolder,
-                location: null
+                location: null,
+                clearFilters: false
             });
-        } 
+        }
         else {
             this.eventBus.emit(INIT_VIEW_EVENT, {viewId: previousViewId});
         }

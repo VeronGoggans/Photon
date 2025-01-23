@@ -212,8 +212,7 @@ entity-options-menu span {
     background-color: var(--button1-bg);
     color: var(--important);
     padding: 10px 30px;
-    border-radius: 10px;
-    transition: 200ms;
+    border-radius: 5px;
 }
 
 .modal-cancel-button {

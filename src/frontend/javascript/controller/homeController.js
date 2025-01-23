@@ -1,11 +1,9 @@
 import { HomeView } from "../view/homeView.js";
 import { HttpModel } from "../model/httpModel.js";
-import { viewToLoad } from "../helpers/random.js";
 import {
-    FETCH_FOLDER_BY_ID_EVENT, FETCH_FOLDER_SEARCH_ITEMS_EVENT,
-    FETCH_NOTE_BY_ID_EVENT, FETCH_NOTE_SEARCH_ITEMS_EVENT,
-    FETCH_RECENT_FOLDERS_EVENT, FETCH_RECENT_NOTES_EVENT,
-    INIT_VIEW_EVENT
+    FETCH_FOLDER_SEARCH_ITEMS_EVENT,
+    FETCH_NOTE_SEARCH_ITEMS_EVENT,
+    FETCH_RECENT_FOLDERS_EVENT, FETCH_RECENT_NOTES_EVENT
 } from "../components/eventBus.js";
 
 

@@ -9,9 +9,13 @@ import {
     FETCH_NOTES_EVENT,
     SET_NOTE_LOCATION_EVENT,
     FETCH_RECENT_FOLDERS_EVENT,
-    GET_BREAD_CRUMBS_EVENT, UPDATE_FOLDER_LOCATION_EVENT, FETCH_PINNED_FOLDERS_EVENT, UPDATE_FOLDER_PIN_VALUE_EVENT,
-    RENDER_PINNED_FOLDERS_EVENT
+    GET_BREAD_CRUMBS_EVENT,
+    UPDATE_FOLDER_LOCATION_EVENT,
+    FETCH_PINNED_FOLDERS_EVENT,
+    UPDATE_FOLDER_PIN_VALUE_EVENT,
+    SET_NOTE_FILTER_EVENT, CLEAR_NOTE_FILTER_EVENT
 } from "../components/eventBus.js";
+import {showBookmarkedNotes} from "../view/viewFunctions.js";
 
 
 
@@ -27,6 +31,8 @@ export class FolderController {
             [GET_CURRENT_FOLDER_EVENT]: () => this.model.getCurrentFolder(),
             [GET_PARENT_FOLDER_EVENT]: () => this.model.peekParentFolder(),
             [GET_BREAD_CRUMBS_EVENT]: () => this.model.getBreadCrumbs(),
+            [SET_NOTE_FILTER_EVENT]: (filterEntity) => this.model.applyFilter(filterEntity),
+            [CLEAR_NOTE_FILTER_EVENT]: () => this.model.removeFilter(),
             [SET_NOTE_LOCATION_EVENT]: (location) => this.model.addHierarchyPath(location),
             [FETCH_FOLDER_BY_ID_EVENT]: async (folderId) => await this.getFolderById(folderId),
             [FETCH_RECENT_FOLDERS_EVENT]: async () => await this.getFolders({recent: true}),
@@ -39,7 +45,7 @@ export class FolderController {
 
 
 
-    async init(folder, location = null) {
+    async init(folder, hierarchyPath = null, clearFilters = false) {
         this.view = new FolderView(this, this.eventBus);
 
         // If a folder on the home view has been clicked.
@@ -47,8 +53,26 @@ export class FolderController {
             this.model.emptyFolders();
         }
 
-        if (location !== null) {
-            this.model.addHierarchyPath(location);
+        // Fill the model with the folder hierarchy/path to the specified folder
+        if (hierarchyPath !== null) {
+            this.model.addHierarchyPath(hierarchyPath);
+        }
+
+        // Remove any active filter
+        if (clearFilters) {
+            this.model.removeFilter();
+        }
+
+        const { isFilterActive, filterEntity } = this.model.getActiveFilter();
+
+        if (isFilterActive && filterEntity === null) {
+            await showBookmarkedNotes(this.eventBus);
+            return
+        }
+
+        else if (isFilterActive && filterEntity !== null) {
+            console.log('Hell yeah nigga😃')
+            return
         }
 
         await this.navigateIntoFolder(folder)
@@ -395,7 +419,11 @@ export class FolderController {
         await this.eventBus.asyncEmit(FETCH_NOTES_EVENT, {
             'folderId': folder.id,
             'render': true,
-            'storeResultInMemory': true
+            'storeResultInMemory': true,
+            'bookmarks': false,      // default value
+            'recent': false,         // default value
+            'recentlyViewed': false, // default value
+            'searchItems': false,    // default value
         });
 
         renderEmptyFolderNotification();   

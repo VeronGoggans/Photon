@@ -26,32 +26,40 @@ export const stickyNoteColors = [
     '#d4e7ff',
 ]
 
-export const sidebarButtonText = ['Home', 'Notes', "to do's", 'Stickies', 'Settings']
+export const sidebarButtonText = ['Home', 'Notes', "to do's", 'Boards', 'Settings']
 
 export const widgetStyles = {
     border: 'widget-style-border',
     shadow: 'widget-style-shadow'
 }
 
-export const modalPlaceholderText = {
-    stickyWall: 'Sticky wall name...',
+
+export const categoryModalNewTitleText = {
+    folder: 'Create a new folder',
+    category: 'Create a new category',
+    tag: ' Create a new tag'
 }
 
-export const modalNewTitleText = {
-    stickyWall: 'New sticky wall',
-    folder: 'New folder'
+
+export const categoryModalUpdateTitleText = {
+    folder: 'Edit current folder',
+    category: 'Edit current category',
+    tag: ' Edit current tag'
 }
 
-export const modalUpdateTitleText = {
-    stickyWall: 'Edit sticky wall',
-    folder: 'Edit folder'
+
+export const categoryModalNewButtonText = {
+    folder: 'Create folder',
+    category: 'Create category',
+    tag: 'Create tag'
 }
 
-export const modalButtonText = {
-    stickyWall: 'Add sticky wall',
-    folder: 'Add folder'
-}
 
+export const categoryModalButtonText = {
+    folder: 'Create folder',
+    category: 'Create category',
+    tag: 'Create tag'
+}
 
 
 

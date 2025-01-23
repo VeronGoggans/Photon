@@ -78,6 +78,7 @@
     --hover-sidebar: #242430;
     --searchbar-placeholder: #d4d7e5; 
     --placeholder: #868b9e;
+    --placeholder-column-board: hsl(233deg 39.27% 82.89%);
     --selection: #314682;
     --dialog: rgb(0 0 0 / 25%);
     --shadow: rgba(0, 0, 0, 0.1);
@@ -99,7 +100,7 @@
     /*Buttons*/
     --button1-bg: #20202f;
     --button1-hover: #2a2a40;
-    --column-board-button: #d2defb;
+    --column-board-button: #25272f;
 }
 
 .light {
@@ -201,6 +202,7 @@
     --hover-sidebar: #eceeff;
     --searchbar-placeholder: #9297aa; 
     --placeholder: #d4d7e5;
+    --placeholder-column-board: hsl(233deg 39.27% 82.89%);
     --selection: #b1daff;
     --dialog: #7d8ead1f;
     --shadow: rgba(92, 98, 157, .1);
@@ -211,7 +213,7 @@
     --stats-background: #f4f5fa;
     --options-menu: hsl(235, 100%, 98%);
     --options-menu-hover: hsl(235, 100%, 95%);
-    --background-column: #f3f5f8;
+    --background-column: #eff5ff;
     --color-picker-background: #fff;
     --scrollbar-editor: #cfd2e2;
     /*Feedback variables*/
@@ -223,5 +225,5 @@
     /*Buttons*/
     --button1-bg: #f4f4fc;
     --button1-hover: #eaeaf7;
-    --column-board-button: #d2defb;
+    --column-board-button: #ccdbff;
 }

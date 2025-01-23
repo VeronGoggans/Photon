@@ -4,7 +4,7 @@
     right: 60px;
     display: flex;
     align-items: center;
-    padding: 0px 10px;
+    padding: 0 10px;
     background-color: var(--dropdown);
     height: 60px;
     width: 400px;
@@ -17,7 +17,6 @@
 }
 
 .search-function-modal input {
-    font-family: Roboto;
     font-weight: 600;
     background-color: transparent;
     color: var(--text);
@@ -50,7 +49,6 @@
 }
 
 .search-function-modal p {
-    font-family: Roboto;
     font-weight: 600;
     position: absolute;
     left: 235px;

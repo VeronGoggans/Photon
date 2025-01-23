@@ -6,8 +6,10 @@ import { Stack } from "../datastuctures/stack.js";
 export class FolderModel extends HttpModel {
     constructor() {
         super();
-        this.stack = new Stack()                       // To keep track of the order in which folders are visited
-        this.homeFolder = { id: 1, name: 'Home' }      // A representation of the home folder (root folder)
+        this.stack = new Stack()                  // To keep track of the order in which folders are visited
+        this.homeFolder = { id: 1, name: 'Home' } // A representation of the home folder (root folder)
+        this.isFilterActive = false;              // Could be an active category/tag/bookmarks
+        this.filterEntity = null;                 // The actual filter object e.g. Category/Tag
     }
 
 
@@ -43,8 +45,12 @@ export class FolderModel extends HttpModel {
      * @returns { {id: number, name: string} } - Metadata of the parent folder
      */
     getParentFolder() {
-        this.stack.pop();
-        const folder = this.stack.peek();
+        if (this.isFilterActive) {
+            this.removeFilter();
+            return this.getCurrentFolder();
+        }
+        this.stack.pop(); // Pop the current folder
+        const folder = this.stack.peek(); // Peek the parent folder (now the current folder)
         return folder ? folder : this.homeFolder;
     }
 
@@ -61,9 +67,9 @@ export class FolderModel extends HttpModel {
      * @returns { {id: number, name: string} } - Metadata of the parent folder
      */
     peekParentFolder() {
-        const currentFolder = this.stack.pop();
-        const parentFolder = this.stack.peek();
-        this.stack.push(currentFolder);
+        const currentFolder = this.stack.pop(); // Pop the current folder
+        const parentFolder = this.stack.peek(); // Peek the parent folder
+        this.stack.push(currentFolder);         // Push the current folder back
         return parentFolder ? parentFolder : this.homeFolder;
     }
 
@@ -88,6 +94,7 @@ export class FolderModel extends HttpModel {
      * @param folder    - An object containing the data representing a folder.
      */
     addFolder(folder) {
+        this.removeFilter()
         const topFolder = this.stack.peek();
 
         if (this.stack.isEmpty() || folder.id !== topFolder.id) {
@@ -125,5 +132,28 @@ export class FolderModel extends HttpModel {
         for (const folder of folders) {
             this.addFolder(folder);
         }
+    }
+
+
+    /**
+     * This method will set the isFilterActive parameter to true
+     */
+    applyFilter(filterEntity = null) {
+        this.filterEntity = filterEntity;
+        this.isFilterActive = true;
+    }
+
+
+    getActiveFilter() {
+        return {
+            isFilterActive: this.isFilterActive,
+            filterEntity: this.filterEntity,
+        }
+    }
+
+
+    removeFilter() {
+        this.isFilterActive = false;
+        this.filterEntity = null;
     }
 }

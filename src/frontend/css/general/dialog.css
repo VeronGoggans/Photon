@@ -13,6 +13,8 @@
 }
 
 .dialog > div:first-child {
+    padding: 70px;
+    border-radius: 10px;
     opacity: 0;
     transform: translateY(30%);
     transition: opacity 250ms ease, transform 150ms ease;

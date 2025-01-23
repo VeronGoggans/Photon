@@ -26,7 +26,7 @@ export class NoteController {
         this.eventBus.registerEvents({
             [FETCH_RECENT_NOTES_EVENT]: async () => await this.getNotes({recent: true}),
             [FETCH_NOTE_BY_ID_EVENT]: async (noteId) => await this.getNoteById(noteId),
-            [FETCH_NOTES_EVENT]: async (params) => await this.getNotes({folderId: params.folderId, render: params.render, storeResultInMemory: params.storeResultInMemory}),
+            [FETCH_NOTES_EVENT]: async (params) => await this.getNotes({folderId: params.folderId, bookmarks: params.bookmarks, recent: params.recent, recentlyViewed: params.recentlyViewed, searchItems: params.searchItems, render: params.render, storeResultInMemory: params.storeResultInMemory}),
             [FETCH_NOTE_SEARCH_ITEMS_EVENT]: async () => await this.getNotes({searchItems: true}),
             [CREATE_NOTE_EVENT]: async (noteId) => await this.addNote(noteId),
             [PATCH_NOTE_NAME_EVENT]: async (updatedNoteData) => await this.updateNoteName(updatedNoteData),

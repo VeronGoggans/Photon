@@ -310,7 +310,8 @@ export class SidebarView {
                     this.eventBus.emit(INIT_VIEW_EVENT, {
                         viewId: viewId,
                         folder: this.homeFolder,
-                        location: [this.homeFolder]
+                        location: [this.homeFolder],
+                        clearFilters: true
                     });
                 }
 

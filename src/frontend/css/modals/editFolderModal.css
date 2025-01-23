@@ -3,10 +3,8 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 650px;
     height: fit-content;
     padding: 30px 40px;
-    border-radius: 10px;
     justify-content: center;
     box-shadow: 0 10px 20px var(--shadow);
 }
@@ -14,6 +12,7 @@
 .edit-folder-modal h2 {
     color: var(--important);
     font-size: 32px;
+    margin: 0;
     font-weight: 500;
 }
 
@@ -29,10 +28,6 @@
     margin: 40px 0 0;
 }
 
-.folder-settings p {
-    color: #9b9bb5;
-    margin: 0 0 5px;
-}
 
 .edit-folder-modal input {
     border: none;
@@ -40,7 +35,6 @@
     border-bottom: 2px solid var(--inactive-border);
     padding: 5px 10px;
     height: 45px;
-    margin-bottom: 10px;
     color: var(--text);
     font-size: 20px;
     width: 100%;
@@ -53,15 +47,26 @@
 }
 
 
-.folder-color-options div {
-    min-width: 30px;
-    height: 30px;
-    margin: 0 5px;
+.folder-color-options #color-option {
+    min-width: 25px;
+    height: 25px;
     border-radius: 50%;
     cursor: pointer;
     transition: 50ms;
     border: 2px solid transparent;
 }
+
+.folder-color-options .color-option-wrapper {
+    padding: 5px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border: 2px solid transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .folder-color-options .color-original {
     width: 30px;
@@ -73,6 +78,8 @@
     background-color: var(--card);
     border: 2px solid var(--border-card);
 }
+
+
 .buttons-container {
     display: flex;
     gap: 15px;
@@ -80,11 +87,6 @@
     justify-content: end;
 }
 
-.selected-folder-color {
-    width: 35px !important;
-    height: 35px !important;
-    border-color: #5c7dff !important;
-}
 
 .folder-color-options {
     display: flex;
@@ -96,7 +98,7 @@
 
 #open-emoji-picker-btn {
     position: absolute;
-    top: 43%;
+    top: 37%;
     right: 10%;
     color: var(--placeholder);
     font-size: 20px;
@@ -105,7 +107,6 @@
 }
 
 #open-emoji-picker-btn:hover {
-    color: var(--text);
     scale: 1.2;
 }
 

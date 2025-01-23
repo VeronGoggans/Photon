@@ -1,10 +1,9 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
-import { removeContent } from "../util/ui.js";
 import { createCustomElement } from "../util/ui/components.js";
 import { DropdownHelper } from "../helpers/dropdownHelper.js";
 import { renderEmptyFolderNotification } from "../handlers/notificationHandler.js";
 import { INIT_VIEW_EVENT, RENDER_DELETE_MODAL_EVENT } from "../components/eventBus.js";
-import { handleSearch } from "./viewFunctions.js";
+import { handleSearch, showBookmarkedNotes } from "./viewFunctions.js";
 
 
 export class NoteView {
@@ -184,6 +183,15 @@ export class NoteView {
 
 
         /**
+         * This event listener will listen for click events on the bookmark option button
+         * When this button is clicked all the bookmarked notes will be rendered to the view.
+         */
+        this.bookmarkedButton.addEventListener('click', async () => {
+            await showBookmarkedNotes(this.eventBus);
+        });
+
+
+        /**
          * This custom event listener will listen for the NoteCardClick event
          * When this event happens the note will be loaded within the text editor view.
          */
@@ -201,15 +209,6 @@ export class NoteView {
             });
         })
 
-
-        /**
-         * This event listener will listen for click events on the bookmark option button
-         * When this button is clicked all the bookmarked notes will be rendered to the view.
-         */
-        this.bookmarkedButton.addEventListener('click', async () => {
-            removeContent(this.notesContainer);
-            await this.controller.getNotes({ bookmarks: true, render: true })
-        });
 
 
         /**

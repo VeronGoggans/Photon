@@ -19,6 +19,8 @@ export function removeContent(parentElement) {
 
 
 
+
+
 /**
  * This method will decrement a string number e.g. "1"
  *
@@ -150,4 +152,34 @@ export function addDragImage(event, draggableEntityName) {
 
 export function removeDragImage() {
     document.querySelector('.drag-image').remove();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export function hideFolderBlockTitle() {
+    // Hide both the block title and container elements from the screen.
+    document.querySelector('#folders-block-title').style.display = 'none';
+    document.querySelector('.folders').style.display = 'none';
+}
+
+
+export function resetFolderColorCircle() {
+    const folderColorCircle = document.querySelector('#folder-color-circle');
+
+    // Remove all the classes from the folder color circle element.
+    folderColorCircle.classList.remove(...folderColorCircle.classList);
 }

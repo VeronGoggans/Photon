@@ -27,15 +27,15 @@ const notesTemplate = `
                 <button><i class="bi bi-three-dots-vertical"></i></button>
                 <ul class="dropdown-items soft-dropdown">
                     <span class="note-view-options-dropdown-section">Document</span>
-                    <li class="add-note-btn"><i class="bi bi-file-earmark"></i> Add a note</li>
+                    <li class="add-note-btn"><i class="bi bi-file-earmark"></i> Create a note</li>
                     <li class="view-bookmarks-btn"><i class="bi bi-bookmarks"></i> Show bookmarks</li>
                     <span class="note-view-options-dropdown-section">Folder</span>
-                    <li class="add-folder-btn"><i class="bi bi-folder-plus"></i> Add a folder</li>
+                    <li class="add-folder-btn"><i class="bi bi-folder-plus"></i> Create a folder</li>
                     <li class="edit-current-folder-btn"><i class="bi bi-pen"></i> Edit current folder</li>
                     <li class="pin-current-folder-btn"><i class="bi bi-pin"></i> Pin current folder</li>
                     <li class="export-current-folder-btn"><i class="bi bi-box-seam"></i> Export current folder</li>
                     <span class="note-view-options-dropdown-section">Other</span>
-                    <li class="add-category-btn"><i class="bi bi-archive"></i> Add a category</li>
+                    <li class="add-category-btn"><i class="bi bi-archive"></i> Create a category</li>
                 </ul>
             </div>
             <div class="current-folder-name-container">
@@ -68,7 +68,6 @@ const standardStickyBoardTemplate = `
             <button class="exit-sticky-board-btn"><i class="bi bi-chevron-left"></i></button>
             <h2 contenteditable="true" spellcheck="false">Brainstorm Pomodoro features</h2>
         </div>
-        <p class="description" contenteditable="true" spellcheck="false">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, in quos? Ab suscipit perspiciatis obcaecati vel iure vitae corporis veniam quas! Mollitia eos tempore ipsam doloribus hic. Laborum, enim praesentium.</p>
         <div class="standard-sticky-board-wrapper">
             <div class="sticky-small"><p>hello</p></div>
             <div class="sticky-long"></div>
@@ -86,8 +85,11 @@ const standardStickyBoardTemplate = `
 
 const columnStickyBoardTemplate = `
     <div class="column-sticky-board-view">
-    <h2 contenteditable="true" spellcheck="false">Sticky wall</h2>
-    <p class="description" contenteditable="true" spellcheck="false">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, in quos? Ab suscipit perspiciatis obcaecati vel iure vitae corporis veniam quas! Mollitia eos tempore ipsam doloribus hic. Laborum, enim praesentium.</p>
+    <div class="sticky-board-name-container">
+        <button class="exit-sticky-board-btn"><i class="bi bi-chevron-left"></i></button>
+        <h2 contenteditable="true" spellcheck="false"></h2>
+    </div>
+    
     <div class="board-wrapper">
 
       <div class="board-column">
@@ -96,7 +98,6 @@ const columnStickyBoardTemplate = `
           <button><i class="bi bi-plus-lg"></i></button> 
         </div>
         <div class="stickies-container">
-            <p class="no-stickies-message">No stickies here</p>
         </div>
       </div>
 
@@ -106,7 +107,6 @@ const columnStickyBoardTemplate = `
           <button><i class="bi bi-plus-lg"></i></button> 
         </div>
         <div class="stickies-container">
-            <p class="no-stickies-message">No stickies here</p>
         </div>
       </div>
 
@@ -117,8 +117,25 @@ const columnStickyBoardTemplate = `
           <button><i class="bi bi-plus-lg"></i></button> 
         </div>
         <div class="stickies-container">
-          <p class="no-stickies-message">No stickies here</p>
         </div>
+      </div>
+      
+      <div class="board-column">
+        <div class="board-section-top">
+          <input type="text" class="board-section-name" placeholder="Column name" spellcheck="false">
+          <div></div>
+          <button><i class="bi bi-plus-lg"></i></button> 
+        </div>
+        <div class="stickies-container"></div>
+      </div>
+      
+      <div class="board-column">
+        <div class="board-section-top">
+          <input type="text" class="board-section-name" placeholder="Column name" spellcheck="false">
+          <div></div>
+          <button><i class="bi bi-plus-lg"></i></button> 
+        </div>
+        <div class="stickies-container"></div>
       </div>
     </div>
   </div>

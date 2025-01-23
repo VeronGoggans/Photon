@@ -104,4 +104,5 @@
     display: flex;
     align-items: end;
     column-gap: 50px;
+    margin-bottom: 50px;
 }

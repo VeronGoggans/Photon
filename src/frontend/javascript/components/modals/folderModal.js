@@ -56,14 +56,15 @@ export class FolderModal {
         this.saveButton = this.modal.querySelector('.save-btn');
         this.cancelButton = this.modal.querySelector('.cancel-btn');
         this.emojiButton = this.modal.querySelector('#open-emoji-picker-btn');
-        this.colorOptions = this.modal.querySelectorAll('.folder-color-options div');
+        this.colorOptions = this.modal.querySelectorAll('.folder-color-options #color-option');
+        this.colorOptionWrappers = this.modal.querySelectorAll('.folder-color-options .color-option-wrapper');
 
         if (this.folder !== null) {
             this.#loadFolder();
             return
         }
 
-        this.#showActiveFolderColor('color-original');
+        this.#showCurrentAppearance('color-original');
     }
 
 
@@ -75,12 +76,12 @@ export class FolderModal {
      * `FolderModal`.
      */
     #loadFolder() {
-        this.modal.querySelector('h2').textContent = 'Edit folder';
-        this.modal.querySelector('.save-btn').textContent = 'Save changes';
+        this.modal.querySelector('h2').textContent = 'Edit current folder';
+        this.modal.querySelector('.save-btn').textContent = 'Save';
         this.modal.querySelector('input').value = this.folder.name;
         const folderCSSClass = this.folder.color;
 
-        this.#showActiveFolderColor(folderCSSClass);
+        this.#showCurrentAppearance(folderCSSClass);
     }
 
 
@@ -118,7 +119,7 @@ export class FolderModal {
             const folderCSSClass = colorOption.getAttribute('data-folder-css-class');
 
             colorOption.addEventListener('click', () => {
-                this.#showActiveFolderColor(folderCSSClass)
+                this.#showCurrentAppearance(folderCSSClass)
             });
         });
 
@@ -180,14 +181,23 @@ export class FolderModal {
      *
      * @param {string} folderCSSClass   - The CSS class corresponding to the selected folder color.
      */
-    #showActiveFolderColor(folderCSSClass) {
-        for (let colorOption of this.colorOptions) {
-            if(colorOption.getAttribute('data-folder-css-class') !== folderCSSClass) {
-                colorOption.classList.remove('selected-folder-color');
+    #showCurrentAppearance(folderCSSClass) {
+        for (let i = 0; i < this.colorOptions.length; i++) {
+            const colorOption = this.colorOptions[i];
+            let borderColor = colorOption.style.backgroundColor;
+
+            if (colorOption.getAttribute('data-folder-css-class') !== folderCSSClass) {
+                this.colorOptionWrappers[i].style.borderColor = 'transparent';
                 continue
             }
+
+            console.log(borderColor)
+            if (borderColor === '#f6f6f9' || borderColor === 'rgb(246, 246, 249)') {
+                borderColor = '#5c7fdd';
+            }
+
+            this.colorOptionWrappers[i].style.borderColor = borderColor;
             this.preferredFolderColor = folderCSSClass;
-            colorOption.classList.add('selected-folder-color');
         }
-    }  
+    }
 }

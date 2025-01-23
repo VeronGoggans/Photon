@@ -64,6 +64,8 @@ sticky-board div {
 
 sticky-board p {
     margin: 0;
+    padding: 5px;
+    text-align: center;
     color: var(--important);
 }
 

@@ -117,8 +117,10 @@ export const FETCH_SETTINGS_EVENT = 'fetch-settings';
 export const GET_CURRENT_FOLDER_EVENT = 'get-current-folder';
 export const GET_PARENT_FOLDER_EVENT = 'get-parent-folder';
 export const GET_BREAD_CRUMBS_EVENT = 'get-bread-crumbs';
-export const RENDER_PINNED_FOLDERS_EVENT = 'render-pinned-folders';
+export const SET_NOTE_FILTER_EVENT = 'set-note-filter';
+export const CLEAR_NOTE_FILTER_EVENT = 'clear-note-filter';
 export const GET_PREVIOUS_VIEW_EVENT = 'get-previous-view';
+export const GET_CURRENT_VIEW_EVENT = 'get-current-view';
 export const INIT_VIEW_EVENT = 'init-view';
 
 export const OPEN_TEXT_EDITOR_EVENT = 'open-text-editor';
@@ -127,7 +129,7 @@ export const LOAD_NOTES_IN_MEMORY_EVENT = 'load-notes-in-memory';
 export const CLEAR_STORED_NOTE_EVENT = 'clear-loaded-note';
 
 export const SET_NOTE_LOCATION_EVENT = 'set-note-location';
-export const SET_PREVIOUS_VIEW_EVENT = 'set-previous-view';
+export const SET_CURRENT_VIEW_EVENT = 'set-previous-view';
 
 export const SET_ACTIVE_TAB_EVENT = 'set-active-tab';
 export const SET_SIDEBAR_STYLE_EVENT = 'set-sidebar-style';
