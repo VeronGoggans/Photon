@@ -2,6 +2,7 @@ import { formatName } from "../../util/formatters.js";
 import { addDragImage, removeDragImage, showContextMenu } from "../../util/ui.js";
 import { applyFolderIconColor, applyWidgetStyle } from "../../util/ui.js";
 import { checkAutoScroll, stopScrolling } from "../draggable.js";
+import {folderIconColors} from "../../constants/constants.js";
 
 
 const optionsMenuTemplate = `
@@ -115,6 +116,7 @@ class PinnedFolder extends HTMLElement {
 
     render() {
         this.innerHTML = `
+            <i class="bi bi-folder" style="color: ${folderIconColors[this.pinnedFolder.color]} "></i>
             <span>${this.pinnedFolder.name}</span>
         `
     }
