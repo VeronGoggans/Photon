@@ -5,7 +5,9 @@ import {
     GET_CURRENT_FOLDER_EVENT,
     RENDER_CATEGORY_MODAL_EVENT,
     RENDER_DELETE_MODAL_EVENT,
-    RENDER_FOLDER_MODAL_EVENT, UPDATE_FOLDER_LOCATION_EVENT, UPDATE_FOLDER_PIN_VALUE_EVENT,
+    RENDER_ORGANISATION_MODAL_EVENT,
+    UPDATE_FOLDER_LOCATION_EVENT,
+    UPDATE_FOLDER_PIN_VALUE_EVENT,
     UPDATE_NOTE_LOCATION_EVENT
 } from "../components/eventBus.js";
 
@@ -282,8 +284,9 @@ export class FolderView {
             }
 
             // Event to tell the dialog to render the folder modal.
-            this.eventBus.emit(RENDER_FOLDER_MODAL_EVENT, {
-                'folder': null,
+            this.eventBus.emit(RENDER_ORGANISATION_MODAL_EVENT, {
+                'entity': null,
+                'entityType': 'folder',
                 'callBack': addFolderCallBack
             });
         });
@@ -326,8 +329,9 @@ export class FolderView {
             }
 
             // Event to tell the dialog to render the folder modal.
-            this.eventBus.emit(RENDER_FOLDER_MODAL_EVENT, {
-                'folder': folder,
+            this.eventBus.emit(RENDER_ORGANISATION_MODAL_EVENT, {
+                'entity': folder,
+                'entityType': 'folder',
                 'callBack': updateCallBack,
                 'eventTriggeredInsideFolder': eventTriggeredInsideFolder
             })
@@ -397,36 +401,45 @@ export class FolderView {
             }
 
             //  Event to tell the dialog to render the folder modal.
-            this.eventBus.emit(RENDER_FOLDER_MODAL_EVENT, {
-                'folder': null,
+            this.eventBus.emit(RENDER_ORGANISATION_MODAL_EVENT, {
+                'entity': null,
+                'entityType': 'folder',
                 'callBack': addFolderCallBack
             })
         });
 
 
-
-
-
+        /**
+         *
+         */
         this._pinCurrentFolderButton.addEventListener('click', () => {
             // Dispatch the PinFolder custom event
             this.viewElement.dispatchEvent(new CustomEvent('PinFolder', {detail: {folder: null}, bubbles: true}));
         })
 
+
+        /**
+         *
+         */
         this._editCurrentFolderButton.addEventListener('click', () => {
             // Dispatch the PinFolder custom event
             this.viewElement.dispatchEvent(new CustomEvent('EditFolder', {detail: {folder: null}, bubbles: true}));
         })
 
+
+        /**
+         *
+         */
         this._createCategoryButton.addEventListener('click', () => {
             // The callback function that'll create the category when the user confirms the creation in the modal.
             const addCategoryCallBack = async (newCategoryData) => {
-                console.log('New Category')
+                alert('New Category')
             }
 
             //  Event to tell the dialog to render the category modal.
-            this.eventBus.emit(RENDER_CATEGORY_MODAL_EVENT, {
-                'category': null,
-                'folder': null,
+            this.eventBus.emit(RENDER_ORGANISATION_MODAL_EVENT, {
+                'entity': null,
+                'entityType': 'category',
                 'callBack': addCategoryCallBack
             })
         })

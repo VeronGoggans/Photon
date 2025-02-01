@@ -1,4 +1,5 @@
 autocomplete-searchbar .searchbar-dropdown::-webkit-scrollbar,
+reference-autocomplete-searchbar .reference-item-list::-webkit-scrollbar,
 .content-view::-webkit-scrollbar,
 .note-view-content::-webkit-scrollbar,
 .font-options::-webkit-scrollbar,
@@ -27,6 +28,7 @@ autocomplete-searchbar .searchbar-dropdown::-webkit-scrollbar,
 
 
 autocomplete-searchbar .searchbar-dropdown::-webkit-scrollbar-thumb,
+reference-autocomplete-searchbar .reference-item-list::-webkit-scrollbar-thumb,
 .font-options::-webkit-scrollbar-thumb,
 .content-view::-webkit-scrollbar-thumb,
 .note-view-content::-webkit-scrollbar-thumb,

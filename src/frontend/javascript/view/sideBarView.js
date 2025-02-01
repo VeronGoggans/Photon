@@ -17,7 +17,7 @@ import {AnimationHandler} from "../handlers/animationHandler.js";
 export class SidebarView {
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this._buttonCount = 5;
+        this._buttonCount = sidebarButtonText.length;
         this._sidebarTransitionTime = 160; // Milliseconds
         this._sidebarShrinkLimit = 950; // Pixels
         this._bigSidebarWidth = 250; // Pixels
@@ -48,7 +48,7 @@ export class SidebarView {
 
     setSidebarStyle(sidebarColor) {
         if (sidebarColor !== 'original') {
-            this._sidebar.classList.add(sidebarColor);
+            this._sidebar.classList.add(`sidebar-${sidebarColor}`);
         }
     }
 
@@ -334,7 +334,6 @@ export class SidebarView {
             const droppedEntityName = droppedCardData.draggedEntityName;
 
             const parentFolderId = this.eventBus.emit(GET_PARENT_FOLDER_EVENT).id;
-            console.log(parentFolderId)
 
             if (droppedEntityName === 'folder') {
                 await this.eventBus.asyncEmit(UPDATE_FOLDER_LOCATION_EVENT, {

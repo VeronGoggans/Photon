@@ -53,58 +53,46 @@ export class SettingController {
 
 
     async getSettings() {
-        const route = '/settings'
-        const response = await this.model.get(route);
+        const response = await this.model.get('/settings');
         return new Settings(response.content.settings);
     }
 
 
-
     async updateTheme(newTheme) {
-        const route = `/settings/theme/${newTheme}`;
-        const response = await this.model.patch(route);
-        return response.content.theme;
+        return this._patchAndExtract(`/settings/theme/${newTheme}`, 'theme');
     }
 
 
-
     async updateSidebarColor(newColor) {
-        const route = `/settings/sidebar-color/${newColor}`;
-        const response = await this.model.patch(route);
-        return response.content.sidebarColor;
+        return this._patchAndExtract(`/settings/sidebar-color/${newColor}`, 'sidebarColor');
     }
 
 
     async updateSidebarState(newState) {
-        const route = `/settings/sidebar-state/${newState}`;
-        const response = await this.model.patch(route);
-        return response.content.sidebarState;
+        return this._patchAndExtract(`/settings/sidebar-state/${newState}`, 'sidebarState');
     }
-
 
 
     async updateWidgetStyle(newWidgetStyle) {
-        const route = `/settings/widget-style/${newWidgetStyle}`;
-        const response = await this.model.patch(route);
         window.sessionStorage.setItem('widget-style', newWidgetStyle);
-        return response.content.widgetStyle;
+        return this._patchAndExtract(`/settings/widget-style/${newWidgetStyle}`, 'widgetStyle');
     }
-
 
 
     async updateSidebarSubsectionState(sidebarSubsection) {
-        const route = `/settings/sidebar-subsection-state/${sidebarSubsection}`;
-        const response = await this.model.patch(route);
-        return response.content.sidebarSubsectionState;
+        return this._patchAndExtract(`/settings/sidebar-subsection-state/${sidebarSubsection}`, 'sidebarSubsectionState')
     }
 
 
-
     async updateFolderIconColor(newFolderIconColor) {
-        const route = `/settings/folder-icon-color/${newFolderIconColor}`;
-        const response = await this.model.patch(route);
         window.sessionStorage.setItem('folder-icon-color', newFolderIconColor);
-        return response.content.folderIconColor;
+        return this._patchAndExtract(`/settings/folder-icon-color/${newFolderIconColor}`, 'folderIconColor');
+    }
+
+
+    async _patchAndExtract(url, key) {
+        const response = await this.model.patch(url);
+        return response.content[key];
     }
 }
 

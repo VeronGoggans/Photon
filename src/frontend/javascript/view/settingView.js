@@ -8,9 +8,9 @@ export class SettingView {
         this.#initElements();
         this.#eventListeners();
         this.dropdownHelper = new DropdownHelper(
-            this.dropdowns, 
-            this.dropdownOptions, 
-            this.settingsView, 
+            this.dropdowns,
+            this.dropdownOptions,
+            this.settingsView,
             ['.theme-dropdown','.sidebar-color-dropdown', '.widget-style-dropdown', '.folder-icon-color-dropdown']
         );
         AnimationHandler.fadeInFromSide(this.settingsView);
@@ -24,76 +24,66 @@ export class SettingView {
     }
 
 
-    async #lightMode() {
+    async applyAppTheme(newTheme) {
         this.dropdownHelper.closeDropdowns();
-        this.themeInput.value = 'Light';
-        document.body.classList.remove('dark');
-        document.body.classList.add('light');
-        await this.controller.updateTheme('light');
-    }
-    
-    async #darkMode() {
-        this.dropdownHelper.closeDropdowns();
-        this.themeInput.value = 'Dark';
-        document.body.classList.remove('light');
-        document.body.classList.add('dark');
-        await this.controller.updateTheme('dark');
+
+        // Show the selected theme name in the dropdown
+        this.themeInput.value = capitalizeFirstLetter(newTheme);
+
+        // Remove the previous app theme css class
+        document.body.classList.remove(...document.body.classList);
+
+        // Add the new app theme css class
+        document.body.classList.add(newTheme);
+
+        // Notify the backend to update the app theme
+        await this.controller.updateTheme(newTheme);
     }
 
-    async #originalColor() {
-        this.dropdownHelper.closeDropdowns();
-        this.sidebarColorInput.value = 'Original';
-        this.sidebar.classList.remove('soft');
-        this.sidebar.classList.remove('invisible');
-        await this.controller.updateSidebarColor('original');
-    }
 
-    async #softColor() {
+    async applySidebarCssClass(cssClass) {
         this.dropdownHelper.closeDropdowns();
-        this.sidebarColorInput.value = 'Soft';
-        if (!this.sidebar.classList.contains('soft')) {
-            if (this.sidebar.classList.contains('invisible')) {
-                this.sidebar.classList.remove('invisible');
-            }
-            this.sidebar.classList.add('soft');
-            await this.controller.updateSidebarColor('soft');
+
+        // Remove the previous sidebar css class if any is present
+        if (this.sidebar.classList.length > 1) {
+            // Get all classes
+            const classes = Array.from(this.sidebar.classList);
+
+            // Remove the second class
+            this.sidebar.classList.remove(classes[1]);
         }
-    }
+        // Show the selected sidebar style name in the dropdown
+        this.sidebarColorInput.value = capitalizeFirstLetter(cssClass);
 
-    async #invisibleColor() {
-        this.dropdownHelper.closeDropdowns();
-        this.sidebarColorInput.value = 'Invisible';
-        if (!this.sidebar.classList.contains('invisible')) {
-            if(this.sidebar.classList.contains('soft')) {
-                this.sidebar.classList.remove('soft');
-            }
-            this.sidebar.classList.add('invisible');
-            await this.controller.updateSidebarColor('invisible');
+        // Add the new sidebar css class
+        if (cssClass !== 'original') {
+            this.sidebar.classList.add(`sidebar-${cssClass}`);
         }
+
+        // Notify the backend to update the sidebar style
+        await this.controller.updateSidebarColor(cssClass);
     }
 
-    async #widgetShadow() {
+
+    async applyWidgetStyle(newWidgetStyle) {
         this.dropdownHelper.closeDropdowns();
-        this.widgetInput.value = 'Shadow';
-        this.controller.updateWidgetStyle('shadow');
+
+        // Show the selected widget style name in the dropdown
+        this.widgetInput.value = capitalizeFirstLetter(newWidgetStyle);
+
+        // Notify the backend to update the widget style
+        await this.controller.updateWidgetStyle(newWidgetStyle);
     }
 
-    async #widgetBorder() {
-        this.dropdownHelper.closeDropdowns();
-        this.widgetInput.value = 'Border';
-        this.controller.updateWidgetStyle('border');
-    }
 
-    async #folderIconColorBlue() {
+    async appyFolderIconStyle(newFolderIconColor) {
         this.dropdownHelper.closeDropdowns();
-        this.folderIconInput.value = 'Blue';
-        this.controller.updateFolderIconColor('blue');
-    }
 
-    async #folderIconColorGray() {
-        this.dropdownHelper.closeDropdowns();
-        this.folderIconInput.value = 'Gray';
-        this.controller.updateFolderIconColor('gray');
+        // Show the selected folder icon style name in the dropdown
+        this.folderIconInput.value = capitalizeFirstLetter(newFolderIconColor);
+
+        // Notify the backend to update the folder icon style
+        await this.controller.updateFolderIconColor(newFolderIconColor);
     }
 
 
@@ -114,6 +104,7 @@ export class SettingView {
 
         this.originalSidebar = this.sidebarOptions.querySelector('li[color="original"]');
         this.softSidebar = this.sidebarOptions.querySelector('li[color="soft"]');
+        this.shadowSidebar = this.sidebarOptions.querySelector('li[color="shadow"]');
         this.invisibleSidebar = this.sidebarOptions.querySelector('li[color="invisible"]');
 
         this.widgetBorder = this.widgetOptions.querySelector('li[widgetstyle="border"]');
@@ -127,14 +118,15 @@ export class SettingView {
     }
 
     #eventListeners() {
-        this.lightTheme.addEventListener('click', () => {this.#lightMode()});
-        this.darkTheme.addEventListener('click', () => {this.#darkMode()});
-        this.originalSidebar.addEventListener('click', () => {this.#originalColor()});
-        this.softSidebar.addEventListener('click', () => {this.#softColor()});
-        this.invisibleSidebar.addEventListener('click', () => {this.#invisibleColor()});
-        this.widgetBorder.addEventListener('click', () => {this.#widgetBorder()});
-        this.widgetShadow.addEventListener('click', () => {this.#widgetShadow()});
-        this.iconBlue.addEventListener('click', () => {this.#folderIconColorBlue()});
-        this.iconGray.addEventListener('click', () => {this.#folderIconColorGray()});
+        this.lightTheme.addEventListener('click', async () => this.applyAppTheme('light'));
+        this.darkTheme.addEventListener('click', async () => this.applyAppTheme('dark'));
+        this.originalSidebar.addEventListener('click', async () => this.applySidebarCssClass('original'));
+        this.softSidebar.addEventListener('click', async () => this.applySidebarCssClass('soft'));
+        this.shadowSidebar.addEventListener('click', async () => this.applySidebarCssClass('shadow'));
+        this.invisibleSidebar.addEventListener('click', async () => this.applySidebarCssClass('invisible'));
+        this.widgetBorder.addEventListener('click', async () => this.applyWidgetStyle('border'));
+        this.widgetShadow.addEventListener('click', async () => this.applyWidgetStyle('shadow'));
+        this.iconBlue.addEventListener('click', async () => this.appyFolderIconStyle('blue'));
+        this.iconGray.addEventListener('click', async () => this.appyFolderIconStyle('gray'));
     }
 }

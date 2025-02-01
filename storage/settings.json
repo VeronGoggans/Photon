@@ -1,9 +1,9 @@
 {
-    "theme": "dark",
+    "theme": "light",
     "sidebarColor": "soft",
     "widgetStyle": "shadow",
     "folderIconColor": "gray",
     "sidebarState": "large",
     "collapsePinnedFolders": true,
-    "collapseCategories": true
+    "collapseCategories": false
 }

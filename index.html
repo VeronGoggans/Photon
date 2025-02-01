@@ -45,13 +45,14 @@
     <title>Photon</title>
     
     <script src="src/frontend/javascript/components/lists/lists.js"></script>
-    <script src="src/frontend/javascript/components/searchbar/searchbar.js"></script>
+    <script type="module" src="src/frontend/javascript/components/searchbar/searchbar.js"></script>
     <script type="module" src="src/frontend/javascript/components/entities/folder.js"></script>
     <script type="module" src="src/frontend/javascript/components/entities/note.js"></script>
     <script type="module" src="src/frontend/javascript/components/entities/stickyNote.js"></script>
     <script type="module" src="src/frontend/javascript/components/pageBlocks/pageBlocks.js"></script>
     <script type="module" src="src/frontend/javascript/components/notifications/notifications.js"></script>
     <script type="module" src="src/frontend/javascript/components/editor.js"></script>
+    <script type="module" src="src/frontend/javascript/components/modals/organisationModal.js"></script>
 </head>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
@@ -71,8 +72,7 @@
           <div class="sidebar-content-upper">
                 <a href="/home" data-view="home" id="home-btn"><i class="bi bi-house"></i><span></span></a>
                 <a href="/notes" data-view="notes" id="notes-btn"><i class="bi bi-file-earmark"></i><span></span></a>
-                <a href="/todos" data-view="notes" id="todos-btn"><i class="bi bi-check2-circle"></i><span></span></a>
-                <a href="/stickyWallHome" data-view="stickyWallHome" id="sticky-wall-home-btn"><i class="bi bi-sticky"></i><span></span></a>
+                <a href="/stickyWallHome" data-view="stickyWallHome" id="sticky-wall-home-btn"><i class="bi bi-check2-circle"></i><span></span></a>
 
               <p class="sidebar-section-title">Other</p>
               <div id="pinned-folders-dropdown" class="sidebar-dropdown">
@@ -91,12 +91,6 @@
                   <div class="category active-category">👨🏻‍🎓School</div>
                   <div class="category">🙋🏼‍♂️Personal</div>
               </div>
-<!--              <div id="tags-dropdown" class="sidebar-dropdown">-->
-<!--                  <i id="chevron-tags" class="bi bi-chevron-right"></i>-->
-<!--                  <i id="tags-icon" class="bi bi-tags"></i>-->
-<!--                  <span class="tag-title">Tags</span>-->
-<!--              </div>-->
-<!--              <div class="tags collapsed-sidebar-dropdown"></div>-->
           </div>
 
           <div class="sidebar-content-lower">

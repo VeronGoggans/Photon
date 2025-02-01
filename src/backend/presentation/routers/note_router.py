@@ -43,7 +43,9 @@ class NoteRouter:
                   bookmarks: bool = False, 
                   recent: bool = False, 
                   recently_viewed: bool = False, 
-                  search_items: bool = False, 
+                  note_search_items: bool = False,
+                  template_search_items: bool = False, 
+                  templates: bool = False,
                   db: Session = Depends(Database.get_db)):
         
         # A dictionary with all the endpoint filters that can be applied to the GET "/notes" endpoint
@@ -51,7 +53,9 @@ class NoteRouter:
             'bookmarks': bookmarks,
             'recent': recent,
             'recently-viewed': recently_viewed,
-            'search-items': search_items
+            'note-search-items': note_search_items,
+            'template-search-items': template_search_items,
+            'templates': templates
         }
 
         # Only one filter should be True with any given request

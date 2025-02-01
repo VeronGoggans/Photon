@@ -9,10 +9,10 @@
 # try:
 #     # Add a new column 'pinned' to the 'folders' table with default FALSE (0)
 #     cursor.execute("""
-#         ALTER TABLE folders
-#         ADD COLUMN pinned BOOLEAN DEFAULT FALSE;
+#         ALTER TABLE notes
+#         ADD COLUMN is_template BOOLEAN DEFAULT FALSE;
 #     """)
-#     print("Column 'pinned' added successfully with default FALSE.")
+#     print("Column 'is_template' added successfully with default FALSE.")
 
 # except sqlite3.OperationalError as e:
 #     print(f"An error occurred: {e}")

@@ -12,7 +12,8 @@
     z-index: 3;
 }
 
-.dialog > div:first-child {
+.dialog > div:first-child,
+.dialog organisation-modal {
     padding: 70px;
     border-radius: 10px;
     opacity: 0;

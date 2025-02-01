@@ -53,11 +53,12 @@
     --title-bar-button-color: #5c7fdd;
     --exit-btn: #28283b;
     --secondary: #5c7dff;
-    --background: #16161a;
+    --background: #121218; /*#16161a*/
     --notification: #0f0e1a;
     --subtitle: #9196aa;
-    --sidebar: #16161a;
-    --sidebar-soft: #16161a;
+    --sidebar: #121218;
+    --sidebar-soft: #101016;
+    --sidebar-shadow-bg: #121218;
     --searchbar: #20202f;
     --sidebar-text: #d6d8e5;
     --sidebar-text-hover: #5c7fdd; 
@@ -74,7 +75,7 @@
     --background-column: #25272f;
     --hover-searchbar-options: #181821;
     --hover-text: #5c7dff;
-    --command-square-bg: transparent;
+    --command-square-bg: #4b5bd096;
     --hover-sidebar: #242430;
     --searchbar-placeholder: #d4d7e5; 
     --placeholder: #868b9e;
@@ -92,6 +93,7 @@
 
     /*Feedback variables*/
     --completed-checklist-task: #28293f;
+    --reference-item-icon: #292957;
     --empty-folder-icon-background: #1b1b27;
     --active-tab-bg: #5c7fdd;
     --active-tab-text: #fff;
@@ -229,7 +231,8 @@
     --notification: #f9fafd;
     --subtitle: #2f3773;
     --sidebar: #ffffff; 
-    --sidebar-soft: #ffffff;
+    --sidebar-soft: #f8f9fc;
+    --sidebar-shadow-bg: #ffffff;
     --searchbar: #f4f5ff; /*f4f4fc*/
     --sidebar-text: #444452; 
     --sidebar-text-hover: #1d2134; 
@@ -264,6 +267,7 @@
     --scrollbar-editor: #cfd2e2;
     /*Feedback variables*/
     --completed-checklist-task: #f8f9ff;
+    --reference-item-icon: #f0f0ff;
 
     --active-tab-bg: #eceeff;
     --active-tab-text: #5c7fdd;

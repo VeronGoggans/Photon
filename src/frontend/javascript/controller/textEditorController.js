@@ -15,6 +15,8 @@ import {
     PATCH_NOTE_CONTENT_EVENT,
     PATCH_NOTE_NAME_EVENT
 } from "../components/eventBus.js";
+import { ReferenceItemTypes } from "../constants/constants.js";
+import { loadFolder } from "../view/viewFunctions.js";
 
 
 
@@ -66,7 +68,7 @@ export class TextEditorController {
     /**
      *
      *
-     * @param editorObject
+     * @param { Object } editorObject
      */
     async loadRecentlyViewedNote(editorObject) {
         // Save the new editor object to the model
@@ -80,6 +82,50 @@ export class TextEditorController {
 
         // Load the recently viewed note in the editor
         this.textEditorView.open(editorObject, location, recentlyViewedNotes);
+    }
+
+
+    /**
+     * 
+     * @param { number } id
+     * @param { ReferenceItemTypes } type
+     */
+    async loadReferenceItem(id, type) {
+        let note, location;
+
+        switch (type) {
+            case ReferenceItemTypes.NOTES:
+                // Get the note & location of the reference item's ID.
+                ({ note, location } = await this.eventBus.asyncEmit(FETCH_NOTE_BY_ID_EVENT, id));
+
+                // Save the new editor object to the model
+                this.model.storeEditorObject(note);
+
+                // Get the recently viewed notes list
+                const recentlyViewedNotes = this.model.getRecentlyViewedNotes();
+
+                // Load the recently viewed note in the editor
+                this.textEditorView.open(note, location, recentlyViewedNotes);
+                break;
+
+            case ReferenceItemTypes.TEMPLATES:
+                // Get the note of the reference item's ID.
+                ({ note } = await this.eventBus.asyncEmit(FETCH_NOTE_BY_ID_EVENT, id));
+
+                // Apply the template to the page
+                this.textEditorView.applyTemplate(note);
+                break;
+            case ReferenceItemTypes.FOLDERS:
+                // Load the specified folder.
+                await loadFolder(id, this.eventBus);
+                break;
+            case ReferenceItemTypes.BOARDS:
+                
+                break;
+            default:
+                break;
+        }
+
     }
 
 

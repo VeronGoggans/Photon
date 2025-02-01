@@ -1,7 +1,8 @@
 from sqlalchemy.orm import Session
 from src.backend.data.models import Folder
-from src.backend.data.helpers import find_folder, get_entity_path
+from src.backend.data.helpers import find_folder, get_entity_path, is_templates_folder_in_path
 from src.backend.data.exceptions.exceptions import NotFoundException
+from src.backend.util.event_bus import event_bus, convert_notes_event
 from datetime import datetime
 
 
@@ -64,11 +65,29 @@ class FolderManager:
 
 
     def update_location(self, folder_id: int, parent_folder_id: int, db: Session) -> Folder :
-        # Check if the new parent even exists
+        # Check to see if the parent folder exists
         find_folder(parent_folder_id, db)
 
+        # Retrieve the folder and update its parent_id to the new parent folder id
         folder = find_folder(folder_id, db)
         folder.parent_id = parent_folder_id
+
+        # Check if the folder is related to the templates folder
+        is_folder_related_to_the_templates_folder = is_templates_folder_in_path(parent_folder_id, db)  
+
+        convert_notes_to_templates: bool = False
+
+        if is_folder_related_to_the_templates_folder:
+            convert_notes_to_templates = True
+        
+        # Emit an event that'll convert all notes in the folder to templates or notes 
+        # based on the folder's relation to the templates folder
+        event_bus.emit(
+            convert_notes_event, 
+            folder_id=folder_id, 
+            to_template=convert_notes_to_templates, 
+            db=db)
+        
 
         db.commit()
         db.refresh(folder)

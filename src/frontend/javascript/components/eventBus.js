@@ -111,6 +111,12 @@ export const PATCH_NOTE_NAME_EVENT = 'patch-note-name';
 export const PATCH_NOTE_CONTENT_EVENT = 'patch-note-content';
 
 
+export const FETCH_CATEGORIES_EVENT = 'fetch-category';
+
+export const FETCH_TEMPLATE_SEARCH_ITEMS_EVENT = 'fetch-template-search-items';
+
+export const FETCH_BOARD_SEARCH_ITEMS_EVENT = 'fetch-board-search-items'; 
+
 export const FETCH_SETTINGS_EVENT = 'fetch-settings';
 
 // Synchronous events
@@ -139,7 +145,7 @@ export const COLLAPSE_SIDEBAR_SUB_TITLE_EVENT = "collapse-sidebar-title"
 export const SIDEBAR_TOGGLE_EVENT = 'sidebar-toggle';
 
 // Dialog events (synchronous)
-export const RENDER_FOLDER_MODAL_EVENT = 'render-folder-modal';
+export const RENDER_ORGANISATION_MODAL_EVENT = 'render-organisation-modal';
 export const RENDER_CATEGORY_MODAL_EVENT = 'render-category-modal';
 export const RENDER_NOTE_DETAILS_MODAL_EVENT = 'render-note-details-modal';
 export const RENDER_DELETE_MODAL_EVENT = 'render-delete-note-modal';

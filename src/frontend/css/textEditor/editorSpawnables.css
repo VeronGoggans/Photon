@@ -200,3 +200,65 @@ slash-command-container i {
     background-color: var(--command-square-bg);
     color: #8fa5ff;
 }
+
+
+
+/*____________________ reference searchbar code below _____________________________*/
+reference-autocomplete-searchbar {
+    user-select: none;
+    display: grid;
+    background-color: var(--dropdown);
+    grid-template-rows: 50px 1fr;
+    width: 300px;
+    max-height: 400px;
+    border-radius: 10px;
+    padding: 20px 15px;
+    opacity: 0;
+    box-shadow: var(--shadow-dropdown);
+    transition: 150ms;
+}
+
+reference-autocomplete-searchbar input {
+    outline: none;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: transparent;
+    color: var(--editor-text);
+}
+
+reference-autocomplete-searchbar .reference-item-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: scroll;
+}
+
+reference-autocomplete-searchbar searchbar-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    max-height: 40px;
+    border-radius: 10px;
+    color: var(--editor-text);
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+reference-autocomplete-searchbar searchbar-item:hover {
+    background-color: var(--hover-slash-command);
+}
+
+reference-autocomplete-searchbar searchbar-item i {
+    background-color: var(--command-square-bg);
+    display: flex;
+    font-size: 19px;
+    justify-content: center;
+    align-items: center;
+    min-height: 30px;
+    min-width: 30px;
+    margin-right: 10px;
+    border-radius: 5px;
+    color: #8fa5ff;
+}

@@ -40,7 +40,7 @@ autocomplete-searchbar ul i {
 
 
 
-searchbar-item {
+autocomplete-searchbar searchbar-item {
     display: block;
     cursor: pointer;
     font-size: 16px;
@@ -51,7 +51,7 @@ searchbar-item {
     transition: background-color 150ms ease
 }
 
-searchbar-item:hover {
+autocomplete-searchbar searchbar-item:hover {
     background-color: var(--hover-searchbar-options);
 }
 
@@ -63,3 +63,5 @@ searchbar-item:hover {
 #folder-search-type{color: #5c7fdd}
 #note-search-type {color: #a8b2ff}
 #template-search-type {color: #abb8ff}
+
+

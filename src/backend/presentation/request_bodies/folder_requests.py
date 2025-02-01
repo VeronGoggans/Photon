@@ -29,3 +29,23 @@ class PatchFolderLocationRequest(BaseModel):
     - parent_id (str): The id of the folder that the dropped folder will move in to. 
     """
     parent_id: int
+
+
+
+class PostCategoryRequest(BaseModel):
+    """
+    - name (str): The name of the new category.
+    - color (str): The color for the new category.
+    """
+    name: str
+    color: str
+
+
+
+class PutCategoryRequest(BaseModel):
+    """
+    - name (str): The new name of the category.
+    - color (str): The new color for the category.
+    """
+    name: str
+    color: str

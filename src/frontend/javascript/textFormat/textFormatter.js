@@ -2,15 +2,6 @@ import {CNode} from "../util/CNode.js";
 
 
 
-export function addCodeBlock(range, language = "plaintext") {
-  const codeSnippit = document.createElement('code-snippit');
-  codeSnippit.render(language)
-  
-  // Append to your note container
-  range.insertNode(codeSnippit);
-  moveCursorToTextBlock(codeSnippit.querySelector('code'));
-}
-
 
 export function addTerminal(range) {
   const terminal = document.createElement('terminal-snippet');
@@ -79,6 +70,10 @@ export function addChecklist(range) {
     range.insertNode(br);
     range.insertNode(checklist);
 }
+
+
+
+// export function add
 
 
 function removeSelectedEffect(range, node) {

@@ -9,22 +9,14 @@ export class KeyEventListener {
         .addEventListener('keydown', (event) => {
             if (event.ctrlKey) {
                 switch (event.key) {
-                    case 's':
-                      event.preventDefault();
-                      this.view.saveEditorObject();
-                      break;
-                    case "n":
-                      event.preventDefault();
-                      this.view.new();
-                      break;
-                    case "e":
-                      event.preventDefault();
-                      this.view.saveEditorObject();
-                      break;
-                    case "f":
-                      event.preventDefault();
-                      this.view.renderSearchModal();
-                      break;
+                    // case "n":
+                    //   event.preventDefault();
+                    //   this.view.new();
+                    //   break;
+                    // case "e":
+                    //   event.preventDefault();
+                    //   this.view.saveEditorObject();
+                    //   break;
                     default:
                         console.log('Unknown key binding.');
                 }

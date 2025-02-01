@@ -64,8 +64,8 @@ export class HomeController {
         const folders = await this.eventBus.asyncEmit(FETCH_FOLDER_SEARCH_ITEMS_EVENT);
         const searchbar = document.querySelector('autocomplete-searchbar');
 
-        searchbar.insertItems('note', notes);
-        searchbar.insertItems('folder', folders);
+        searchbar.insertItems('notes', notes);
+        searchbar.insertItems('folders', folders);
         searchbar.renderItems();
     }
 }

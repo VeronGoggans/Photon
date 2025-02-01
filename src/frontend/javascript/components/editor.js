@@ -1,7 +1,8 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
-import { addChecklist, addCodeBlock, addHeading, addHtml, addLink, addList, 
+import { addChecklist, addHeading, addHtml, addLink, addList, 
     addHorizontalLine, addEmbedVideo, addColor, addTerminal } from "../textFormat/textFormatter.js";
 import { PlacementHelper } from "../helpers/placementHelper.js";
+import { ReferenceItemTypes } from "../constants/constants.js";
 
 
 class SlashCommandContainer extends HTMLElement {
@@ -36,10 +37,10 @@ class SlashCommandContainer extends HTMLElement {
             <div class="heading-3" data-command="h3"><i class="bi bi-type-h3"></i>Add heading 3</div>
             <div class="heading-4" data-command="h4"><i class="bi bi-type-h4"></i>Add heading 4</div>
             <div class="terminal" data-command="terminal"><i class="bi bi-terminal"></i>Add terminal command</div>
-            <div class="note-reference" data-command="note-reference"><i class="bi bi-file-earmark"></i>Add note reference</div>
-            <div class="folder-reference" data-command="folder-reference"><i class="bi bi-folder-symlink"></i>Add folder reference</div>
-            <div class="sticky-board-reference" data-command="sticky-board-reference"><i class="bi bi-stickies"></i>Add sticky board reference</div>
-            <div class="template" data-command="template"><i class="bi bi-file-earmark-text"></i>Apply template</div>
+            <div class="note-reference" data-command="note ref"><i class="bi bi-file-earmark"></i>Add note reference</div>
+            <div class="folder-reference" data-command="folder ref"><i class="bi bi-folder-symlink"></i>Add folder reference</div>
+            <div class="sticky-board-reference" data-command="board ref"><i class="bi bi-stickies"></i>Add board reference</div>
+            <div class="template" data-command="template"><i class="bi bi-file-earmark-text"></i>Add template</div>
             <div class="insert-html" data-command="html"><i class="bi bi-filetype-html"></i>Insert HTML</div>
         </div>
         `
@@ -90,21 +91,45 @@ class SlashCommandContainer extends HTMLElement {
           case 'h4':
             addHeading(this.range, 4, extension);
             break;
-          case 'snippet':
-            addCodeBlock(this.range, extension);
-            break;
           case 'terminal':
             addTerminal(this.range);
             break;
           case 'html':
             addHtml(this.range);
             break;
+          case 'note ref':
+            this.addReferenceContainer(ReferenceItemTypes.NOTES);
+            break;
+          case 'folder ref':
+            this.addReferenceContainer(ReferenceItemTypes.FOLDERS);
+            break;
+          case 'board ref':
+            this.addReferenceContainer(ReferenceItemTypes.BOARDS);
+            break;
           case 'template':
+            this.addReferenceContainer(ReferenceItemTypes.TEMPLATES);
             break;
           default:
             console.log('No matching function for:', command);
         }
         this.input.value = '';
+    }
+
+
+    addReferenceContainer(referenceType) {
+        const referenceContainer = document.createElement('reference-autocomplete-searchbar');
+
+        
+        this.dispatchEvent(new CustomEvent(
+            'AddReferenceContainer', { 
+                detail: { 
+                    component: referenceContainer, 
+                    referenceType: referenceType,
+                    cursorPosition: this.range
+                }, 
+                bubbles: true 
+            }
+        ));
     }
 
 
@@ -193,7 +218,7 @@ class SlashCommandContainer extends HTMLElement {
         // Apply active class to selected option
         selectedCommand.classList.add('active');
 
-        // Scoll selected options into view 
+        // Scroll selected options into view
         selectedCommand.scrollIntoView({
             behavior: 'smooth', 
             block: 'nearest'  
@@ -265,11 +290,11 @@ class SlashCommandContainer extends HTMLElement {
     }
 
 
+
     checkForForwardSlash(event) {
-        if (event.key === '/') {
-            this.showSlashCommands();
-        }
+        if (event.key === '/') this.showSlashCommands();
     }
+
 
 
     rememberRange(range) {

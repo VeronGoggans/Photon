@@ -158,20 +158,26 @@
     color: var(--active-tab-text) !important;
 }
 
-.soft {
-    background-color: var(--sidebar-soft);
+.sidebar-shadow {
+    background-color: var(--sidebar-shadow-bg);
     border-right: var(--border-sidebar-soft);
     box-shadow: var(--sidebar-shadow);
     z-index: 2;
 }
 
-.invisible {
+.sidebar-soft {
+    background-color: var(--sidebar-soft);
+    border-right: transparent;
+}
+
+.sidebar-invisible {
     border: none;
     box-shadow: none;
 }
 
-.soft a,
-.invisible a{
+.sidebar-soft a,
+.sidebar-shadow a,
+.sidebar-invisible a{
     color: var(--sidebar-inactive-tab) ;
 }
 

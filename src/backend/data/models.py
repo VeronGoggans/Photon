@@ -5,6 +5,9 @@ from datetime import datetime
 
 Base = declarative_base()
 
+
+
+
 # Folders table (top-level folders)
 class Folder(Base):
     __tablename__ = 'folders'
@@ -25,6 +28,22 @@ class Folder(Base):
 
 
 
+class Category(Base):
+    __tablename__ = 'categories'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String, nullable=True)
+    color = Column(String, nullable=False, default='rgb(255, 255, 255)')
+
+    notes = relationship(
+        "Note",
+        backref="category",            # Allows access to the category from the Note model
+        cascade="save-update, merge",  # Avoids deleting Notes when a Category is deleted
+        passive_deletes=True           # Ensures the database handles deletions gracefully 
+        )
+
+
+
 # Notes table (can belong to either a folder or a subfolder)
 class Note(Base):
     __tablename__ = 'notes'
@@ -33,12 +52,25 @@ class Note(Base):
     name = Column(String, nullable=False)
     content = Column(String, nullable=True)
     bookmark = Column(Boolean, default=False)
+    is_template = Column(Boolean, default=False)
     last_edit = Column(String, nullable=False, default=datetime.now())
     last_visit = Column(String, nullable=False, default=datetime.now())
     creation = Column(String, nullable=False)
     
-    # Foreign keys for folder or subfolder
-    folder_id = Column(Integer, ForeignKey('folders.id', ondelete='CASCADE'), nullable=True)
+    # Foreign keys for folders and categories
+    folder_id = Column(Integer, 
+                       ForeignKey(
+                           'folders.id', 
+                            ondelete='CASCADE'),  # used to delete all the notes that are referencing the same folder when it's deleted
+                            nullable=True         # Allows the category_id to be NULL
+                        )
+        
+    category_id = Column(Integer, 
+                        ForeignKey(
+                            'categories.id', 
+                            ondelete='SET NULL'), # Set to NULL if the Category is deleted 
+                            nullable=True         # Allows the category_id to be NULL
+                        )
 
 
 
@@ -98,12 +130,20 @@ class StickyNote(Base):
 
 
 
-class Template(Base):
-    __tablename__ = 'templates'
-    
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String, nullable=True)
-    content = Column(String, nullable=True)
-    last_edit = Column(String, nullable=False, default=datetime.now())
-    creation = Column(String, nullable=False, default=datetime.now())
-    uses = Column(Integer, default=0)
+
+
+
+
+# class Tag(Base):
+#     __tablename__ = 'tags'
+
+#     id = Column(Integer, primary_key=True, autoincrement=True)
+#     name = Column(String, nullable=True)
+#     color = Column(String, nullable=False, default='rgb(255, 255, 255)')
+
+#     notes = relationship(
+#         "Note",
+#         backref="tag",                 # Allows access to the tag from the Note model
+#         cascade="save-update, merge",  # Avoids deleting Notes when a Tag is deleted
+#         passive_deletes=True           # Ensures the database handles deletions gracefully 
+#         )

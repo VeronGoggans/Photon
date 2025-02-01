@@ -4,36 +4,58 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="The searchbar is now a re-useable web component">
+    <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="Pinned folder will now have the folder icon with its applied appearance">
+      <change afterPath="$PROJECT_DIR$/src/frontend/javascript/components/modals/organisationModal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/frontend/javascript/controller/categoryController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/css/components/entities/sticky.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/components/entities/sticky.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/bugs.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/bugs.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/application/services/note_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/application/services/note_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/data/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/data/helpers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/data/managers/folder_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/data/managers/folder_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/data/managers/note_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/data/managers/note_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/data/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/data/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/presentation/request_bodies/folder_requests.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/presentation/request_bodies/folder_requests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/presentation/routers/note_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/presentation/routers/note_router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/util/filters.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/util/paths.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/util/paths.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/components/entities/folder.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/components/entities/folder.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/components/pageBlocks/pageBlocks.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/components/pageBlocks/pageBlocks.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/css/general/dialog.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/dialog.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/css/general/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/general/scrollbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/scrollbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/general/searchbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/searchbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/general/sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/sidebar.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/css/general/themes.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/general/themes.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/css/modals/deleteModal.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/modals/deleteModal.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/css/modals/editFolderModal.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/modals/editFolderModal.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/css/modals/newCollectionModal.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/modals/newCollectionModal.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/css/modals/noteDetailsModal.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/modals/noteDetailsModal.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/css/modals/searchModal.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/modals/searchModal.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/css/views/sticky_note/stickyWallHomeView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/views/sticky_note/stickyWallHomeView.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/css/views/sticky_note/stickyWallView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/views/sticky_note/stickyWallView.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/css/textEditor/editorSpawnables.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/css/textEditor/editorSpawnables.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/frontend_playground/test5.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/frontend_playground/test5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/frontend_playground/test6.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/frontend_playground/test6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/components/dynamicElementPlacer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/components/dynamicElementPlacer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/components/editor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/components/editor.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/javascript/components/eventBus.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/components/eventBus.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/components/modals/folderModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/components/modals/folderModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/components/modals/categoryModal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/components/modals/folderModal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/components/pageBlocks/pageBlocks.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/components/pageBlocks/pageBlocks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/components/searchbar/searchbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/components/searchbar/searchbar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/javascript/constants/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/constants/constants.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/javascript/constants/modalTemplates.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/constants/modalTemplates.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/javascript/constants/templates.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/constants/templates.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/controller/applicationController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/controller/applicationController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/javascript/controller/folderController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/controller/folderController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/controller/homeController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/controller/homeController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/javascript/controller/noteController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/controller/noteController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/controller/settingController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/controller/settingController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/javascript/controller/textEditorController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/controller/textEditorController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/datastuctures/stack.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/datastuctures/stack.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/model/folderModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/model/folderModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/util/ui.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/util/ui.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/view/homeView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/view/homeView.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/view/noteView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/view/noteView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/eventListeners/keyEventListener.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/eventListeners/keyEventListener.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/helpers/random.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/textFormat/textFormatter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/textFormat/textFormatter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/util/dialog.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/util/dialog.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/view/folderView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/view/folderView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/view/settingView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/view/settingView.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/javascript/view/sideBarView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/view/sideBarView.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/view/stickyNoteView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/view/stickyNoteView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/javascript/view/textEditorView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/view/textEditorView.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/javascript/view/viewFunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/javascript/view/viewFunctions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/settings.json" afterDir="false" />
     </list>
@@ -59,12 +81,12 @@
     &quot;assignee&quot;: &quot;VeronGoggans&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/VeronGoggans/Note-taking-app.git&quot;,
-    &quot;accountId&quot;: &quot;c0352633-a578-45f2-99f7-8571e13a7327&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/VeronGoggans/Note-taking-app.git",
+    "accountId": "c0352633-a578-45f2-99f7-8571e13a7327"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 3
@@ -79,7 +101,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;sqlite-persistence&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/jsvgo/Web Dev/In progress/Note-taking-app&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jsvgo/PycharmProjects/planet_simulation&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -171,7 +193,19 @@
       <workItem from="1737293071639" duration="281000" />
       <workItem from="1737293457973" duration="21164000" />
       <workItem from="1737398207293" duration="819000" />
-      <workItem from="1737550795050" duration="22154000" />
+      <workItem from="1737550795050" duration="31314000" />
+      <workItem from="1737668227377" duration="2665000" />
+      <workItem from="1737806749432" duration="3076000" />
+      <workItem from="1737918225043" duration="602000" />
+      <workItem from="1737981410826" duration="12181000" />
+      <workItem from="1738026411640" duration="3060000" />
+      <workItem from="1738063298991" duration="1755000" />
+      <workItem from="1738079610208" duration="4755000" />
+      <workItem from="1738091567581" duration="31000" />
+      <workItem from="1738102136111" duration="2336000" />
+      <workItem from="1738239059796" duration="440000" />
+      <workItem from="1738256904080" duration="4609000" />
+      <workItem from="1738419623492" duration="3682000" />
     </task>
     <task id="LOCAL-00001" summary="the sidebar can now be without a border in the settings tab. And the options menu for folders and notes have been changed">
       <option name="closed" value="true" />
@@ -357,7 +391,23 @@
       <option name="project" value="LOCAL" />
       <updated>1737298810467</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="The note filter infrastructure is laid down for the bookmarks, categories and tags">
+      <option name="closed" value="true" />
+      <created>1737649234783</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1737649234784</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Pinned folder will now have the folder icon with its applied appearance">
+      <option name="closed" value="true" />
+      <created>1738000864114</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1738000864114</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -386,6 +436,8 @@
     <MESSAGE value="The current folder now shows its color next to its name" />
     <MESSAGE value="Names of folders and notes no are longer allowed to have any whites space at the start and end of the name And pressing enter whilst the document name input is active will focus the cursor to the document page (content of the document)." />
     <MESSAGE value="The searchbar is now a re-useable web component" />
-    <option name="LAST_COMMIT_MESSAGE" value="The searchbar is now a re-useable web component" />
+    <MESSAGE value="The note filter infrastructure is laid down for the bookmarks, categories and tags" />
+    <MESSAGE value="Pinned folder will now have the folder icon with its applied appearance" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pinned folder will now have the folder icon with its applied appearance" />
   </component>
 </project>

@@ -1,13 +1,14 @@
 import { NoteDetailModal} from "../components/modals/noteDetailModal.js";
 import { DeleteModal } from "../components/modals/deleteModal.js";
 import { SearchModal } from "../components/modals/searchModal.js";
-import { FolderModal } from "../components/modals/folderModal.js";
 import { AnimationHandler } from "../handlers/animationHandler.js";
 import { StickyBoardModel } from "../components/modals/stickyBoardModal.js";
 import {
     RENDER_DELETE_MODAL_EVENT,
-    RENDER_FOLDER_MODAL_EVENT, RENDER_CATEGORY_MODAL_EVENT,
-    RENDER_NOTE_DETAILS_MODAL_EVENT, RENDER_SEARCH_MODAL_EVENT, RENDER_STICKY_BOARD_MODAL_EVENT
+    RENDER_NOTE_DETAILS_MODAL_EVENT,
+    RENDER_SEARCH_MODAL_EVENT,
+    RENDER_STICKY_BOARD_MODAL_EVENT,
+    RENDER_ORGANISATION_MODAL_EVENT
 } from "../components/eventBus.js";
 
 
@@ -21,12 +22,11 @@ export class Dialog {
         this.dialog = document.querySelector('.dialog');
         this.attachEventlisteners();
         this.eventBus.registerEvents({
-            [RENDER_FOLDER_MODAL_EVENT]: (modalData) => this.renderFolderModal(modalData),
+            [RENDER_ORGANISATION_MODAL_EVENT]: (modalData) => this.renderOrganisationModal(modalData),
             [RENDER_DELETE_MODAL_EVENT]: (modalData) => this.renderDeleteModal(modalData),
             [RENDER_NOTE_DETAILS_MODAL_EVENT]: (modalData) => this.renderNoteDetailsModal(modalData),
             [RENDER_STICKY_BOARD_MODAL_EVENT]: (modalData) => this.renderStickyBoardModal(modalData),
             [RENDER_SEARCH_MODAL_EVENT]: () => this.renderSearchModal(),
-            [RENDER_CATEGORY_MODAL_EVENT]: (modalData) => this.renderCategoryModal(modalData)
         })
     }
 
@@ -40,8 +40,7 @@ export class Dialog {
                 '.delete-modal',
                 '.settings-container',
                 '.note-details-modal',
-                '.edit-folder-modal',
-                '.category-modal',
+                'organisation-modal',
                 '.new-sticky-board-modal',
             ];
 
@@ -148,25 +147,14 @@ export class Dialog {
      *
      * @param modalData
      */
-    renderFolderModal(modalData) {
-        const modal = new FolderModal(modalData);
+    renderOrganisationModal(modalData) {
+        const modal = document.createElement('organisation-modal');
+        modal.setData(modalData);
+
         this.#renderModal(modal);
 
         // Focus on the first input field (improves the UX)
-        this.dialog.querySelector('.edit-folder-modal input').focus()
-    }
-
-
-    /**
-     *
-     * @param modalData
-     */
-    renderCategoryModal(modalData) {
-        const modal = new FolderModal(modalData);
-        this.#renderModal(modal);
-
-        // Focus on the first input field (improves the UX)
-        this.dialog.querySelector('.edit-folder-modal input').focus()
+        this.dialog.querySelector('organisation-modal input').focus()
     }
 }
 

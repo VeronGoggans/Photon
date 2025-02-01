@@ -7,9 +7,15 @@ import { removeContent } from "../util/ui.js";
 import { loadFolder } from "./viewFunctions.js";
 import { AutoSave } from "../components/Autosave.js";
 import {
+  FETCH_BOARD_SEARCH_ITEMS_EVENT,
+  FETCH_FOLDER_SEARCH_ITEMS_EVENT,
+  FETCH_NOTE_SEARCH_ITEMS_EVENT,
+  FETCH_TEMPLATE_SEARCH_ITEMS_EVENT,
   RENDER_DELETE_MODAL_EVENT,
   RENDER_NOTE_DETAILS_MODAL_EVENT
 } from "../components/eventBus.js";
+import { ReferenceItemTypes } from "../constants/constants.js";
+import { placeSearchContainer } from "../components/dynamicElementPlacer.js";
 
 
 
@@ -98,6 +104,17 @@ export class TextEditorView {
   }
 
 
+  /**
+   * This method will apply the specified template to the end of the page/note.
+   *
+   * @param template         - The template (note with is_template = True) object
+   * @param template.content - The content of the template object.
+   */
+  applyTemplate(template) {
+    this.page.innerHTML = this.page.innerHTML + template.content;
+  }
+
+
 
   /**
    * This method will save the currently loaded template or note.
@@ -108,12 +125,6 @@ export class TextEditorView {
     this.controller.clearStoredObject();
   }
 
-
-
-
-  renderSearchModal() {
-    this.dialog.renderSearchModal(this.toolbar);
-  }
 
 
   /**
@@ -163,28 +174,6 @@ export class TextEditorView {
 
 
 
-  /**
-   *
-   * @param event
-   */
-  async #loadRecentlyViewedNote(event) {
-    // Load the recently viewed note into the editor
-    await this.controller.loadRecentlyViewedNote(event.detail.note);
-
-  }
-
-
-
-  /**
-   *
-   * @param event
-   */
-  async #loadLinkedNote(event) {
-    // The linked note
-    const { note } = event.detail;
-  }
-
-
 
   #initElements() {
     // toolbar top
@@ -226,9 +215,7 @@ export class TextEditorView {
      * (e.g. A4 paper right under the name)
      */
     this.documentNameInput.addEventListener('keypress', (event) => {
-      if (event.key === 'Enter') {
-        this.page.focus();
-      }
+      if (event.key === 'Enter') this.page.focus();
     })
 
 
@@ -268,8 +255,65 @@ export class TextEditorView {
      *
      */
     this.recentlyViewedNotesDropdown.addEventListener('RecentlyViewedNoteCardClick', async (event) => {
-      await this.#loadRecentlyViewedNote(event);
+      const { note } = event.detail;
+      await this.controller.loadRecentlyViewedNote(note);
     })
+
+    
+    /**
+     * 
+     */
+    this.viewElement.addEventListener('ReferenceItemClick', async (event) => {
+      const { id, type } = event.detail;
+      await this.controller.loadReferenceItem(id, type);
+    })
+
+
+    this.viewElement.addEventListener('SearchBarItemClick', async (event) => {
+        const { searchItem, searchType, cursorPosition } = event.detail;
+
+        // Render a link block for ( notes/folders/boards )
+        if (searchType !== ReferenceItemTypes.TEMPLATES) {
+          const referenceItem = document.createElement('reference-item-card');
+          referenceItem.setAttribute('reference-item', JSON.stringify({id: searchItem.id, name: searchItem.name, type: searchType}));
+          cursorPosition.insertNode(referenceItem);
+        }
+
+        // Load in the template
+        else await this.controller.loadReferenceItem(searchItem.id, searchType);
+
+    })
+
+
+  
+
+    this.viewElement.addEventListener('AddReferenceContainer', async (event) => {
+      const { component, referenceType, cursorPosition } = event.detail;
+      let referenceItems;
+      
+      switch (referenceType) {
+        case ReferenceItemTypes.NOTES:
+          referenceItems = await this.eventBus.asyncEmit(FETCH_NOTE_SEARCH_ITEMS_EVENT);
+          break;
+        case ReferenceItemTypes.TEMPLATES:
+          referenceItems = await this.eventBus.asyncEmit(FETCH_TEMPLATE_SEARCH_ITEMS_EVENT);
+          break;
+        case ReferenceItemTypes.FOLDERS:
+          referenceItems = await this.eventBus.asyncEmit(FETCH_FOLDER_SEARCH_ITEMS_EVENT);
+          break;
+        case ReferenceItemTypes.BOARDS:
+          referenceItems = await this.eventBus.asyncEmit(FETCH_BOARD_SEARCH_ITEMS_EVENT); 
+          break;
+        default:
+          break;
+        }
+
+        placeSearchContainer(component);
+
+        component.setCursorPosition(cursorPosition);
+        // Fill the searchbar with the fetched reference items
+        component.insertItems(referenceType, referenceItems);        
+    });
 
 
     /**
@@ -317,6 +361,10 @@ export class TextEditorView {
      */
     this.exitButton.addEventListener('click', () => {
       this.controller.loadPreviousView()
+    });
+
+    this.page.addEventListener('drop', () => {
+
     });
 
 

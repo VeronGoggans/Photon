@@ -39,7 +39,7 @@ export const folderIconColors = {
 export const stickyNoteColors = ['#ffdfef', '#ded7ff', '#b4ebce', '#ffecc0', '#ffd0d0', '#d4e7ff']
 
 
-export const sidebarButtonText = ['Home', 'Notes', "to do's", 'Boards', 'Settings']
+export const sidebarButtonText = ['Home', 'Notes', 'Boards', 'Settings']
 
 
 
@@ -74,8 +74,8 @@ export const organisationModalUpdateButtonText = {
 
 
 export const organisationModalContextText = {
-    folder: 'Folders help you categorise your notes in a hierarchical fashion',
-    category: 'Categories help you categorise your notes in a flat and straight forward manner'
+    folder: 'Folders help you organise your notes in a hierarchical fashion',
+    category: 'Categories help you organise your notes in a flat and straight forward manner'
 }
 
 
@@ -84,6 +84,11 @@ export const organisationModalEntityNameText = {
     category: 'Category name'
 }
 
+
+export const organisationModalIcons = {
+    folder: 'bi bi-folder',
+    category: 'bi bi-inboxes'
+}
 
 
 
@@ -98,3 +103,11 @@ export const StickyBoardTypes = {
     STANDARD: 'standard',
     COLUMN:   'column'
 }
+
+export const ReferenceItemTypes = {
+    NOTES: 'notes',
+    FOLDERS: 'folders',
+    BOARDS: 'boards',
+    TEMPLATES: 'templates'
+}
+

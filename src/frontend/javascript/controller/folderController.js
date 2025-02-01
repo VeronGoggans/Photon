@@ -15,7 +15,7 @@ import {
     UPDATE_FOLDER_PIN_VALUE_EVENT,
     SET_NOTE_FILTER_EVENT, CLEAR_NOTE_FILTER_EVENT
 } from "../components/eventBus.js";
-import {showBookmarkedNotes} from "../view/viewFunctions.js";
+import { showBookmarkedNotes } from "../view/viewFunctions.js";
 
 
 

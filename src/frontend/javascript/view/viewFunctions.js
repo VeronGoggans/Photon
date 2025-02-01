@@ -3,7 +3,6 @@ import {
     FETCH_FOLDER_BY_ID_EVENT,
     FETCH_NOTE_BY_ID_EVENT, FETCH_NOTES_EVENT, SET_NOTE_FILTER_EVENT
 } from "../components/eventBus.js";
-import { viewToLoad } from "../helpers/random.js";
 import {hideFolderBlockTitle, removeContent, resetFolderColorCircle} from "../util/ui.js";
 
 
@@ -33,7 +32,7 @@ export async function loadFolder(folderId, eventBus) {
 export async function handleSearch(searchItemId, searchType, eventBus) {
     const viewId = viewToLoad(searchType)
     if (viewId === 'editor') {
-        if (searchType === 'note') {
+        if (searchType === 'notes' || searchType === 'templates') {
             const { note, location } = await eventBus.asyncEmit(FETCH_NOTE_BY_ID_EVENT, searchItemId);
             eventBus.emit(INIT_VIEW_EVENT, {
                 viewId: viewId,
@@ -85,3 +84,16 @@ export async function showBookmarkedNotes(eventBus) {
 }
 
 
+
+
+
+function viewToLoad(searchType) {
+    switch (searchType) {
+        case 'notes':
+            return 'editor'
+        case 'templates':
+            return 'editor'
+        case 'folders':
+            return 'notes'
+    }
+}

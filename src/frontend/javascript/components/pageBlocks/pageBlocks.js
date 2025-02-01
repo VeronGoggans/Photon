@@ -1,6 +1,7 @@
 import { createCustomElement } from "../../util/ui/components.js";
-import { formatDate } from "../../util/date.js";
-import { DynamicElementPlacer } from "../dynamicElementPlacer.js";
+import { placeContextMenu } from "../dynamicElementPlacer.js";
+import { folderColorOptionsTemplate, categoryColorOptionsTemplate } from "../../constants/modalTemplates.js";
+import { ReferenceItemTypes } from "../../constants/constants.js";
 
 
 class DocumentLocationPageBlock extends HTMLElement {
@@ -79,7 +80,7 @@ class EntityOptionsMenu extends HTMLElement {
     render() {
         this.innerHTML = this.menuTemplate;
         this.checkCorrectOptionStates();
-        DynamicElementPlacer.placeContextMenu(this, this.boundedElement);
+        placeContextMenu(this, this.boundedElement);
     }
 
 
@@ -152,82 +153,141 @@ class EntityOptionsMenu extends HTMLElement {
 
 
 
-class NoteLink extends HTMLElement {
+class AppearanceOptions extends HTMLElement {
     constructor() {
         super();
     }
 
 
     connectedCallback() {
-        this.contentEditable = 'false'
+        this.entity = this.getAttribute('entity-name');
         this.render();
         this.addEventListeners();
     }
 
 
-    init(name, lastEditDate) {
-        this.innerHTML = `
-            <i class="bi bi-file-earmark"></i>
-            <div>
-                <span class="note-name">${name}</span>
-                <span class="last-edit-date">${formatDate(lastEditDate)}</span>
-            </div>
-        `
-    }
-
-
     render() {
+        if (this.entity === 'folder') {
+            this.innerHTML = folderColorOptionsTemplate;
+        }
+        else if (this.entity === 'category') {
+            this.innerHTML = categoryColorOptionsTemplate;
+        }
 
+        this.colorOptions = this.querySelectorAll('#color-option');
+        this.colorOptionWrappers = this.querySelectorAll('.color-option-wrapper');
     }
+
 
     addEventListeners() {
-        this.dispatchEvent()
+        /**
+         * This event listener will listen for clicks on the  color options for that entity.
+         * Clicking on a color option will give a visual indication to clarify that's the selected color.
+         */
+        this.colorOptions.forEach(colorOption => {
+            const entityCSSClass = colorOption.getAttribute('data-entity-css-class');
+
+            colorOption.addEventListener('click', () => {
+                this.showSelectedAppearance(entityCSSClass);
+            });
+        });
     }
 
+
+    /**
+     * The `#showActiveFolderColor` method updates the visual state of folder color options
+     * in the UI by highlighting the currently selected color and storing it as the preferred
+     * folder color. It iterates over an array of color options, modifies their classes to
+     * reflect the active selection, and updates the internal state.
+     *
+     * @private
+     * @method
+     * @name #showActiveFolderColor
+     * @description This method ensures that only the folder color option matching the
+     * given `styleClass` is highlighted by adding the `selected-folder-color` class to it.
+     * Other color options have the `selected-folder-color` class removed. The selected
+     * color is saved as `this.preferredEntityColor`.
+     *
+     * @param {string} entityCSSClass   - The CSS class corresponding to the selected entity color.
+     */
+    showSelectedAppearance(entityCSSClass) {
+        for (let i = 0; i < this.colorOptions.length; i++) {
+            const colorOption = this.colorOptions[i];
+            let borderColor = colorOption.style.backgroundColor;
+
+            if (colorOption.getAttribute('data-entity-css-class') !== entityCSSClass) {
+                this.colorOptionWrappers[i].style.borderColor = 'transparent';
+                continue
+            }
+
+            if (borderColor === '#f6f6f9' || borderColor === 'rgb(246, 246, 249)') {
+                borderColor = '#5c7fdd';
+            }
+
+            this.colorOptionWrappers[i].style.borderColor = borderColor;
+        }
+        this.dispatchEvent(new CustomEvent('appearance-option-click', { detail: { color: entityCSSClass }, bubbles: true }));
+    }
 }
 
 
 
 
 
-class CodeSnippet extends HTMLElement {
+class ReferenceItemCard extends HTMLElement {
     constructor() {
         super();
     }
 
+
     connectedCallback() {
-        const snippet = this.querySelector('code');
-        hljs.highlightElement(snippet);
+        this.draggable = true;
+        this.contentEditable = 'false';
+        this.referenceItem = JSON.parse(this.getAttribute('reference-item'));
+        this.id = this.referenceItem.id;
+        this.name = this.referenceItem.name;
+        this.type = this.referenceItem.type;
+
+        this.render();
         this.addEventListeners();
     }
 
 
-    render(language) {
+    render() {
         this.innerHTML = `
-            <span>${language}</span>
-            <pre>
-                <code class="language-${language}" style="height: 50px;"></code>
-            </pre>
+            <i class="${this.determineIcon()}"></i>
+            <span class="note-name">${this.name}</span>
         `
     }
 
-    addEventListeners() {
-        this.addEventListener('paste', (event) => {this.highlightOnPaste(event)})
+
+    determineIcon() {
+        switch (this.type) {
+            case ReferenceItemTypes.NOTES:
+                return 'bi bi-file-earmark';
+            case ReferenceItemTypes.FOLDERS:
+                return 'bi bi-folder';
+            case ReferenceItemTypes.BOARDS:
+                return 'bi bi-columns';   
+        }
+
     }
 
-    highlightOnPaste(event) {
-        event.preventDefault();
 
-        // Access the clipboard data
-        const clipboardData = event.clipboardData || window.clipboardData;
-        const pastedContent = clipboardData.getData('text');
-        
-        const snippet = this.querySelector('code');
-        snippet.textContent = pastedContent;
 
-        hljs.highlightElement(snippet);
+    addEventListeners() {
+        this.addEventListener('click', () => {
+            this.dispatchEvent(new CustomEvent('ReferenceItemClick', {
+                detail: {
+                    id: this.id,
+                    type: this.type
+                },
+                bubbles: true
+            }));
+        })
     }
 }
+
 
 
 
@@ -296,5 +356,6 @@ class TerminalSnippet extends HTMLElement {
 
 customElements.define('entity-options-menu', EntityOptionsMenu);
 customElements.define('document-location-page-block', DocumentLocationPageBlock);
-customElements.define('code-snippet', CodeSnippet);
 customElements.define('terminal-snippet', TerminalSnippet);
+customElements.define('appearance-options', AppearanceOptions);
+customElements.define('reference-item-card', ReferenceItemCard);

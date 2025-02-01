@@ -1,93 +1,104 @@
-export const editFolderModalTemplate = `
-<h2>Create a new folder</h2>
-<div class="folder-settings">
-    <p>Folder help you categorise your notes in a hierarchical fashion</p>
-    <span id="title">Folder name</span>
-    <input type="text" placeholder="Untitled" spellcheck="false">
-    <i id="open-emoji-picker-btn" class="bi bi-emoji-grin"></i>
-    <span id="title">Appearance</span>
-    <div class="folder-color-options">
-        <div class="color-option-wrapper">
-            <div id="color-option" style="background-color: rgb(121, 144, 255)" data-folder-css-class="color-blue-1"></div>
-        </div>
-        <div class="color-option-wrapper">
-            <div id="color-option" style="background-color: rgb(169, 215, 255)" data-folder-css-class="color-blue-2"></div>
-        </div>
-        <div class="color-option-wrapper">
-             <div id="color-option" style="background-color: rgb(217, 237, 255)" data-folder-css-class="color-blue-3"></div>
-        </div>
-        <div class="color-option-wrapper">
-           <div id="color-option" style="background-color: rgb(124, 199, 211)"  data-folder-css-class="color-blue-4"></div>
-        </div>
-        <div class="color-option-wrapper">
-            <div id="color-option" style="background-color: rgb(158, 213, 197)" data-folder-css-class="color-green-1"></div>
-        </div>
-        <div class="color-option-wrapper">
-           <div id="color-option" style="background-color: rgb(203, 255, 197)" data-folder-css-class="color-green-2"></div>
-        </div>
-        <div class="color-option-wrapper">
-            <div id="color-option" style="background-color: rgb(173, 255, 164)" data-folder-css-class="color-green-3"></div>
-        </div>
-        <div class="color-option-wrapper">
-            <div id="color-option" style="background-color: rgb(142, 122, 181)" data-folder-css-class="color-purple-1"></div>
-        </div>
-        <div class="color-option-wrapper">
-            <div id="color-option" style="background-color: rgb(223, 193, 255)" data-folder-css-class="color-purple-2"></div>
-        </div>
-        <div class="color-option-wrapper">
-            <div id="color-option" style="background-color: rgb(255, 163, 163)" data-folder-css-class="color-red-1"></div>
-        </div>
-        <div class="color-option-wrapper">
-            <div id="color-option" style="background-color: rgb(255, 197, 197)" data-folder-css-class="color-red-2"></div>
-        </div>
-        <div class="color-option-wrapper">
-            <div id="color-option" style="background-color: rgb(255, 182, 116)" data-folder-css-class="color-orange-1"></div>
-        </div>
-        <div class="color-option-wrapper">
-            <div id="color-option" style="background-color: rgb(255, 224, 158)" data-folder-css-class="color-orange-2"></div>
-        </div>
-        <div class="color-option-wrapper">
-            <div id="color-option" class="color-original" style="background-color: #f6f6f9; border-color: var(--border-card)" data-folder-css-class="color-original"></div>
-        </div>
+
+
+
+export const folderColorOptionsTemplate = `
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(121, 144, 255)" data-entity-css-class="color-blue-1"></div>
     </div>
-    <div class="buttons-container">
-        <button class="modal-cancel-button cancel-btn dialog-button">Cancel</button>
-        <button class="modal-confirm-button save-btn dialog-button">Add folder</button>
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(169, 215, 255)" data-entity-css-class="color-blue-2"></div>
     </div>
-</div>
+    <div class="color-option-wrapper">
+         <div id="color-option" style="background-color: rgb(217, 237, 255)" data-entity-css-class="color-blue-3"></div>
+    </div>
+    <div class="color-option-wrapper">
+       <div id="color-option" style="background-color: rgb(124, 199, 211)"  data-entity-css-class="color-blue-4"></div>
+    </div>
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(158, 213, 197)" data-entity-css-class="color-green-1"></div>
+    </div>
+    <div class="color-option-wrapper">
+       <div id="color-option" style="background-color: rgb(203, 255, 197)" data-entity-css-class="color-green-2"></div>
+    </div>
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(173, 255, 164)" data-entity-css-class="color-green-3"></div>
+    </div>
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(142, 122, 181)" data-entity-css-class="color-purple-1"></div>
+    </div>
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(223, 193, 255)" data-entity-css-class="color-purple-2"></div>
+    </div>
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(255, 163, 163)" data-entity-css-class="color-red-1"></div>
+    </div>
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(255, 197, 197)" data-entity-css-class="color-red-2"></div>
+    </div>
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(255, 182, 116)" data-entity-css-class="color-orange-1"></div>
+    </div>
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(255, 224, 158)" data-entity-css-class="color-orange-2"></div>
+    </div>
+    <div class="color-option-wrapper">
+        <div id="color-option" class="color-original" style="background-color: #f6f6f9; border-color: var(--border-card)" data-entity-css-class="color-original"></div>
+    </div>
 `
 
-export const categoryModalTemplate = `
-<h2>New category</h2>
-<div class="category-settings">
-    <span id="title">Category name</span>
-    <p>You can change the name of the category below</p>
-    <input type="text" placeholder="Untitled" spellcheck="false">
 
-    <span id="title">Category color</span>
-    <p>Select a color for this category</p>
-    <div class="category-color-options">
-        <div style="background-color: rgb(121, 144, 255)" data-folder-css-class="color-blue-1"></div>
-        <div style="background-color: rgb(169, 215, 255)" data-folder-css-class="color-blue-2"></div>
-        <div style="background-color: rgb(217, 237, 255)" data-folder-css-class="color-blue-3"></div>
-        <div style="background-color: rgb(124, 199, 211)"  data-folder-css-class="color-blue-4"></div>
-        <div style="background-color: rgb(158, 213, 197)" data-folder-css-class="color-green-1"></div>
-        <div style="background-color: rgb(203, 255, 197)" data-folder-css-class="color-green-2"></div>
-        <div style="background-color: rgb(173, 255, 164)" data-folder-css-class="color-green-3"></div>
-        <div style="background-color: rgb(142, 122, 181)" data-folder-css-class="color-purple-1"></div>
-        <div style="background-color: rgb(223, 193, 255)" data-folder-css-class="color-purple-2"></div>
-        <div style="background-color: rgb(255, 163, 163)" data-folder-css-class="color-red-1"></div>
-        <div style="background-color: rgb(255, 197, 197)" data-folder-css-class="color-red-2"></div>
-        <div style="background-color: rgb(255, 182, 116)" data-folder-css-class="color-orange-1"></div>
-        <div style="background-color: rgb(255, 224, 158)" data-folder-css-class="color-orange-2"></div>
-        <div class="color-original" style="background-color: #fff" data-folder-css-class="color-original"></div>
+
+export const categoryColorOptionsTemplate = `
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(99,118,231)" data-entity-css-class="color-blue-1"></div>
     </div>
-    <div class="buttons-container">
-        <button class="modal-cancel-button cancel-btn">Cancel</button>
-        <button class="modal-confirm-button save-btn">Add category</button>
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(128,145,246)" data-entity-css-class="color-blue-2"></div>
     </div>
-</div>
+    <div class="color-option-wrapper">
+         <div id="color-option" style="background-color: rgb(211,217,255)" data-entity-css-class="color-blue-3"></div>
+    </div>
+    <div class="color-option-wrapper">
+       <div id="color-option" style="background-color: rgb(204,224,255)"  data-entity-css-class="color-blue-4"></div>
+    </div>
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(140,236,141)" data-entity-css-class="color-green-1"></div>
+    </div>
+    <div class="color-option-wrapper">
+       <div id="color-option" style="background-color: rgb(177,255,177)" data-entity-css-class="color-green-2"></div>
+    </div>
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(203,255,203)" data-entity-css-class="color-green-3"></div>
+    </div>
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(209,177,255)" data-entity-css-class="color-purple-1"></div>
+    </div>
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(230,212,255)" data-entity-css-class="color-purple-2"></div>
+    </div>
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(255,172,172)" data-entity-css-class="color-red-1"></div>
+    </div>
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(255,212,212)" data-entity-css-class="color-red-2"></div>
+    </div>
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(255,200,153)" data-entity-css-class="color-orange-1"></div>
+    </div>
+    <div class="color-option-wrapper">
+        <div id="color-option" style="background-color: rgb(255,231,210)" data-entity-css-class="color-orange-2"></div>
+    </div>
+    <div class="color-option-wrapper">
+        <div id="color-option" class="color-original" style="background-color: #f6f6f9; border-color: var(--border-card)" data-entity-css-class="color-original"></div>
+    </div>
 `
+
+
+
+
+
+
+
 
 export const newStickyBoardModalTemplate = `
 <h2>New sticky board</h2>

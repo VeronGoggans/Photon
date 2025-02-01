@@ -13,7 +13,8 @@ import {
     LOAD_NOTES_IN_MEMORY_EVENT,
     CLEAR_STORED_NOTE_EVENT,
     DELETE_NOTE_EVENT,
-    UPDATE_NOTE_LOCATION_EVENT
+    UPDATE_NOTE_LOCATION_EVENT,
+    FETCH_TEMPLATE_SEARCH_ITEMS_EVENT
 } from "../components/eventBus.js";
 
 
@@ -27,7 +28,8 @@ export class NoteController {
             [FETCH_RECENT_NOTES_EVENT]: async () => await this.getNotes({recent: true}),
             [FETCH_NOTE_BY_ID_EVENT]: async (noteId) => await this.getNoteById(noteId),
             [FETCH_NOTES_EVENT]: async (params) => await this.getNotes({folderId: params.folderId, bookmarks: params.bookmarks, recent: params.recent, recentlyViewed: params.recentlyViewed, searchItems: params.searchItems, render: params.render, storeResultInMemory: params.storeResultInMemory}),
-            [FETCH_NOTE_SEARCH_ITEMS_EVENT]: async () => await this.getNotes({searchItems: true}),
+            [FETCH_NOTE_SEARCH_ITEMS_EVENT]: async () => await this.getNotes({noteSearchItems: true}),
+            [FETCH_TEMPLATE_SEARCH_ITEMS_EVENT]: async () => await this.getNotes({templateSearchItems: true}),
             [CREATE_NOTE_EVENT]: async (noteId) => await this.addNote(noteId),
             [PATCH_NOTE_NAME_EVENT]: async (updatedNoteData) => await this.updateNoteName(updatedNoteData),
             [PATCH_NOTE_CONTENT_EVENT]: async (updatedNoteData) => await this.updateNoteContent(updatedNoteData),
@@ -70,20 +72,15 @@ export class NoteController {
 
 
     /**
-     *
-     * @param folderId              - Query parameter
-     * @param bookmarks             - Query parameter
-     * @param recent                - Query parameter
-     * @param recentlyViewed        - Query parameter
-     * @param searchItems           - Query parameter
-     * @param render                - Behavioral parameter
-     * @param storeResultInMemory   - Behavioral parameter
+     * 
+     * 
+     * @returns 
      */
     async getNotes(
-        { folderId = undefined, bookmarks = false,
+        {   folderId = undefined, bookmarks = false,
             recent = false, recentlyViewed = false,
-            searchItems = false, render = false,
-            storeResultInMemory = false
+            noteSearchItems = false, templateSearchItems = false, 
+            render = false, storeResultInMemory = false
         } = {}) {
 
         // Construct query parameters dynamically
@@ -92,7 +89,8 @@ export class NoteController {
             bookmarks,
             recent,
             recently_viewed: recentlyViewed,
-            search_items: searchItems,
+            note_search_items: noteSearchItems,
+            template_search_items: templateSearchItems
         });
 
         if (folderId === undefined) params.delete('folder_id')
@@ -218,10 +216,10 @@ export class NoteController {
     async #initSearchbar() {
         const notes = await this.eventBus.asyncEmit(FETCH_NOTE_SEARCH_ITEMS_EVENT);
         const folders = await this.eventBus.asyncEmit(FETCH_FOLDER_SEARCH_ITEMS_EVENT);
-        const searchbar = document.querySelector('autocomplete-searchbar');
+        this.searchbar = document.querySelector('autocomplete-searchbar');
 
-        searchbar.insertItems('note', notes);
-        searchbar.insertItems('folder', folders);
-        searchbar.renderItems();
+        this.searchbar.insertItems('notes', notes);
+        this.searchbar.insertItems('folders', folders);
+        this.searchbar.renderItems();
     }
 }

@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from src.backend.data.models import Folder, Note, StandardStickyBoard, ColumnStickyBoard, StickyBoardColumn, StickyNote
+from src.backend.data.models import Folder, Note, StandardStickyBoard, ColumnStickyBoard, StickyBoardColumn, StickyNote, Category
 from src.backend.data.exceptions.exceptions import NotFoundException
 
 
@@ -9,6 +9,14 @@ def find_folder(folder_id: int, db: Session) -> (Folder | NotFoundException):
     if folder is None:
         raise NotFoundException(f"Folder with id {folder_id} not found.")
     return folder
+
+
+def find_category(category_id: int, db: Session) -> (Category | NotFoundException):
+    category = db.query(Category).filter(Category.id == category_id).first()
+
+    if category is None:
+        raise NotFoundException(f"Category with id {category_id} not found.")
+    return category
 
 
 def find_note(note_id: int, db: Session) -> ( Note | NotFoundException ):
@@ -85,3 +93,17 @@ def get_entity_path(item_id: int, db: Session, is_note: bool = False) -> list[di
     
     # Reverse the path to show the hierarchy from top to bottom
     return path[::-1]
+
+
+
+
+def is_templates_folder_in_path(parent_folder_id: int, db: Session) -> bool:
+
+    hierarchy: list[object] = get_entity_path(parent_folder_id, db)
+
+    # Checking to see if the Templates folder is inside of the path to the note.
+    # If so the app will register that note as a template. 
+    for folder in hierarchy:
+        if 'Templates' in folder.name or 'templates' in folder.name:
+            return True
+    return False

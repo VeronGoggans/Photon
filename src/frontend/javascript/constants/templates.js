@@ -1,17 +1,16 @@
 const homeTemplate = `
     <div class="home">
         <div class="top">
-
-        <autocomplete-searchbar></autocomplete-searchbar>
-        
+            
+            <autocomplete-searchbar></autocomplete-searchbar>
         </div>
         <div class="middle">
-        <h1 class="view-title"><div class="time-of-day-art"></div></h1>
-        <p class="block-title">Recent folders</p>
+            <h1 class="view-title"></h1>
+            <p class="block-title">Recent folders</p>
         <div class="recent-folders"></div>
-        <p class="block-title">Your recent work</p>
+            <p class="block-title">Your recent work</p>
         <div class="recent-notes"></div>
-        <p class="block-title">Jump back in</p>
+            <p class="block-title">Jump back in</p>
         <div class="flashcard-decks"></div>
         </div>
     </div>
@@ -35,7 +34,7 @@ const notesTemplate = `
                     <li class="pin-current-folder-btn"><i class="bi bi-pin"></i> Pin current folder</li>
                     <li class="export-current-folder-btn"><i class="bi bi-box-seam"></i> Export current folder</li>
                     <span class="note-view-options-dropdown-section">Other</span>
-                    <li class="add-category-btn"><i class="bi bi-archive"></i> Create a category</li>
+                    <li class="add-category-btn"><i class="bi bi-inboxes"></i> Create a category</li>
                 </ul>
             </div>
             <div class="current-folder-name-container">
@@ -193,6 +192,7 @@ const settingsTemplate = `
                     <ul class="dropdown-items">
                         <li color="original">Original</li>
                         <li color="soft">Soft</li>
+                        <li color="shadow">Shadow</li>
                         <li color="invisible">Invisible</li>
                     </ul>
                 </div>
