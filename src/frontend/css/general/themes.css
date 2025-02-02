@@ -54,6 +54,7 @@
     --exit-btn: #28283b;
     --secondary: #5c7dff;
     --background: #121218; /*#16161a*/
+    --reference-item-bg: #101016;
     --notification: #0f0e1a;
     --subtitle: #9196aa;
     --sidebar: #121218;
@@ -94,7 +95,7 @@
     /*Feedback variables*/
     --completed-checklist-task: #28293f;
     --reference-item-icon: #292957;
-    --empty-folder-icon-background: #1b1b27;
+    --empty-folder-icon-background: #101016;
     --active-tab-bg: #5c7fdd;
     --active-tab-text: #fff;
 
@@ -225,6 +226,8 @@
     /*Other*/
     --title-bar-button-background: #dfe7ff;
     --title-bar-button-color: rgb(101, 102, 120);
+    --empty-folder-icon-background: #eff2ff;
+    --reference-item-bg: #ffffff;
     --exit-btn: #f8fafe;
     --secondary: #5c7dff;
     --background: #ffffff;

@@ -1,8 +1,18 @@
-import { AnimationHandler } from "../handlers/animationHandler.js";
-import { addChecklist, addHeading, addHtml, addLink, addList, 
-    addHorizontalLine, addEmbedVideo, addColor, addTerminal } from "../textFormat/textFormatter.js";
-import { PlacementHelper } from "../helpers/placementHelper.js";
-import { ReferenceItemTypes } from "../constants/constants.js";
+import {AnimationHandler} from "../handlers/animationHandler.js";
+import {
+    addChecklist,
+    addColor,
+    addEmbedVideo,
+    addHeading,
+    addHorizontalLine,
+    addHtml,
+    addLink,
+    addList,
+    addTerminal
+} from "../textFormat/textFormatter.js";
+import {PlacementHelper} from "../helpers/placementHelper.js";
+import {ReferenceItemTypes, SlashCommands} from "../constants/constants.js";
+import {placeSlashCommandContainer} from "./dynamicElementPlacer.js";
 
 
 class SlashCommandContainer extends HTMLElement {
@@ -26,100 +36,99 @@ class SlashCommandContainer extends HTMLElement {
         this.innerHTML = `
         <input type="text" placeholder="Enter a command" spellcheck="false">
         <div class="commands">
-            <div class="link-option" data-command="link"><i class="bi bi-link-45deg"></i>Add url</div>
-            <div class="embed-video-option" data-command="video"><i class="bi bi-play-fill"></i>Add video</div>
-            <div class="horizontal-line-option" data-command="line"><i class="bi bi-hr"></i>Add horizontal line</div>
-            <div class="unordered-list" data-command="ul"><i class="bi bi-list-ul"></i>Add bullet list</div>
-            <div class="ordered-list" data-command="ol"><i class="bi bi-list-ol"></i>Add numbered list</div>
-            <div class="check-list" data-command="check"><i class="bi bi-check-square"></i>Add check list</div> 
-            <div class="heading-1" data-command="h1"><i class="bi bi-type-h1"></i>Add heading 1</div>
-            <div class="heading-2" data-command="h2"><i class="bi bi-type-h2"></i>Add heading 2</div>
-            <div class="heading-3" data-command="h3"><i class="bi bi-type-h3"></i>Add heading 3</div>
-            <div class="heading-4" data-command="h4"><i class="bi bi-type-h4"></i>Add heading 4</div>
-            <div class="terminal" data-command="terminal"><i class="bi bi-terminal"></i>Add terminal command</div>
-            <div class="note-reference" data-command="note ref"><i class="bi bi-file-earmark"></i>Add note reference</div>
-            <div class="folder-reference" data-command="folder ref"><i class="bi bi-folder-symlink"></i>Add folder reference</div>
-            <div class="sticky-board-reference" data-command="board ref"><i class="bi bi-stickies"></i>Add board reference</div>
-            <div class="template" data-command="template"><i class="bi bi-file-earmark-text"></i>Add template</div>
-            <div class="insert-html" data-command="html"><i class="bi bi-filetype-html"></i>Insert HTML</div>
+            <div class="link-option" data-command="${SlashCommands.URL}"><i class="bi bi-link-45deg"></i>Add url</div>
+            <div class="embed-video-option" data-command="${SlashCommands.VIDEO}"><i class="bi bi-play-fill"></i>Add video</div>
+            <div class="horizontal-line-option" data-command="${SlashCommands.DIVIDER}"><i class="bi bi-hr"></i>Add horizontal line</div>
+            <div class="unordered-list" data-command="${SlashCommands.UL}"><i class="bi bi-list-ul"></i>Add bullet list</div>
+            <div class="ordered-list" data-command="${SlashCommands.OL}"><i class="bi bi-list-ol"></i>Add numbered list</div>
+            <div class="check-list" data-command="${SlashCommands.TODO}"><i class="bi bi-check-square"></i>Add to do list</div> 
+            <div class="heading-1" data-command="${SlashCommands.H1}"><i class="bi bi-type-h1"></i>Add heading 1</div>
+            <div class="heading-2" data-command="${SlashCommands.H2}"><i class="bi bi-type-h2"></i>Add heading 2</div>
+            <div class="heading-3" data-command="${SlashCommands.H3}"><i class="bi bi-type-h3"></i>Add heading 3</div>
+            <div class="heading-4" data-command="${SlashCommands.H4}"><i class="bi bi-type-h4"></i>Add heading 4</div>
+            <div class="terminal" data-command="${SlashCommands.TERMINAL}"><i class="bi bi-terminal"></i>Add terminal command</div>
+            <div class="note-reference" data-command="${SlashCommands.LINK_TO_NOTE}"><i class="bi bi-file-earmark"></i>Add note reference</div>
+            <div class="folder-reference" data-command="${SlashCommands.LINK_TO_FOLDER}"><i class="bi bi-folder-symlink"></i>Add folder reference</div>
+            <div class="sticky-board-reference" data-command="${SlashCommands.LINK_TO_BOARD}"><i class="bi bi-stickies"></i>Add board reference</div>
+            <div class="template" data-command="${SlashCommands.TEMPLATE}"><i class="bi bi-file-earmark-text"></i>Add template</div>
+            <div class="insert-html" data-command="${SlashCommands.HTML}"><i class="bi bi-filetype-html"></i>Insert HTML</div>
         </div>
         `
         this.container = this.querySelector('.commands');
         this.commands = this.container.querySelectorAll('div');
         this.input = this.querySelector('input');
+        this.input.focus();
     }
 
 
     addEventListeners() {
         this.listenForCommandClicks();
         this.querySelector('input').addEventListener('keydown', (event) => { this.handleKeyEvents(event) });
-        this.editorPaper.addEventListener('click', () => { this.removeSlashCommands() });
+        this.editorPaper.addEventListener('click', () => { AnimationHandler.fadeOut(this); });
+        this.editor.addEventListener('scroll', () => { AnimationHandler.fadeOut(this); });
         this.editorPaper.addEventListener('keyup', (event) => { this.checkForForwardSlash(event) });
-        this.editor.addEventListener('scroll', () => { this.removeSlashCommands() });
     }
 
 
     executeSlashCommand(command, extension = null) {
         switch (command) {
-          case 'link':
+          case SlashCommands.URL:
             addLink(this.range);
             break;
-          case 'video':
+          case SlashCommands.VIDEO:
             addEmbedVideo(this.range);
             break;
-          case 'line':
+          case SlashCommands.DIVIDER:
             addHorizontalLine(this.range, extension);
             break;
-          case 'ul':            
+          case SlashCommands.UL:
             addList(this.range, 'ul');
             break;
-          case 'ol':
+          case SlashCommands.OL:
             addList(this.range, 'ol');
             break;
-          case 'check':
+          case SlashCommands.TODO:
             addChecklist(this.range);
             break;
-          case 'h1':
+          case SlashCommands.H1:
             addHeading(this.range, 1, extension);
             break;
-          case 'h2':
+          case SlashCommands.H2:
             addHeading(this.range, 2, extension);
             break;
-          case 'h3':
+          case SlashCommands.H3:
             addHeading(this.range, 3, extension);
             break;
-          case 'h4':
+          case SlashCommands.H4:
             addHeading(this.range, 4, extension);
             break;
-          case 'terminal':
+          case SlashCommands.TERMINAL:
             addTerminal(this.range);
             break;
-          case 'html':
+          case SlashCommands.HTML:
             addHtml(this.range);
             break;
-          case 'note ref':
+          case SlashCommands.LINK_TO_NOTE:
             this.addReferenceContainer(ReferenceItemTypes.NOTES);
             break;
-          case 'folder ref':
+          case SlashCommands.LINK_TO_FOLDER:
             this.addReferenceContainer(ReferenceItemTypes.FOLDERS);
             break;
-          case 'board ref':
+          case SlashCommands.LINK_TO_BOARD:
             this.addReferenceContainer(ReferenceItemTypes.BOARDS);
             break;
-          case 'template':
+          case SlashCommands.TEMPLATE:
             this.addReferenceContainer(ReferenceItemTypes.TEMPLATES);
             break;
           default:
             console.log('No matching function for:', command);
         }
-        this.input.value = '';
     }
 
 
     addReferenceContainer(referenceType) {
         const referenceContainer = document.createElement('reference-autocomplete-searchbar');
 
-        
         this.dispatchEvent(new CustomEvent(
             'AddReferenceContainer', { 
                 detail: { 
@@ -134,13 +143,13 @@ class SlashCommandContainer extends HTMLElement {
 
 
     listenForCommandClicks() {
-        this.container.addEventListener('click', (event) => {
-            const command = event.target.closest('div').getAttribute('data-command');
-
-            this.deleteForwardSlash();
-            this.removeSlashCommands();
-            this.executeSlashCommand(command);
-        });
+        this.commands.forEach(command => {
+          command.addEventListener('click', () => {
+              this.deleteForwardSlash();
+              this.executeSlashCommand(command.getAttribute('data-command'));
+              AnimationHandler.fadeOut(this);
+          });
+        })
     }
   
 
@@ -172,12 +181,11 @@ class SlashCommandContainer extends HTMLElement {
             // Check if the character before the caret is a forward slash
             if (textContent[caretOffset - 1] === '/') {
                 // Replace the forward slash with a space
-                const updatedTextContent = textContent.slice(0, caretOffset - 1) + ' ' + textContent.slice(caretOffset);
-                caretNode.textContent = updatedTextContent;
+                caretNode.textContent = textContent.slice(0, caretOffset - 1) + ' ' + textContent.slice(caretOffset);
 
                 // Update the range to reflect the new caret position (just after the space)
-                this.range.setStart(caretNode, caretOffset);  // Start position after the space
-                this.range.setEnd(caretNode, caretOffset);    // End position at the same point
+                this.range.setStart(caretNode, caretOffset - 1);  // Start position after the space
+                this.range.setEnd(caretNode, caretOffset - 1);    // End position at the same point
 
                 // Apply the new range
                 const selection = window.getSelection();
@@ -185,26 +193,6 @@ class SlashCommandContainer extends HTMLElement {
                 selection.addRange(this.range); // Add the updated range to the selection
             }
         }
-    }
-
-    deleteForwardSlash() {
-       // Move the cursor to the correct position
-        this.range.deleteContents(); // Delete the slash
-        this.range.insertNode(document.createTextNode(' ')); // Insert space
-
-        // Place the cursor right after the inserted space
-        const spaceNode = this.range.startContainer;
-        const spaceTextNode = spaceNode.splitText(this.range.startOffset);
-        
-        // Move the range to the position after the space
-        this.range.setStart(spaceNode, spaceTextNode.length); 
-        this.range.setEnd(spaceNode, spaceTextNode.length);
-
-        // Focus the contentEditable div and set the cursor to the inserted space
-        this.editor.focus();
-        const selection = window.getSelection();
-        selection.removeAllRanges();
-        selection.addRange(this.range);
     }
 
 
@@ -246,27 +234,26 @@ class SlashCommandContainer extends HTMLElement {
         else if (event.key === 'Enter' && this.selectedIndex !== -1) {
             const selectedCommand = this.commands[this.selectedIndex];
             const command = selectedCommand.getAttribute('data-command');
-            console.log(command);
-            
+
             this.deleteForwardSlash();
             this.executeSlashCommand(command);
-            this.removeSlashCommands();
+            AnimationHandler.fadeOut(this);
         }
 
         else if (event.key === 'Enter') {
             event.preventDefault();
 
-            const { command, extention } = this.getCommand();
+            const { command, extension } = this.getCommand();
             this.deleteForwardSlash();
-            this.executeSlashCommand(command, extention);
-            this.removeSlashCommands();
+            this.executeSlashCommand(command, extension);
+            AnimationHandler.fadeOut(this);
         }
 
         else if (event.key === 'Backspace' && this.input.value === '') {
             event.preventDefault();
 
             this.deleteForwardSlash();
-            this.removeSlashCommands();
+            AnimationHandler.fadeOut(this);
         }
     }
 
@@ -274,18 +261,13 @@ class SlashCommandContainer extends HTMLElement {
     showSlashCommands() {
         const selection = window.getSelection();
         const range = selection.getRangeAt(0);
-        this.input.value = '';
         
         if (selection.isCollapsed) {
             this.range = range;
-            this.placementHelper.placeCommandBar(selection);
-            AnimationHandler.fadeIn(this);
-            this.container.scrollTo({ top: 0, behavior: 'smooth' });
-            this.input.focus();
-        } 
-        
+            placeSlashCommandContainer(selection);
+        }
         else {
-          this.removeSlashCommands();
+            AnimationHandler.fadeOut(this);
         }
     }
 
@@ -293,22 +275,6 @@ class SlashCommandContainer extends HTMLElement {
 
     checkForForwardSlash(event) {
         if (event.key === '/') this.showSlashCommands();
-    }
-
-
-
-    rememberRange(range) {
-        this.range = range;
-    }
-
-
-    removeSlashCommands() {
-        this.selectedIndex = -1;
-        this.commands.forEach(command => {
-            command.classList.remove('active');
-        });
-        AnimationHandler.fadeOut(this);
-        this.input.placeholder ='Enter a command';
     }
 }
 
@@ -537,5 +503,5 @@ class RichTextBar extends HTMLElement {
 }
 
 
-customElements.define('slash-command-container', SlashCommandContainer);
+customElements.define('slash-command-component', SlashCommandContainer);
 customElements.define('rich-text-bar', RichTextBar);

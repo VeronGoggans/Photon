@@ -264,7 +264,6 @@ const editorTemplate = `
       </div>
 
       <rich-text-bar></rich-text-bar>
-      <slash-command-container></slash-command-container>
     </div>
 `
 

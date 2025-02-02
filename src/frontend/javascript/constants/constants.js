@@ -111,3 +111,47 @@ export const ReferenceItemTypes = {
     TEMPLATES: 'templates'
 }
 
+
+export const SlashCommands = {
+    H1: 'h1',
+    H2: 'h2',
+    H3: 'h3',
+    H4: 'h4',
+    OL: 'ol',
+    UL: 'ul',
+    TODO: 'todo',
+    URL: 'url',
+    VIDEO: 'video',
+    DIVIDER: 'divider',
+    TERMINAL: 'terminal',
+    HTML: 'html',
+    LINK_TO_NOTE: 'link to note',
+    LINK_TO_FOLDER: 'link to folder',
+    LINK_TO_BOARD: 'link to board',
+    TEMPLATE: 'template',
+}
+
+
+export const SlashCommandComponentDimensions = {
+    WIDTH: 300,
+    HEIGHT: 300,
+}
+
+
+export const RichTextComponentDimensions = {
+    WIDTH: 612,
+    HEIGHT: 52,
+}
+
+
+export const EditorKeyBindings = {
+    E_KEY: 'e',
+    N_KEY: 'n',
+    D_KEY: 'd',
+    I_KEY: 'i',
+    GREATER_KEY: '>',
+    LESS_KEY: '<',
+
+}
+
+

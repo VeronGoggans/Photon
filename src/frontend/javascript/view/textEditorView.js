@@ -53,7 +53,7 @@ export class TextEditorView {
     }
 
 
-    new KeyEventListener(this);
+    new KeyEventListener(this, this.controller);
     new AutoSave('.note-name-input', saveNameCallBack, true);
     new AutoSave('.editor-paper', saveContentCallBack, false, true);
     AnimationHandler.fadeInFromSide(this.viewElement)
@@ -120,7 +120,7 @@ export class TextEditorView {
    * This method will save the currently loaded template or note.
    * Right after it'll clear the editor for new work.
    */
-  newEditorObject() {
+  clearCurrentEditorObject() {
     this.clearEditorContent();
     this.controller.clearStoredObject();
   }
@@ -173,6 +173,49 @@ export class TextEditorView {
   }
 
 
+  loadPreviousNote() {
+    const previousNote = this.controller.getPreviousNote();
+    this.documentNameInput.value = previousNote.name;
+    this.page.innerHTML = previousNote.content;
+    this.editor.scrollTo( { top: 0, behavior: 'smooth' } );
+  }
+
+
+  loadNextNote() {
+    const nextNote = this.controller.getNextNote();
+
+    this.documentNameInput.value = nextNote.name;
+    this.page.innerHTML = nextNote.content;
+    this.editor.scrollTo( { top: 0, behavior: 'smooth' } );
+  }
+
+
+  renderNoteDetailsModal() {
+    const storedNoteObject = this.controller.getStoredObject();
+
+    // Event to tell the dialog class to render the note details modal.
+    this.eventBus.emit(RENDER_NOTE_DETAILS_MODAL_EVENT, storedNoteObject)
+  }
+
+
+  renderNoteDeleteModal() {
+    const { id } = this.controller.getStoredObject();
+    const noteName = this.documentNameInput.value;
+
+    const deleteCallBack = async (deleteDetails) => {
+      await this.controller.deleteEditorObject(deleteDetails.id);
+    }
+
+    // Event to tell the dialog class to render the delete modal.
+    this.eventBus.emit(RENDER_DELETE_MODAL_EVENT, {
+      'id': id,
+      'name': noteName,
+      'notifyUser': true,
+      'callBack': deleteCallBack
+    })
+  }
+
+
 
 
   #initElements() {
@@ -209,46 +252,10 @@ export class TextEditorView {
 
   #eventListeners() {
 
-    /**
-     * THis event listener will listen for the Enter keypress on the document name input.
-     * When this event listener is triggered the cursor will be put to the documents content section
-     * (e.g. A4 paper right under the name)
-     */
-    this.documentNameInput.addEventListener('keypress', (event) => {
-      if (event.key === 'Enter') this.page.focus();
-    })
 
 
-    /**
-     *
-     */
-    this.loadNextNoteButton.addEventListener('click', () => {
-      const nextNote = this.controller.getNextNote();
 
-      this.documentNameInput.value = nextNote.name;
-      this.page.innerHTML = nextNote.content;
-      this.editor.scrollTo( { top: 0, behavior: 'smooth' } );
-    })
-
-
-    /**
-     *
-     */
-    this.loadPreviousNoteButton.addEventListener('click', () => {
-      const previousNote = this.controller.getPreviousNote();
-
-      this.documentNameInput.value = previousNote.name;
-      this.page.innerHTML = previousNote.content;
-      this.editor.scrollTo( { top: 0, behavior: 'smooth' } );
-    })
-
-
-    /**
-     *
-     */
-    this.documentLocation.addEventListener('FolderPathClick', async (event) => {
-      await loadFolder(event.detail.folderId, this.eventBus);
-    })
+    this.documentLocation.addEventListener('FolderPathClick', async (event) => {await loadFolder(event.detail.folderId, this.eventBus);})
 
 
     /**
@@ -315,59 +322,18 @@ export class TextEditorView {
         component.insertItems(referenceType, referenceItems);        
     });
 
-
     /**
-     *
+     * THis event listener will listen for the Enter keypress on the document name input.
+     * When this event listener is triggered the cursor will be put to the documents content section
+     * (e.g. A4 paper right under the name)
      */
-    this.noteDetailsSpan.addEventListener('click', () => {
-      const storedNoteObject = this.controller.getStoredObject();
-
-      // Event to tell the dialog class to render the note details modal.
-      this.eventBus.emit(RENDER_NOTE_DETAILS_MODAL_EVENT, storedNoteObject)
-    });
-
-
-    /**
-     *
-     */
-    this.deleteNoteSpan.addEventListener('click', () => { 
-      const { id } = this.controller.getStoredObject();
-      const noteName = this.documentNameInput.value;
-
-      const deleteCallBack = async (deleteDetails) => {
-        await this.controller.deleteEditorObject(deleteDetails.id);
-      }
-
-      // Event to tell the dialog class to render the delete modal.
-      this.eventBus.emit(RENDER_DELETE_MODAL_EVENT, {
-        'id': id,
-        'name': noteName,
-        'notifyUser': true,
-        'callBack': deleteCallBack
-      })
-    });
-
-
-    /**
-     *
-     */
-    this.newNoteSpan.addEventListener('click', () => {
-      this.newEditorObject()
-    });
-
-
-    /**
-     *
-     */
-    this.exitButton.addEventListener('click', () => {
-      this.controller.loadPreviousView()
-    });
-
-    this.page.addEventListener('drop', () => {
-
-    });
-
-
+    this.documentNameInput.addEventListener('keypress', (event) => {if (event.key === 'Enter') this.page.focus();})
+    this.loadNextNoteButton.addEventListener('click', () => {this.loadNextNote()})
+    this.loadPreviousNoteButton.addEventListener('click', () => {this.loadPreviousNote()})
+    this.noteDetailsSpan.addEventListener('click', () => {this.renderNoteDetailsModal()});
+    this.deleteNoteSpan.addEventListener('click', () => {this.renderNoteDeleteModal()});
+    this.newNoteSpan.addEventListener('click', () => {this.clearCurrentEditorObject()});
+    this.exitButton.addEventListener('click', () => {this.controller.loadPreviousView()});
     this.page.addEventListener('click', () => {this.dropdownHelper.closeDropdowns()});
     this.colorButton.addEventListener('click', () => {this.dropdownHelper.toggleDropdown(this.colorDropdown)});
     this.headingSpan.addEventListener('click', () => {this.dropdownHelper.toggleDropdown(this.headingDropdown)});

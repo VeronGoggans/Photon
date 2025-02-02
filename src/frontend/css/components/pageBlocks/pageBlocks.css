@@ -102,6 +102,7 @@ terminal-snippet {
 reference-item-card {
     cursor: pointer;
     border: 1px solid var(--border-card);
+    background-color: var(--reference-item-bg);
     border-radius: 5px;
     padding: 5px;
     display: flex;

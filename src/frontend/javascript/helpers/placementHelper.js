@@ -22,21 +22,6 @@ export class PlacementHelper {
     }
 
 
-    placeCommandBar(selection) {
-        const rect = selection.getRangeAt(0).getBoundingClientRect();
-
-        const xPosition = this.#checkForWidthOverflow(rect, this.commandBarWidth);
-        const overflow = this.#checkForHeightOverflow(rect);
-        if (overflow) {
-            this.forwardSlashCommandContainer.style.top = `${rect.bottom + window.scrollY  + 5}px`;
-        } else {
-            this.forwardSlashCommandContainer.style.top = `${rect.top + window.scrollY - this.commandBarHeigth - this.paddingY}px`;
-        }
-        this.forwardSlashCommandContainer.style.left = `${xPosition}px`;
-        this.forwardSlashCommandContainer.style.display = 'grid';
-        this.forwardSlashCommandContainer.scrollTop = 0;
-    }
-
     /**
      * This method adjusts the spawn point of the
      * command/format containers if X axis overflow is taking place.

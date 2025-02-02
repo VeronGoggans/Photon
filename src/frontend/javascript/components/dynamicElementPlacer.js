@@ -1,7 +1,24 @@
 import { AnimationHandler } from "../handlers/animationHandler.js";
+import { SlashCommandComponentDimensions, RichTextComponentDimensions } from "../constants/constants.js";
 
 
 export function placeSlashCommandContainer(selection) {
+    const slashCommandComponent = document.createElement("slash-command-component");
+
+    const editor = document.querySelector('.editor');
+    const rect = selection.getRangeAt(0).getBoundingClientRect();
+    const xPosition = checkForWidthOverflow(rect);
+    const overflow = checkForHeightOverflow(rect);
+
+
+    editor.appendChild(slashCommandComponent);
+
+    if (overflow) slashCommandComponent.style.top = `${rect.bottom + window.scrollY  + 5}px`;
+    else slashCommandComponent.style.top = `${rect.top + window.scrollY - SlashCommandComponentDimensions.HEIGHT - this.paddingY}px`;
+
+    slashCommandComponent.style.left = `${xPosition}px`;
+    slashCommandComponent.style.display = 'grid';
+    AnimationHandler.fadeIn(slashCommandComponent);
 
 }
 
@@ -61,4 +78,36 @@ export function placeContextMenu(contextMenu, boundedElement) {
         contextMenu.style.left = `${menuLeft}px`;
         contextMenu.style.top =  `${rect.top}px`;
     }
+}
+
+
+
+
+/**
+ * This method adjusts the spawn point of the
+ * command/format containers if X axis overflow is taking place.
+ * @param {DOMRect} rect
+ */
+function checkForWidthOverflow(rect) {
+    const padding = 20; //Pixels
+    const screenWidth = this.editor.clientWidth;
+    const spawnPoint = rect.left + window.scrollX - this.sidebar.clientWidth;
+    const totalWidth = spawnPoint + SlashCommandComponentDimensions.WIDTH;
+
+    if (totalWidth > screenWidth) {
+        const pixelOverflow = totalWidth - screenWidth;
+        return spawnPoint - pixelOverflow - padding;
+    }
+    return spawnPoint;
+}
+
+/**
+ * Same thing as the method above but now for
+ * Y axis overflow.
+ * @param {DOMRect} rect
+ */
+function checkForHeightOverflow(rect) {
+    const spawnPoint = rect.top + window.scrollY;
+    const totalHeight = spawnPoint - SlashCommandComponentDimensions.HEIGHT;
+    return totalHeight <= 10
 }
