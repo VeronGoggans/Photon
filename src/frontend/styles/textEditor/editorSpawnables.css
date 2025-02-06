@@ -1,0 +1,264 @@
+/*Rich Text Options Container*/
+
+rich-text-bar {
+    user-select: none;
+    position: absolute;
+    bottom: -80px;
+    display: flex;
+    width: fit-content;
+    height: fit-content;
+    background: var(--dropdown);
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-dropdown);
+    border: var(--border-card);
+    opacity: 0;
+    transition: 150ms;
+}
+
+.btn-group {
+    display: flex;
+    padding: 0 10px;
+}
+
+.btn-group button {
+    background-color: transparent;
+    border-radius: 10px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    color: var(--editor-text);
+}
+
+.btn-group button:hover,
+.active-text-format {
+    color: #5c7dff !important;
+    background-color: var(--hover) !important;
+}
+
+
+.color-dropdown {
+    position: relative;
+}
+
+
+.heading-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.color-dropdown ul {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    left: -240px;
+    top: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 7px;
+    list-style: none;
+    background: var(--dropdown);
+    box-shadow: 0 0 10px var(--shadow);
+    border-radius: 10px;
+    margin: 0;
+    padding: 15px;
+    transition: 150ms;
+}
+
+.color-dropdown ul li {
+    cursor: pointer;
+    border-radius: 50%;
+    color: var(--text);
+    width: 30px;
+    height: 30px;
+}
+
+.heading-dropdown ul {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    list-style: none;
+    background: var(--dropdown);
+    box-shadow: 0 0 10px var(--shadow);
+    border-radius: 10px;
+    margin: 0;
+    padding: 15px;
+    transition: 150ms;
+    left: -20px;
+    top: 50px;
+}
+
+.heading-dropdown ul li {
+    cursor: pointer;
+    color: var(--text);
+    border-radius: 7px;
+    padding: 5px 10px;
+    transition: 150ms;
+}
+
+.heading-dropdown ul li:hover {
+    background-color: var(--hover-slash-command);
+}
+
+.heading-dropdown span {
+    cursor: pointer;
+    color: var(--text);
+}
+
+.heading-dropdown span i {
+    font-size: 12px;
+    margin-left: 7px;
+    color: var(--less-important);
+}
+
+
+
+
+/*Forward Slash Command Container*/
+
+slash-command-container {
+    user-select: none;
+    position: absolute;
+    bottom: -300px;
+    display: grid;
+    grid-template-rows: 30px 1fr;
+    border-radius: 10px;
+    box-shadow: var(--shadow-dropdown);
+    width: 300px;
+    padding: 20px;
+    row-gap: 10px;
+    max-height: 300px;
+    background: var(--dropdown);
+    opacity: 0;
+    transition: 150ms;
+}
+
+slash-command-container input {
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: var(--dropdown);
+    color: var(--editor-text);
+}
+
+slash-command-container .commands {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    row-gap: 5px;
+}
+
+slash-command-container .commands::-webkit-scrollbar {
+    background-color: transparent;
+    width: 5px;
+}
+
+slash-command-container .commands::-webkit-scrollbar-thumb {
+    background-color: #cfd2e3;
+    border-radius: 10px;
+}
+
+slash-command-container .commands::-webkit-scrollbar-thumb:active {
+  background-color: #bbbed4;
+}
+
+slash-command-container .commands div {
+    cursor: pointer;
+    align-items: center;
+    height: 50px;
+    border-radius: 5px;
+    padding: 5px 10px;
+    display: grid;
+    font-size: 14px;
+    grid-template-columns: 40px 1fr;
+    color: var(--editor-text);
+    transition: 50ms;
+}
+
+slash-command-container .commands div:hover {
+    background-color: var(--hover-slash-command);
+}
+
+slash-command-container .commands .active {
+    background-color: var(--hover-slash-command) !important;
+}
+
+slash-command-container i {
+    display: flex;
+    font-size: 19px;
+    justify-content: center;
+    align-items: center;
+    min-height: 30px;
+    margin-right: 10px;
+    border-radius: 5px;
+    background-color: var(--command-square-bg);
+    color: #8fa5ff;
+}
+
+
+
+/*____________________ reference searchbar code below _____________________________*/
+reference-autocomplete-searchbar {
+    user-select: none;
+    display: grid;
+    background-color: var(--dropdown);
+    grid-template-rows: 50px 1fr;
+    width: 300px;
+    max-height: 400px;
+    border-radius: 10px;
+    padding: 20px 15px;
+    opacity: 0;
+    box-shadow: var(--shadow-dropdown);
+    transition: 150ms;
+}
+
+reference-autocomplete-searchbar input {
+    outline: none;
+    border: none;
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: transparent;
+    color: var(--editor-text);
+}
+
+reference-autocomplete-searchbar .reference-item-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: scroll;
+}
+
+reference-autocomplete-searchbar searchbar-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    max-height: 40px;
+    border-radius: 10px;
+    color: var(--editor-text);
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+reference-autocomplete-searchbar searchbar-item:hover {
+    background-color: var(--hover-slash-command);
+}
+
+reference-autocomplete-searchbar searchbar-item i {
+    background-color: var(--command-square-bg);
+    display: flex;
+    font-size: 19px;
+    justify-content: center;
+    align-items: center;
+    min-height: 30px;
+    min-width: 30px;
+    margin-right: 10px;
+    border-radius: 5px;
+    color: #8fa5ff;
+}

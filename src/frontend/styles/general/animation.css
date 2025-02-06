@@ -1,0 +1,69 @@
+.fadeInFromBottom {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.fadeInFromSide {
+    opacity: 1 !important;
+    transform: translateX(0) !important;
+}
+
+.fadeOut {
+    opacity: 0 !important;
+}
+
+.fadeIn {
+    opacity: 1 !important;
+}
+
+.openDropdown {
+    opacity: 1; 
+}
+
+
+@keyframes bobbing {
+    0%, 100% {
+    transform: translateY(0);   /* Start and end at original position */
+    }
+    50% {
+    transform: translateY(-10px); /* Move up by 10px in the middle */
+    }
+}
+
+
+
+@keyframes pulsing {
+    0%, 100% {
+      transform: scale(1);       /* Start and end at original size */
+      opacity: 1;                /* Full opacity */
+    }
+    50% {
+      transform: scale(1.1);     /* Scale up slightly */
+      opacity: 1;              /* Slightly fade */
+    }
+}
+
+
+
+@keyframes sway-in-the-wind {
+    0% { transform: rotate(5deg); }
+    25% { transform: rotate(10deg) translateX(-5px); }
+    50% { transform: rotate(7deg) translateX(5px); }
+    75% { transform: rotate(10deg) translateX(-5px); }
+    100% { transform: rotate(5deg); }
+}
+
+
+
+@keyframes bounce {
+    0% { transform: translateY(0); }
+    30% { transform: translateY(-50px); }
+    50% { transform: translateY(0); }
+    70% { transform: translateY(-25px); }
+    100% { transform: translateY(0); }
+}
+
+/* Add bounce class animation */
+.bouncing {
+    animation: bounce 0.6s ease-out;
+}

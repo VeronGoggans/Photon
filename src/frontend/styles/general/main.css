@@ -1,0 +1,274 @@
+body {
+    width: 100dvw;
+    height: 100dvh;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Poppins;
+}
+
+body.dragging-card {
+    cursor: grabbing !important;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+    transition: 150ms;
+}
+
+input {
+    outline: none;
+    transition: 150ms;
+}
+
+
+i {
+    transition: 150ms;
+    background-color: transparent;
+}
+
+::selection {
+    background-color: var(--selection);
+}
+
+.dragging {
+    background-color: var(--dragging) !important;
+}
+
+.hovered {
+    scale: 1.05;
+    box-shadow: 0 0 20px var(--shadow) !important;
+}
+
+.drag-image {
+    user-select: none;
+    position: absolute;
+    opacity: .8;
+    background-color: var(--dragging);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--icon);
+    width: 125px;
+    height: 100px;
+    cursor: grabbing !important;
+    font-size: 25px;
+}
+
+.wrapper {
+    user-select: none;
+    position: relative;
+    width: 100dvw;
+    height: calc(100dvh);
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    background: var(--background);
+}
+
+.content {
+    display: grid;
+    grid-template-rows: 37px 1fr;
+    max-height: calc(100dvh);
+}
+
+
+.view {
+    max-height: calc(100dvh - 37px);
+}
+
+.view-title {
+    font-size: 45px;
+    width: fit-content;
+    font-weight: 300;
+    color: var(--important);
+}
+
+
+
+
+input::placeholder {
+    color: var(--placeholder);
+}
+
+
+.dropdown-items,
+autocomplete-searchbar .searchbar-dropdown{
+    position: absolute;
+    top: 60px;
+    left: -1px;
+    z-index: 1;
+    width: 100%;
+    min-width: 300px;
+    max-height: 350px;
+    overflow-y: auto;
+    border: var(--border-sidebar-right);
+    border-radius: 10px;
+    background: var(--dropdown);
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: 150ms;
+}
+
+.soft-dropdown {
+    border: 1px solid var(--border-note-view-dropdown) !important;
+    box-shadow: var(--shadow-dropdown) !important;
+}
+
+.dropdown-items li {
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+    padding: 10px;
+    color: var(--editor-text);
+    border-radius: 5px;
+    transition: background-color 150ms ease
+}
+
+.dropdown-items i {
+    margin-right: 10px;
+}
+
+.dropdown-items li:hover {
+    background-color: var(--hover-searchbar-options);
+}
+
+
+entity-options-menu {
+    user-select: none;
+    position: absolute;
+    background-color: var(--options-menu);
+    color: var(--text-soft);
+    padding: 10px;
+    box-shadow: 10px 10px 20px var(--shadow);
+    border-radius: 10px;
+    opacity: 0;
+    transition: .15s;
+}
+
+entity-options-menu div {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    transition: 200ms;
+}
+
+entity-options-menu div:hover {
+    background-color: var(--options-menu-hover);
+}
+
+entity-options-menu i {
+    font-size: 14px;
+    margin-right: 15px;
+}
+
+entity-options-menu span {
+    font-size: 14px;
+    margin-left: 5px;
+    font-weight: 500;
+}
+
+
+.widget-style-border {
+    border: 1px solid var(--border-card);
+}
+
+.widget-style-shadow {
+    box-shadow: var(--shadow-card);
+}
+
+
+
+
+
+
+
+
+/*__________________________BUTTON STYLES__________________________*/
+.modal-confirm-button {
+    background-color: var(--button1-bg);
+    color: var(--important);
+    padding: 10px 30px;
+    border-radius: 5px;
+}
+
+.modal-cancel-button {
+    background-color: transparent;
+    font-size: 16px;
+    padding: 10px 30px;
+    border-radius: 30px;
+    color: var(--important);
+}
+
+
+.modal-confirm-button:hover {
+    color: #fff;
+    background-color: #5c7dff;
+    scale: 1.05;
+}
+
+.modal-cancel-button:hover {
+    scale: 1.05;
+}
+
+
+
+
+
+
+/*__________________________EMOJI PICKER STYLES__________________________*/
+.emoji-picker-container {
+    position: absolute;
+    background: var(--modal);
+    border-radius: 15px;
+    padding: 10px;
+    box-shadow: var(--shadow-card);
+    top: 50px;
+    right: 10px;
+    opacity: 0;
+    transform: translateY(50%);
+    visibility: hidden;
+    transition: opacity .25s ease, transform .25s ease, scale .25s ease, visibility .25s ease;
+}
+
+.open-emoji-picker {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    visibility: visible !important;
+}
+
+
+.emoji-picker-container:hover {
+    scale: 1.03;
+}
+
+emoji-picker {
+    --background: var(--color-picker-background);
+    --border-radius: 10px;
+    --border-color: transparent;
+    --input-border-color: var(--border-card);
+    --input-border-radius: 20px;
+    --input-font-color: var(--text);
+    --input-placeholder-color: var(--placeholder);
+    --outline-color: #5c7fdd;
+    --input-padding: 7px 15px;
+    --button-hover-background: var(--hover);
+    --button-active-background: var(--hover);
+
+}
+
+.emoji-picker-container button {
+    color: var(--text) !important;
+}

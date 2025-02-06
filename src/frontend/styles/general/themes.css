@@ -1,0 +1,282 @@
+.dark {
+
+    /*sidebar*/
+    --sidebar-inactive-tab: #8686a1;
+    --sidebar-shadow: 0 0 15px #0a0812;
+    /*Settings view*/
+    --setting-dropdown: #18182d;
+    /*Editor View*/
+    --editor-text: #bdc6d5;
+    --editor-container: #23252e;
+    --editor-container-shadow: transparent;
+    --editor-container-input: #16171c;
+    --dropdown: #20202f;
+    --heading3: #9da0bd;
+    --heading4: #8e91a3;
+    --hover-slash-command: #181b3b;
+    --file-path: #9095aa;
+
+
+    /*stickyWall view*/
+    --add-sticky-btn: #18172b;
+    --board-types: #181b3b;
+    --active-board-type: #292d56;
+
+    /*Notes View*/ 
+    --bookmark: #5063b1;
+    --dragging: #27293b;
+    --hover: #617fff69; 
+    --inactive-border: #323852;
+
+    /*borders*/
+    --border-notification: none;
+    --border-note-view-dropdown: none;
+    --border-card: #181821;
+    --border-column-board: #6d78b1;
+    --border-sidebar-right: 1px solid #1e202f;
+    --border-sidebar-soft: none;
+    --border-checklist: 1px solid #27293b;
+
+    /*Progress bars*/
+    --progress-checklist: #656479;
+
+    /*Hover*/
+    --hover-button: #0f0e1a;
+    --hover-checklist-task: #202134;
+    
+    /*Shadows*/
+    --shadow-dropdown: 5px 5px 18px #030304;
+    --shadow-card: none;
+
+    /*Other*/
+    --title-bar-button-background: #252735;
+    --title-bar-button-color: #5c7fdd;
+    --exit-btn: #28283b;
+    --secondary: #5c7dff;
+    --background: #121218; /*#16161a*/
+    --reference-item-bg: #101016;
+    --notification: #0f0e1a;
+    --subtitle: #9196aa;
+    --sidebar: #121218;
+    --sidebar-soft: #101016;
+    --sidebar-shadow-bg: #121218;
+    --searchbar: #20202f;
+    --sidebar-text: #d6d8e5;
+    --sidebar-text-hover: #5c7fdd; 
+    --card: #20202f ;
+    --folder: #20202f; /* TODO #setting option color 171531*/
+    --text: hsl(232, 20%, 78%);
+    --text-soft: hsl(232, 20%, 60%);;
+    --icon: #bbbed2;
+    --input-bg: #18182d;
+    --icon-hover: #5c7dff;
+    --important: hsl(232, 22%, 87%);
+    --less-important: hsl(232 22% 68% / 1);
+    
+    --background-column: #25272f;
+    --hover-searchbar-options: #181821;
+    --hover-text: #5c7dff;
+    --command-square-bg: #4b5bd096;
+    --hover-sidebar: #242430;
+    --searchbar-placeholder: #d4d7e5; 
+    --placeholder: #868b9e;
+    --placeholder-column-board: hsl(233deg 39.27% 82.89%);
+    --selection: #314682;
+    --dialog: rgb(0 0 0 / 25%);
+    --shadow: rgba(0, 0, 0, 0.1);
+    --modal: #1d1d27;
+    --searchbar-dropdown: hsl(240 36.17% 13.41%);
+    --scrollbar-content-view: #0d0d12;
+    --home-tab: #28283b;
+    --options-menu: #20202f;
+    --options-menu-hover: #161620;
+    --color-picker-background: #12121d;
+
+    /*Feedback variables*/
+    --completed-checklist-task: #28293f;
+    --reference-item-icon: #292957;
+    --empty-folder-icon-background: #101016;
+    --active-tab-bg: #5c7fdd;
+    --active-tab-text: #fff;
+
+    --scrollbar-editor: #0d0d12;
+    /*Buttons*/
+    --button1-bg: #20202f;
+    --button1-hover: #2a2a40;
+    --column-board-button: #ccdbff;
+
+
+    /*folder appearance classes */
+
+    --background-blue-1: rgb(121, 144, 255);
+    --background-blue-2: rgb(80, 141, 196);
+    --background-blue-3: rgb(122, 179, 228);
+    --background-blue-4: rgb(81, 159, 172);
+    --background-green-1: rgb(100, 174, 152);
+    --background-green-2: rgb(153, 230, 145);
+    --background-green-3: rgb(123, 219, 113);
+    --background-purple-1: rgb(142, 122, 181);
+    --background-purple-2: rgb(180, 152, 210);
+    --background-red-1: rgb(196, 91, 91);
+    --background-red-2: rgb(228, 141, 141);
+    --background-orange-1: rgb(224, 154, 91);
+    --background-orange-2: rgb(243, 182, 114);
+
+    --color-blue-1: rgb(31 41 89);
+    --color-blue-2: rgb(7 63 113);
+    --color-blue-3: rgb(34 122 200);
+    --color-blue-4: rgb(34, 97, 94);
+    --color-green-1: rgb(49 122 101);
+    --color-green-2: rgb(80 175 69);
+    --color-green-3: rgb(9 90 0);
+    --color-purple-1: rgb(100, 58, 178);
+    --color-purple-2: rgb(121 85 161);
+    --color-red-1: #742828;
+    --color-red-2: rgb(192 43 43);
+    --color-orange-1: rgb(193 91 0);
+    --color-orange-2: rgb(225 132 20);
+}
+
+.light {
+
+
+    /* Folder colors */
+    --background-blue-1: rgb(121, 144, 255);
+    --background-blue-2: rgb(169, 215, 255);
+    --background-blue-3: rgb(217, 237, 255);
+    --background-blue-4: rgb(124, 199, 211);
+    --background-green-1: rgb(158, 213, 197);
+    --background-green-2: rgb(203, 255, 197);
+    --background-green-3: rgb(173, 255, 164);
+    --background-purple-1: rgb(142, 122, 181);
+    --background-purple-2: rgb(223, 193, 255);
+    --background-red-1: rgb(255, 163, 163);
+    --background-red-2: rgb(255, 197, 197);
+    --background-orange-1: rgb(255, 182, 116);
+    --background-orange-2: rgb(255, 224, 158);
+
+    --color-blue-1: rgb(50, 72, 177);
+    --color-blue-2: rgb(70, 158, 239);
+    --color-blue-3: rgb(143, 191, 236);
+    --color-blue-4: rgb(34, 97, 94);
+    --color-green-1: rgb(36, 169, 130);
+    --color-green-2: rgb(85, 183, 73);
+    --color-green-3: rgb(32, 146, 20);
+    --color-purple-1: rgb(100, 58, 178);
+    --color-purple-2: rgb(167, 103, 236);
+    --color-red-1: rgb(225, 82, 82);
+    --color-red-2: rgb(255, 108, 108);
+    --color-orange-1: rgb(220, 109, 10);
+    --color-orange-2: rgb(239, 170, 21);
+
+
+
+
+    /*sidebar*/
+    --sidebar-inactive-tab: #8686a1;
+    --sidebar-shadow: 0 0 15px #eaecf7;
+    /*Settings view*/
+    --setting-dropdown: #f4f5f7;
+
+    /*stickyWall view*/
+    --add-sticky-btn: #eae9f9;
+    --board-types: #f4f5fa;
+    --active-board-type: #d4daff;
+
+    /*Notes View*/
+    --dragging: #f3f4ff;
+    --bookmark: #d5ddff;
+    --hover: #f0f0ff;
+    --inactive-border: #f4f5ff;
+
+    /*Home View*/
+
+    /*Editor View*/
+    --editor-container: #ffffff;
+    --editor-container-shadow: #272933;
+    --editor-container-input: #f6f7ff;
+    --dropdown: #ffffff;
+    --heading3: #707391;
+    --heading4: #8e91a3;
+
+    --command-square-bg: rgba(185, 198, 250, 0.5);
+    --editor-text: #383838;
+    --hover-slash-command: #f4f4fc;
+    --file-path: #a0a6c1;
+    /*Borders*/
+    --border-notification: #f3f5fb;
+    --border-card: #dee1ef;
+    --border-column-board: #ced2e6;
+    --border-sidebar-right: 1px solid #dee1ef; 
+    --border-sidebar-soft: 1px solid #ffffff;
+    --border-note-view-dropdown: none;
+    --border-checklist: 1px solid #dee1ef;
+
+    /*Hover*/
+    --hover-button: #f4f4fc;
+    --hover-checklist-task: #f3f5ff;
+
+    /*Progress bars*/
+    --progress-checklist: #f4f4fc;
+
+    /*Shadows*/
+    --shadow-dropdown: 5px 5px 18px #eaecf7;
+    --shadow-card: 5px 5px 18px #eaecf7; 
+
+    /*Other*/
+    --title-bar-button-background: #dfe7ff;
+    --title-bar-button-color: rgb(101, 102, 120);
+    --empty-folder-icon-background: #eff2ff;
+    --reference-item-bg: #ffffff;
+    --exit-btn: #f8fafe;
+    --secondary: #5c7dff;
+    --background: #ffffff;
+    --notification: #f9fafd;
+    --subtitle: #2f3773;
+    --sidebar: #ffffff; 
+    --sidebar-soft: #f8f9fc;
+    --sidebar-shadow-bg: #ffffff;
+    --searchbar: #f4f5ff; /*f4f4fc*/
+    --sidebar-text: #444452; 
+    --sidebar-text-hover: #1d2134; 
+    --card: #ffffff; 
+    --folder: #ffffff; /*#f4f5ff*/
+    --text: hsl(232, 19%, 33%);
+    --text-soft: hsl(232, 19%, 51%);
+    --icon: #4c4c68; 
+    --input-bg: #f6f6fb;
+    --icon-hover: #5c7fdd;
+    --important: hsl(233, 42%, 32%);
+    --less-important: hsl(233deg 23.62% 57.32%);
+    
+    --hover-searchbar-options: #f7f7fa;
+    --hover-text: #444863;
+    --hover-sidebar: #eceeff;
+    --searchbar-placeholder: #9297aa; 
+    --placeholder: #d4d7e5;
+    --placeholder-column-board: hsl(233deg 39.27% 82.89%);
+    --selection: #b1daff;
+    --dialog: #7d8ead1f;
+    --shadow: rgba(92, 98, 157, .1);
+    
+    --modal: #ffffff;
+    --scrollbar-content-view: #eff0f4;
+    --searchbar-dropdown: #fff;
+    --stats-background: #f4f5fa;
+    --options-menu: hsl(235, 100%, 98%);
+    --options-menu-hover: hsl(235, 100%, 95%);
+    --background-column: #eff5ff;
+    --color-picker-background: #fff;
+    --scrollbar-editor: #cfd2e2;
+    /*Feedback variables*/
+    --completed-checklist-task: #f8f9ff;
+    --reference-item-icon: #f0f0ff;
+
+    --active-tab-bg: #eceeff;
+    --active-tab-text: #5c7fdd;
+
+    /*Buttons*/
+    --button1-bg: #f4f4fc;
+    --button1-hover: #eaeaf7;
+    --column-board-button: #ccdbff;
+}

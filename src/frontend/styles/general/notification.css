@@ -1,0 +1,170 @@
+push-notification {
+    position: absolute;
+    bottom: -200px;
+    right: 50px;
+    background-color: var(--notification);
+    border: 1px solid var(--border-notification); 
+    height: fit-content;
+    width: fit-content;
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: .2s
+}
+
+push-notification:hover {
+    scale: 1.05;
+}
+
+push-notification div {
+    display: flex;
+    align-items: center;
+}
+
+push-notification .notification-title{
+    color: #5c7fdd;
+    font-size: 16px;
+}
+
+push-notification .dot {
+    width: 7px;
+    height: 7px;
+    box-shadow: 0 0 10px #5c7fdd;
+    background-color: #5c7fdd;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+push-notification .notitication-message {
+    color: var(--text);
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.show-push-notification {
+    bottom: 50px !important;
+}
+
+
+
+
+empty-notification {
+    height: 400px;
+    max-width: 400px;
+    margin: auto;
+    display: grid;
+    opacity: 0;
+    transform: translateY(30%);
+    transition: opacity .7s ease, transform .25s ease, scale .2s ease;
+    grid-template-rows: 1fr 100px 70px;
+}
+
+empty-notification .icons {
+    width: 400px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+empty-notification #floating-icon1,
+empty-notification #floating-icon2,
+empty-notification #floating-icon3,
+empty-notification #floating-icon4 {
+    position: absolute;
+    background-color: var(--empty-folder-icon-background);
+    color: var(--text);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px var(--shadow);
+    animation: bobbing 1.5s ease-in-out infinite;
+}
+
+empty-notification #floating-icon1 {
+    width: 35px;
+    height: 35px;
+    font-size: 23px;
+    top: 20px;
+    left: 50px;
+    animation-delay: .5s;
+}
+
+empty-notification #floating-icon2 {
+    font-size: 20px;
+    bottom: 25px;
+    right: 55px;
+    width: 30px;
+    height: 30px;
+    animation-delay: .75s;
+}
+
+empty-notification #floating-icon3 {
+    bottom: 55px;
+    left: 75px;
+    font-size: 17px;
+    width: 25px;
+    height: 25px;
+    animation-delay: .25s;
+}
+
+empty-notification #floating-icon4 {
+    top: 30px;
+    right: 75px;
+    width: 25px;
+    height: 25px;
+    font-size: 15px;
+    animation-delay: 1s;
+}
+
+empty-notification #center-icon {
+    font-size: 56px;
+    color: var(--text)
+}
+
+empty-notification .empty-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+empty-notification p {
+    font-size: 25px;
+    margin: 5px 0;
+    font-weight: 400;
+    color: var(--important);
+}
+
+empty-notification span {
+    max-width: 400px;
+    font-weight: 300;
+    text-align: center;
+    color: var(--less-important);
+}
+
+empty-notification .emtpy-message-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    column-gap: 25px;
+    height: 100px;
+}
+
+.emtpy-message-buttons button {
+    border: none;
+    background-color: #5c7fdd;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 14px;
+    transition: .2s;
+}
+
+.emtpy-message-buttons button:hover {
+    background-color: #466edb;
+    scale: 1.05;
+}

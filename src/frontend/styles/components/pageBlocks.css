@@ -1,0 +1,138 @@
+/*__________DESCRIPTION PAGE BLOCK___________*/
+description-page-block {
+    display: flex;
+    flex-direction: column;
+    
+    color: var(--text);
+    max-width: 600px;
+    margin: 0;
+    padding: 20px 0;
+}
+
+description-page-block .page-property {
+    font-family: Roboto;
+    font-weight: 600;
+}
+
+description-page-block p {
+    padding-left: 20px;
+}
+
+description-page-block .description-block-placeholder {
+    color: var(--placeholder);
+    font-style: italic;
+}
+
+
+/*__________DOCUMENT LOCATION___________*/
+
+document-location-page-block {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
+document-location-page-block i {
+    font-size: 14px;
+    margin: 0 3px;
+    color: var(--text);
+}
+
+
+/*__________ TERMINAL SNIPPET__________*/
+terminal-snippet {
+    min-height: 100px;
+    background-color: #131313;
+    border-radius: 5px; 
+    display: grid; 
+    grid-template-rows: 30px 1fr;
+}
+
+.terminal-bar {
+    user-select: none;
+    overflow-y: visible;
+    font-family: Poppins;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    color: #ccced3;
+    padding: 0 20px;
+    background-color: #1f1f26;
+}
+
+.terminal-command {
+    font-family: Poppins;
+    outline: none;
+    padding: 20px;
+    background-color: transparent;
+    border-radius: 0 0 5px 5px;
+    border: none;
+    color: #ccced3;
+}
+
+.terminal-command::selection {
+    background-color: #313136;
+}
+
+.terminal-bar p {
+    margin: 0;
+    font-size: 12px;
+    display: flex;
+    column-gap: 10px;
+}
+
+.terminal-bar i {
+    cursor: pointer;
+    transition: 150ms;
+}
+
+.terminal-bar i:hover {
+    scale: 1.2;
+}
+
+.terminal-bar i:active {
+    scale: 1.5;
+}
+
+
+
+/*__________ REREFENCE ITEM __________*/
+
+reference-item-card {
+    cursor: pointer;
+    border: 1px solid var(--border-card);
+    background-color: var(--reference-item-bg);
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+    width: fit-content;
+    min-width: 300px;
+    transition: 150ms;
+}
+
+
+reference-item-card:hover {
+    scale: 1.05;
+}
+
+reference-item-card i {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: var(--reference-item-icon);
+    color: #5c7fdd;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+reference-item-card span {
+    margin: 0;
+    font-size: 13px;
+    color: var(--editor-text);
+}

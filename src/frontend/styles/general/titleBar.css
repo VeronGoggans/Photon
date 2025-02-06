@@ -1,0 +1,21 @@
+.content .controls {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding-right: 10px;
+    -webkit-app-region: drag; /* Allows dragging of the window */
+}
+
+.content .controls button {
+  background: transparent;
+  border-radius: 3px;
+  color: var(--title-bar-button-color);
+  padding: 7px 10px;
+  font-size: 12px;
+  -webkit-app-region: no-drag; /* Ensures buttons do not drag the window */
+}
+
+.content .controls button:hover {
+  background: var(--title-bar-button-background);
+  color: rgb(76, 90, 196);
+}
