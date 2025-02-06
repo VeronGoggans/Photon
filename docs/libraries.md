@@ -1,9 +1,12 @@
 # Libraries
 
-Backend 
+## Backend 
 1. FastAPI
-2. Pywebview
+2. SQLAlchemy
 
-Frontend
-1. FontAwesome
-2. Roboto Google font
+
+
+## Frontend
+1. Google fonts
+2. Bootstrap icons
+3. Electron

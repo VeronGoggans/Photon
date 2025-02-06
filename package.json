@@ -1,5 +1,5 @@
 {
-  "name": "note-taking-app",
+  "name": "photon",
   "version": "1.0.0",
   "description": "This is a simple note taking app",
   "main": "index.mjs",
@@ -13,7 +13,7 @@
   "author": "Veron Goggans",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^32.1.0"
+    "electron": "^32.3.0"
   },
   "dependencies": {
     "@electron/remote": "^2.1.2",

@@ -1,7 +1,11 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import remoteMain from '@electron/remote/main/index.js';
 import { spawn } from 'child_process';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 let fastApiProcess;
 
@@ -15,7 +19,7 @@ function createWindow () {
       nodeIntegration: true,
       contextIsolation: false,
       enableRemoteModule: true, // Don't expose remote modules directly
-      preload: 'titleBar.javascript' // Path to the preload script
+      preload: join(__dirname, 'titleBar.js'), // Path to the preload script
     }
   });
 
