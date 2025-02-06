@@ -3,34 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="src/frontend/css/general/sidebar.css">
-    <link rel="stylesheet" href="src/frontend/css/general/main.css">
-    <link rel="stylesheet" href="src/frontend/css/components/entities/note.css">
-    <link rel="stylesheet" href="src/frontend/css/components/entities/sticky.css">
-    <link rel="stylesheet" href="src/frontend/css/components/entities/folder.css">
-    <link rel="stylesheet" href="src/frontend/css/components/entities/category.css">
-    <link rel="stylesheet" href="src/frontend/css/general/dialog.css">
-    <link rel="stylesheet" href="src/frontend/css/general/themes.css">
-    <link rel="stylesheet" href="src/frontend/css/general/animation.css">
-    <link rel="stylesheet" href="src/frontend/css/notification/notification.css">
-    <link rel="stylesheet" href="src/frontend/css/textEditor/textEditor.css">
-    <link rel="stylesheet" href="src/frontend/css/textEditor/toolbarTop.css">
-    <link rel="stylesheet" href="src/frontend/css/textEditor/editorSpawnables.css">
-    <link rel="stylesheet" href="src/frontend/css/modals/deleteModal.css">
-    <link rel="stylesheet" href="src/frontend/css/modals/noteDetailsModal.css">
-    <link rel="stylesheet" href="src/frontend/css/general/scrollbar.css">
-    <link rel="stylesheet" href="src/frontend/css/modals/searchModal.css">
-    <link rel="stylesheet" href="src/frontend/css/modals/editFolderModal.css">
-    <link rel="stylesheet" href="src/frontend/css/views/home/homeView.css">
-    <link rel="stylesheet" href="src/frontend/css/views/note/notesView.css">
-    <link rel="stylesheet" href="src/frontend/css/views/settingsView.css">
-    <link rel="stylesheet" href="src/frontend/css/general/searchbar.css">
-    <link rel="stylesheet" href="src/frontend/css/views/sticky_note/stickyWallView.css">
-    <link rel="stylesheet" href="src/frontend/css/modals/newCollectionModal.css">
-    <link rel="stylesheet" href="src/frontend/css/general/titleBar.css">
-    <link rel="stylesheet" href="src/frontend/css/views/sticky_note/stickyWallHomeView.css">
-    <link rel="stylesheet" href="src/frontend/css/components/lists/lists.css">
-    <link rel="stylesheet" href="src/frontend/css/components/pageBlocks/pageBlocks.css">
+    <link rel="stylesheet" href="src/frontend/styles/general/sidebar.css">
+    <link rel="stylesheet" href="src/frontend/styles/general/main.css">
+    <link rel="stylesheet" href="src/frontend/styles/components/note.css">
+    <link rel="stylesheet" href="src/frontend/styles/components/folder.css">
+    <link rel="stylesheet" href="src/frontend/styles/components/category.css">
+    <link rel="stylesheet" href="src/frontend/styles/general/dialog.css">
+    <link rel="stylesheet" href="src/frontend/styles/general/themes.css">
+    <link rel="stylesheet" href="src/frontend/styles/general/animation.css">
+    <link rel="stylesheet" href="src/frontend/styles/general/notification.css">
+    <link rel="stylesheet" href="src/frontend/styles/textEditor/textEditor.css">
+    <link rel="stylesheet" href="src/frontend/styles/textEditor/toolbarTop.css">
+    <link rel="stylesheet" href="src/frontend/styles/textEditor/editorSpawnables.css">
+    <link rel="stylesheet" href="src/frontend/styles/modals/deleteModal.css">
+    <link rel="stylesheet" href="src/frontend/styles/modals/noteDetailsModal.css">
+    <link rel="stylesheet" href="src/frontend/styles/general/scrollbar.css">
+    <link rel="stylesheet" href="src/frontend/styles/modals/searchModal.css">
+    <link rel="stylesheet" href="src/frontend/styles/modals/editFolderModal.css">
+    <link rel="stylesheet" href="src/frontend/styles/views/homeView.css">
+    <link rel="stylesheet" href="src/frontend/styles/views/notesView.css">
+    <link rel="stylesheet" href="src/frontend/styles/views/settingsView.css">
+    <link rel="stylesheet" href="src/frontend/styles/general/searchbar.css">
+    <link rel="stylesheet" href="src/frontend/styles/general/titleBar.css">
+    <link rel="stylesheet" href="src/frontend/styles/components/lists.css">
+    <link rel="stylesheet" href="src/frontend/styles/components/pageBlocks.css">
     <!-- CDN for the icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -44,19 +40,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:wght@100&display=swap" rel="stylesheet">
     <title>Photon</title>
     
-    <script src="src/frontend/javascript/components/lists/lists.js"></script>
-    <script type="module" src="src/frontend/javascript/components/searchbar/searchbar.js"></script>
-    <script type="module" src="src/frontend/javascript/components/entities/folder.js"></script>
-    <script type="module" src="src/frontend/javascript/components/entities/note.js"></script>
-    <script type="module" src="src/frontend/javascript/components/entities/stickyNote.js"></script>
-    <script type="module" src="src/frontend/javascript/components/pageBlocks/pageBlocks.js"></script>
-    <script type="module" src="src/frontend/javascript/components/notifications/notifications.js"></script>
-    <script type="module" src="src/frontend/javascript/components/editor.js"></script>
-    <script type="module" src="src/frontend/javascript/components/modals/organisationModal.js"></script>
+    <script src="src/frontend/core/components/lists/lists.js"></script>
+    <script type="module" src="src/frontend/core/components/searchbar/searchbar.js"></script>
+    <script type="module" src="src/frontend/core/components/entities/folder.js"></script>
+    <script type="module" src="src/frontend/core/components/entities/note.js"></script>
+    <script type="module" src="src/frontend/core/components/pageBlocks/pageBlocks.js"></script>
+    <script type="module" src="src/frontend/core/components/notifications/notifications.js"></script>
+    <script type="module" src="src/frontend/core/components/editor.js"></script>
+    <script type="module" src="src/frontend/core/components/modals/organisationModal.js"></script>
 </head>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
-  </style>
+
 <body>
   <div class="wrapper">
     <div class="sidebar">
@@ -72,9 +65,6 @@
           <div class="sidebar-content-upper">
                 <a href="/home" data-view="home" id="home-btn"><i class="bi bi-house"></i><span></span></a>
                 <a href="/notes" data-view="notes" id="notes-btn"><i class="bi bi-file-earmark"></i><span></span></a>
-                <a href="/stickyWallHome" data-view="stickyWallHome" id="sticky-wall-home-btn"><i class="bi bi-check2-circle"></i><span></span></a>
-
-              <p class="sidebar-section-title">Other</p>
               <div id="pinned-folders-dropdown" class="sidebar-dropdown">
                   <i id="chevron-pinned-folder" class="bi bi-chevron-right"></i>
                   <i id="pinned-folder-icon" class="bi bi-folder-symlink"></i>

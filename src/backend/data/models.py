@@ -75,63 +75,6 @@ class Note(Base):
 
 
 
-class StandardStickyBoard(Base):
-    __tablename__ = 'standard_sticky_boards'
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String, nullable=True)
-    description = Column(String, nullable=True)
-    creation = Column(String, nullable=False)
-    type = Column(String, nullable=False, default='board')
-
-    stickies = relationship("StickyNote", backref="standard_sticky_boards", cascade="all, delete-orphan")
-
-
-
-
-class ColumnStickyBoard(Base):
-    __tablename__ = 'column_sticky_boards'
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String, nullable=True)
-    description = Column(String, nullable=True)
-    creation = Column(String, nullable=False)
-    type = Column(String, nullable=False, default='column')
-
-    columns = relationship("StickyBoardColumn", backref="column_sticky_boards", cascade="all, delete-orphan")
-
-
-
-
-class StickyBoardColumn(Base):
-    __tablename__ = 'sticky_board_columns'
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String, nullable=True)
-    defualt_sticky_color = Column(String, nullable=False, default='rgb(180, 214, 255)')
-
-    sticky_board_id = Column(Integer, ForeignKey('column_sticky_boards.id', ondelete='CASCADE'), nullable=True)
-    stickies = relationship("StickyNote", backref="sticky_board_columns", cascade="all, delete-orphan")
-
-
-
-
-class StickyNote(Base):
-    __tablename__ = 'sticky_notes'
-    
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    content = Column(String, nullable=True)
-    color = Column(String, nullable=False, default='rgb(180, 214, 255)')
-
-    sticky_board_id = Column(Integer, ForeignKey('standard_sticky_boards.id', ondelete='CASCADE'), nullable=True)
-    column_id = Column(Integer, ForeignKey('sticky_board_columns.id', ondelete='CASCADE'), nullable=True)
-
-
-
-
-
-
-
 
 
 # class Tag(Base):

@@ -1,4 +1,4 @@
-import { ApplicationController } from './src/frontend/javascript/controller/applicationController.js';
+import { ApplicationController } from './src/frontend/core/architecture/controller/applicationController.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     new ApplicationController();

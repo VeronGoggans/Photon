@@ -4,6 +4,6 @@
     "widgetStyle": "border",
     "folderIconColor": "blue",
     "sidebarState": "large",
-    "collapsePinnedFolders": true,
+    "collapsePinnedFolders": false,
     "collapseCategories": false
 }
