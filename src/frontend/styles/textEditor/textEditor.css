@@ -34,7 +34,7 @@
 .toolbar {
    display: grid;
    grid-template-rows: 30px 1fr;
-   padding: 10px;
+   padding: 0 30px;
 }
 
 .toolbar-top {
@@ -153,11 +153,6 @@
 
  .editor li {
    margin: 10px 0;
- }
-
- .editor code {
-   min-height: 50px;
-   border-radius: 5px;
  }
 
  .editor pre {

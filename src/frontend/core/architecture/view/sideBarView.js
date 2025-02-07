@@ -21,7 +21,7 @@ export class SidebarView {
         this._sidebarTransitionTime = 160; // Milliseconds
         this._sidebarShrinkLimit = 950; // Pixels
         this._bigSidebarWidth = 250; // Pixels
-        this._smallSidebarWidth = 70; // Pixels
+        this._smallSidebarWidth = 100; // Pixels
         this.homeFolder = {'id': 1, 'name': 'Home', 'color': 'color-original', 'parent_id': null}
 
         this.#initElements();
@@ -181,7 +181,7 @@ export class SidebarView {
             this.eventBus.emit(SIDEBAR_TOGGLE_EVENT, 'small');
 
             this.logo.style.justifyContent = 'center';
-            this.#resizeSidebar(70);
+            this.#resizeSidebar(this._smallSidebarWidth);
             this.#removeSidebarResizeTransition();
             this.#collapseButtons();
         }

@@ -1,7 +1,7 @@
 import { createCustomElement } from "../../util/ui/components.js";
 import { placeContextMenu } from "../dynamicElementPlacer.js";
 import { folderColorOptionsTemplate, categoryColorOptionsTemplate } from "../../constants/modalTemplates.js";
-import { ReferenceItemTypes } from "../../constants/constants.js";
+import {CssAnimationClasses, CssAnimationDurations, ReferenceItemTypes} from "../../constants/constants.js";
 
 
 class DocumentLocationPageBlock extends HTMLElement {
@@ -139,6 +139,7 @@ class EntityOptionsMenu extends HTMLElement {
                 this.boundedElement.handleDeleteClick();
                 break;
         }
+        this.remove();
     }
 
 
@@ -341,10 +342,10 @@ class TerminalSnippet extends HTMLElement {
 
         // apply bouncing class and remove it after animation is done.
         this.copyButton.setAttribute('class', 'bi bi-check-lg')
-        this.copyButton.classList.add('bouncing');
+        this.copyButton.classList.add(CssAnimationClasses.BOUNCING_ANIMATION);
         setTimeout(() => {
-            this.copyButton.classList.remove('bouncing');
-        }, 600);
+            this.copyButton.classList.remove(CssAnimationClasses.BOUNCING_ANIMATION);
+        }, CssAnimationDurations.BOUNCING_ANIMATION);
 
         setTimeout(() => {
             this.copyButton.setAttribute('class', 'bi bi-copy')

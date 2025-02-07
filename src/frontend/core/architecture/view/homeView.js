@@ -115,6 +115,6 @@ export class HomeView {
         document.querySelector('.view-title').textContent = greetBasedOnTime();
         this._recentFolderList = document.querySelector('.recent-folders');
         this._recentNoteList = document.querySelector('.recent-notes');
-        this._viewElement = document.querySelector('.home');
+        this._viewElement = document.querySelector('.home-view');
     }
 }

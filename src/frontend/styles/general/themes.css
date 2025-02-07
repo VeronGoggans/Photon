@@ -1,8 +1,20 @@
+:root {
+    --font-weight-bold: 600;
+    --font-weight-semi-bold: 500;
+    --font-weight-normal: 400;
+    --font-weight-thin: 300;
+    --font-weight-light: 200;
+
+}
+
+
 .dark {
 
     /*sidebar*/
     --sidebar-inactive-tab: #8686a1;
     --sidebar-shadow: 0 0 15px #0a0812;
+    --sidebar-dropdown-bg-color: #1b1d2b;
+    --sidebar-soft-dropdwons-bg-color: #121218;
     /*Settings view*/
     --setting-dropdown: #18182d;
     /*Editor View*/
@@ -17,13 +29,8 @@
     --file-path: #9095aa;
 
 
-    /*stickyWall view*/
-    --add-sticky-btn: #18172b;
-    --board-types: #181b3b;
-    --active-board-type: #292d56;
-
     /*Notes View*/ 
-    --bookmark: #5063b1;
+    --bookmark-patch-bg-color: #5c7fdd;
     --dragging: #27293b;
     --hover: #617fff69; 
     --inactive-border: #323852;
@@ -41,7 +48,7 @@
     --progress-checklist: #656479;
 
     /*Hover*/
-    --hover-button: #0f0e1a;
+    --hover-button-soft: #090912;
     --hover-checklist-task: #202134;
     
     /*Shadows*/
@@ -56,7 +63,6 @@
     --background: #121218; /*#16161a*/
     --reference-item-bg: #101016;
     --notification: #0f0e1a;
-    --subtitle: #9196aa;
     --sidebar: #121218;
     --sidebar-soft: #101016;
     --sidebar-shadow-bg: #121218;
@@ -68,12 +74,10 @@
     --text: hsl(232, 20%, 78%);
     --text-soft: hsl(232, 20%, 60%);;
     --icon: #bbbed2;
-    --input-bg: #18182d;
     --icon-hover: #5c7dff;
     --important: hsl(232, 22%, 87%);
     --less-important: hsl(232 22% 68% / 1);
     
-    --background-column: #25272f;
     --hover-searchbar-options: #181821;
     --hover-text: #5c7dff;
     --command-square-bg: #4b5bd096;
@@ -87,7 +91,6 @@
     --modal: #1d1d27;
     --searchbar-dropdown: hsl(240 36.17% 13.41%);
     --scrollbar-content-view: #0d0d12;
-    --home-tab: #28283b;
     --options-menu: #20202f;
     --options-menu-hover: #161620;
     --color-picker-background: #12121d;
@@ -96,14 +99,17 @@
     --completed-checklist-task: #28293f;
     --reference-item-icon: #292957;
     --empty-folder-icon-background: #101016;
-    --active-tab-bg: #5c7fdd;
-    --active-tab-text: #fff;
+
+    --active-tab-bg-on-original-sidebar: #5c7fdd;
+    --active-tab-text-on-original-sidebar: #fff;
+
+    --active-tab-bg-on-soft-sidebar: #5c7fdd;
+    --active-tab-text-on-soft-sidebar: #fff;
 
     --scrollbar-editor: #0d0d12;
     /*Buttons*/
     --button1-bg: #20202f;
     --button1-hover: #2a2a40;
-    --column-board-button: #ccdbff;
 
 
     /*folder appearance classes */
@@ -175,17 +181,15 @@
     /*sidebar*/
     --sidebar-inactive-tab: #8686a1;
     --sidebar-shadow: 0 0 15px #eaecf7;
+    --sidebar-dropdown-bg-color: #fafaff;
+    --sidebar-soft-dropdwons-bg-color: #121218;
+
     /*Settings view*/
     --setting-dropdown: #f4f5f7;
 
-    /*stickyWall view*/
-    --add-sticky-btn: #eae9f9;
-    --board-types: #f4f5fa;
-    --active-board-type: #d4daff;
-
     /*Notes View*/
     --dragging: #f3f4ff;
-    --bookmark: #d5ddff;
+    --bookmark-patch-bg-color: #A9D7FFFF;
     --hover: #f0f0ff;
     --inactive-border: #f4f5ff;
 
@@ -213,8 +217,12 @@
     --border-checklist: 1px solid #dee1ef;
 
     /*Hover*/
-    --hover-button: #f4f4fc;
+    --hover-button-soft: #f4f4fc;
     --hover-checklist-task: #f3f5ff;
+
+
+    /* Active colors */
+    --active-button-soft: #ececf3;
 
     /*Progress bars*/
     --progress-checklist: #f4f4fc;
@@ -232,8 +240,7 @@
     --secondary: #5c7dff;
     --background: #ffffff;
     --notification: #f9fafd;
-    --subtitle: #2f3773;
-    --sidebar: #ffffff; 
+    --sidebar: #ffffff;
     --sidebar-soft: #f8f9fc;
     --sidebar-shadow-bg: #ffffff;
     --searchbar: #f4f5ff; /*f4f4fc*/
@@ -244,14 +251,13 @@
     --text: hsl(232, 19%, 33%);
     --text-soft: hsl(232, 19%, 51%);
     --icon: #4c4c68; 
-    --input-bg: #f6f6fb;
     --icon-hover: #5c7fdd;
     --important: hsl(233, 42%, 32%);
     --less-important: hsl(233deg 23.62% 57.32%);
     
     --hover-searchbar-options: #f7f7fa;
     --hover-text: #444863;
-    --hover-sidebar: #eceeff;
+    --hover-sidebar: #f4f5ff;
     --searchbar-placeholder: #9297aa; 
     --placeholder: #d4d7e5;
     --placeholder-column-board: hsl(233deg 39.27% 82.89%);
@@ -265,18 +271,19 @@
     --stats-background: #f4f5fa;
     --options-menu: hsl(235, 100%, 98%);
     --options-menu-hover: hsl(235, 100%, 95%);
-    --background-column: #eff5ff;
     --color-picker-background: #fff;
     --scrollbar-editor: #cfd2e2;
     /*Feedback variables*/
     --completed-checklist-task: #f8f9ff;
     --reference-item-icon: #f0f0ff;
 
-    --active-tab-bg: #eceeff;
-    --active-tab-text: #5c7fdd;
+    --active-tab-bg-on-original-sidebar: #f4f5ff;
+    --active-tab-text-on-original-sidebar: #5c7fdd;
+
+    --active-tab-bg-on-soft-sidebar: #ecedf5;
+    --active-tab-text-on-soft-sidebar: #3a3e47;
 
     /*Buttons*/
     --button1-bg: #f4f4fc;
     --button1-hover: #eaeaf7;
-    --column-board-button: #ccdbff;
 }

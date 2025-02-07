@@ -1,7 +1,6 @@
 .category {
     cursor: pointer;
     padding: 10px 30px;
-    margin: 5px 0;
     border-radius: 7px;
     font-size: 14px;
     color: var(--less-important);

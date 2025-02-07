@@ -36,10 +36,7 @@ export const folderIconColors = {
 
 
 
-export const stickyNoteColors = ['#ffdfef', '#ded7ff', '#b4ebce', '#ffecc0', '#ffd0d0', '#d4e7ff']
-
-
-export const sidebarButtonText = ['Home', 'Notes', 'Settings']
+export const sidebarButtonText = ['Home', 'Documents', 'Settings']
 
 
 
@@ -99,15 +96,10 @@ export const organisationModalIcons = {
 
 // ___________________________ Enums ________________________________ //
 
-export const StickyBoardTypes = {
-    STANDARD: 'standard',
-    COLUMN:   'column'
-}
 
 export const ReferenceItemTypes = {
     NOTES: 'notes',
     FOLDERS: 'folders',
-    BOARDS: 'boards',
     TEMPLATES: 'templates'
 }
 
@@ -151,7 +143,14 @@ export const EditorKeyBindings = {
     I_KEY: 'i',
     GREATER_KEY: '>',
     LESS_KEY: '<',
-
 }
 
 
+export const CssAnimationClasses = {
+    BOUNCING_ANIMATION: 'bouncing'
+}
+
+
+export const CssAnimationDurations = {
+    BOUNCING_ANIMATION: 600
+}

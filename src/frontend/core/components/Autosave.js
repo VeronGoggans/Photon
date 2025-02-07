@@ -27,7 +27,7 @@ export class AutoSave {
         inputContent = false,
         htmlContent = false,
         plainTextContent = false,
-        delay = 1000) {
+        delay = AutosaveTimer) {
         this.contentEditable = document.querySelector(contentEditableSelector); // Select the contenteditable element
         this.saveCallback = saveCallback;                                       // Callback function to save content
         this.delay = delay;                                                     // Delay in milliseconds
@@ -105,3 +105,6 @@ export class AutoSave {
         });
     }
 }
+
+
+const AutosaveTimer = 1000 // milliseconds

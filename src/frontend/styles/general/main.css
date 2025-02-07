@@ -68,7 +68,7 @@ i {
     width: 100dvw;
     height: calc(100dvh);
     display: grid;
-    grid-template-columns: 70px 1fr;
+    grid-template-columns: 100px 1fr;
     background: var(--background);
 }
 
@@ -86,8 +86,15 @@ i {
 .view-title {
     font-size: 45px;
     width: fit-content;
-    font-weight: 300;
+    font-weight: var(--font-weight-bold);
     color: var(--important);
+}
+
+.block-title {
+    color: var(--less-important);
+    margin-top: 20px;
+    font-size: 20px;
+    padding: 20px 0;
 }
 
 
@@ -147,7 +154,6 @@ entity-options-menu {
     user-select: none;
     position: absolute;
     background-color: var(--options-menu);
-    color: var(--text-soft);
     padding: 10px;
     box-shadow: 10px 10px 20px var(--shadow);
     border-radius: 10px;
@@ -159,14 +165,19 @@ entity-options-menu div {
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: 10px;
+    padding: 7px;
     margin: 5px;
     border-radius: 5px;
+    font-weight: var(--font-weight-semi-bold);
+    color: var(--text-soft);
     transition: 200ms;
 }
 
+
 entity-options-menu div:hover {
     background-color: var(--options-menu-hover);
+    color: var(--important);
+    scale: 1.05;
 }
 
 entity-options-menu i {
@@ -177,7 +188,6 @@ entity-options-menu i {
 entity-options-menu span {
     font-size: 14px;
     margin-left: 5px;
-    font-weight: 500;
 }
 
 

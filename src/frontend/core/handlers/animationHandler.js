@@ -1,4 +1,3 @@
-import { removeEmptyFolderNotification, renderEmptyFolderNotification } from "./notificationHandler.js";
 
 export class AnimationHandler {
 
@@ -44,6 +43,17 @@ export class AnimationHandler {
             node.style.display = 'none';
         }, 150);
     }
+
+
+    static fadeOutBookmarkPatch(node) {
+        node.classList.add('fadeOut');
+
+        setTimeout(() => {
+            node.style.display = 'none';
+            node.classList.remove('fadeOut');
+        }, 150);
+    }
+
 
     static fadeOutContextMenu(node) {
         node.classList.remove('fadeIn');

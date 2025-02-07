@@ -5,13 +5,17 @@
     display: grid;
     grid-template-rows: 60px 1fr;
     padding: 0 5%;
+    overflow-y: scroll;
     opacity: 0;
     transform: translateY(30%);
     transition: opacity .7s ease, transform .2s ease;
 }
 
 .notes-top {
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: var(--background);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -55,7 +59,7 @@
 }
 
 .current-folder-options-container button:hover {
-    background-color: var(--hover-button);
+    background-color: var(--hover-button-soft);
     scale: 1.2;
 }
 
@@ -87,7 +91,6 @@
     padding: 0 15px;
     height: calc(100dvh - 117px);
     max-height: calc(100dvh - 117px);
-    overflow-y: scroll;
 }
 
 .notes {

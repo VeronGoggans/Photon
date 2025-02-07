@@ -1,5 +1,5 @@
 const homeTemplate = `
-    <div class="home">
+    <div class="home-view">
         <div class="top">
             
             <autocomplete-searchbar></autocomplete-searchbar>
@@ -10,9 +10,7 @@ const homeTemplate = `
         <div class="recent-folders"></div>
             <p class="block-title">Your recent work</p>
         <div class="recent-notes"></div>
-            <p class="block-title">Jump back in</p>
-        <div class="flashcard-decks"></div>
-        </div>
+            
     </div>
 `;
 

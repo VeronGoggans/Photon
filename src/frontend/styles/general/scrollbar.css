@@ -1,27 +1,22 @@
 autocomplete-searchbar .searchbar-dropdown::-webkit-scrollbar,
 reference-autocomplete-searchbar .reference-item-list::-webkit-scrollbar,
-.content-view::-webkit-scrollbar,
-.note-view-content::-webkit-scrollbar,
 .font-options::-webkit-scrollbar,
-.home .middle::-webkit-scrollbar,
-.editor-wrapper .templates-container::-webkit-scrollbar,
-.board-wrapper::-webkit-scrollbar,
-.sticky-wall-view::-webkit-scrollbar,
-.sticky-home-view::-webkit-scrollbar,
-.standard-sticky-board-view::-webkit-scrollbar,
-.column-sticky-board-view::-webkit-scrollbar,
 .slash-command-container .commands::-webkit-scrollbar,
 .recently-viewed-notes-dropdown .options::-webkit-scrollbar {
     background-color: transparent;
     width: 5px;
 }
 
-.editor::-webkit-scrollbar {
+.editor::-webkit-scrollbar,
+.notes-view::-webkit-scrollbar,
+.home-view::-webkit-scrollbar {
     background-color: transparent;
     width: 10px;
 }
 
-.editor::-webkit-scrollbar-thumb {
+.editor::-webkit-scrollbar-thumb,
+.notes-view::-webkit-scrollbar-thumb ,
+.home-view::-webkit-scrollbar-thumb {
     background-color: var(--scrollbar-editor);
     border-radius: 5px;
 }
@@ -30,15 +25,6 @@ reference-autocomplete-searchbar .reference-item-list::-webkit-scrollbar,
 autocomplete-searchbar .searchbar-dropdown::-webkit-scrollbar-thumb,
 reference-autocomplete-searchbar .reference-item-list::-webkit-scrollbar-thumb,
 .font-options::-webkit-scrollbar-thumb,
-.content-view::-webkit-scrollbar-thumb,
-.note-view-content::-webkit-scrollbar-thumb,
-.home .middle::-webkit-scrollbar-thumb,
-.editor-wrapper .templates-container::-webkit-scrollbar-thumb,
-.board-wrapper::-webkit-scrollbar-thumb,
-.sticky-wall-view::-webkit-scrollbar-thumb,
-.standard-sticky-board-view::-webkit-scrollbar-thumb,
-.column-sticky-board-view::-webkit-scrollbar-thumb,
-.sticky-home-view::-webkit-scrollbar-thumb,
 .slash-command-container .commands::-webkit-scrollbar-thumb,
 .recently-viewed-notes-dropdown .options::-webkit-scrollbar-thumb {
     background-color: var(--scrollbar-content-view);
