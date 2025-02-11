@@ -1,15 +1,19 @@
 const homeTemplate = `
     <div class="home-view">
         <div class="top">
-            
             <autocomplete-searchbar></autocomplete-searchbar>
         </div>
+
         <div class="middle">
             <h1 class="view-title"></h1>
+
             <p class="block-title">Recent folders</p>
-        <div class="recent-folders"></div>
-            <p class="block-title">Your recent work</p>
-        <div class="recent-notes"></div>
+            <div class="recent-folders"></div>
+
+            <p class="block-title">Recent documents <span class="show-bookmarks-patch"><i class="bi bi-bookmark"></i>Show bookmarks</span></p>
+            
+            <div class="recent-notes"></div>
+        </div>
             
     </div>
 `;
@@ -138,6 +142,7 @@ const editorTemplate = `
             <div class="options">
               <button class="new-note-span"><i class="bi bi-plus-lg"></i>New</button>
               <button class="delete-note-span"><i class="bi bi-trash3"></i>Delete</button>
+              <button class="export-note-span"><i class="bi bi-file-earmark-arrow-down"></i>Export</button>
               <button class="note-details-span"><i class="bi bi-info-circle"></i>Details</button>
             </div>
           </div>
@@ -161,8 +166,8 @@ const editorTemplate = `
 
 
 export const templates = {
-    home: homeTemplate,
-    notes: notesTemplate,
-    settings: settingsTemplate,
-    editor: editorTemplate
+    home_view_id: homeTemplate,
+    notes_view_id: notesTemplate,
+    settings_view_id: settingsTemplate,
+    editor_view_id: editorTemplate
 }

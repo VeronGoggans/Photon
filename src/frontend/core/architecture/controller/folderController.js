@@ -193,11 +193,9 @@ export class FolderController {
 
         if (childFolders) {
             this.view.renderAll(folders);
+            return
         }
-
-        else {
-            return folders
-        }
+        return folders
     }
 
 
@@ -415,17 +413,19 @@ export class FolderController {
         }
 
         await this.model.patch(`/folders/${folder.id}/view-time`);
-        await this.getFolders({childFolders: true});
-        await this.eventBus.asyncEmit(FETCH_NOTES_EVENT, {
-            'folderId': folder.id,
-            'render': true,
-            'storeResultInMemory': true,
-            'bookmarks': false,      // default value
-            'recent': false,         // default value
-            'recentlyViewed': false, // default value
-            'searchItems': false,    // default value
-        });
 
-        renderEmptyFolderNotification();   
+        await this.getFolders({ childFolders: true })
+        .then(async () => {            
+            await this.eventBus.asyncEmit(FETCH_NOTES_EVENT, {
+                'folderId': folder.id,
+                'render': true,
+                'storeResultInMemory': true,
+                'bookmarks': false,      // default value
+                'recent': false,         // default value
+                'recentlyViewed': false, // default value
+                'searchItems': false,    // default value
+            })
+        })
+        renderEmptyFolderNotification();        
     }
 }

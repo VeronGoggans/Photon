@@ -1,4 +1,4 @@
-folder-card {
+folder-component {
     cursor: pointer;
     height: 50px;
     display: flex;
@@ -13,24 +13,24 @@ folder-card {
 }
 
 
-folder-card:hover {
+folder-component:hover {
     scale: 1.05;
 }
 
 
-folder-card div:hover {
+folder-component div:hover {
     opacity: 1;
 }
 
 
-folder-card p {
+folder-component p {
     padding: 5px;
     margin: 0 10px;
     font-size: 15px;
 }
 
 
-recent-folder-card {
+recent-folder-component {
     cursor: pointer;
     height: 50px;
     display: flex;
@@ -44,19 +44,19 @@ recent-folder-card {
     transition: opacity .7s ease, transform .25s ease, scale .2s ease;
 }
 
-recent-folder-card:hover {
+recent-folder-component:hover {
     scale: 1.05;
 
 }
 
-recent-folder-card i,
-folder-card i {
+recent-folder-component i,
+folder-component i {
     margin-right: 10px;
     font-size: 18px;
 }
 
 
-folder-path {
+folder-path-component {
     padding: 5px;
     border-radius: 5px;
     font-size: 14px;
@@ -66,14 +66,14 @@ folder-path {
     transition: .2s;
 }
 
-folder-path:hover {
+folder-path-component:hover {
     background-color: var(--hover);
     color: #5c7fdd;
 }
 
 
 
-pinned-folder {
+pinned-folder-component {
     cursor: pointer;
     display: block;
     padding: 10px 30px;
@@ -86,13 +86,13 @@ pinned-folder {
     transition: opacity .7s ease, transform .25s ease, scale .2s ease, background .15s ease;
 }
 
-pinned-folder i {
+pinned-folder-component i {
     margin: 0 5px;
     font-size: 18px;
 }
 
 
-pinned-folder:hover {
+pinned-folder-component:hover {
     background: var(--hover);
     font-weight: var(--font-weight-bold);
     scale: 1.05;

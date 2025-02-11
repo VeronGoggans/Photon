@@ -1,38 +1,13 @@
-/*__________DESCRIPTION PAGE BLOCK___________*/
-description-page-block {
-    display: flex;
-    flex-direction: column;
-    
-    color: var(--text);
-    max-width: 600px;
-    margin: 0;
-    padding: 20px 0;
-}
-
-description-page-block .page-property {
-    font-family: Roboto;
-    font-weight: 600;
-}
-
-description-page-block p {
-    padding-left: 20px;
-}
-
-description-page-block .description-block-placeholder {
-    color: var(--placeholder);
-    font-style: italic;
-}
-
 
 /*__________DOCUMENT LOCATION___________*/
 
-document-location-page-block {
+document-location-component {
     display: flex;
     align-items: center;
     margin: 0 10px;
 }
 
-document-location-page-block i {
+document-location-component i {
     font-size: 14px;
     margin: 0 3px;
     color: var(--text);

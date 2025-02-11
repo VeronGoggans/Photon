@@ -1,8 +1,9 @@
 import { AnimationHandler } from "../../handlers/animationHandler.js";
 import { greetBasedOnTime } from "../../util/date.js";
-import { createCustomElement } from "../../util/ui/components.js";
 import { FETCH_FOLDER_BY_ID_EVENT, FETCH_NOTE_BY_ID_EVENT, INIT_VIEW_EVENT } from "../../components/eventBus.js";
-import { handleSearch} from "./viewFunctions.js";
+import { handleSearch, showBookmarkedNotes} from "./viewFunctions.js";
+import { UIWebComponentFactory } from "../../patterns/factories/webComponentFactory.js";
+import { UIWebComponentNames, ViewRouteIDs } from "../../constants/constants.js";
 
 
 
@@ -13,6 +14,8 @@ export class HomeView {
 
         this.#initElements();
         this.#eventListeners();
+
+        this.homeFolder = {'id': 1, 'name': 'Home', 'color': 'color-original', 'parent_id': null}
 
         AnimationHandler.fadeInFromBottom(this._viewElement)
     }
@@ -31,15 +34,8 @@ export class HomeView {
      * @returns { void }
      */
     renderRecentFolders(folders) {
-        const contentFragment = document.createDocumentFragment();
-
-        for (let i = 0; i < folders.length; i++) {
-            const folderCard = this.#recentFolder(folders[i]);
-
-            contentFragment.appendChild(folderCard);
-            AnimationHandler.fadeInFromBottom(folderCard);
-        }
-        this._recentFolderList.appendChild(contentFragment); 
+        UIWebComponentFactory.
+        createUIWebComponentCollection(folders, UIWebComponentNames.RECENT_FOLDER, this._recentFolderList);
     }
 
 
@@ -56,38 +52,40 @@ export class HomeView {
      * @returns { void }
      */
     renderRecentNotes(notes) {
-        const contentFragment = document.createDocumentFragment();
-
-        for (let i = 0; i < notes.length; i++) {
-            const noteCard = createCustomElement(notes[i], 'recently-changed-note-card');
-
-            contentFragment.appendChild(noteCard);
-            AnimationHandler.fadeInFromBottom(noteCard);
-        }
-        this._recentNoteList.appendChild(contentFragment); 
+        UIWebComponentFactory.
+        createUIWebComponentCollection(notes, UIWebComponentNames.RECENTLY_CHANGED_NOTE, this._recentNoteList, false)
     }
 
-
-
-    #recentFolder(folder) {
-        const recentFolderCard = document.createElement('recent-folder-card');
-        recentFolderCard.setAttribute('folder', JSON.stringify(folder));
-        return recentFolderCard
-    }
 
 
 
     #eventListeners() {
+        
+        this._showBookmarkedNotesButton.addEventListener('click', async () => {
+            // Event that tells the ApplicationController to initialize the notes view
+            // and load the home folder (root folder).
+            await this.eventBus.asyncEmit(INIT_VIEW_EVENT, {
+                viewId: ViewRouteIDs.NOTES_VIEW_ID,
+                folder: this.homeFolder,
+                location: [this.homeFolder],
+                clearFilters: true
+            }).then(async () => {
+                await showBookmarkedNotes(this.eventBus)
+            });
+        })
+
+
+
         this._recentNoteList.addEventListener('RecentNoteCardClick', async (event) => {
             const { noteId } = event.detail;
             const { note, location } = await this.eventBus.asyncEmit(FETCH_NOTE_BY_ID_EVENT, noteId);
 
-            this.eventBus.emit(INIT_VIEW_EVENT,
+            this.eventBus.asyncEmit(INIT_VIEW_EVENT,
                 {
-                    viewId: 'editor',
+                    viewId: ViewRouteIDs.EDITOR_VIEW_ID,
                     editorObject: note,
                     newEditorObject: false, 
-                    previousView: 'home',
+                    previousView: ViewRouteIDs.HOME_VIEW_ID,
                     editorObjectLocation: location 
                 }
             );
@@ -96,8 +94,8 @@ export class HomeView {
         this._recentFolderList.addEventListener('RecentFolderCardClick', async (event) => {
             const { folderId } = event.detail;            
             const { folder, location } = await this.eventBus.asyncEmit(FETCH_FOLDER_BY_ID_EVENT, folderId);
-            this.eventBus.emit(INIT_VIEW_EVENT, {
-                viewId: 'notes',
+            this.eventBus.asyncEmit(INIT_VIEW_EVENT, {
+                viewId: ViewRouteIDs.NOTES_VIEW_ID,
                 folder: folder,
                 location: location,
                 clearFilters: true
@@ -116,5 +114,6 @@ export class HomeView {
         this._recentFolderList = document.querySelector('.recent-folders');
         this._recentNoteList = document.querySelector('.recent-notes');
         this._viewElement = document.querySelector('.home-view');
+        this._showBookmarkedNotesButton = document.querySelector('.show-bookmarks-patch');
     }
 }

@@ -1,4 +1,4 @@
-import { sidebarButtonText } from "../../constants/constants.js";
+import { sidebarButtonText, UIWebComponentNames, ViewRouteIDs } from "../../constants/constants.js";
 import {
     COLLAPSE_SIDEBAR_SUB_TITLE_EVENT,
     GET_PARENT_FOLDER_EVENT,
@@ -7,7 +7,7 @@ import {
     UPDATE_FOLDER_LOCATION_EVENT, UPDATE_NOTE_LOCATION_EVENT
 } from "../../components/eventBus.js";
 import {loadFolder} from "./viewFunctions.js";
-import {AnimationHandler} from "../../handlers/animationHandler.js";
+import { UIWebComponentFactory } from "../../patterns/factories/webComponentFactory.js";
 
 
 
@@ -117,18 +117,8 @@ export class SidebarView {
      * // displaying the data provided in the `folders` array.
      */
     renderPinnedFolders(folders) {
-        const domFragment = document.createDocumentFragment();
-
-        for (const pinnedFolder of folders) {
-
-            const pinnedFolderCard = document.createElement("pinned-folder");
-            pinnedFolderCard.setAttribute('pinned-folder', JSON.stringify(pinnedFolder));
-
-            domFragment.appendChild(pinnedFolderCard);
-            AnimationHandler.fadeInFromBottom(pinnedFolderCard);
-        }
-
-        this._pinnedFolders.appendChild(domFragment);
+        UIWebComponentFactory.
+        createUIWebComponentCollection(folders, UIWebComponentNames.PINNED_FOLDER, this._pinnedFolders)
     }
 
 
@@ -304,10 +294,10 @@ export class SidebarView {
                 const anchor = event.target.closest('a[data-view]')
                 const viewId = anchor.getAttribute('data-view')
 
-                if (viewId === 'notes') {
+                if (viewId === ViewRouteIDs.NOTES_VIEW_ID) {
                     // Event that tells the ApplicationController to initialize the notes view
                     // and load the home folder (root folder).
-                    this.eventBus.emit(INIT_VIEW_EVENT, {
+                    this.eventBus.asyncEmit(INIT_VIEW_EVENT, {
                         viewId: viewId,
                         folder: this.homeFolder,
                         location: [this.homeFolder],
@@ -317,7 +307,7 @@ export class SidebarView {
 
                 // load other views (e.g. sticky board, home, settings view)
                 else {
-                    this.eventBus.emit(INIT_VIEW_EVENT, {viewId: viewId});
+                    this.eventBus.asyncEmit(INIT_VIEW_EVENT, {viewId: viewId});
                 }
             });
         });

@@ -1,5 +1,5 @@
 import { AnimationHandler } from "../../handlers/animationHandler.js";
-import { removeEmptyFolderNotification, renderEmptyFolderNotification } from "../../handlers/notificationHandler.js";
+import { removeEmptyFolderNotification } from "../../handlers/notificationHandler.js";
 import { removeContent } from "../../util/ui.js";
 import {
     GET_CURRENT_FOLDER_EVENT,
@@ -10,6 +10,8 @@ import {
     UPDATE_FOLDER_PIN_VALUE_EVENT,
     UPDATE_NOTE_LOCATION_EVENT
 } from "../../components/eventBus.js";
+import { UIWebComponentFactory } from "../../patterns/factories/webComponentFactory.js";
+import { UIWebComponentNames } from "../../constants/constants.js";
 
 
 export class FolderView {
@@ -32,7 +34,6 @@ export class FolderView {
      *
      * @param {Array<Object>} folders               - An array of folder objects to be rendered. Each object represents a folder.
      *
-     * @requires createCustomElement                - A utility function to create a DOM element for a folder.
      * @requires AnimationHandler.fadeInFromBottom  - A utility method that animates the fade-in effect for a folder card.
      */
     renderAll(folders) {
@@ -49,15 +50,8 @@ export class FolderView {
             this.foldersContainer.style.display = '';
         }
 
-        const contentFragment = document.createDocumentFragment();
-
-        for (let i = 0; i < folders.length; i++) {
-            const folderCard = this.#folder(folders[i]);
-
-            contentFragment.appendChild(folderCard);
-            AnimationHandler.fadeInFromBottom(folderCard);
-        }
-        this.foldersContainer.appendChild(contentFragment);
+        UIWebComponentFactory.
+        createUIWebComponentCollection(folders, UIWebComponentNames.FOLDER, this.foldersContainer)
     }
 
 
@@ -82,7 +76,7 @@ export class FolderView {
             this.foldersContainer.style.display = '';
         }
 
-        const folderCard = this.#folder(folder);
+        const folderCard = UIWebComponentFactory.createUIWebComponent(folder, UIWebComponentNames.FOLDER);
         this.foldersContainer.appendChild(folderCard);
         AnimationHandler.fadeInFromBottom(folderCard); 
         removeEmptyFolderNotification();  
@@ -108,7 +102,9 @@ export class FolderView {
         // Updating the folder card
         for (const folderCard of folderCards) {
             if (folderCard.id === String(folder.id)) {
-                folderCard.setAttribute('folder', JSON.stringify(folder));
+                console.log('rerender');
+                
+                folderCard.setAttribute(UIWebComponentNames.FOLDER, JSON.stringify(folder));
                 this.#updatePinnedFolder(folder);
             }
         }
@@ -128,7 +124,6 @@ export class FolderView {
      *                                            This must match the ID of a folder card in the container.
      *
      * @requires AnimationHandler.fadeOutCard   - A utility method to animate the fade-out of an element.
-     * @requires renderEmptyFolderNotification  - A function that displays a notification for an empty folder.
      */
     renderDelete(folder) {
         // remove the folders subtitle if this was the last folder
@@ -139,12 +134,10 @@ export class FolderView {
 
         const folders = this.foldersContainer.children;
         for (const folderCard of folders) {
-            if (folderCard.id === String(folder.id) && folderCard.tagName === 'FOLDER-CARD') {
+            if (folderCard.id === String(folder.id)) {
                 AnimationHandler.fadeOutCard(folderCard);
             }
         }
-
-        renderEmptyFolderNotification(705);
     }
 
 
@@ -153,7 +146,7 @@ export class FolderView {
      * @param folder
      */
     renderOnePinnedFolder(folder) {
-        const pinnedFolderCard = this.#pinnedFolder(folder);
+        const pinnedFolderCard = UIWebComponentFactory.createUIWebComponent(folder, UIWebComponentNames.PINNED_FOLDER);
         this._pinnedFolders.appendChild(pinnedFolderCard);
         AnimationHandler.fadeInFromBottom(pinnedFolderCard);
     }
@@ -216,33 +209,10 @@ export class FolderView {
         if (folder.pinned) {
             for (const pinnedFolderCard of pinnedFolderCards) {
                 if (pinnedFolderCard.id === String(folder.id)) {
-                    pinnedFolderCard.setAttribute('pinned-folder', JSON.stringify(folder));
+                    pinnedFolderCard.setAttribute(UIWebComponentNames.PINNED_FOLDER, JSON.stringify(folder));
                 }
             }
         }
-    }
-
-
-    /**
-     * This method will create a single FolderCard component.
-     *
-     * @param folder             - A folder object.
-     * @returns { HTMLElement }  - A folder card component.
-     */
-    #folder(folder) {
-        const folderCard = document.createElement('folder-card');
-        folderCard.setAttribute('folder', JSON.stringify(folder));
-        return folderCard
-    }
-
-
-    /**
-     *
-     */
-    #pinnedFolder(pinnedFolder) {
-       const pinnedFolderCard = document.createElement('pinned-folder');
-       pinnedFolderCard.setAttribute('pinned-folder', JSON.stringify(pinnedFolder));
-       return pinnedFolderCard
     }
 
 

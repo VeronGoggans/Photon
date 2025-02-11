@@ -2,7 +2,7 @@ import { formatName, filterNotePreview } from "../../util/formatters.js";
 import { addDragImage, removeDragImage, showContextMenu, applyWidgetStyle } from "../../util/ui.js";
 import { formatDate } from "../../util/date.js";
 import { checkAutoScroll, stopScrolling } from "../draggable.js";
-import {CssAnimationClasses, CssAnimationDurations} from "../../constants/constants.js";
+import {CssAnimationClasses, CssAnimationDurations, UIWebComponentNames} from "../../constants/constants.js";
 import {AnimationHandler} from "../../handlers/animationHandler.js";
 
 
@@ -21,7 +21,7 @@ const optionMenuTemplate = `
     </div>
     <div id="apply-category-note-btn" >
         <i class="bi bi-archive"></i>
-        <span>Apply category</span>
+        <span>Add category</span>
     </div>
 `
 
@@ -183,6 +183,7 @@ class RecentlyChangedNote extends HTMLElement {
 
 
 
+
 class RecentlyViewedNote extends HTMLElement {
     constructor() {
         super();
@@ -218,6 +219,8 @@ class RecentlyViewedNote extends HTMLElement {
 }
 
 
-customElements.define('note-card', Note);
-customElements.define('recently-changed-note-card', RecentlyChangedNote);
-customElements.define('recently-viewed-note-card', RecentlyViewedNote);
+
+
+customElements.define(UIWebComponentNames.NOTE, Note);
+customElements.define(UIWebComponentNames.RECENTLY_CHANGED_NOTE, RecentlyChangedNote);
+customElements.define(UIWebComponentNames.RECENTLY_VIEWED_NOTE, RecentlyViewedNote);

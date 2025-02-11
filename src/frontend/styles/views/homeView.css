@@ -46,3 +46,29 @@
     grid-template-rows: repeat(auto-fill, 280px);
     margin-bottom: 50px;
 }
+
+
+.show-bookmarks-patch {
+    display: flex; 
+    align-items: center;
+    column-gap: 10px;
+    background-color: var(--bookmark-patch-bg-color);
+    color: white;
+    padding: 5px 20px;
+    margin: 0 30px;
+    font-weight: var(--font-weight-semi-bold);
+    font-size: 13px;
+    border-radius: 10px;
+    width: fit-content;
+    cursor: pointer;
+    transition: 150ms;
+}
+  
+.show-bookmarks-patch:hover {
+    scale: 1.05;
+}
+
+
+.show-bookmarks-patch:active {
+    scale: 1.1;
+}

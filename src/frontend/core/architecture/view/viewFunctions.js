@@ -3,6 +3,7 @@ import {
     FETCH_FOLDER_BY_ID_EVENT,
     FETCH_NOTE_BY_ID_EVENT, FETCH_NOTES_EVENT, SET_NOTE_FILTER_EVENT
 } from "../../components/eventBus.js";
+import { ViewRouteIDs } from "../../constants/constants.js";
 import {hideFolderBlockTitle, removeContent, resetFolderColorCircle} from "../../util/ui.js";
 
 
@@ -14,8 +15,8 @@ import {hideFolderBlockTitle, removeContent, resetFolderColorCircle} from "../..
 export async function loadFolder(folderId, eventBus) {
     // Loading the clicked on folder in the notes tab
     const { folder, location } = await eventBus.emit(FETCH_FOLDER_BY_ID_EVENT, folderId);
-    eventBus.emit(INIT_VIEW_EVENT, {
-        viewId: 'notes',
+    eventBus.asyncEmit(INIT_VIEW_EVENT, {
+        viewId: ViewRouteIDs.NOTES_VIEW_ID,
         folder: folder,
         location: location,
         clearFilters: true
@@ -31,21 +32,22 @@ export async function loadFolder(folderId, eventBus) {
  */
 export async function handleSearch(searchItemId, searchType, eventBus) {
     const viewId = viewToLoad(searchType)
-    if (viewId === 'editor') {
+    if (viewId === ViewRouteIDs.EDITOR_VIEW_ID) {
         if (searchType === 'notes' || searchType === 'templates') {
+            
             const { note, location } = await eventBus.asyncEmit(FETCH_NOTE_BY_ID_EVENT, searchItemId);
-            eventBus.emit(INIT_VIEW_EVENT, {
+            eventBus.asyncEmit(INIT_VIEW_EVENT, {
                 viewId: viewId,
                 editorObject: note,
                 newEditorObject: false,
-                previousView: 'notes',
+                previousView: ViewRouteIDs.NOTES_VIEW_ID,
                 editorObjectLocation: location
             })
         }
     }
-    if (viewId === 'notes') {
+    if (viewId === ViewRouteIDs.NOTES_VIEW_ID) {
         const { folder, location } = await eventBus.asyncEmit(FETCH_FOLDER_BY_ID_EVENT, searchItemId);
-        eventBus.emit(INIT_VIEW_EVENT, {
+        eventBus.asyncEmit(INIT_VIEW_EVENT, {
             viewId: viewId,
             folder: folder,
             location: location,
@@ -59,6 +61,7 @@ export async function handleSearch(searchItemId, searchType, eventBus) {
 
 
 export async function showBookmarkedNotes(eventBus) {
+   
     hideFolderBlockTitle();
     resetFolderColorCircle();
 
@@ -90,10 +93,10 @@ export async function showBookmarkedNotes(eventBus) {
 function viewToLoad(searchType) {
     switch (searchType) {
         case 'notes':
-            return 'editor'
+            return ViewRouteIDs.EDITOR_VIEW_ID
         case 'templates':
-            return 'editor'
+            return ViewRouteIDs.EDITOR_VIEW_ID
         case 'folders':
-            return 'notes'
+            return ViewRouteIDs.NOTES_VIEW_ID
     }
 }

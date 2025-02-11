@@ -2,7 +2,6 @@ import { KeyEventListener } from "../../eventListeners/keyEventListener.js";
 import { DropdownHelper } from "../../helpers/dropdownHelper.js";
 import { TextBlockHandler } from "../../textFormat/textBlockHandler.js";
 import { AnimationHandler } from "../../handlers/animationHandler.js";
-import { createDocumentLocation } from "../../util/ui/components.js";
 import { removeContent } from "../../util/ui.js";
 import { loadFolder } from "./viewFunctions.js";
 import { AutoSave } from "../../components/Autosave.js";
@@ -13,8 +12,9 @@ import {
   RENDER_DELETE_MODAL_EVENT,
   RENDER_NOTE_DETAILS_MODAL_EVENT
 } from "../../components/eventBus.js";
-import { ReferenceItemTypes } from "../../constants/constants.js";
+import { ReferenceItemTypes, UIWebComponentNames } from "../../constants/constants.js";
 import { placeSearchContainer } from "../../components/dynamicElementPlacer.js";
+import { UIWebComponentFactory } from "../../patterns/factories/webComponentFactory.js";
 
 
 
@@ -93,7 +93,8 @@ export class TextEditorView {
     removeContent(this.documentLocation)
 
     // Render the new path
-    this.documentLocation.appendChild(createDocumentLocation(objectLocation));
+    const documentLocation = UIWebComponentFactory.createUIWebComponent(objectLocation, UIWebComponentNames.DOCUMENT_LOCATION, false);
+    this.documentLocation.appendChild(documentLocation);
 
     setTimeout(() => {
       // Focus on the document title
@@ -135,16 +136,8 @@ export class TextEditorView {
     // Remove previous list of recently viewed notes
     removeContent(this.recentlyViewedNotesOptions)
 
-    const fragment  = document.createDocumentFragment();
-
-    notes.forEach(note => {
-      const noteCard = document.createElement('recently-viewed-note-card');
-
-      noteCard.setData(note);
-      fragment.appendChild(noteCard);
-    });
-
-    this.recentlyViewedNotesOptions.appendChild(fragment);
+    UIWebComponentFactory.
+    createUIWebComponentCollection(notes, UIWebComponentNames.RECENTLY_VIEWED_NOTE, this.recentlyViewedNotesOptions, false)
   }
 
 

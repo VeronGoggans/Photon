@@ -1,5 +1,5 @@
-note-card,
-recently-changed-note-card{
+note-component,
+recently-changed-note-component{
     cursor: pointer;
     min-height: 280px;
     max-height: 280px;
@@ -13,13 +13,13 @@ recently-changed-note-card{
     transition: opacity .7s ease, transform .25s ease, scale .2s ease;
 }
 
-note-card:hover,
-recently-changed-note-card:hover{
+note-component:hover,
+recently-changed-note-component:hover{
     scale: 1.05;
 }
 
-note-card h4,
-recently-changed-note-card h4 {
+note-component h4,
+recently-changed-note-component h4 {
     padding: 5px;
     margin: auto 10px;
     color: var(--important);
@@ -27,8 +27,8 @@ recently-changed-note-card h4 {
     font-weight: 500;
 }
 
-note-card .note-content-box,
-recently-changed-note-card .note-content-box {
+note-component .note-content-box,
+recently-changed-note-component .note-content-box {
     padding: 10px;
     overflow: hidden;
     color: var(--text-soft);
@@ -37,13 +37,13 @@ recently-changed-note-card .note-content-box {
 }
 
 
-note-card .note-content-box img,
-recently-changed-note-card .note-content-box img {
+note-component .note-content-box img,
+recently-changed-note-component .note-content-box img {
     max-width: 150px;
     border-radius: 5px;
 }
 
-note-card .note-content-box i {
+note-component .note-content-box i {
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -53,33 +53,33 @@ note-card .note-content-box i {
     color: var(--text);
 }
 
-note-card .note-content-box iframe,
-recently-changed-note-card .note-content-box iframe {visibility: hidden}
+note-component .note-content-box iframe,
+recently-changed-note-component .note-content-box iframe {visibility: hidden}
 
-note-card .note-content-box hr,
-recently-changed-note-card .note-content-box hr {
+note-component .note-content-box hr,
+recently-changed-note-component .note-content-box hr {
     border-style: none;
     border-radius: 5px;
     border: 1px solid var(--editor-text);
   }
 
-note-card .note-content-box :where(h1, h2),
-recently-changed-note-card .note-content-box :where(h1, h2) {
+note-component .note-content-box :where(h1, h2),
+recently-changed-note-component .note-content-box :where(h1, h2) {
     color: var(--important);
     font-weight: 500;
     font-size: 12px
 }
 
-note-card .note-content-box h1,
-recently-changed-note-card .note-content-box h1{
+note-component .note-content-box h1,
+recently-changed-note-component .note-content-box h1{
     font-size: 14px;
     font-weight: 400;
 }
 
-note-card .note-content-box .linked-note-container {visibility: hidden}
+note-component .note-content-box .linked-note-container {visibility: hidden}
 
-note-card .note-content-box a,
-recently-changed-note-card .note-content-box a {color: rgb(67, 142, 255)}
+note-component .note-content-box a,
+recently-changed-note-component .note-content-box a {color: rgb(67, 142, 255)}
 
 .note-content-box terminal-snippet {
     visibility: hidden;
@@ -103,7 +103,7 @@ recently-changed-note-card .note-content-box a {color: rgb(67, 142, 255)}
 
 
 
-recently-viewed-note-card {
+recently-viewed-note-component {
     background-color: transparent;
     cursor: pointer;
     transition: 200ms;
@@ -115,12 +115,12 @@ recently-viewed-note-card {
     border-radius: 7px;
 }
 
-recently-viewed-note-card .name-container {
+recently-viewed-note-component .name-container {
     display: grid;
     grid-template-columns: 30px 1fr;
 }
 
-recently-viewed-note-card .dot {
+recently-viewed-note-component .dot {
     width: 7px;
     height: 7px;
     border-radius: 50%;
@@ -128,12 +128,12 @@ recently-viewed-note-card .dot {
     background-color: #5c7fdd;
 }
 
-recently-viewed-note-card .view-date {
+recently-viewed-note-component .view-date {
     font-size: 10px;
     display: flex;
     align-items: end;
 }
 
-recently-viewed-note-card:hover {
+recently-viewed-note-component:hover {
     background-color: var(--hover-searchbar-options);
 }

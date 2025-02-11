@@ -91,6 +91,7 @@ i {
 }
 
 .block-title {
+    display: flex;
     color: var(--less-important);
     margin-top: 20px;
     font-size: 20px;

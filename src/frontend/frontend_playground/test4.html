@@ -1,217 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:wght@100&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 
+  <!-- CDN for the icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- CDN for Emoji picker element -->
+  <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
+
+  <!-- CDN for Google fonts-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:wght@100&display=swap" rel="stylesheet">
+  <title>Photon</title>
 </head>
+
 <style>
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      padding: 0;
-      margin: 0;
-      width: 100dvw;
-      height: 100dvh;
-      overflow-x: hidden;
-      font-family: Poppins;
-    }
-
-    h2 {
-      font-weight: 400;
-    }
-
-   .wrapper {
-    padding: 0 5%;
-    display: flex;
-    background-color: #ffffff;
-    flex-direction: column;
-   }
-
-   .board-wrapper {
-    position: relative;
-    display: flex;
-    margin: 50px 0;
-    max-width: 100%;
-    height: 100%;
-    overflow-x: scroll;
-    background-color: rgb(2, 2, 2);
-   }
-
-   .board-wrapper::-webkit-scrollbar {
-    height: 8px;
-    background-color: transparent;
-   }
-
-   .board-wrapper::-webkit-scrollbar-thumb {
-    background-color: #eff0f4;
-    border-radius: 4px;
-   }
-
-   body::-webkit-scrollbar {
-    width: 1-px;
-    background-color: transparent;
-   }
-
-   body::-webkit-scrollbar-thumb {
-    background-color: #eff0f4;
-    border-radius: 4px;
-   }
+body {
+  padding: 20%;
+  font-family: Poppins;
+}
 
 
-   .single-board-wrapper {
-    position: relative;
-    padding: 10px;
-    background-color:#ffffff;
-    border-radius: 5px;
-    margin: 50px 0;
-      }
 
-      .single-board-wrapper h2 {
-        text-align: center;
-      }
-
-    
-
-    .stickies-container {
-        display: grid;
-        grid-template-columns: repeat(5, 200px);
-        grid-auto-rows: 200px; /* Two rows, each 100px tall */
-        justify-content: center;
-        gap: 10px; /* Space between grid items */
-    
-    }
-
-    @media screen and (max-width: 1120px) {
-        .stickies-container {
-            grid-template-columns: repeat(4, 200px);
-        }
-        
-    }
-
-    @media screen and (max-width: 940px) {
-        .stickies-container {
-            grid-template-columns: repeat(3, 200px);
-        }
-    }
-
-    @media screen and (max-width: 690px) {
-        .stickies-container {
-            grid-template-columns: repeat(2, 200px);
-        }
-        
-    }
-
-    .sticky-small {
-        padding: 10px;
-        transition: 200ms;
-        border-radius: 5px;
-      background-color: rgb(69, 182, 154);
-      grid-column: span 1; /* Occupies 1 column */
-      grid-row: span 1;    /* Occupies 1 row */
-    }
-
-    .sticky-long {
-        padding: 10px;
-        transition: 200ms;
-        border-radius: 5px;
-      background-color: rgb(46, 141, 146);
-      grid-column: span 1; /* Occupies 1 column */
-      grid-row: span 2;    /* Occupies 2 rows */
-    }
-
-    .sticky-wide {
-        padding: 10px;
-        transition: 200ms;
-        border-radius: 5px;
-      background-color: #607D8B;
-      grid-column: span 2; /* Occupies 2 columns */
-      grid-row: span 1;    /* Occupies 1 row */
-    }
-
-   .board-section input::placeholder {
-    color: #ced2e6;
-   }
-
-
-   .sticky-small:hover,
-   .sticky-long:hover,
-   .sticky-wide:hover{
-    scale: 1.025;
-   }
-
-   .no-stickies-message {
-    position: absolute;
-    top: 20%;
-    left: 33%;
-    font-size: 20px;
-    color: #ced2e6;
-    font-weight: 300;
-   }
-
-   .add-sticky-btn {
-    position:sticky;
-    margin-left: auto;
-    bottom: 30px;
-    right: 0px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: none;
-    color: #2f3773;
-    background-color: #f4f4fc;
-    font-size: 30px;
-    cursor: pointer;
-    transition: 200ms;
-   }
-
-   .add-sticky-btn:hover {
-    scale: 1.05;
-   }
-
-   
 </style>
+
+
 <body>
+  <div class="show-bookmarks-patch"> <i class="bi bi-bookmark"></i>Show bookmarks</div>
 
-  <div class="wrapper">
-    <h2>Brainstorm Pomodoro features</h2>
-    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, in quos? Ab suscipit perspiciatis obcaecati vel iure vitae corporis veniam quas! Mollitia eos tempore ipsam doloribus hic. Laborum, enim praesentium.</p>
-    <div class="single-board-wrapper">
-        <div class="stickies-container">
-            <div class="sticky-wide">
-                <p>Hello world</p>
-            </div>
-            <div class="sticky-long">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem est possimus modi eos distinctio neque repellendus nemo quisquam enim, sit blanditiis ex tenetur nesciunt eligendi eius. Libero facilis ad fuga.</p>
-            </div>
-            <div class="sticky-small">
-                <h2>Hello</h2>
-                <p>Hello world</p>
-            </div>
-            <div class="sticky-small"><p>hello</p></div>
-            <div class="sticky-long"></div>
-            <div class="sticky-small"></div>
-            <div class="sticky-wide"></div> 
-            <div class="sticky-long"></div> 
-            <div class="sticky-wide"></div> 
-
-        </div> 
-         
-    </div>
-    <button class="add-sticky-btn"><i class="bi bi-plus-lg"></i></button>
-    
-    
-  </div>
-    
-      
 </body>
 </html>

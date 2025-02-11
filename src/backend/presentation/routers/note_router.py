@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from src.backend.data.database import Database
-from src.backend.application.services.note_service import NoteService
+from src.backend.application.note_service import NoteService
 from src.backend.data.managers.note_manager import NoteManager
 from src.backend.presentation.request_bodies.note_requests import *
 from src.backend.presentation.http_status import HttpStatus

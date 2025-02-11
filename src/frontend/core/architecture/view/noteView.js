@@ -1,9 +1,9 @@
 import { AnimationHandler } from "../../handlers/animationHandler.js";
-import { createCustomElement } from "../../util/ui/components.js";
 import { DropdownHelper } from "../../helpers/dropdownHelper.js";
-import { renderEmptyFolderNotification } from "../../handlers/notificationHandler.js";
 import { INIT_VIEW_EVENT, RENDER_DELETE_MODAL_EVENT } from "../../components/eventBus.js";
 import { handleSearch, showBookmarkedNotes } from "./viewFunctions.js";
+import { UIWebComponentFactory } from "../../patterns/factories/webComponentFactory.js";
+import { UIWebComponentNames, ViewRouteIDs } from "../../constants/constants.js";
 
 
 export class NoteView {
@@ -34,7 +34,6 @@ export class NoteView {
      *
      * @param {Array<Object>} notes                 - An array of note objects to be rendered. Each object represents a note.
      *
-     * @requires createCustomElement                - A utility function to create a DOM element for a note.
      * @requires AnimationHandler.fadeInFromBottom  - A utility method that animates the fade-in effect for a note card.
      */
     renderAll(notes) {
@@ -51,15 +50,8 @@ export class NoteView {
             this.notesContainer.style.display = '';
         }
 
-        const contentFragment = document.createDocumentFragment();
-
-        for (let i = 0; i < notes.length; i++) {
-            const noteCard = createCustomElement(notes[i], 'note-card');
-
-            contentFragment.appendChild(noteCard);
-            AnimationHandler.fadeInFromBottom(noteCard);
-        }
-        this.notesContainer.appendChild(contentFragment);
+        UIWebComponentFactory.
+        createUIWebComponentCollection(notes, UIWebComponentNames.NOTE, this.notesContainer, false)
     }
 
 
@@ -76,7 +68,6 @@ export class NoteView {
      *                                            of a child element in the notes' container.
      *
      * @requires AnimationHandler.fadeOutCard   - A utility method that animates the fade-out of an element.
-     * @requires renderEmptyFolderNotification  - A function that displays a notification for an empty folder.
      */
     renderDelete(note) {
         if (this.notesContainer.children.length === 1) {
@@ -87,12 +78,12 @@ export class NoteView {
 
         // Search for the specified note card
         const cards = this.notesContainer.children;
+        
         for (let i = 0; i < cards.length; i++) {
             if (cards[i].id === String(note.id)) {
                 AnimationHandler.fadeOutCard(cards[i]);
             }
         }
-        renderEmptyFolderNotification(705);
     }
 
 
@@ -125,11 +116,11 @@ export class NoteView {
          * The ApplicationController will listen for this event and initialize the editor view.
          */
         this.viewElement.addEventListener('CreateNewNote', () => {
-            this.eventBus.emit(INIT_VIEW_EVENT, {
-                viewId: 'editor',
+            this.eventBus.asyncEmit(INIT_VIEW_EVENT, {
+                viewId: ViewRouteIDs.EDITOR_VIEW_ID,
                 editorObject: null,
                 newEditorObject: true, 
-                previousView: 'notes', 
+                previousView: ViewRouteIDs.NOTES_VIEW_ID, 
                 editorObjectLocation: null
             })
         })
@@ -200,11 +191,11 @@ export class NoteView {
 
             // Event to tell the ApplicationController to initialize the editor view
             // and load the specified note within the editor.
-            this.eventBus.emit(INIT_VIEW_EVENT, {
-                viewId: 'editor',
+            this.eventBus.asyncEmit(INIT_VIEW_EVENT, {
+                viewId: ViewRouteIDs.EDITOR_VIEW_ID,
                 editorObject: note,
                 newEditorObject: false,
-                previousView: 'notes',
+                previousView: ViewRouteIDs.NOTES_VIEW_ID,
                 editorObjectLocation: null
             });
         })
@@ -218,11 +209,11 @@ export class NoteView {
         this.createNoteButton.addEventListener('click', () => {
 
             // Event to tell the ApplicationController to initialize the editor view
-            this.eventBus.emit(INIT_VIEW_EVENT, {
-                viewId: 'editor',
+            this.eventBus.asyncEmit(INIT_VIEW_EVENT, {
+                viewId: ViewRouteIDs.EDITOR_VIEW_ID,
                 editorObject: null,
                 newEditorObject: true, 
-                previousView: 'notes', 
+                previousView: ViewRouteIDs.NOTES_VIEW_ID, 
                 editorObjectLocation: null
             })
         })

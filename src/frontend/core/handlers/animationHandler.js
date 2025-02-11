@@ -1,3 +1,4 @@
+import { renderEmptyFolderNotification } from "./notificationHandler.js";
 
 export class AnimationHandler {
 
@@ -24,7 +25,8 @@ export class AnimationHandler {
     static fadeOutCard(card) { 
         card.classList.add('fadeOut');
         setTimeout(() => {
-            card.remove();
+            card.remove()
+            renderEmptyFolderNotification()
         }, 700);
     }
 

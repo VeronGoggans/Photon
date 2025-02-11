@@ -13,19 +13,18 @@ export class KeyEventListener {
         if (!editor) return; // Prevent errors if element is not found
 
         const keyActions = {
-            [EditorKeyBindings.N_KEY]: () => this.view.clearCurrentEditorObject(),
-            [EditorKeyBindings.D_KEY]: () => this.view.renderNoteDeleteModal(),
-            [EditorKeyBindings.E_KEY]: () => this.controller.loadPreviousView(),
-            [EditorKeyBindings.I_KEY]: () => this.view.renderNoteDetailsModal(),
-            [EditorKeyBindings.GREATER_KEY]: () => this.view.loadNextNote(),
-            [EditorKeyBindings.LESS_KEY]: () => this.view.loadPreviousNote(),
+            [EditorKeyBindings.N_KEY]: (e) => {e.preventDefault(); this.view.clearCurrentEditorObject()},
+            [EditorKeyBindings.D_KEY]: (e) => {e.preventDefault(); this.view.renderNoteDeleteModal()},
+            [EditorKeyBindings.E_KEY]: (e) => {e.preventDefault(); this.controller.loadPreviousView()},
+            [EditorKeyBindings.I_KEY]: (e) => {e.preventDefault(); this.view.renderNoteDetailsModal()},
+            [EditorKeyBindings.GREATER_KEY]: (e) => {e.preventDefault(); this.view.loadNextNote()},
+            [EditorKeyBindings.LESS_KEY]: (e) => {e.preventDefault(); this.view.loadPreviousNote()},
         };
 
         editor.addEventListener('keydown', (event) => {
             if (!event.ctrlKey) return; // Exit if Ctrl is not pressed
-            event.preventDefault();
 
-            keyActions[event.key]?.() || console.log('Unknown key binding.');
+            keyActions[event.key]?.(event) || console.log('Unknown key binding.');
         });
     }
 }

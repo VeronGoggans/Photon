@@ -2,7 +2,7 @@ import { formatName } from "../../util/formatters.js";
 import { addDragImage, removeDragImage, showContextMenu } from "../../util/ui.js";
 import { applyFolderIconColor, applyWidgetStyle } from "../../util/ui.js";
 import { checkAutoScroll, stopScrolling } from "../draggable.js";
-import {folderIconColors} from "../../constants/constants.js";
+import {folderIconColors, UIWebComponentNames} from "../../constants/constants.js";
 
 
 const optionsMenuTemplate = `
@@ -29,7 +29,7 @@ class RecentFolder extends HTMLElement {
 
     connectedCallback() {
         // Parse the folder JSON attribute with error handling
-        this.folder = JSON.parse(this.getAttribute('folder'));
+        this.folder = JSON.parse(this.getAttribute(UIWebComponentNames.RECENT_FOLDER));
         this.id = this.folder.id;
 
         this.render();
@@ -53,6 +53,8 @@ class RecentFolder extends HTMLElement {
         this.dispatchEvent(new CustomEvent('RecentFolderCardClick', { detail: { folderId: this.id }, bubbles: true }));
     }
 }
+
+
 
 
 
@@ -88,7 +90,7 @@ class FolderPath extends HTMLElement {
 
 class PinnedFolder extends HTMLElement {
     static get observedAttributes() {
-        return ['pinned-folder'];
+        return [UIWebComponentNames.PINNED_FOLDER];
     }
 
 
@@ -98,7 +100,7 @@ class PinnedFolder extends HTMLElement {
 
 
     attributeChangedCallback(name, oldValue, newValue) {
-        if (name === 'pinned-folder') {
+        if (name === UIWebComponentNames.PINNED_FOLDER) {
             this.pinnedFolder = JSON.parse(newValue);
             this.render();
         }
@@ -106,7 +108,7 @@ class PinnedFolder extends HTMLElement {
 
 
     connectedCallback() {
-        this.pinnedFolder = JSON.parse(this.getAttribute('pinned-folder'));
+        this.pinnedFolder = JSON.parse(this.getAttribute(UIWebComponentNames.PINNED_FOLDER));
         this.id = this.pinnedFolder.id;
 
         this.render();
@@ -133,7 +135,7 @@ class PinnedFolder extends HTMLElement {
 
 class Folder extends HTMLElement {
     static get observedAttributes() {
-        return ['folder']; 
+        return [UIWebComponentNames.FOLDER]; 
     }
 
     constructor() {
@@ -143,7 +145,7 @@ class Folder extends HTMLElement {
 
 
     connectedCallback() {
-        this.folder = JSON.parse(this.getAttribute('folder'));
+        this.folder = JSON.parse(this.getAttribute(UIWebComponentNames.FOLDER));
         this.id = this.folder.id;
         this.draggable = true;
         
@@ -153,7 +155,7 @@ class Folder extends HTMLElement {
 
 
     attributeChangedCallback(name, oldValue, newValue) {
-        if (name === 'folder') {
+        if (name === UIWebComponentNames.FOLDER) {
             this.folder = JSON.parse(newValue);
             this.render();
         }
@@ -281,13 +283,8 @@ class Folder extends HTMLElement {
 
 
 
-
-
-
-
-
 // Register the custom elements
-customElements.define('folder-card', Folder);
-customElements.define('recent-folder-card', RecentFolder);
-customElements.define('folder-path', FolderPath);
-customElements.define('pinned-folder', PinnedFolder);
+customElements.define(UIWebComponentNames.FOLDER, Folder);
+customElements.define(UIWebComponentNames.RECENT_FOLDER, RecentFolder);
+customElements.define(UIWebComponentNames.FOLDER_PATH, FolderPath);
+customElements.define(UIWebComponentNames.PINNED_FOLDER, PinnedFolder);

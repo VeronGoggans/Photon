@@ -15,7 +15,7 @@ import {
     PATCH_NOTE_CONTENT_EVENT,
     PATCH_NOTE_NAME_EVENT
 } from "../../components/eventBus.js";
-import { ReferenceItemTypes } from "../../constants/constants.js";
+import { ReferenceItemTypes, ViewRouteIDs } from "../../constants/constants.js";
 import { loadFolder } from "../view/viewFunctions.js";
 
 
@@ -46,12 +46,12 @@ export class TextEditorController {
     loadPreviousView() {
         const previousViewId = this.eventBus.emit(GET_PREVIOUS_VIEW_EVENT);
 
-        if (previousViewId === 'notes') {
+        if (previousViewId === ViewRouteIDs.NOTES_VIEW_ID) {
 
             // The notes view will be initialized in the folder they were in before opening the editor
             const currentFolder = this.eventBus.emit(GET_CURRENT_FOLDER_EVENT);
 
-            this.eventBus.emit(INIT_VIEW_EVENT, {
+            this.eventBus.asyncEmit(INIT_VIEW_EVENT, {
                 viewId: previousViewId,
                 folder: currentFolder,
                 location: null,
@@ -59,7 +59,7 @@ export class TextEditorController {
             });
         }
         else {
-            this.eventBus.emit(INIT_VIEW_EVENT, {viewId: previousViewId});
+            this.eventBus.asyncEmit(INIT_VIEW_EVENT, {viewId: previousViewId});
         }
         this.model.clear();
     }

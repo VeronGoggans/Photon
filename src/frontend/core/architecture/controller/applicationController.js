@@ -14,6 +14,7 @@ import {
     INIT_VIEW_EVENT, OPEN_NOTE_IN_TEXT_EDITOR_EVENT, OPEN_TEXT_EDITOR_EVENT, SET_ACTIVE_TAB_EVENT,
     SET_NOTE_LOCATION_EVENT, SET_CURRENT_VIEW_EVENT
 } from "../../components/eventBus.js";
+import { ViewRouteIDs } from "../../constants/constants.js";
 
 
 
@@ -30,13 +31,14 @@ export class ApplicationController {
             [GET_PREVIOUS_VIEW_EVENT]: () => this.viewStack.pop(),
             [GET_CURRENT_VIEW_EVENT]: () => this.viewStack.view(),
             [SET_CURRENT_VIEW_EVENT]: (viewId) => this.viewStack.push(viewId),
-            [INIT_VIEW_EVENT]: (viewParameters) => this.router.initView(viewParameters)
+            [INIT_VIEW_EVENT]: async (viewParameters) => await this.router.initView(viewParameters)
         })
     }
+
+    async start() {
+        await this.router.initView({ viewId: ViewRouteIDs.HOME_VIEW_ID });
+    }
 }
-
-
-
 
 
 class Router {
@@ -49,65 +51,67 @@ class Router {
         this.settingController = new SettingController(this.eventBus);
         this.sidebarController = new SidebarController(this.eventBus);
         this.viewElement = document.querySelector('.content .view');
-
-
-        this.initView({ viewId: 'home' });
-        this.initView({ viewId: 'sidebar' });
+        this.sidebarController.init();
     }
 
 
-    initView(viewParameters = {}) {
+    async initView(viewParameters = {}) {
         const viewId = viewParameters.viewId;
 
-        // The sidebar view doesn't have a template.
-        // So this function does not need to load in any html template.
-        if (viewId !== 'sidebar') {
+        return new Promise((resolve) => {
+            const observer = new MutationObserver(async (mutations, obs) => {
+                if (this.viewElement.children.length > 0) { // Ensures children exist
+                    obs.disconnect(); // Stop observing once the view is loaded
+    
+                    // Now execute your initialization logic safely
+                    if (viewId === ViewRouteIDs.HOME_VIEW_ID) {                    
+                        await this.homeController.init();
+                        this.eventBus.emit(SET_ACTIVE_TAB_EVENT, 'home');
+                    }
+    
+
+                    if (viewId === ViewRouteIDs.NOTES_VIEW_ID) {
+                        const { folder, location, clearFilters } = viewParameters;
+    
+                        await this.noteController.init();
+                        await this.folderController.init(folder, location, clearFilters);
+                        this.eventBus.emit(SET_ACTIVE_TAB_EVENT, 'notes');
+                    }
+    
+
+                    if (viewId === ViewRouteIDs.EDITOR_VIEW_ID) {
+                        const { editorObject, newEditorObject, previousView, editorObjectLocation } = viewParameters;
+                        this.textEditorController.init();
+    
+                        if (editorObjectLocation !== null) {
+                            this.eventBus.emit(SET_NOTE_LOCATION_EVENT, editorObjectLocation);
+                        }
+                        if (newEditorObject) {
+                            this.eventBus.emit(OPEN_TEXT_EDITOR_EVENT);
+                        }
+                        if (!newEditorObject) {
+                            this.eventBus.emit(OPEN_NOTE_IN_TEXT_EDITOR_EVENT, editorObject);
+                            await this.noteController.updateNoteLastViewTime(editorObject.id);
+                        }
+    
+                        this.eventBus.emit(SET_CURRENT_VIEW_EVENT, previousView);
+                        this.eventBus.emit(SET_ACTIVE_TAB_EVENT, 'notes');
+                    }
+    
+                    
+                    if (viewId === ViewRouteIDs.SETTINGS_VIEW_ID) {
+                        await this.settingController.init();
+                        this.eventBus.emit(SET_ACTIVE_TAB_EVENT, 'settings');
+                    }
+
+                    resolve();
+                }
+            });
+
+            // Observe the parent view element for child mutations
+            observer.observe(this.viewElement, { childList: true });
+
             this.viewElement.innerHTML = templates[viewId];
-        }
-
-        setTimeout(async () => {
-            if (viewId === 'home') {
-                await this.homeController.init();
-                this.eventBus.emit(SET_ACTIVE_TAB_EVENT, 'home');
-            }
-
-            else if (viewId === 'notes') {
-                const { folder, location, clearFilters } = viewParameters;
-
-                await this.noteController.init();
-                await this.folderController.init(folder, location, clearFilters);
-                this.eventBus.emit(SET_ACTIVE_TAB_EVENT, 'notes');
-            }
-
-            else if (viewId === 'editor') {
-                const {editorObject, newEditorObject, previousView, editorObjectLocation} = viewParameters;
-                this.textEditorController.init();
-
-                if (editorObjectLocation !== null) {
-                    this.eventBus.emit(SET_NOTE_LOCATION_EVENT, editorObjectLocation);
-                }
-                if (newEditorObject) {
-                    this.eventBus.emit(OPEN_TEXT_EDITOR_EVENT);
-                }
-                if (!newEditorObject) {
-                    this.eventBus.emit(OPEN_NOTE_IN_TEXT_EDITOR_EVENT, editorObject);
-                    await this.noteController.updateNoteLastViewTime(editorObject.id);
-                }
-
-                this.eventBus.emit(SET_CURRENT_VIEW_EVENT, previousView);
-                this.eventBus.emit(SET_ACTIVE_TAB_EVENT, 'notes');
-            }
-
-
-            else if (viewId === 'settings') {
-                await this.settingController.init();
-                this.eventBus.emit(SET_ACTIVE_TAB_EVENT,'settings');
-            }
-
-            else if (viewId === 'sidebar') {
-                await this.sidebarController.init();
-            }
-
-        }, 0)
+        })
     }
 }

@@ -154,3 +154,31 @@ export const CssAnimationClasses = {
 export const CssAnimationDurations = {
     BOUNCING_ANIMATION: 600
 }
+
+
+
+
+export const UIWebComponentNames = {
+    
+    FOLDER: 'folder-component',
+    PINNED_FOLDER: 'pinned-folder-component',
+    FOLDER_PATH: 'folder-path-component',
+    RECENT_FOLDER: 'recent-folder-component',
+
+    NOTE: 'note-component',
+    RECENTLY_CHANGED_NOTE: 'recently-changed-note-component',
+    RECENTLY_VIEWED_NOTE: 'recently-viewed-note-component',
+
+    DOCUMENT_LOCATION: 'document-location-component'
+
+}
+
+
+export const ViewRouteIDs = {
+
+    NOTES_VIEW_ID: 'notes_view_id',
+    HOME_VIEW_ID: 'home_view_id',
+    EDITOR_VIEW_ID: 'editor_view_id',
+    SETTINGS_VIEW_ID: 'settings_view_id'
+
+}

@@ -1,7 +1,7 @@
-import { createCustomElement } from "../../util/ui/components.js";
 import { placeContextMenu } from "../dynamicElementPlacer.js";
 import { folderColorOptionsTemplate, categoryColorOptionsTemplate } from "../../constants/modalTemplates.js";
-import {CssAnimationClasses, CssAnimationDurations, ReferenceItemTypes} from "../../constants/constants.js";
+import {CssAnimationClasses, CssAnimationDurations, ReferenceItemTypes, UIWebComponentNames} from "../../constants/constants.js";
+import { UIWebComponentFactory } from "../../patterns/factories/webComponentFactory.js";
 
 
 class DocumentLocationPageBlock extends HTMLElement {
@@ -30,7 +30,7 @@ class DocumentLocationPageBlock extends HTMLElement {
         const folderPaths = [];
 
         this.folders.forEach(folder => {
-            const folderPath = createCustomElement(folder, 'folder-path');
+            const folderPath = UIWebComponentFactory.createUIWebComponent(folder, UIWebComponentNames.FOLDER_PATH, false);
             const icon = document.createElement('i');
             icon.classList.add('bi');
             icon.classList.add('bi-chevron-right');
@@ -355,8 +355,9 @@ class TerminalSnippet extends HTMLElement {
 }
     
 
+
 customElements.define('entity-options-menu', EntityOptionsMenu);
-customElements.define('document-location-page-block', DocumentLocationPageBlock);
+customElements.define(UIWebComponentNames.DOCUMENT_LOCATION, DocumentLocationPageBlock);
 customElements.define('terminal-snippet', TerminalSnippet);
 customElements.define('appearance-options', AppearanceOptions);
 customElements.define('reference-item-card', ReferenceItemCard);

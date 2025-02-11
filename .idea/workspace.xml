@@ -4,28 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="Removed the project management code and changed the map structure">
+    <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="Styling tweaks and improvements">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/core/architecture/view/homeView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/architecture/view/homeView.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/core/architecture/view/sideBarView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/architecture/view/sideBarView.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/core/components/Autosave.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/components/Autosave.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/core/components/entities/note.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/components/entities/note.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/core/components/pageBlocks/pageBlocks.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/components/pageBlocks/pageBlocks.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/core/constants/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/constants/constants.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/core/constants/templates.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/constants/templates.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/core/handlers/animationHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/handlers/animationHandler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/styles/components/category.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/styles/components/category.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/styles/components/folder.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/styles/components/folder.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/styles/components/note.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/styles/components/note.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/styles/general/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/styles/general/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/styles/general/scrollbar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/styles/general/scrollbar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/styles/general/sidebar.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/styles/general/sidebar.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/styles/general/themes.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/styles/general/themes.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/styles/textEditor/textEditor.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/styles/textEditor/textEditor.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/styles/textEditor/toolbarTop.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/styles/textEditor/toolbarTop.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/styles/views/homeView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/styles/views/homeView.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/styles/views/notesView.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/styles/views/notesView.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/eventListeners/keyEventListener.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/eventListeners/keyEventListener.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/frontend_playground/test6.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/frontend_playground/test6.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -67,6 +52,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;JavaScript Debug.test6.html.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
@@ -179,7 +165,8 @@
       <workItem from="1738858495894" duration="5807000" />
       <workItem from="1738885244545" duration="1212000" />
       <workItem from="1738888987015" duration="137000" />
-      <workItem from="1738926369698" duration="14467000" />
+      <workItem from="1738926369698" duration="19958000" />
+      <workItem from="1738957179821" duration="2859000" />
     </task>
     <task id="LOCAL-00001" summary="the sidebar can now be without a border in the settings tab. And the options menu for folders and notes have been changed">
       <option name="closed" value="true" />
@@ -405,7 +392,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738859180627</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Styling tweaks and improvements">
+      <option name="closed" value="true" />
+      <created>1738948445624</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1738948445624</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -423,7 +418,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Changed the white space around the Photon text inside the sidebar and increased the text size of it" />
     <MESSAGE value="Rewrote the editor logic" />
     <MESSAGE value="Created a component for the option menu. The logic is now reused for every entity component" />
     <MESSAGE value="GET, DELETE and ADD work on the sticky board home view. UPDATE is done from within the sticky board view through PATCH HTTP requests" />
@@ -448,6 +442,7 @@
     <MESSAGE value="Pinned folder will now have the folder icon with its applied appearance" />
     <MESSAGE value="Notes &amp; folder can now be linked within a note. Templates can now be applied to a note" />
     <MESSAGE value="Removed the project management code and changed the map structure" />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed the project management code and changed the map structure" />
+    <MESSAGE value="Styling tweaks and improvements" />
+    <option name="LAST_COMMIT_MESSAGE" value="Styling tweaks and improvements" />
   </component>
 </project>
