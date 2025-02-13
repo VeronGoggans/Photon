@@ -1,10 +1,13 @@
-.category {
+category-component {
     cursor: pointer;
     padding: 10px 30px;
+    margin: 0 10px;
     border-radius: 7px;
     font-size: 14px;
-    color: var(--less-important);
-    transition: background .15s ease;
+    color: var(--important);
+    opacity: 0;
+    transform: translateY(30%);
+    transition: opacity .7s ease, transform .25s ease, scale .2s ease, background .15s ease;
 }
 
 
@@ -14,8 +17,44 @@
 }
 
 
-.category:hover {
-    background: var(--hover);
-    color: var(--important);
+category-component:hover {
+    font-weight: var(--font-weight-bold);
+    scale: 1.05;
 }
 
+
+category-component i {
+    margin: 0 5px;
+    font-size: 18px;
+}
+
+
+.category-appearance-blue-1 { background: var(--category-background-blue-1); }
+.category-appearance-blue-2 { background: var(--category-background-blue-2); }
+.category-appearance-blue-3 { background: var(--category-background-blue-3); }
+.category-appearance-blue-4 { background: var(--category-background-blue-4); }
+.category-appearance-green-1 { background: var(--category-background-green-1);}
+.category-appearance-green-2 { background: var(--category-background-green-2); }
+.category-appearance-green-3 { background: var(--category-background-green-3); }
+.category-appearance-purple-1 { background: var(--category-background-purple-1); }
+.category-appearance-purple-2 { background: var(--category-background-purple-2); }
+.category-appearance-red-1 { background: var(--category-background-red-1); }
+.category-appearance-red-2 { background: var(--category-background-red-2); }
+.category-appearance-orange-1 { background: var(--category-background-orange-1); }
+.category-appearance-orange-2 { background: var(--category-background-orange-2); }
+
+
+
+.category-appearance-blue-1 i { color: var(--category-color-blue-1) !important; }
+.category-appearance-blue-2 i { color: var(--category-color-blue-2) !important; }
+.category-appearance-blue-3 i { color: var(--category-color-blue-3) !important; }
+.category-appearance-blue-4 i { color: var(--category-color-blue-4) !important; }
+.category-appearance-green-1 i { color: var(--category-color-green-1) !important; }
+.category-appearance-green-2 i { color: var(--category-color-green-2) !important; }
+.category-appearance-green-3 i { color: var(--category-color-green-3) !important; }
+.category-appearance-purple-1 i { color: var(--category-color-purple-1) !important; }
+.category-appearance-purple-2 i { color: var(--category-color-purple-2) !important; }
+.category-appearance-red-1 i { color: var(--category-color-red-1) !important; }
+.category-appearance-red-2 i { color: var(--category-color-red-2) !important; }
+.category-appearance-orange-1 i { color: var(--category-color-orange-1) !important; }
+.category-appearance-orange-2 i { color: var(--category-color-orange-2) !important; }

@@ -9,7 +9,6 @@ export class TextEditorModel {
     constructor() {
         this.currentLoadedNote = null;
         this.stackLimit = 10;
-        this.httpModel = new HttpModel();
         this.editorNotesCache = new EditorNotesCache();
         this.recentlyViewedNotesStack = new UniqueEvictingStack(this.stackLimit);
 
@@ -139,7 +138,7 @@ export class TextEditorModel {
      * and fills the evicting stack with the most recently viewed notes.
      */
     async #addRecentlyViewedNotes() {
-        const response = await this.httpModel.get('/notes?bookmarks=false&recent=false&recently_viewed=true&search_items=false');
+        const response = await HttpModel.get('/notes?bookmarks=false&recent=false&recently_viewed=true&search_items=false');
         this.recentlyViewedNotesStack.stack = response.content.notes
     }
 }

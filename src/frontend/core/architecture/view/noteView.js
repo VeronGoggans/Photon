@@ -1,9 +1,10 @@
 import { AnimationHandler } from "../../handlers/animationHandler.js";
 import { DropdownHelper } from "../../helpers/dropdownHelper.js";
 import { INIT_VIEW_EVENT, RENDER_DELETE_MODAL_EVENT } from "../../components/eventBus.js";
-import { handleSearch, showBookmarkedNotes } from "./viewFunctions.js";
+import { handleSearch, showBookmarkedNotes } from "../controller/controllerFunctions.js";
 import { UIWebComponentFactory } from "../../patterns/factories/webComponentFactory.js";
 import { UIWebComponentNames, ViewRouteIDs } from "../../constants/constants.js";
+import { removeBlockTitle, showBlockTitle } from "./viewFunctions.js";
 
 
 export class NoteView {
@@ -11,8 +12,8 @@ export class NoteView {
         this.controller = controller;
         this.eventBus = eventBus;
 
-        this.#initElements();
-        this.#eventListeners();
+        this.#defineElements();
+        this.#defineEvents();
 
         new DropdownHelper(
             this.dropdowns, 
@@ -25,30 +26,12 @@ export class NoteView {
 
 
 
-    /**
-     * Renders a collection of notes in the notes container, updating the UI accordingly.
-     *
-     * If there are no notes, it hides the notes subtitle and the container. If notes do exist,
-     * it ensures the subtitle and container are visible, creates note cards for each note,
-     * and animates their appearance.
-     *
-     * @param {Array<Object>} notes                 - An array of note objects to be rendered. Each object represents a note.
-     *
-     * @requires AnimationHandler.fadeInFromBottom  - A utility method that animates the fade-in effect for a note card.
-     */
+
+    
     renderAll(notes) {
 
-        if (notes.length === 0) {
-            // remove the notes subtitle
-            this._notesBlockTitle.style.display = 'none';
-            this.notesContainer.style.display = 'none';
-        }
-
-        if (notes.length > 0) {
-            // show the notes subtitle
-            this._notesBlockTitle.style.display = '';
-            this.notesContainer.style.display = '';
-        }
+        if (notes.length === 0) removeBlockTitle(this._notesBlockTitle, this.notesContainer);
+        if (notes.length > 0) showBlockTitle(this._notesBlockTitle, this.notesContainer);
 
         UIWebComponentFactory.
         createUIWebComponentCollection(notes, UIWebComponentNames.NOTE, this.notesContainer, false)
@@ -56,40 +39,27 @@ export class NoteView {
 
 
 
-    /**
-     * Handles the deletion of a note by removing its visual representation and updating the UI.
-     *
-     * If the notes container has only one child, it hides the notes subtitle and the notes container.
-     * The method then finds and animates the removal of the note that matches the given note ID.
-     * Finally, it displays a notification for an empty folder, if empty.
-     *
-     * @param {Object} note                     - The note object that is being deleted.
-     * @param {number|string} note.id           - The unique identifier of the note to be removed. It must match the ID
-     *                                            of a child element in the notes' container.
-     *
-     * @requires AnimationHandler.fadeOutCard   - A utility method that animates the fade-out of an element.
-     */
+
+
+    
     renderDelete(note) {
         if (this.notesContainer.children.length === 1) {
-            // hide the notes subtitle & container
-            this._notesBlockTitle.style.display = 'none';
-            this.notesContainer.style.display = 'none';
+            removeBlockTitle(this._notesBlockTitle, this.notesContainer);
         }
 
-        // Search for the specified note card
-        const cards = this.notesContainer.children;
-        
-        for (let i = 0; i < cards.length; i++) {
-            if (cards[i].id === String(note.id)) {
-                AnimationHandler.fadeOutCard(cards[i]);
-            }
+        const noteCards = this.notesContainer.children;
+        for (const noteCard of noteCards) {
+            if (noteCard.id === String(note.id)) {
+                AnimationHandler.fadeOutCard(noteCard);
+            }   
         }
     }
 
 
 
 
-    #initElements() {
+
+    #defineElements() {
         this.createNoteButton = document.querySelector('.add-note-btn');
         this.bookmarkedButton = document.querySelector('.view-bookmarks-btn');
         this.noteViewOptionsButton = document.querySelector('.note-view-options-dropdown'); 
@@ -109,7 +79,7 @@ export class NoteView {
 
 
 
-    #eventListeners() {
+    #defineEvents() {
 
         /**
          * Creating a new note by emitting an EVENT to open a blank editor.

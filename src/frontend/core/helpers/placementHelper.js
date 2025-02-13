@@ -3,13 +3,11 @@ export class PlacementHelper {
         this.formatBarWidth = 611.8 //Pixels
         this.formatBarHeigth = 51.6 // Pixels
         this.commandBarHeigth = 300 //Pixels
-        this.commandBarWidth = 300 // Pixels
         this.paddingY = 50 //Pixels
 
         this.sidebar = document.querySelector('.sidebar');
         this.editor = document.querySelector('.editor');
         this.formatBar = document.querySelector('rich-text-bar');
-        this.forwardSlashCommandContainer = document.querySelector('slash-command-container');
     }
 
 

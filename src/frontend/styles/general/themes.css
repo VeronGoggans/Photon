@@ -112,71 +112,130 @@
     --button1-hover: #2a2a40;
 
 
-    /*folder appearance classes */
+    /* folder appearances */
 
-    --background-blue-1: rgb(121, 144, 255);
-    --background-blue-2: rgb(80, 141, 196);
-    --background-blue-3: rgb(122, 179, 228);
-    --background-blue-4: rgb(81, 159, 172);
-    --background-green-1: rgb(100, 174, 152);
-    --background-green-2: rgb(153, 230, 145);
-    --background-green-3: rgb(123, 219, 113);
-    --background-purple-1: rgb(142, 122, 181);
-    --background-purple-2: rgb(180, 152, 210);
-    --background-red-1: rgb(196, 91, 91);
-    --background-red-2: rgb(228, 141, 141);
-    --background-orange-1: rgb(224, 154, 91);
-    --background-orange-2: rgb(243, 182, 114);
+    --folder-background-blue-1: rgb(121, 144, 255);
+    --folder-background-blue-2: rgb(80, 141, 196);
+    --folder-background-blue-3: rgb(122, 179, 228);
+    --folder-background-blue-4: rgb(81, 159, 172);
+    --folder-background-green-1: rgb(100, 174, 152);
+    --folder-background-green-2: rgb(153, 230, 145);
+    --folder-background-green-3: rgb(123, 219, 113);
+    --folder-background-purple-1: rgb(142, 122, 181);
+    --folder-background-purple-2: rgb(180, 152, 210);
+    --folder-background-red-1: rgb(196, 91, 91);
+    --folder-background-red-2: rgb(228, 141, 141);
+    --folder-background-orange-1: rgb(224, 154, 91);
+    --folder-background-orange-2: rgb(243, 182, 114);
 
-    --color-blue-1: rgb(31 41 89);
-    --color-blue-2: rgb(7 63 113);
-    --color-blue-3: rgb(34 122 200);
-    --color-blue-4: rgb(34, 97, 94);
-    --color-green-1: rgb(49 122 101);
-    --color-green-2: rgb(80 175 69);
-    --color-green-3: rgb(9 90 0);
-    --color-purple-1: rgb(100, 58, 178);
-    --color-purple-2: rgb(121 85 161);
-    --color-red-1: #742828;
-    --color-red-2: rgb(192 43 43);
-    --color-orange-1: rgb(193 91 0);
-    --color-orange-2: rgb(225 132 20);
+    --folder-color-blue-1: rgb(31 41 89);
+    --folder-color-blue-2: rgb(7 63 113);
+    --folder-color-blue-3: rgb(34 122 200);
+    --folder-color-blue-4: rgb(34, 97, 94);
+    --folder-color-green-1: rgb(49 122 101);
+    --folder-color-green-2: rgb(80 175 69);
+    --folder-color-green-3: rgb(9 90 0);
+    --folder-color-purple-1: rgb(100, 58, 178);
+    --folder-color-purple-2: rgb(121 85 161);
+    --folder-color-red-1: #742828;
+    --folder-color-red-2: rgb(192 43 43);
+    --folder-color-orange-1: rgb(193 91 0);
+    --folder-color-orange-2: rgb(225 132 20);
+
+
+    /* category appearances */
+
+    --category-background-blue-1: #4c57b4;
+    --category-background-blue-2: #5f68b6;
+    --category-background-blue-3: #747bb7;
+    --category-background-blue-4: #7f89da;
+    --category-background-green-1: #69b17f;
+    --category-background-green-2: #77c990;
+    --category-background-green-3: #5cd467;
+    --category-background-purple-1: #784989;
+    --category-background-purple-2: #8a5baa;
+    --category-background-red-1: #be6666;
+    --category-background-red-2: #df7c7c;
+    --category-background-orange-1: #ca8f40;
+    --category-background-orange-2: #e1a85c;
+
+    --category-color-blue-1: rgb(31 41 89);
+    --category-color-blue-2: rgb(7 63 113);
+    --category-color-blue-3: rgb(34 122 200);
+    --category-color-blue-4: rgb(34, 97, 94);
+    --category-color-green-1: rgb(49 122 101);
+    --category-color-green-2: rgb(80 175 69);
+    --category-color-green-3: rgb(9 90 0);
+    --category-color-purple-1: rgb(100, 58, 178);
+    --category-color-purple-2: rgb(121 85 161);
+    --category-color-red-1: #742828;
+    --category-color-red-2: rgb(192 43 43);
+    --category-color-orange-1: rgb(193 91 0);
+    --category-color-orange-2: rgb(225 132 20);
 }
 
 .light {
 
 
     /* Folder colors */
-    --background-blue-1: rgb(121, 144, 255);
-    --background-blue-2: rgb(169, 215, 255);
-    --background-blue-3: rgb(217, 237, 255);
-    --background-blue-4: rgb(124, 199, 211);
-    --background-green-1: rgb(158, 213, 197);
-    --background-green-2: rgb(203, 255, 197);
-    --background-green-3: rgb(173, 255, 164);
-    --background-purple-1: rgb(142, 122, 181);
-    --background-purple-2: rgb(223, 193, 255);
-    --background-red-1: rgb(255, 163, 163);
-    --background-red-2: rgb(255, 197, 197);
-    --background-orange-1: rgb(255, 182, 116);
-    --background-orange-2: rgb(255, 224, 158);
+    --folder-background-blue-1: rgb(121, 144, 255);
+    --folder-background-blue-2: rgb(169, 215, 255);
+    --folder-background-blue-3: rgb(217, 237, 255);
+    --folder-background-blue-4: rgb(124, 199, 211);
+    --folder-background-green-1: rgb(158, 213, 197);
+    --folder-background-green-2: rgb(203, 255, 197);
+    --folder-background-green-3: rgb(173, 255, 164);
+    --folder-background-purple-1: rgb(142, 122, 181);
+    --folder-background-purple-2: rgb(223, 193, 255);
+    --folder-background-red-1: rgb(255, 163, 163);
+    --folder-background-red-2: rgb(255, 197, 197);
+    --folder-background-orange-1: rgb(255, 182, 116);
+    --folder-background-orange-2: rgb(255, 224, 158);
 
-    --color-blue-1: rgb(50, 72, 177);
-    --color-blue-2: rgb(70, 158, 239);
-    --color-blue-3: rgb(143, 191, 236);
-    --color-blue-4: rgb(34, 97, 94);
-    --color-green-1: rgb(36, 169, 130);
-    --color-green-2: rgb(85, 183, 73);
-    --color-green-3: rgb(32, 146, 20);
-    --color-purple-1: rgb(100, 58, 178);
-    --color-purple-2: rgb(167, 103, 236);
-    --color-red-1: rgb(225, 82, 82);
-    --color-red-2: rgb(255, 108, 108);
-    --color-orange-1: rgb(220, 109, 10);
-    --color-orange-2: rgb(239, 170, 21);
+    --folder-color-blue-1: rgb(50, 72, 177);
+    --folder-color-blue-2: rgb(70, 158, 239);
+    --folder-color-blue-3: rgb(143, 191, 236);
+    --folder-color-blue-4: rgb(34, 97, 94);
+    --folder-color-green-1: rgb(36, 169, 130);
+    --folder-color-green-2: rgb(85, 183, 73);
+    --folder-color-green-3: rgb(32, 146, 20);
+    --folder-color-purple-1: rgb(100, 58, 178);
+    --folder-color-purple-2: rgb(167, 103, 236);
+    --folder-color-red-1: rgb(225, 82, 82);
+    --folder-color-red-2: rgb(255, 108, 108);
+    --folder-color-orange-1: rgb(220, 109, 10);
+    --folder-color-orange-2: rgb(239, 170, 21);
 
 
+    /* category appearances */
 
+    --category-background-blue-1: #6376e7;
+    --category-background-blue-2: #8091f6;
+    --category-background-blue-3: #d3d9ff;
+    --category-background-blue-4: #cce0ff;
+    --category-background-green-1: #8cec8d;
+    --category-background-green-2: #b1ffb1;
+    --category-background-green-3: #cbffcb;
+    --category-background-purple-1: #d1b1ff;
+    --category-background-purple-2: #e6d4ff;
+    --category-background-red-1: #ffacac;
+    --category-background-red-2: #ffd4d4;
+    --category-background-orange-1: #ffc899;
+    --category-background-orange-2: #ffe7d2;
+
+    --category-color-blue-1: rgb(31 41 89);
+    --category-color-blue-2: rgb(7 63 113);
+    --category-color-blue-3: rgb(34 122 200);
+    --category-color-blue-4: rgb(34, 97, 94);
+    --category-color-green-1: rgb(49 122 101);
+    --category-color-green-2: rgb(80 175 69);
+    --category-color-green-3: rgb(9 90 0);
+    --category-color-purple-1: rgb(100, 58, 178);
+    --category-color-purple-2: rgb(121 85 161);
+    --category-color-red-1: #742828;
+    --category-color-red-2: rgb(192 43 43);
+    --category-color-orange-1: rgb(193 91 0);
+    --category-color-orange-2: rgb(225 132 20);
 
     /*sidebar*/
     --sidebar-inactive-tab: #8686a1;

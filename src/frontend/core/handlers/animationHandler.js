@@ -57,6 +57,15 @@ export class AnimationHandler {
     }
 
 
+    static fadeOutSlashCommands(node) {
+        node.classList.remove('fadeIn');
+
+        setTimeout(() => {
+            node.remove();
+        }, 150);
+    }
+
+
     static fadeOutContextMenu(node) {
         node.classList.remove('fadeIn');
         setTimeout(() => {

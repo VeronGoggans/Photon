@@ -112,6 +112,9 @@ export const PATCH_NOTE_CONTENT_EVENT = 'patch-note-content';
 
 
 export const FETCH_CATEGORIES_EVENT = 'fetch-category';
+export const CREATE_CATEGORY_EVENT = 'create-category-event';
+
+
 
 export const FETCH_TEMPLATE_SEARCH_ITEMS_EVENT = 'fetch-template-search-items';
 

@@ -27,7 +27,7 @@ class CategoryRouter:
     def add_category(self, request: PostCategoryRequest, db: Session = Depends(Database.get_db)):
         new_category = Category(name=request.name, color=request.color)
 
-        category = self.manager.add_category(new_category, db)
+        category = self.manager.add(new_category, db)
         return JSONResponse(status_code=HttpStatus.CREATED, content={'category': category})
         
 

@@ -1,11 +1,9 @@
-import { HttpModel } from "./httpModel.js";
 import { Stack } from "../../datastuctures/stack.js";
 
 
 
-export class FolderModel extends HttpModel {
+export class FolderModel {
     constructor() {
-        super();
         this.stack = new Stack()                  // To keep track of the order in which folders are visited
         this.homeFolder = { id: 1, name: 'Home' } // A representation of the home folder (root folder)
         this.isFilterActive = false;              // Could be an active category/tag/bookmarks

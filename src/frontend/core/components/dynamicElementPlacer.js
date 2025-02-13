@@ -2,23 +2,31 @@ import { AnimationHandler } from "../handlers/animationHandler.js";
 import { SlashCommandComponentDimensions, RichTextComponentDimensions } from "../constants/constants.js";
 
 
-export function placeSlashCommandContainer(selection) {
-    const slashCommandComponent = document.createElement("slash-command-component");
+const verticalPadding = 50; // Pixels
 
-    const editor = document.querySelector('.editor');
+
+export function placeSlashCommandContainer(selection, slashCommandComponent) {
+
     const rect = selection.getRangeAt(0).getBoundingClientRect();
-    const xPosition = checkForWidthOverflow(rect);
+    console.log('X: ' + rect.left)
+    console.log('X: ' + rect.top)
+    const horizontalPosition = checkForWidthOverflow(rect);
     const overflow = checkForHeightOverflow(rect);
 
+    document.querySelector('.editor-wrapper').appendChild(slashCommandComponent);
 
-    editor.appendChild(slashCommandComponent);
+    if (overflow) {
+        slashCommandComponent.style.top = `${rect.bottom + window.scrollY + 5}px`;
+    }
+    else {
+        slashCommandComponent.style.top = `${rect.top + window.scrollY - SlashCommandComponentDimensions.HEIGHT - verticalPadding}px`;
+    }
 
-    if (overflow) slashCommandComponent.style.top = `${rect.bottom + window.scrollY  + 5}px`;
-    else slashCommandComponent.style.top = `${rect.top + window.scrollY - SlashCommandComponentDimensions.HEIGHT - this.paddingY}px`;
-
-    slashCommandComponent.style.left = `${xPosition}px`;
-    slashCommandComponent.style.display = 'grid';
+    slashCommandComponent.style.left = `${horizontalPosition}px`;
+    slashCommandComponent.classList.add('show-slash-command-component');
     AnimationHandler.fadeIn(slashCommandComponent);
+    console.log(slashCommandComponent)
+
 
 }
 
@@ -90,8 +98,8 @@ export function placeContextMenu(contextMenu, boundedElement) {
  */
 function checkForWidthOverflow(rect) {
     const padding = 20; //Pixels
-    const screenWidth = this.editor.clientWidth;
-    const spawnPoint = rect.left + window.scrollX - this.sidebar.clientWidth;
+    const screenWidth = document.querySelector('.editor').clientWidth;
+    const spawnPoint = rect.left + window.scrollX - document.querySelector('.sidebar').clientWidth;
     const totalWidth = spawnPoint + SlashCommandComponentDimensions.WIDTH;
 
     if (totalWidth > screenWidth) {
@@ -108,6 +116,9 @@ function checkForWidthOverflow(rect) {
  */
 function checkForHeightOverflow(rect) {
     const spawnPoint = rect.top + window.scrollY;
+    console.log('scroll y' + window.scrollY)
+    console.log('rect top' + rect.top)
     const totalHeight = spawnPoint - SlashCommandComponentDimensions.HEIGHT;
+    console.log(SlashCommandComponentDimensions.HEIGHT);
     return totalHeight <= 10
 }

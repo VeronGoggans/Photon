@@ -6,11 +6,39 @@
   <component name="ChangeListManager">
     <list default="true" id="c66243fa-e17a-4b52-ade1-46c9e4c4dbb0" name="Changes" comment="Styling tweaks and improvements">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/core/components/entities/note.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/components/entities/note.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/data/managers/category_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/data/managers/category_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/data/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/data/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/backend/presentation/routers/category_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/backend/presentation/routers/category_router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/architecture/controller/SidebarController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/architecture/controller/SidebarController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/architecture/controller/applicationController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/architecture/controller/applicationController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/architecture/controller/categoryController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/architecture/controller/categoryController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/architecture/controller/folderController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/architecture/controller/folderController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/architecture/controller/homeController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/architecture/controller/homeController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/architecture/controller/noteController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/architecture/controller/noteController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/architecture/controller/settingController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/architecture/controller/settingController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/architecture/controller/textEditorController.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/architecture/controller/textEditorController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/architecture/model/folderModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/architecture/model/folderModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/architecture/model/httpModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/architecture/model/httpModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/architecture/model/textEditorModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/architecture/model/textEditorModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/architecture/view/folderView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/architecture/view/folderView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/architecture/view/homeView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/architecture/view/homeView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/architecture/view/noteView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/architecture/view/noteView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/architecture/view/sideBarView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/architecture/view/sideBarView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/architecture/view/textEditorView.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/architecture/view/textEditorView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/architecture/view/viewFunctions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/architecture/view/viewFunctions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/components/dynamicElementPlacer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/components/dynamicElementPlacer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/components/editor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/components/editor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/components/eventBus.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/components/eventBus.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/components/modals/organisationModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/components/modals/organisationModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/constants/constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/constants/constants.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/frontend/core/constants/templates.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/constants/templates.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/core/eventListeners/keyEventListener.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/eventListeners/keyEventListener.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/frontend/frontend_playground/test6.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/frontend_playground/test6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/datastuctures/stack.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/datastuctures/stack.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/handlers/animationHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/handlers/animationHandler.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/core/helpers/placementHelper.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/core/helpers/placementHelper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/styles/components/category.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/styles/components/category.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/frontend/styles/textEditor/editorSpawnables.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/frontend/styles/textEditor/editorSpawnables.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/storage/database.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/storage/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/storage/settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,7 +99,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-WS-243.23654.120" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-WS-243.23654.157" />
       </set>
     </attachedChunks>
   </component>
@@ -167,6 +195,9 @@
       <workItem from="1738888987015" duration="137000" />
       <workItem from="1738926369698" duration="19958000" />
       <workItem from="1738957179821" duration="2859000" />
+      <workItem from="1739347450065" duration="8000" />
+      <workItem from="1739372902298" duration="5622000" />
+      <workItem from="1739452190351" duration="12000" />
     </task>
     <task id="LOCAL-00001" summary="the sidebar can now be without a border in the settings tab. And the options menu for folders and notes have been changed">
       <option name="closed" value="true" />

@@ -1,5 +1,4 @@
 import { HomeView } from "../view/homeView.js";
-import { HttpModel } from "../model/httpModel.js";
 import {
     FETCH_FOLDER_SEARCH_ITEMS_EVENT,
     FETCH_NOTE_SEARCH_ITEMS_EVENT,
@@ -10,9 +9,7 @@ import {
 export class HomeController {
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.model = new HttpModel()
     }
-
 
 
     async init() {
@@ -22,7 +19,6 @@ export class HomeController {
         await this.getRecentFolders();
         await this.getRecentNotes();
     }
-
 
 
     /**
@@ -39,7 +35,6 @@ export class HomeController {
         const folders = await this.eventBus.asyncEmit(FETCH_RECENT_FOLDERS_EVENT);
         this.view.renderRecentFolders(folders);
     }
-
 
 
     /**

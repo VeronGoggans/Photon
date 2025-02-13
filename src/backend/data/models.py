@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Boolean, ForeignKey
+from sqlalchemy import Column, String, Integer, Boolean, ForeignKey, create_engine
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
@@ -73,20 +73,14 @@ class Note(Base):
                         )
 
 
+# # Connect to the SQLite database
+# DATABASE_URL = "sqlite:///./storage/database.db"  # Change this if using a different database
+# engine = create_engine(DATABASE_URL, echo=True)
+
+# # Create the table
+# def create_tables():
+#     Base.metadata.create_all(engine)
+#     print("Tables created successfully!")
 
 
-
-
-# class Tag(Base):
-#     __tablename__ = 'tags'
-
-#     id = Column(Integer, primary_key=True, autoincrement=True)
-#     name = Column(String, nullable=True)
-#     color = Column(String, nullable=False, default='rgb(255, 255, 255)')
-
-#     notes = relationship(
-#         "Note",
-#         backref="tag",                 # Allows access to the tag from the Note model
-#         cascade="save-update, merge",  # Avoids deleting Notes when a Tag is deleted
-#         passive_deletes=True           # Ensures the database handles deletions gracefully 
-#         )
+# create_tables()

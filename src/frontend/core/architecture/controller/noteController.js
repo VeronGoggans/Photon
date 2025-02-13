@@ -22,7 +22,6 @@ import {
 export class NoteController {
     constructor(eventBus) {
         this.eventBus = eventBus;
-        this.model = new HttpModel();
 
         this.eventBus.registerEvents({
             [FETCH_RECENT_NOTES_EVENT]: async () => await this.getNotes({recent: true}),
@@ -60,7 +59,7 @@ export class NoteController {
             'content': content
         }
 
-        const response = await this.model.add(route, postNoteRequest);
+        const response = await HttpModel.post(route, postNoteRequest);
         const note = response.content.note;
         
         if (notify) {
@@ -97,7 +96,7 @@ export class NoteController {
 
 
         const route = `/notes?${params.toString()}`;
-        const response = await this.model.get(route);
+        const response = await HttpModel.get(route);
         const notes = response.content.notes;
 
 
@@ -123,7 +122,7 @@ export class NoteController {
      */
     async getNoteById(noteId) {
         const route = `/notes/${noteId}`;
-        const response = await this.model.get(route);
+        const response = await HttpModel.get(route);
 
         const parentFolderId = response.content.note.folder_id;
 
@@ -142,7 +141,7 @@ export class NoteController {
         const { noteId, updatedName } = updatedNoteData;
         const patchNoteContentRequest = { 'name': updatedName };
         const route = `/notes/${noteId}/name`;
-        const response = await this.model.patch(route, patchNoteContentRequest);
+        const response = await HttpModel.patch(route, patchNoteContentRequest);
         return response.content.note;
     }
 
@@ -152,7 +151,7 @@ export class NoteController {
         const { noteId, updatedContent } = updatedNoteData;
         const patchNoteContentRequest = { 'content': updatedContent };
         const route = `/notes/${noteId}/content`;
-        const response = await this.model.patch(route, patchNoteContentRequest);
+        const response = await HttpModel.patch(route, patchNoteContentRequest);
         return response.content.note;
     }
 
@@ -161,14 +160,14 @@ export class NoteController {
     async updateNoteBookmark(noteId, newBookmarkValue) {
         const route = `/notes/${noteId}/bookmark`;
         const patchNoteBookmarkRequest = { 'bookmark': newBookmarkValue }
-        await this.model.patch(route, patchNoteBookmarkRequest);
+        await HttpModel.patch(route, patchNoteBookmarkRequest);
     }
 
 
 
     async updateNoteLastViewTime(noteId) {
         const route = `/notes/${noteId}/view-time`;
-        await this.model.patch(route);
+        await HttpModel.patch(route);
     }
 
 
@@ -177,7 +176,7 @@ export class NoteController {
         const route = `/notes/${droppedEntityId}/location`;
         const patchNoteLocationRequest = { 'parent_id': parentFolderId }
 
-        const response = await this.model.patch(route, patchNoteLocationRequest);
+        const response = await HttpModel.patch(route, patchNoteLocationRequest);
         const note = response.content.note;
         this.view.renderDelete(note);
     }
@@ -193,7 +192,7 @@ export class NoteController {
         } = {}) {
 
         const route = `/notes/${noteId}`
-        const response = await this.model.delete(route);
+        const response = await HttpModel.delete(route);
         const note = response.content.note;
 
         if (render) {

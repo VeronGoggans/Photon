@@ -11,7 +11,6 @@ import {
 
 export class SettingController {
     constructor(eventBus) {
-        this.model = new HttpModel();
         this.eventBus = eventBus;
 
 
@@ -53,7 +52,7 @@ export class SettingController {
 
 
     async getSettings() {
-        const response = await this.model.get('/settings');
+        const response = await HttpModel.get('/settings');
         return new Settings(response.content.settings);
     }
 
@@ -91,7 +90,7 @@ export class SettingController {
 
 
     async _patchAndExtract(url, key) {
-        const response = await this.model.patch(url);
+        const response = await HttpModel.patch(url);
         return response.content[key];
     }
 }

@@ -3,7 +3,7 @@ import { DropdownHelper } from "../../helpers/dropdownHelper.js";
 import { TextBlockHandler } from "../../textFormat/textBlockHandler.js";
 import { AnimationHandler } from "../../handlers/animationHandler.js";
 import { removeContent } from "../../util/ui.js";
-import { loadFolder } from "./viewFunctions.js";
+import { loadFolder } from "../controller/controllerFunctions.js";
 import { AutoSave } from "../../components/Autosave.js";
 import {
   FETCH_FOLDER_SEARCH_ITEMS_EVENT,
@@ -228,7 +228,6 @@ export class TextEditorView {
     this.viewElement = document.querySelector('.editor-wrapper');
     this.editor = document.querySelector('.editor');
     this.page = document.querySelector('.editor-paper');
-    this.toolbar = document.querySelector('.toolbar')
 
     // dropdowns
     this.colorDropdown = document.querySelector('.color-dropdown ul');
@@ -247,7 +246,9 @@ export class TextEditorView {
 
 
 
-    this.documentLocation.addEventListener('FolderPathClick', async (event) => {await loadFolder(event.detail.folderId, this.eventBus);})
+    this.documentLocation.addEventListener('FolderPathClick', async (event) => {
+      await loadFolder(event.detail.folderId, this.eventBus)
+    })
 
 
     /**
@@ -299,9 +300,6 @@ export class TextEditorView {
           break;
         case ReferenceItemTypes.FOLDERS:
           referenceItems = await this.eventBus.asyncEmit(FETCH_FOLDER_SEARCH_ITEMS_EVENT);
-          break;
-        case ReferenceItemTypes.BOARDS:
-          referenceItems = await this.eventBus.asyncEmit(FETCH_BOARD_SEARCH_ITEMS_EVENT); 
           break;
         default:
           break;

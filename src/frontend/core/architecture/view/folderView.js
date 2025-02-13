@@ -1,9 +1,8 @@
 import { AnimationHandler } from "../../handlers/animationHandler.js";
 import { removeEmptyFolderNotification } from "../../handlers/notificationHandler.js";
-import { removeContent } from "../../util/ui.js";
 import {
+    CREATE_CATEGORY_EVENT,
     GET_CURRENT_FOLDER_EVENT,
-    RENDER_CATEGORY_MODAL_EVENT,
     RENDER_DELETE_MODAL_EVENT,
     RENDER_ORGANISATION_MODAL_EVENT,
     UPDATE_FOLDER_LOCATION_EVENT,
@@ -12,6 +11,7 @@ import {
 } from "../../components/eventBus.js";
 import { UIWebComponentFactory } from "../../patterns/factories/webComponentFactory.js";
 import { UIWebComponentNames } from "../../constants/constants.js";
+import { removeBlockTitle, showBlockTitle, removeContent } from "./viewFunctions.js";
 
 
 export class FolderView {
@@ -19,36 +19,18 @@ export class FolderView {
         this.controller = controller;
         this.eventBus = eventBus;
 
-        this.#initElements();
-        this.#eventListeners();
+        this.#defineElements();
+        this.#defineEvents();
     }
 
 
 
-    /**
-     * Renders a collection of folders in the folders container, updating the UI accordingly.
-     *
-     * If there are no folders, it hides the folders subtitle and the container. If folders do exist,
-     * it ensures the subtitle and container are visible, creates folder cards for each folder,
-     * and animates their appearance.
-     *
-     * @param {Array<Object>} folders               - An array of folder objects to be rendered. Each object represents a folder.
-     *
-     * @requires AnimationHandler.fadeInFromBottom  - A utility method that animates the fade-in effect for a folder card.
-     */
+
+
     renderAll(folders) {
 
-        if (folders.length === 0) {
-            // remove the folders subtitle
-            this._foldersBlockTitle.style.display = 'none';
-            this.foldersContainer.style.display = 'none';
-        }
-
-        if (folders.length > 0) {
-            // show the folders subtitle
-            this._foldersBlockTitle.style.display = '';
-            this.foldersContainer.style.display = '';
-        }
+        if (folders.length === 0) removeBlockTitle(this._foldersBlockTitle, this.foldersContainer);
+        if (folders.length > 0) showBlockTitle(this._foldersBlockTitle, this.foldersContainer);
 
         UIWebComponentFactory.
         createUIWebComponentCollection(folders, UIWebComponentNames.FOLDER, this.foldersContainer)
@@ -56,24 +38,11 @@ export class FolderView {
 
 
 
-    /**
-     * Renders a single folder in the UI and updates the container's visibility if needed.
-     *
-     * If this is the first folder being added, the method ensures the folder subtitle and container
-     * are made visible. It then creates a folder card, appends it to the container, applies an
-     * animation effect, and removes any "empty folder" notifications.
-     *
-     * @param {Object} folder                       - The folder object to be rendered.
-     *
-     * @requires AnimationHandler.fadeInFromBottom  - Animates the appearance of the newly added folder card.
-     * @requires removeEmptyFolderNotification      - Removes any "empty folder" notification displayed in the UI.
-     * @method #folder                              - A private method that creates a DOM element for the folder card.
-     */
+
+
     renderOne(folder) {
-        // show the folders subtitle if this is the first folder
         if (this.foldersContainer.children.length === 0) {
-            this._foldersBlockTitle.style.display = '';
-            this.foldersContainer.style.display = '';
+            showBlockTitle(this._foldersBlockTitle, this.foldersContainer);
         }
 
         const folderCard = UIWebComponentFactory.createUIWebComponent(folder, UIWebComponentNames.FOLDER);
@@ -84,26 +53,13 @@ export class FolderView {
 
 
 
-    /**
-     * Updates the attributes of a folder card in the UI when the folder data is modified.
-     *
-     * This method iterates through the folder cards in the folder container to find the one
-     * matching the given folder's ID. Once found, it updates the `folder` attribute of the
-     * folder card with the serialized folder data.
-     *
-     * @param {Object} folder            - The folder object containing updated data.
-     * @param {number|string} folder.id  - The unique identifier of the folder to be updated.
-     *
-     * @requires JSON.stringify          - Converts the folder object to a JSON string for storage as an attribute.
-     */
+
+
     renderUpdate(folder) {
         const folderCards = this.foldersContainer.children;
 
-        // Updating the folder card
         for (const folderCard of folderCards) {
-            if (folderCard.id === String(folder.id)) {
-                console.log('rerender');
-                
+            if (folderCard.id === String(folder.id)) {                
                 folderCard.setAttribute(UIWebComponentNames.FOLDER, JSON.stringify(folder));
                 this.#updatePinnedFolder(folder);
             }
@@ -112,24 +68,11 @@ export class FolderView {
 
 
 
-    /**
-     * Handles the deletion of a folder by updating the UI and removing its visual representation.
-     *
-     * If the folder container contains only one folder, it hides the folder subtitle and container.
-     * The method then finds and animates the removal of the folder that matches the given folder ID.
-     * Finally, it displays a notification for an empty folder, if empty.
-     *
-     * @param {Object} folder                   - The folder object to be deleted.
-     * @param {number|string} folder.id         - The unique identifier of the folder to be removed.
-     *                                            This must match the ID of a folder card in the container.
-     *
-     * @requires AnimationHandler.fadeOutCard   - A utility method to animate the fade-out of an element.
-     */
+
+
     renderDelete(folder) {
-        // remove the folders subtitle if this was the last folder
         if (this.foldersContainer.children.length === 1) {
-            this._foldersBlockTitle.style.display = 'none';
-            this.foldersContainer.style.display = 'none';
+            removeBlockTitle(this._foldersBlockTitle, this.foldersContainer);
         }  
 
         const folders = this.foldersContainer.children;
@@ -141,10 +84,9 @@ export class FolderView {
     }
 
 
-    /**
-     *
-     * @param folder
-     */
+
+
+
     renderOnePinnedFolder(folder) {
         const pinnedFolderCard = UIWebComponentFactory.createUIWebComponent(folder, UIWebComponentNames.PINNED_FOLDER);
         this._pinnedFolders.appendChild(pinnedFolderCard);
@@ -152,10 +94,6 @@ export class FolderView {
     }
 
 
-    /**
-     *
-     * @param folder
-     */
     removePinnedFolder(folder) {
         const pinnedFolders = this._pinnedFolders.children;
 
@@ -168,11 +106,7 @@ export class FolderView {
 
 
 
-    /**
-     * This method will display the name of the folder the user is currently in.
-     *
-     * @param name -  The name of the current folder.
-     */
+    
     displayFolderName(name) {
         removeContent(this.foldersContainer);
         removeContent(document.querySelector('.notes'));
@@ -180,9 +114,7 @@ export class FolderView {
     }
 
 
-    /**
-     *
-     */
+    
     updateFolderNameDisplay(folder) {
         this.currentFolderName.textContent = folder.name;
         this.#updatePinnedFolder(folder);
@@ -190,10 +122,6 @@ export class FolderView {
 
 
 
-    /**
-     *
-     * @param folderCSSClass
-     */
     displayFolderColorCircle(folderCSSClass) {
         this._folderColorCircle.classList.remove(...this._folderColorCircle.classList);
 
@@ -218,7 +146,7 @@ export class FolderView {
 
 
 
-    #initElements() {
+    #defineElements() {
         this.foldersContainer = document.querySelector('.folders');
         this._pinnedFolders = document.querySelector('.pinned-folders');
         this._foldersBlockTitle = document.querySelector('#folders-block-title');
@@ -240,7 +168,7 @@ export class FolderView {
     }
 
     
-    #eventListeners() {
+    #defineEvents() {
 
         /**
          * Creating a new folder by emitting an EVENT to open de Folder modal.
@@ -379,31 +307,25 @@ export class FolderView {
         });
 
 
-        /**
-         *
-         */
+        
         this._pinCurrentFolderButton.addEventListener('click', () => {
             // Dispatch the PinFolder custom event
             this.viewElement.dispatchEvent(new CustomEvent('PinFolder', {detail: {folder: null}, bubbles: true}));
         })
 
 
-        /**
-         *
-         */
+        
         this._editCurrentFolderButton.addEventListener('click', () => {
             // Dispatch the PinFolder custom event
             this.viewElement.dispatchEvent(new CustomEvent('EditFolder', {detail: {folder: null}, bubbles: true}));
         })
 
 
-        /**
-         *
-         */
-        this._createCategoryButton.addEventListener('click', () => {
+        
+        this._createCategoryButton.addEventListener('click', async () => {
             // The callback function that'll create the category when the user confirms the creation in the modal.
             const addCategoryCallBack = async (newCategoryData) => {
-                alert('New Category')
+                await this.eventBus.asyncEmit(CREATE_CATEGORY_EVENT, newCategoryData);
             }
 
             //  Event to tell the dialog to render the category modal.
@@ -413,6 +335,7 @@ export class FolderView {
                 'callBack': addCategoryCallBack
             })
         })
+
 
 
         this.foldersContainer.addEventListener('DroppedItemOnFolder', async (event) => {

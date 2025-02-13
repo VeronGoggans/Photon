@@ -160,6 +160,7 @@ const editorTemplate = `
       </div>
 
       <rich-text-bar></rich-text-bar>
+      <slash-command-component></slash-command-component>
     </div>
 `
 

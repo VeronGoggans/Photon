@@ -1,5 +1,6 @@
 import { SidebarView } from "../view/sideBarView.js";
 import {
+    FETCH_CATEGORIES_EVENT,
     FETCH_PINNED_FOLDERS_EVENT,
     SET_ACTIVE_TAB_EVENT,
     SET_SIDEBAR_DROPDOWN_STATE_EVENT,
@@ -26,6 +27,9 @@ export class SidebarController {
     async init() {
         // Fetching the pinned folders and displaying them on the sidebar
         const pinnedFolders = await this.eventBus.asyncEmit(FETCH_PINNED_FOLDERS_EVENT);
+        const categories = await this.eventBus.asyncEmit(FETCH_CATEGORIES_EVENT);
+        
         this.view.renderPinnedFolders(pinnedFolders);
+        this.view.renderCategories(categories);
     }
 }

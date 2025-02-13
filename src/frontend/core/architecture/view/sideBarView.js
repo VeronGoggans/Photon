@@ -6,14 +6,12 @@ import {
     SIDEBAR_TOGGLE_EVENT,
     UPDATE_FOLDER_LOCATION_EVENT, UPDATE_NOTE_LOCATION_EVENT
 } from "../../components/eventBus.js";
-import {loadFolder} from "./viewFunctions.js";
+import { loadFolder } from "../controller/controllerFunctions.js";
 import { UIWebComponentFactory } from "../../patterns/factories/webComponentFactory.js";
 
 
 
-/**
- *
- */
+
 export class SidebarView {
     constructor(eventBus) {
         this.eventBus = eventBus;
@@ -72,11 +70,6 @@ export class SidebarView {
     }
 
 
-    /**
-     *
-     * @param dropdown1State
-     * @param dropdown2State
-     */
     setSidebarDropdownStates(dropdown1State, dropdown2State) {
        if (dropdown1State) {
            this._pinnedFolders.classList.remove('collapsed-sidebar-dropdown')
@@ -91,34 +84,15 @@ export class SidebarView {
 
 
 
-    /**
-     * Renders a list of pinned folders by creating and appending DOM elements.
-     *
-     * @param {Array<Object>} folders - An array of folder objects to render.
-     * Each object represents a folder's data that will be set in the `pinned-folder` elements.
-     *
-     * The method performs the following steps:
-     * 1. Iterates over the provided `folders` array.
-     * 2. For each folder:
-     *    - Creates a new `pinned-folder` custom element.
-     *    - Sets the folder data in the `pinned-folder` element using its `setData` method.
-     *    - Wraps the `pinned-folder` element in a `DocumentFragment` for efficient DOM updates.
-     *    - Appends the `DocumentFragment` to the `_pinnedFolders` container.
-     *
-     * @example
-     * const folders = [
-     *   { id: 1, name: "Work", items: [...] },
-     *   { id: 2, name: "Personal", items: [...] }
-     * ];
-     *
-     * renderPinnedFolders(folders);
-     *
-     * // Result: The `_pinnedFolders` container is populated with custom `pinned-folder` elements
-     * // displaying the data provided in the `folders` array.
-     */
     renderPinnedFolders(folders) {
         UIWebComponentFactory.
         createUIWebComponentCollection(folders, UIWebComponentNames.PINNED_FOLDER, this._pinnedFolders)
+    }
+
+
+    renderCategories(categories) {
+        UIWebComponentFactory.
+        createUIWebComponentCollection(categories, UIWebComponentNames.CATEGORY, this._categories);
     }
 
 
@@ -136,12 +110,6 @@ export class SidebarView {
 
 
 
-
-    /**
-     *
-     * @param sidebarDropdown
-     * @param chevron
-     */
     #collapseSidebarDropdown(sidebarDropdown, chevron) {
         sidebarDropdown.classList.toggle('collapsed-sidebar-dropdown');
         chevron.classList.toggle('open-sidebar-dropdown-chevron');

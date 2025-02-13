@@ -42,7 +42,7 @@ class RecentFolder extends HTMLElement {
 
     render() {
         this.innerHTML = `
-            <i id="folder-icon" class="bi bi-folder"></i>
+            <i class="bi bi-folder"></i>
             <p>${this.folder.name}</p>
         `;
         applyFolderIconColor(this)
@@ -164,7 +164,7 @@ class Folder extends HTMLElement {
 
     render() {
         this.innerHTML = `
-            <i id="folder-icon" class="bi bi-folder"></i>
+            <i class="bi bi-folder"></i>
             <p>${formatName(this.folder.name)}</p>
         `;
         this.addColor();
@@ -253,7 +253,7 @@ class Folder extends HTMLElement {
         const allFolderClasses = Array.from(this.classList);
 
         for (const cls of allFolderClasses) {
-            if (cls.includes('color')) {
+            if (cls.includes('folder-appearance')) {
                 this.classList.remove(cls);
             }
         }

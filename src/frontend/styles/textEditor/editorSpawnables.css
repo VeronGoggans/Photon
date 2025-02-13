@@ -122,7 +122,7 @@ rich-text-bar {
 
 /*Forward Slash Command Container*/
 
-slash-command-container {
+slash-command-component {
     user-select: none;
     position: absolute;
     bottom: -300px;
@@ -136,10 +136,11 @@ slash-command-container {
     max-height: 300px;
     background: var(--dropdown);
     opacity: 0;
+    visibility: hidden;
     transition: 150ms;
 }
 
-slash-command-container input {
+slash-command-component input {
     border: none;
     padding: 5px 10px;
     font-size: 16px;
@@ -147,28 +148,28 @@ slash-command-container input {
     color: var(--editor-text);
 }
 
-slash-command-container .commands {
+slash-command-component .commands {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
     row-gap: 5px;
 }
 
-slash-command-container .commands::-webkit-scrollbar {
+slash-command-component .commands::-webkit-scrollbar {
     background-color: transparent;
     width: 5px;
 }
 
-slash-command-container .commands::-webkit-scrollbar-thumb {
+slash-command-component .commands::-webkit-scrollbar-thumb {
     background-color: #cfd2e3;
     border-radius: 10px;
 }
 
-slash-command-container .commands::-webkit-scrollbar-thumb:active {
+slash-command-component .commands::-webkit-scrollbar-thumb:active {
   background-color: #bbbed4;
 }
 
-slash-command-container .commands div {
+slash-command-component .commands div {
     cursor: pointer;
     align-items: center;
     height: 50px;
@@ -181,15 +182,15 @@ slash-command-container .commands div {
     transition: 50ms;
 }
 
-slash-command-container .commands div:hover {
+slash-command-component .commands div:hover {
     background-color: var(--hover-slash-command);
 }
 
-slash-command-container .commands .active {
+slash-command-component .commands .active {
     background-color: var(--hover-slash-command) !important;
 }
 
-slash-command-container i {
+slash-command-component i {
     display: flex;
     font-size: 19px;
     justify-content: center;
@@ -199,6 +200,12 @@ slash-command-container i {
     border-radius: 5px;
     background-color: var(--command-square-bg);
     color: #8fa5ff;
+}
+
+
+.show-slash-command-component {
+    display: grid !important;
+    visibility: visible;
 }
 
 

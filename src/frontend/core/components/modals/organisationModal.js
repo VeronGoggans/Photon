@@ -11,7 +11,7 @@ import {
 class OrganisationModal extends HTMLElement {
     constructor() {
         super();
-        this.preferredEntityColor = null;
+        this.selectedFolderAppearance = null;
     }
 
     /**
@@ -92,6 +92,7 @@ class OrganisationModal extends HTMLElement {
         this.querySelector('.save-btn').textContent = organisationModalUpdateButtonText[this.entityType];
         this.querySelector('input').value = this.entity.name;
         this.appearanceComponent.showSelectedAppearance(this.entity.color);
+        this.selectedFolderAppearance = this.entity.color;
     }
 
 
@@ -129,7 +130,7 @@ class OrganisationModal extends HTMLElement {
          * This event listener will listen for clicks on the  color options for that entity.
          */
         this.addEventListener('appearance-option-click', (event) => {
-            this.preferredEntityColor = event.detail.color;
+            this.selectedFolderAppearance = event.detail.color;
         })
 
 
@@ -145,15 +146,16 @@ class OrganisationModal extends HTMLElement {
                 await this.modalData.callBack({
                     'id': this.entity.id,
                     'name': this.entityNameInput.value,
-                    'color': this.preferredEntityColor,
+                    'color': this.selectedFolderAppearance,
                     'eventTriggeredInsideFolder': this.eventTriggeredInsideFolder
                 })    
+                
             }
 
             else {
                 await this.modalData.callBack({
                     'name': this.entityNameInput.value || 'Untitled',
-                    'color': this.preferredEntityColor
+                    'color': this.selectedFolderAppearance
                 })
             }
 

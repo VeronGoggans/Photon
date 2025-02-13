@@ -1,102 +1,62 @@
-import {
-    INIT_VIEW_EVENT,
-    FETCH_FOLDER_BY_ID_EVENT,
-    FETCH_NOTE_BY_ID_EVENT, FETCH_NOTES_EVENT, SET_NOTE_FILTER_EVENT
-} from "../../components/eventBus.js";
-import { ViewRouteIDs } from "../../constants/constants.js";
-import {hideFolderBlockTitle, removeContent, resetFolderColorCircle} from "../../util/ui.js";
+import { removeEmptyFolderNotification } from "../../handlers/notificationHandler.js";
+
 
 
 /**
+ * This method will remove all the child elements from the specified
+ * parent element
  *
- * @param folderId
- * @param eventBus
+ * @param parentElement The element you want to remove all the children from
  */
-export async function loadFolder(folderId, eventBus) {
-    // Loading the clicked on folder in the notes tab
-    const { folder, location } = await eventBus.emit(FETCH_FOLDER_BY_ID_EVENT, folderId);
-    eventBus.asyncEmit(INIT_VIEW_EVENT, {
-        viewId: ViewRouteIDs.NOTES_VIEW_ID,
-        folder: folder,
-        location: location,
-        clearFilters: true
-    })
+export function removeContent(parentElement) {
+    while (parentElement.firstChild) {
+        parentElement.removeChild(parentElement.firstChild);
+    }
+    removeEmptyFolderNotification();
 }
+
+
+
 
 
 /**
- *
- * @param searchItemId
- * @param searchType
- * @param eventBus
+ * This method is used to hide (not remove) the notes/folders block title if needed.
+ * 
+ * @param { HTMLElement } blockTitle - The corrisponding block title that needs to be hidden. 
+ * @param { HTMLElement } container - The corrisponding element containing the folders or notes that needs to be hidden. 
  */
-export async function handleSearch(searchItemId, searchType, eventBus) {
-    const viewId = viewToLoad(searchType)
-    if (viewId === ViewRouteIDs.EDITOR_VIEW_ID) {
-        if (searchType === 'notes' || searchType === 'templates') {
-            
-            const { note, location } = await eventBus.asyncEmit(FETCH_NOTE_BY_ID_EVENT, searchItemId);
-            eventBus.asyncEmit(INIT_VIEW_EVENT, {
-                viewId: viewId,
-                editorObject: note,
-                newEditorObject: false,
-                previousView: ViewRouteIDs.NOTES_VIEW_ID,
-                editorObjectLocation: location
-            })
-        }
-    }
-    if (viewId === ViewRouteIDs.NOTES_VIEW_ID) {
-        const { folder, location } = await eventBus.asyncEmit(FETCH_FOLDER_BY_ID_EVENT, searchItemId);
-        eventBus.asyncEmit(INIT_VIEW_EVENT, {
-            viewId: viewId,
-            folder: folder,
-            location: location,
-            clearFilters: true
-        });
-    }
+export function removeBlockTitle(blockTitle, container) {    
+    // Hide both the block title and container elements from the screen.
+    blockTitle.style.display = 'none';
+    container.style.display = 'none';
 }
 
 
 
 
 
-export async function showBookmarkedNotes(eventBus) {
-   
-    hideFolderBlockTitle();
-    resetFolderColorCircle();
-
-    document.querySelector('.current-folder-name').textContent = 'Bookmarks📄';
-
-    // Remove the folder & notes from the view.
-    removeContent(document.querySelector('.notes'));
-    removeContent(document.querySelector('.folders'));
-
-    // Event that'll notify the folderModel a filter is active e.g. Bookmarks
-    eventBus.emit(SET_NOTE_FILTER_EVENT);
-
-    // Fetch all the bookmarked notes.
-    await eventBus.asyncEmit(FETCH_NOTES_EVENT, {
-        'bookmarks': true,
-        'render': true,
-        'storeResultInMemory': true,
-        'folderId': undefined,   // Default value
-        'recent': false,         // Default value
-        'recentlyViewed': false, // Default value
-        'searchItems': false,    // Default value
-    })
+/**
+ * This method is used to show (not add) the notes/folders block title if needed.
+ * 
+ * @param { HTMLElement } blockTitle - The corrisponding block title that needs to be shown. 
+ * @param { HTMLElement } container - The corrisponding element containing the folders or notes that needs to be shown. 
+ */
+export function showBlockTitle(blockTitle, container) {
+    // Show both the block title and container elements from the screen.
+    blockTitle.style.display = '';
+    container.style.display = '';
 }
 
 
 
 
 
-function viewToLoad(searchType) {
-    switch (searchType) {
-        case 'notes':
-            return ViewRouteIDs.EDITOR_VIEW_ID
-        case 'templates':
-            return ViewRouteIDs.EDITOR_VIEW_ID
-        case 'folders':
-            return ViewRouteIDs.NOTES_VIEW_ID
-    }
+/**
+ * 
+ */
+export function resetFolderColorCircle() {
+    const folderColorCircle = document.querySelector('#folder-color-circle');
+
+    // Remove all the classes from the folder color circle element.
+    folderColorCircle.classList.remove(...folderColorCircle.classList);
 }

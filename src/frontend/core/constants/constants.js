@@ -18,20 +18,20 @@ export const notificationMessages = {
 
 
 export const folderIconColors = {
-    "color-blue-1": "var(--background-blue-1)",
-    "color-blue-2": "var(--background-blue-2)",
-    "color-blue-3": "var(--background-blue-3)",
-    "color-blue-4": "var(--background-blue-4)",
-    "color-green-1": "var(--background-green-1)",
-    "color-green-2": "var(--background-green-2)",
-    "color-green-3": "var(--background-green-3)",
-    "color-purple-1": "var(--background-purple-1)",
-    "color-purple-2": "var(--background-purple-2)",
-    "color-red-1": "var(--background-red-1)",
-    "color-red-2": "var(--background-red-2)",
-    "color-orange-1": "var(--background-orange-1)",
-    "color-orange-2": "var(--background-orange-2)",
-    'color-original': 'rgb(164, 168, 191)'
+    "folder-appearance-blue-1": "var(--folder-background-blue-1)",
+    "folder-appearance-blue-2": "var(--folder-background-blue-2)",
+    "folder-appearance-blue-3": "var(--folder-background-blue-3)",
+    "folder-appearance-blue-4": "var(--folder-background-blue-4)",
+    "folder-appearance-green-1": "var(--folder-background-green-1)",
+    "folder-appearance-green-2": "var(--folder-background-green-2)",
+    "folder-appearance-green-3": "var(--folder-background-green-3)",
+    "folder-appearance-purple-1": "var(--folder-background-purple-1)",
+    "folder-appearance-purple-2": "var(--folder-background-purple-2)",
+    "folder-appearance-red-1": "var(--folder-background-red-1)",
+    "folder-appearance-red-2": "var(--folder-background-red-2)",
+    "folder-appearance-orange-1": "var(--folder-background-orange-1)",
+    "folder-appearance-orange-2": "var(--folder-background-orange-2)",
+    'folder-appearance-original': 'rgb(164, 168, 191)'
 };
 
 
@@ -119,7 +119,6 @@ export const SlashCommands = {
     HTML: 'html',
     LINK_TO_NOTE: 'link to note',
     LINK_TO_FOLDER: 'link to folder',
-    LINK_TO_BOARD: 'link to board',
     TEMPLATE: 'template',
 }
 
@@ -169,7 +168,8 @@ export const UIWebComponentNames = {
     RECENTLY_CHANGED_NOTE: 'recently-changed-note-component',
     RECENTLY_VIEWED_NOTE: 'recently-viewed-note-component',
 
-    DOCUMENT_LOCATION: 'document-location-component'
+    DOCUMENT_LOCATION: 'document-location-component',
+    CATEGORY: 'category-component'
 
 }
 

@@ -15,7 +15,7 @@ class CategoryManager:
 
 
     def get(self, db: Session) -> (list[Category] | NotFoundException):
-        return db.query(Category).filter(Category).all()
+        return db.query(Category).all()
     
 
 

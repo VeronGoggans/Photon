@@ -1,7 +1,7 @@
 import { AnimationHandler } from "../../handlers/animationHandler.js";
 import { greetBasedOnTime } from "../../util/date.js";
 import { FETCH_FOLDER_BY_ID_EVENT, FETCH_NOTE_BY_ID_EVENT, INIT_VIEW_EVENT } from "../../components/eventBus.js";
-import { handleSearch, showBookmarkedNotes} from "./viewFunctions.js";
+import { handleSearch, showBookmarkedNotes} from "../controller/controllerFunctions.js";
 import { UIWebComponentFactory } from "../../patterns/factories/webComponentFactory.js";
 import { UIWebComponentNames, ViewRouteIDs } from "../../constants/constants.js";
 

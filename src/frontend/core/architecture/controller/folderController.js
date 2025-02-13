@@ -15,7 +15,9 @@ import {
     UPDATE_FOLDER_PIN_VALUE_EVENT,
     SET_NOTE_FILTER_EVENT, CLEAR_NOTE_FILTER_EVENT
 } from "../../components/eventBus.js";
-import { showBookmarkedNotes } from "../view/viewFunctions.js";
+import { showBookmarkedNotes } from "./controllerFunctions.js";
+import { HttpModel } from "../model/httpModel.js";
+import { RequestBodyFactory } from "../../patterns/factories/requestBodiesFactory.js";
 
 
 
@@ -105,17 +107,12 @@ export class FolderController {
      * // A new folder is added under the current folder, and the UI is updated to reflect the new folder.
      */
     async addFolder(newFolderData) {
+        const { id } = this.model.getCurrentFolder();
         const { name, color } = newFolderData
-        const currentFolder = this.model.getCurrentFolder();
+        const { route, body } = RequestBodyFactory.getPostFolderBody(id, name, color);
 
-        const route = '/folders'
-        const postFolderRequest = {
-            'parent_id': currentFolder.id,
-            'color': color,
-            'name': name
-        }
-
-        const response = await this.model.add(route, postFolderRequest)
+        // Make the POST request
+        const response = await HttpModel.post(route, body);
         const folder = response.content.folder;
 
         this.view.renderOne(folder);
@@ -188,7 +185,7 @@ export class FolderController {
             route = `/folders?recent=false&search_items=false&pinned=true`;
         }
 
-        const response = await this.model.get(route);
+        const response = await HttpModel.get(route);
         const folders = response.content.folders;
 
         if (childFolders) {
@@ -219,8 +216,7 @@ export class FolderController {
      * console.log(location);
      */
     async getFolderById(folderId) {
-        const route = `/folders/${folderId}`;
-        const response = await this.model.get(route);
+        const response = await HttpModel.get(`/folders/${folderId}`);
         return response.content;
     }
 
@@ -256,13 +252,9 @@ export class FolderController {
      */
     async updateFolder(updatedFolderData) {
         const { id, eventTriggeredInsideFolder, name, color } = updatedFolderData;
-        const route = `/folders/${id}`;
-        const putFolderRequest = {
-            'name': name,
-            'color': color
-        }
+        const { route, body } = RequestBodyFactory.getPutFolderBody(id, name, color);
 
-        const response = await this.model.update(route, putFolderRequest);
+        const response = await HttpModel.put(route, body);
         const folder = response.content.folder;
 
         if (eventTriggeredInsideFolder) {
@@ -304,7 +296,7 @@ export class FolderController {
         const route = `/folders/${droppedEntityId}/location`;
         const patchFolderLocationRequest = { 'parent_id': parentFolderId };
 
-        const response = await this.model.patch(route, patchFolderLocationRequest);
+        const response = await HttpModel.patch(route, patchFolderLocationRequest);
         const folder = response.content.folder;
 
         this.view.renderDelete(folder);
@@ -314,7 +306,7 @@ export class FolderController {
 
     async updateFolderPinValue(folder) {
         const route = `/folders/${folder.id}/pin-folder`;
-        const response = await this.model.patch(route);
+        const response = await HttpModel.patch(route);
 
         const updatedFolder = response.content.folder;
         const folderPinValue = updatedFolder.pinned;
@@ -351,7 +343,7 @@ export class FolderController {
     async deleteFolder(folderId) {
         const route = `/folders/${folderId}`;
 
-        const response = await this.model.delete(route);
+        const response = await HttpModel.delete(route);
         const folder = response.content.folder;
 
         this.view.renderDelete(folder);
@@ -412,7 +404,7 @@ export class FolderController {
             this.model.emptyFolders();
         }
 
-        await this.model.patch(`/folders/${folder.id}/view-time`);
+        await HttpModel.patch(`/folders/${folder.id}/view-time`);
 
         await this.getFolders({ childFolders: true })
         .then(async () => {            

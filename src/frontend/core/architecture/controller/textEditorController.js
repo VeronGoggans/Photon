@@ -1,6 +1,5 @@
 import { TextEditorView } from "../view/textEditorView.js";
 import { TextEditorModel } from "../model/textEditorModel.js";
-import { HttpModel } from "../model/httpModel.js";
 import { pushNotification } from "../../handlers/notificationHandler.js";
 import {
     CLEAR_STORED_NOTE_EVENT,
@@ -16,7 +15,7 @@ import {
     PATCH_NOTE_NAME_EVENT
 } from "../../components/eventBus.js";
 import { ReferenceItemTypes, ViewRouteIDs } from "../../constants/constants.js";
-import { loadFolder } from "../view/viewFunctions.js";
+import { loadFolder } from "./controllerFunctions.js";
 
 
 
@@ -24,7 +23,6 @@ export class TextEditorController {
     constructor(eventBus) {
         this.eventBus = eventBus;
         this.model = new TextEditorModel();
-        this.httpModel = new HttpModel();
         this.eventBus.registerEvents({
             [OPEN_TEXT_EDITOR_EVENT]: () => this.showTextEditor(),
             [OPEN_NOTE_IN_TEXT_EDITOR_EVENT]: (editorObject) => this.openInTextEditor(editorObject),

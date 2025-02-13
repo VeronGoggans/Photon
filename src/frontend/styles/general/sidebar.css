@@ -145,8 +145,14 @@
 
 .pinned-folders,
 .categories {
+    display: flex;
+    flex-direction: column;
     border-radius: 10px;
     background: var(--sidebar-dropdown-bg-color);
+}
+
+.categories {
+    margin-bottom: 70px;
 }
 
 

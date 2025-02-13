@@ -49,7 +49,6 @@ class SlashCommandContainer extends HTMLElement {
             <div class="terminal" data-command="${SlashCommands.TERMINAL}"><i class="bi bi-terminal"></i>Add terminal command</div>
             <div class="note-reference" data-command="${SlashCommands.LINK_TO_NOTE}"><i class="bi bi-file-earmark"></i>Add note reference</div>
             <div class="folder-reference" data-command="${SlashCommands.LINK_TO_FOLDER}"><i class="bi bi-folder-symlink"></i>Add folder reference</div>
-            <div class="sticky-board-reference" data-command="${SlashCommands.LINK_TO_BOARD}"><i class="bi bi-stickies"></i>Add board reference</div>
             <div class="template" data-command="${SlashCommands.TEMPLATE}"><i class="bi bi-file-earmark-text"></i>Add template</div>
             <div class="insert-html" data-command="${SlashCommands.HTML}"><i class="bi bi-filetype-html"></i>Insert HTML</div>
         </div>
@@ -57,7 +56,6 @@ class SlashCommandContainer extends HTMLElement {
         this.container = this.querySelector('.commands');
         this.commands = this.container.querySelectorAll('div');
         this.input = this.querySelector('input');
-        this.input.focus();
     }
 
 
@@ -113,9 +111,6 @@ class SlashCommandContainer extends HTMLElement {
             break;
           case SlashCommands.LINK_TO_FOLDER:
             this.addReferenceContainer(ReferenceItemTypes.FOLDERS);
-            break;
-          case SlashCommands.LINK_TO_BOARD:
-            this.addReferenceContainer(ReferenceItemTypes.BOARDS);
             break;
           case SlashCommands.TEMPLATE:
             this.addReferenceContainer(ReferenceItemTypes.TEMPLATES);
@@ -264,10 +259,11 @@ class SlashCommandContainer extends HTMLElement {
         
         if (selection.isCollapsed) {
             this.range = range;
-            placeSlashCommandContainer(selection);
+            placeSlashCommandContainer(selection, this);
+            this.input.focus()
         }
         else {
-            AnimationHandler.fadeOut(this);
+            AnimationHandler.fadeOutSlashCommands(this);
         }
     }
 
